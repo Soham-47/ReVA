@@ -7,3 +7,7 @@ logs/
 subs/
 *.out
 .venv/
+.env*
+*.pem
+*.key
+credentials
