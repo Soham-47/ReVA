@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import glob
 import json
 import math
 import os
@@ -24,9 +23,9 @@ import common as C
 
 def newest_checkpoint(output: Path) -> str | None:
     checkpoints = []
-    for path in glob.glob(str(output / "checkpoint-*")):
+    for path in output.glob("checkpoint-*"):
         try:
-            checkpoints.append((int(Path(path).name.rsplit("-", 1)[1]), path))
+            checkpoints.append((int(path.name.rsplit("-", 1)[1]), str(path)))
         except ValueError:
             continue
     return max(checkpoints)[1] if checkpoints else None
