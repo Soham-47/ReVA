@@ -95,6 +95,9 @@ class PureLogicTests(unittest.TestCase):
         self.assertEqual(permutation[-1], "A")
         self.assertEqual(shown["D"], "all of the above")
 
+    def test_score_probabilities_map_back_to_original_letters(self):
+        self.assertEqual(common.remap_probabilities([0.1, 0.2, 0.3, 0.4], ["B", "D", "A", "C"]), [0.3, 0.1, 0.4, 0.2])
+
     def test_letter_ids_require_one_token_each(self):
         class Tokenizer:
             def encode(self, text, add_special_tokens=False):

@@ -324,6 +324,16 @@ def permute_options(q: dict[str, Any], permutation: Iterable[str]):
     return shown, perm
 
 
+def remap_probabilities(shown_prob: Iterable[float], permutation: Iterable[str]) -> list[float]:
+    """Map probabilities for displayed option positions back to original A-D."""
+
+    shown_prob = list(shown_prob)
+    original_prob = [0.0] * len(LETTERS)
+    for shown_index, original_letter in enumerate(permutation):
+        original_prob[LETTERS.index(original_letter)] = float(shown_prob[shown_index])
+    return original_prob
+
+
 def user_text(q: dict[str, Any], shown: dict[str, str]) -> str:
     options = "\n".join(f"{letter}. {shown[letter]}" for letter in LETTERS)
     return (
