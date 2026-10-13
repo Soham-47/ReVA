@@ -41,6 +41,18 @@ class PureLogicTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             common.sample_index_list(10, 30, 1.0)
 
+    def test_endpoint_sampling_is_opt_in_and_keeps_legacy_mapping(self):
+        legacy = common.sample_index_list(180, 30, 0.0)
+        endpoints = common.sample_index_list(180, 30, 0.0, mode="endpoints")
+        shifted = common.sample_index_list(180, 30, 0.5, mode="endpoints")
+        self.assertEqual(legacy, [min(179, (i * 180) // 16) for i in range(16)])
+        self.assertEqual(len(endpoints), 16)
+        self.assertEqual((endpoints[0], endpoints[-1]), (0, 179))
+        self.assertEqual((shifted[0], shifted[-1]), (0, 179))
+        self.assertNotEqual(endpoints, shifted)
+        with self.assertRaises(ValueError):
+            common.sample_index_list(180, 30, 0.0, mode="unknown")
+
     def test_fast_recipe_and_score_defaults_are_explicit(self):
         for name in ("stageA", "stageB"):
             config = yaml.safe_load((ROOT / "code" / "configs" / f"{name}.yaml").read_text())
@@ -56,6 +68,24 @@ class PureLogicTests(unittest.TestCase):
         self.assertAlmostEqual(common.estimate_training_hours(32, 2, 16, 3600), 4.0)
         with self.assertRaises(ValueError):
             common.estimate_training_hours(32, 2, 0, 1)
+
+    def test_sdpa_disables_cudnn_backend_but_eager_is_unchanged(self):
+        class Backend:
+            def __init__(self):
+                self.calls = []
+
+            def enable_cudnn_sdp(self, enabled):
+                self.calls.append(enabled)
+
+        class Torch:
+            def __init__(self):
+                self.backends = type("Backends", (), {"cuda": Backend()})()
+
+        fake_torch = Torch()
+        common.configure_attention_backend("sdpa", fake_torch)
+        self.assertEqual(fake_torch.backends.cuda.calls, [False])
+        common.configure_attention_backend("eager", fake_torch)
+        self.assertEqual(fake_torch.backends.cuda.calls, [False])
 
     def test_all_of_the_above_stays_last_and_maps_answer(self):
         row = {
