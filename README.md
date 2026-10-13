@@ -31,6 +31,11 @@ The first run is deliberately small enough to measure on one H200:
 | Validation | `fit_A` training source, `valT` video holdout, `valQ` question holdout |
 | Scoring | Letter logits, two temporal offsets (`0`, `0.5`) and two cyclic option orders |
 
+The current known private-test score is **3,358 / 4,000 (83.95%)**. This is a
+measured private-test result for the existing submission; the current
+leaderboard gap and top-3 target remain unknown until the live leaderboard is
+checked.
+
 PyTorch SDPA is the required attention path. FlashAttention and vLLM are not
 assumed: the installed versions may not support them, and this pipeline keeps
 the same Transformers preprocessing for training and scoring. The GPU smoke
@@ -157,6 +162,18 @@ Do not submit a long run if this probe fails. Its error identifies the missing
 runtime capability or processor API instead of silently using a different
 preprocessing path.
 
+```mermaid
+flowchart LR
+  D[Data and manifest] --> S[Train-only splits]
+  S --> A[Stage A train and validation score]
+  A --> G{Validation gate}
+  G -- pass --> B[Optional Stage B full train]
+  G -- hold --> R[Review Stage A artifacts]
+  B --> T[Test scoring]
+  T --> P[Package submission]
+  P --> C[Codabench]
+```
+
 ## Stage A: measure the recipe
 
 Submit Stage A and its dependent scoring job from the runtime tree:
@@ -229,7 +246,29 @@ gets the next-token logits for A-D, applies softmax over those four logits,
 maps every cyclic option permutation back to the original letters, and averages
 the views. The default is four forwards per question: offsets `0` and `0.5`
 times two cyclic option orders. Use `--offsets` and `--rots` only after the
-fast pass has produced evidence; they are recorded in the score manifest.
+fast pass has produced evidence; they are recorded in the score manifest. The
+default `legacy` frame sampler preserves the original index mapping. The
+controlled `endpoints` ablation keeps the same 16-frame budget, includes the
+first and final decoded frames in every offset view, shifts only interior
+frames, and records `frame_sampling` in the score manifest. It is an inference
+only experiment; it does not change training or the dataset.
+
+To run the proposed valQ ablation with the existing Stage A adapter, use a new
+output path so the baseline score file is untouched:
+
+```bash
+python code/score.py \
+  --adapter runs/stageA_q3vl8b_r16/final_adapter \
+  --split valQ \
+  --frame-sampling endpoints \
+  --out runs/stageA_q3vl8b_r16/scores_valQ_endpoints.jsonl
+python code/evaluate.py \
+  runs/stageA_q3vl8b_r16/scores_valQ_endpoints.jsonl valQ
+```
+
+This command is a proposed ablation procedure; no endpoint result or gain is
+claimed here. Compare it with the existing `scores_valQ.jsonl` on the same
+checkpoint before considering any leaderboard or top-3 conclusion.
 
 The first benchmark is expected to fit comfortably in the 12-hour GPU limit,
 but the measured 50-step estimate in the training log is authoritative. A
@@ -245,7 +284,9 @@ a fixed wall-clock time before the probe.
 * A stopped scoring job resumes from the JSONL and requires the same manifest.
   To intentionally change TTA or adapter, choose a new output path.
 * `common.py` pins model and dataset revisions. Score manifests record both,
-  the split checksum, adapter checksum, offsets, rotations, and shard settings.
+  the split checksum, adapter checksum, offsets, rotations, frame sampling,
+  and shard settings. Older manifests without `frame_sampling` remain valid
+  for the default `legacy` mode.
 * Keep runtime artifacts outside git. Commit only source, configs, jobs,
   tests, requirements, and documentation.
 
