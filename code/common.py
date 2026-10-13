@@ -23,6 +23,8 @@ MAX_FRAMES = 16
 LETTERS = ("A", "B", "C", "D")
 DEFAULT_SCORE_OFFSETS = (0.0, 0.5)
 DEFAULT_SCORE_ROTS = 2
+FRAME_SAMPLING_MODES = ("legacy", "endpoints")
+DEFAULT_FRAME_SAMPLING = "legacy"
 VIDEO_SIZE = {"shortest_edge": 131072, "longest_edge": 16 * 640 * 640}
 SYSTEM_PROMPT = (
     "You are an expert analyst of aerial drone (UAV) videos. Watch every frame carefully. "
@@ -80,6 +82,19 @@ def estimate_training_hours(
         raise ValueError("training estimate inputs must be positive")
     updates = math.ceil(samples / (batch_size * grad_accum)) * epochs
     return updates * seconds_per_step / 3600
+
+
+def configure_attention_backend(attn_implementation: str, torch_module=None) -> None:
+    """Keep Qwen vision SDPA off the unstable cuDNN fused-MHA path on H200."""
+
+    if attn_implementation != "sdpa":
+        return
+    if torch_module is None:
+        import torch as torch_module
+    enable_cudnn_sdp = getattr(torch_module.backends.cuda, "enable_cudnn_sdp", None)
+    if enable_cudnn_sdp is None:
+        raise RuntimeError("the installed PyTorch build has no cuDNN SDPA control")
+    enable_cudnn_sdp(False)
 
 
 def path_checksum(path: str | os.PathLike[str]) -> str:
@@ -142,7 +157,13 @@ def load_manifest(work: str | os.PathLike[str] | None = None) -> dict[str, dict[
         return json.load(f)
 
 
-def sample_index_list(n_frames: int, fps: float, offset: float) -> list[int]:
+def sample_index_list(
+    n_frames: int,
+    fps: float,
+    offset: float,
+    *,
+    mode: str = DEFAULT_FRAME_SAMPLING,
+) -> list[int]:
     """Choose an even frame grid without requiring NumPy.
 
     ``offset`` is a fractional shift of the grid. Clipping and duplication are
@@ -154,18 +175,32 @@ def sample_index_list(n_frames: int, fps: float, offset: float) -> list[int]:
     off = float(offset)
     if not 0.0 <= off < 1.0:
         raise ValueError(f"offset must be in [0, 1), got {offset}")
+    if mode not in FRAME_SAMPLING_MODES:
+        raise ValueError(f"unknown frame sampling mode: {mode}")
     k = int(round(n / rate * FPS_TARGET))
     k = max(MIN_FRAMES, min(MAX_FRAMES, k))
     k = min(k, max(n, 2))
     k -= k % 2
     k = max(k, 2)
+    if mode == "endpoints":
+        interior = [
+            min(n - 1, max(0, math.floor((i + off) * (n - 1) / (k - 1))))
+            for i in range(1, k - 1)
+        ]
+        return [0, *interior, n - 1]
     return [min(n - 1, max(0, math.floor((i + off) * n / k))) for i in range(k)]
 
 
-def sample_indices(n_frames: int, fps: float, offset: float):
+def sample_indices(
+    n_frames: int,
+    fps: float,
+    offset: float,
+    *,
+    mode: str = DEFAULT_FRAME_SAMPLING,
+):
     import numpy as np
 
-    return np.asarray(sample_index_list(n_frames, fps, offset), dtype=np.int64)
+    return np.asarray(sample_index_list(n_frames, fps, offset, mode=mode), dtype=np.int64)
 
 
 def _video_metadata(**values: Any) -> Any:
@@ -206,13 +241,19 @@ def read_frames(relative_path: str, indices: Iterable[int], work: str | os.PathL
     return np.stack([got.get(index, fallback) for index in wanted])
 
 
-def get_video(relative_path: str, offset: float = 0.0, work: str | os.PathLike[str] | None = None):
+def get_video(
+    relative_path: str,
+    offset: float = 0.0,
+    work: str | os.PathLike[str] | None = None,
+    *,
+    mode: str = DEFAULT_FRAME_SAMPLING,
+):
     manifest = load_manifest(work)
     try:
         info = manifest[relative_path]
     except KeyError as exc:
         raise KeyError(f"{relative_path!r} is absent from {manifest_path(work)}") from exc
-    indices = sample_indices(info["n_frames"], info["fps"], offset)
+    indices = sample_indices(info["n_frames"], info["fps"], offset, mode=mode)
     frames = read_frames(relative_path, indices, work)
     meta = _video_metadata(
         total_num_frames=int(info["n_frames"]),
