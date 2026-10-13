@@ -35,6 +35,7 @@ def main() -> int:
     ap.add_argument("--out", required=True)
     ap.add_argument("--offsets", default=','.join(str(value) for value in C.DEFAULT_SCORE_OFFSETS))
     ap.add_argument("--rots", type=int, default=C.DEFAULT_SCORE_ROTS)
+    ap.add_argument("--frame-sampling", choices=C.FRAME_SAMPLING_MODES, default=C.DEFAULT_FRAME_SAMPLING)
     ap.add_argument("--shard", type=int, default=0)
     ap.add_argument("--nshards", type=int, default=1)
     args = ap.parse_args()
@@ -64,6 +65,7 @@ def main() -> int:
         "split_checksum": split_digest,
         "offsets": offsets,
         "rots": args.rots,
+        "frame_sampling": args.frame_sampling,
         "shard": args.shard,
         "nshards": args.nshards,
     }
@@ -71,6 +73,7 @@ def main() -> int:
     if manifest_path.exists():
         with manifest_path.open() as f:
             actual_manifest = json.load(f)
+        actual_manifest.setdefault("frame_sampling", C.DEFAULT_FRAME_SAMPLING)
         if actual_manifest != expected_manifest:
             raise RuntimeError(f"score manifest mismatch: {manifest_path}; choose a new output or remove stale scores")
     elif out.exists() and out.stat().st_size:
@@ -87,11 +90,13 @@ def main() -> int:
     ltr_ids = C.letter_ids(processor.tokenizer)
     if not torch.cuda.is_available():
         raise RuntimeError("CUDA is required for video scoring")
+    attn_implementation = "sdpa"
+    C.configure_attention_backend(attn_implementation)
     model = Qwen3VLForConditionalGeneration.from_pretrained(
         C.MODEL_ID,
         revision=C.MODEL_REV,
         dtype=torch.bfloat16,
-        attn_implementation="sdpa",
+        attn_implementation=attn_implementation,
     )
     if adapter_path is not None:
         model = PeftModel.from_pretrained(model, adapter_path).merge_and_unload()
@@ -107,7 +112,7 @@ def main() -> int:
                 break
             views = []
             for offset in offsets:
-                frames, meta = C.get_video(row["video_path"], offset)
+                frames, meta = C.get_video(row["video_path"], offset, mode=args.frame_sampling)
                 for permutation in rotations:
                     encoded, actual_perm = C.encode(processor, row, frames, meta, permutation)
                     logits = model(**move_inputs(encoded, device)).logits[0, -1, ltr_ids].float()
