@@ -10,6 +10,7 @@ import json
 import hashlib
 import math
 import os
+from collections import Counter
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -241,6 +242,60 @@ def read_frames(relative_path: str, indices: Iterable[int], work: str | os.PathL
     return np.stack([got.get(index, fallback) for index in wanted])
 
 
+def iter_read_frames(
+    relative_path: str,
+    indices: Iterable[int],
+    batch_size: int,
+    work: str | os.PathLike[str] | None = None,
+):
+    """Yield requested frames in batches during one decoder pass.
+
+    The decoder stays open while the caller processes each yielded batch, so a
+    bounded candidate grid never needs to be materialized as one large array.
+    Missing decoded indices use the same last-frame fallback as ``read_frames``.
+    """
+
+    import av
+    import numpy as np
+
+    wanted = [int(i) for i in indices]
+    if not wanted:
+        raise ValueError("at least one frame index is required")
+    if isinstance(batch_size, bool) or int(batch_size) != batch_size or batch_size <= 0:
+        raise ValueError("batch_size must be a positive integer")
+    size = int(batch_size)
+    batches = [wanted[start : start + size] for start in range(0, len(wanted), size)]
+    wanted_set = set(wanted)
+    got: dict[int, Any] = {}
+    remaining = Counter(wanted)
+    fallback_frame = None
+    batch_index = 0
+    path = dataset_dir(work) / relative_path
+    with av.open(str(path)) as container:
+        stream = container.streams.video[0]
+        stream.thread_type = "AUTO"
+        for number, frame in enumerate(container.decode(stream)):
+            if number in wanted_set:
+                got[number] = frame.to_ndarray(format="rgb24")
+                fallback_frame = got[number]
+            if batch_index < len(batches) and set(batches[batch_index]) <= got.keys():
+                batch = batches[batch_index]
+                yield np.stack([got[index] for index in batch])
+                for index in batch:
+                    remaining[index] -= 1
+                    if not remaining[index]:
+                        got.pop(index, None)
+                batch_index += 1
+            if batch_index == len(batches):
+                break
+    if fallback_frame is None:
+        raise RuntimeError(f"could not decode any requested frame from {relative_path}")
+    fallback = got[max(got)] if got else fallback_frame
+    while batch_index < len(batches):
+        yield np.stack([got.get(index, fallback) for index in batches[batch_index]])
+        batch_index += 1
+
+
 def get_video(
     relative_path: str,
     offset: float = 0.0,
@@ -259,6 +314,33 @@ def get_video(
         total_num_frames=int(info["n_frames"]),
         fps=float(info["fps"]),
         frames_indices=indices.tolist(),
+        width=int(info["width"]),
+        height=int(info["height"]),
+        duration=float(info["duration"]),
+    )
+    return frames, meta
+
+
+def get_video_by_indices(
+    relative_path: str,
+    indices: Iterable[int],
+    work: str | os.PathLike[str] | None = None,
+):
+    """Decode an explicit source-frame list and build matching video metadata."""
+
+    manifest = load_manifest(work)
+    try:
+        info = manifest[relative_path]
+    except KeyError as exc:
+        raise KeyError(f"{relative_path!r} is absent from {manifest_path(work)}") from exc
+    wanted = [int(index) for index in indices]
+    if not wanted or any(index < 0 or index >= int(info["n_frames"]) for index in wanted):
+        raise ValueError(f"indices must be non-empty and within {relative_path!r}")
+    frames = read_frames(relative_path, wanted, work)
+    meta = _video_metadata(
+        total_num_frames=int(info["n_frames"]),
+        fps=float(info["fps"]),
+        frames_indices=wanted,
         width=int(info["width"]),
         height=int(info["height"]),
         duration=float(info["duration"]),
@@ -292,6 +374,54 @@ def load_processor():
     return AutoProcessor.from_pretrained(MODEL_ID, revision=MODEL_REV)
 
 
+def load_peft_adapters(model, adapter_path: str | os.PathLike[str]):
+    """Load the root adapter and every named child adapter in a Phase 6 result.
+
+    The returned names are the exact PEFT adapter names that must be active when
+    merging.  Keeping this step separate from ``merge_and_unload`` lets smoke
+    checks compare the serialized model before and after merging.
+    """
+
+    from peft import PeftModel
+
+    path = Path(adapter_path)
+    adapted = PeftModel.from_pretrained(model, str(path))
+    child_adapters = sorted(
+        child.name
+        for child in path.iterdir()
+        if child.is_dir() and (child / "adapter_config.json").is_file() and child.name != "default"
+    )
+    for adapter_name in child_adapters:
+        adapted.load_adapter(str(path / adapter_name), adapter_name=adapter_name)
+    adapter_names = ["default", *child_adapters]
+    adapted.base_model.set_adapter(adapter_names)
+    if list(adapted.peft_config) != adapter_names:
+        raise RuntimeError(
+            f"serialized adapters do not match expected names: {list(adapted.peft_config)} vs {adapter_names}"
+        )
+    return adapted, adapter_names
+
+
+def load_peft_for_inference(
+    model,
+    adapter_path: str | os.PathLike[str],
+    *,
+    merge: bool = True,
+):
+    """Load a saved adapter layout, optionally merging all named adapters.
+
+    ``merge=True`` preserves the historical scorer behavior.  Phase 6B
+    multi-adapter runs can pass ``merge=False`` because the installed PEFT
+    merge path changes Qwen3-VL bfloat16 logits even though the serialized,
+    unmerged model is exact.
+    """
+
+    adapted, adapter_names = load_peft_adapters(model, adapter_path)
+    if merge:
+        return adapted.merge_and_unload(adapter_names=adapter_names)
+    return adapted
+
+
 def letter_ids(tokenizer) -> list[int]:
     tokenised = [tokenizer.encode(letter, add_special_tokens=False) for letter in LETTERS]
     if any(len(ids) != 1 for ids in tokenised):
@@ -322,16 +452,6 @@ def permute_options(q: dict[str, Any], permutation: Iterable[str]):
     perm = normalise_permutation(q, permutation)
     shown = {letter: q["options"][perm[index]] for index, letter in enumerate(LETTERS)}
     return shown, perm
-
-
-def remap_probabilities(shown_prob: Iterable[float], permutation: Iterable[str]) -> list[float]:
-    """Map probabilities for displayed option positions back to original A-D."""
-
-    shown_prob = list(shown_prob)
-    original_prob = [0.0] * len(LETTERS)
-    for shown_index, original_letter in enumerate(permutation):
-        original_prob[LETTERS.index(original_letter)] = float(shown_prob[shown_index])
-    return original_prob
 
 
 def user_text(q: dict[str, Any], shown: dict[str, str]) -> str:
@@ -383,6 +503,10 @@ def encode(
     answer_letter_orig: str | None = None,
     im_end_id: int | None = None,
     ltr_ids: list[int] | None = None,
+    grounding_context: str | None = None,
+    segmentation_context: str | None = None,
+    temporal_context: str | None = None,
+    enable_thinking: bool | None = None,
 ):
     """Build the exact train/inference encoding and optional one-token label."""
 
@@ -393,20 +517,42 @@ def encode(
         {"role": "system", "content": [{"type": "text", "text": SYSTEM_PROMPT}]},
         {
             "role": "user",
-            "content": [{"type": "video"}, {"type": "text", "text": user_text(q, shown)}],
+            "content": [
+                {"type": "video"},
+                {"type": "text", "text": user_text(q, shown)},
+                *(
+                    [{"type": "text", "text": grounding_context}]
+                    if grounding_context
+                    else []
+                ),
+                *(
+                    [{"type": "text", "text": segmentation_context}]
+                    if segmentation_context
+                    else []
+                ),
+                *(
+                    [{"type": "text", "text": temporal_context}]
+                    if temporal_context
+                    else []
+                ),
+            ],
         },
     ]
-    text = processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+    chat_kwargs = {"tokenize": False, "add_generation_prompt": True}
+    if enable_thinking is not None:
+        chat_kwargs["enable_thinking"] = bool(enable_thinking)
+    text = processor.apply_chat_template(messages, **chat_kwargs)
     raw = _processor_call(processor, text, frames, meta)
     allowed = {
         "input_ids",
         "attention_mask",
+        "mm_token_type_ids",
         "pixel_values_videos",
         "video_grid_thw",
         "second_per_grid_ts",
     }
     encoded = {key: value for key, value in raw.items() if key in allowed}
-    required = {"input_ids", "attention_mask", "pixel_values_videos", "video_grid_thw"}
+    required = {"input_ids", "attention_mask", "mm_token_type_ids", "pixel_values_videos", "video_grid_thw"}
     missing = required - encoded.keys()
     if missing:
         raise KeyError(f"processor did not return required model inputs: {sorted(missing)}")
@@ -420,5 +566,7 @@ def encode(
         labels[-2] = target
         encoded["input_ids"] = ids.unsqueeze(0)
         encoded["attention_mask"] = torch.ones_like(encoded["input_ids"])
+        text_types = torch.zeros((1, 2), dtype=encoded["mm_token_type_ids"].dtype)
+        encoded["mm_token_type_ids"] = torch.cat((encoded["mm_token_type_ids"], text_types), dim=1)
         encoded["labels"] = labels.unsqueeze(0)
     return encoded, perm

@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "purpose": "Small deterministic Stage A grounding-only pilot; score with baseline legacy frames.",
+  "seed": 0,
+  "sampling": {
+    "unit": "question",
+    "per_split_per_stratum": 4,
+    "strata": {
+      "temporal_grounding": {
+        "task": "Temporal Grounding",
+        "selection": "fixed entity coverage for courts/fields/parking lots/barns, then deterministic hash fill"
+      },
+      "geometric_relation": {
+        "task": "Geometric Relation",
+        "selection": "fixed entity coverage for parking lots/courts/barns/boats/fields, then deterministic hash fill"
+      },
+      "object_count_location": {
+        "task": "Object and Land Cover Recognition",
+        "selection": "fixed count/location coverage for parking lots/courts/pools/boats/fields, then deterministic hash fill"
+      },
+      "control": {
+        "task": "mixed non-target tasks",
+        "selection": "deterministic SHA-256(seed|split|stratum|qa_id) order after excluding the three target task strata"
+      }
+    },
+    "ordering": "IDs are grouped by stratum; within each stratum the listed order is fixed and is not a score order."
+  },
+  "source_split_checksums": {
+    "valQ": "bb59ccdc4bd0d9346d2e8dd52f22398264a0736d8022affb7b5c6a7493a5dc2a",
+    "valT": "2f330b0f080f7fdd3c875aa37571fb27da4f440b2e159f13311b822518565155"
+  },
+  "splits": {
+    "valQ": {
+      "ids": [
+        "train_003181",
+        "train_009393",
+        "train_009869",
+        "train_015573",
+        "train_014717",
+        "train_002581",
+        "train_013068",
+        "train_003645",
+        "train_008852",
+        "train_003423",
+        "train_003585",
+        "train_003179",
+        "train_007923",
+        "train_000976",
+        "train_000794",
+        "train_002115"
+      ],
+      "strata": {
+        "temporal_grounding": [
+          "train_003181",
+          "train_009393",
+          "train_009869",
+          "train_015573"
+        ],
+        "geometric_relation": [
+          "train_014717",
+          "train_002581",
+          "train_013068",
+          "train_003645"
+        ],
+        "object_count_location": [
+          "train_008852",
+          "train_003423",
+          "train_003585",
+          "train_003179"
+        ],
+        "control": [
+          "train_007923",
+          "train_000976",
+          "train_000794",
+          "train_002115"
+        ]
+      }
+    },
+    "valT": {
+      "ids": [
+        "train_009901",
+        "train_002906",
+        "train_010397",
+        "train_012498",
+        "train_011808",
+        "train_012156",
+        "train_012502",
+        "train_014232",
+        "train_004698",
+        "train_000645",
+        "train_000073",
+        "train_008022",
+        "train_015640",
+        "train_004573",
+        "train_009140",
+        "train_002266"
+      ],
+      "strata": {
+        "temporal_grounding": [
+          "train_009901",
+          "train_002906",
+          "train_010397",
+          "train_012498"
+        ],
+        "geometric_relation": [
+          "train_011808",
+          "train_012156",
+          "train_012502",
+          "train_014232"
+        ],
+        "object_count_location": [
+          "train_004698",
+          "train_000645",
+          "train_000073",
+          "train_008022"
+        ],
+        "control": [
+          "train_015640",
+          "train_004573",
+          "train_009140",
+          "train_002266"
+        ]
+      }
+    }
+  },
+  "prompt_entities": [
+    "person",
+    "bicycle",
+    "car",
+    "motorcycle",
+    "bus",
+    "truck",
+    "boat",
+    "building",
+    "house",
+    "bridge",
+    "road",
+    "parking lot",
+    "court",
+    "basketball court",
+    "soccer field",
+    "baseball field",
+    "tennis court",
+    "sports field",
+    "field",
+    "pool",
+    "swimming pool",
+    "barn",
+    "water",
+    "river",
+    "tree",
+    "path",
+    "train",
+    "train track"
+  ],
+  "limits": [
+    "The pilot is a stratified smoke check, not a held-out promotion result.",
+    "Prompt labels cover recurring target nouns and close visual classes; colors, fine-grained vehicle types, and unseen synonyms can still be missed.",
+    "Boxes and IoU tracks remain image-relative 2D evidence; no depth or physical distance is inferred."
+  ]
+}

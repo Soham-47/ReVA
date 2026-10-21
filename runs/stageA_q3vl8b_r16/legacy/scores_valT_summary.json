@@ -1,0 +1,17 @@
+{
+  "acc": 0.8356940509915014,
+  "acc_single": 0.8328611898016998,
+  "per_task": {
+    "Causation Reasoning": 0.8387096774193549,
+    "Change Detection": 0.8378378378378378,
+    "Consequence Reasoning": 0.967741935483871,
+    "General Understanding": 0.9866666666666667,
+    "Geometric Relation": 0.783625730994152,
+    "Hypothetical Reasoning": 0.9310344827586207,
+    "Object and Land Cover Recognition": 0.7889908256880734,
+    "Perspective and Viewpoint": 0.8251748251748252,
+    "Structural Layout": 0.8888888888888888,
+    "Temporal Grounding": 0.7443609022556391,
+    "Trend and Pattern": 0.8454545454545455
+  }
+}

@@ -1,0 +1,1 @@
+These sheets visualize only the frozen SigLIP2 per-frame top-five rankings. Candidate rank, cosine similarity, crop style, proposal arm, and timestamp are shown. They are unblinded retrieval examples; rank exposure makes them unsuitable as annotation inputs. The rank-free review sheets are in `../blinded_review/`.

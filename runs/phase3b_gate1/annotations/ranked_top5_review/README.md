@@ -1,0 +1,1 @@
+Ranked, unblinded top-five examples regenerated from frozen Gate 1 rankings. Group labels are placed below the crops to avoid obscuring rank/score text. These are diagnostic only; relevance was not used to rank.
