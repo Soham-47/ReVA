@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "experiment": "reva-air-style-sampler",
+  "status": "frozen-before-official-val",
+  "reference": "UCF-AIR/A.I.R.@400fb52f1cfbf64debc6408cd215cfa375fd9797",
+  "reference_retrieved": "2026-10-30",
+  "adaptation_note": "The public AIR implementation does not support ReVA Qwen3-VL. ReVA ports its event segmentation, density allocation, local refinement, and exact-budget fallback while retaining the Qwen3-VL-8B answerer. EVA-CLIP-L is not cached on the authorized HPC runtime; the frozen SigLIP2 cache is used as the query/frame similarity signal and is labeled as an AIR-style adaptation.",
+  "similarity_method": "siglip2_query_similarity_adaptation",
+  "feature_encoder_revision": "google/siglip2-base-patch16-224@022b6f71160ffb0169ca4709e2d7e25be659598a",
+  "answer_model_revision": "Qwen/Qwen3-VL-8B-Instruct@0c351dd01ed87e9c1b53cbc748cba10e6187ff3b",
+  "candidate_policy": {
+    "cap": 64,
+    "count": 64,
+    "grid": "uniform-endpoints",
+    "grid_version": "air-candidate-grid-v1",
+    "include_first_last": true,
+    "short_clip_behavior": "min(64, n_frames)"
+  },
+  "short_clip_policy": {
+    "gmm_components": 2,
+    "gmm_coefficient": 0.5,
+    "gmm_threshold_method": "max(low_mean + 0.5*(high_mean-low_mean), high_mean - coefficient*high_std), clipped to observed range; ReVA adaptation, not exact paper convention",
+    "merge_gap": "1.5 median candidate spacings",
+    "min_event_fraction": 0.0,
+    "local_radius": "1.5 median candidate spacings",
+    "fixed_seconds_thresholds": false
+  },
+  "interval_refinement": {
+    "potential": "max measured candidate relevance in selected-boundary interval + 0.25*(interval relevance range) + 0.05*interval temporal span",
+    "method_note": "ReVA deterministic interval-potential adaptation; not a claim of the paper's unavailable Qwen3/EVA implementation",
+    "local_neighbor_source": "original_video_source_frames",
+    "neighbor_radius": "one median candidate spacing",
+    "neighbor_measurement": "pending Qwen3-VL VLM batch; no inherited similarity"
+  },
+  "processor_budget": {
+    "video_size": {"shortest_edge": 131072, "longest_edge": 6553600},
+    "cap_pixels_per_frame": true,
+    "resolution_tradeoff": "frozen baseline VIDEO_SIZE; 32/64-frame arms lower per-frame grid density and must report this confound"
+  },
+  "arms": [
+    {"name": "U16", "sampler": "legacy", "candidate_count": 16, "answer_frame_budget": 16},
+    {"name": "U32", "sampler": "uniform-endpoints", "candidate_count": 32, "answer_frame_budget": 32},
+    {"name": "AIR64_to_16", "sampler": "air-style", "candidate_count": 64, "answer_frame_budget": 16},
+    {"name": "AIR64_to_32", "sampler": "air-style", "candidate_count": 64, "answer_frame_budget": 32}
+  ],
+  "evaluation_split": "val",
+  "test_run_allowed": false,
+  "option_rotations": 2,
+  "temporal_offsets": [0.0, 0.5]
+}

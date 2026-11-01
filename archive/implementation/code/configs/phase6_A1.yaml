@@ -1,0 +1,33 @@
+run_name: phase6_A1_language_from_stageA
+train_json: data/splits/fit_A.json
+output_dir: runs/phase6_A1_language_from_stageA
+init_adapter: runs/stageA_q3vl8b_r16/final_adapter
+seed: 42
+data_seed: 42
+deterministic_sampling: true
+attn_implementation: sdpa
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+visual_merger:
+  enabled: false
+train:
+  epochs: 1
+  max_steps: 200
+  lr: 2.0e-4
+  visual_lr: null
+  explicit_optimizer: true
+  weight_decay: 0.0
+  warmup_ratio: 0.03
+  scheduler: cosine
+  grad_accum: 16
+  max_grad_norm: 1.0
+  bf16: true
+  gradient_checkpointing: true
+  max_tokens: 12000
+  save_steps: 50
+  save_total_limit: 2
+  logging_steps: 10
+  dataloader_workers: 0
+  benchmark_steps: 25

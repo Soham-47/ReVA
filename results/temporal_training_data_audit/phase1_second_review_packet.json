@@ -1,0 +1,295 @@
+{
+  "schema_version": 1,
+  "purpose": "Independent blind review of target identity, event definition, temporal bracket, and censoring. Do not consult prior annotations or answer key.",
+  "selection_seed": 20261020,
+  "stratum_quotas": {
+    "action_or_transition": 3,
+    "joint_onset_exit": 3,
+    "other_temporal": 3,
+    "exit_or_offset": 3,
+    "onset_or_entry": 4,
+    "duration": 4
+  },
+  "records": [
+    {
+      "case_id": "TA008",
+      "qa_id": "train_008839",
+      "question": "When is the vehicle movement visible on the highway throughout the video?",
+      "question_stratum": "action_or_transition",
+      "video": {
+        "fps": 29.97002997002997,
+        "n_frames": 180,
+        "duration": 6.006,
+        "width": 640,
+        "height": 360
+      },
+      "contact_sheet": "runs/temporal_training_data_audit/review_material/TA008.jpg"
+    },
+    {
+      "case_id": "TA012",
+      "qa_id": "train_007187",
+      "question": "When does the camera first reveal the complete curve of the athletic track?",
+      "question_stratum": "action_or_transition",
+      "video": {
+        "fps": 29.97002997002997,
+        "n_frames": 180,
+        "duration": 6.006,
+        "width": 640,
+        "height": 360
+      },
+      "contact_sheet": "runs/temporal_training_data_audit/review_material/TA012.jpg"
+    },
+    {
+      "case_id": "TA013",
+      "qa_id": "train_005995",
+      "question": "When does the sun begin to set behind the mountains in the video?",
+      "question_stratum": "action_or_transition",
+      "video": {
+        "fps": 22.782608695652176,
+        "n_frames": 131,
+        "duration": 5.75,
+        "width": 640,
+        "height": 640
+      },
+      "contact_sheet": "runs/temporal_training_data_audit/review_material/TA013.jpg"
+    },
+    {
+      "case_id": "TA021",
+      "qa_id": "train_012661",
+      "question": "At what time does the white car first appear on the bridge and when does it disappear from view?",
+      "question_stratum": "joint_onset_exit",
+      "video": {
+        "fps": 29.97002997002997,
+        "n_frames": 138,
+        "duration": 4.6046000000000005,
+        "width": 640,
+        "height": 360
+      },
+      "contact_sheet": "runs/temporal_training_data_audit/review_material/TA021.jpg"
+    },
+    {
+      "case_id": "TA026",
+      "qa_id": "train_012217",
+      "question": "At what time does the black car first appear in the lower center of the frame and when does it disappear?",
+      "question_stratum": "joint_onset_exit",
+      "video": {
+        "fps": 29.97002997002997,
+        "n_frames": 240,
+        "duration": 8.008000000000001,
+        "width": 640,
+        "height": 360
+      },
+      "contact_sheet": "runs/temporal_training_data_audit/review_material/TA026.jpg"
+    },
+    {
+      "case_id": "TA029",
+      "qa_id": "train_012511",
+      "question": "When does the black car first appear in the video and when does it disappear?",
+      "question_stratum": "joint_onset_exit",
+      "video": {
+        "fps": 29.97002997002997,
+        "n_frames": 240,
+        "duration": 8.008000000000001,
+        "width": 640,
+        "height": 360
+      },
+      "contact_sheet": "runs/temporal_training_data_audit/review_material/TA029.jpg"
+    },
+    {
+      "case_id": "TA031",
+      "qa_id": "train_004456",
+      "question": "When does the fire truck first become clearly visible in the video?",
+      "question_stratum": "other_temporal",
+      "video": {
+        "fps": 24.0,
+        "n_frames": 139,
+        "duration": 5.791666666666667,
+        "width": 640,
+        "height": 640
+      },
+      "contact_sheet": "runs/temporal_training_data_audit/review_material/TA031.jpg"
+    },
+    {
+      "case_id": "TA034",
+      "qa_id": "train_001854",
+      "question": "At what point in the video is the white car in the lower center of the frame already moving forward through the intersection?",
+      "question_stratum": "other_temporal",
+      "video": {
+        "fps": 30.0,
+        "n_frames": 180,
+        "duration": 6.0,
+        "width": 640,
+        "height": 360
+      },
+      "contact_sheet": "runs/temporal_training_data_audit/review_material/TA034.jpg"
+    },
+    {
+      "case_id": "TA038",
+      "qa_id": "train_006899",
+      "question": "When does the white bus appear on the bridge in the video?",
+      "question_stratum": "other_temporal",
+      "video": {
+        "fps": 24.0,
+        "n_frames": 134,
+        "duration": 5.583333333333333,
+        "width": 640,
+        "height": 640
+      },
+      "contact_sheet": "runs/temporal_training_data_audit/review_material/TA038.jpg"
+    },
+    {
+      "case_id": "TA056",
+      "qa_id": "train_014275",
+      "question": "At what time does the first car appear in the frame and at what time does it disappear from view?",
+      "question_stratum": "exit_or_offset",
+      "video": {
+        "fps": 30.0,
+        "n_frames": 562,
+        "duration": 18.733333333333334,
+        "width": 640,
+        "height": 360
+      },
+      "contact_sheet": "runs/temporal_training_data_audit/review_material/TA056.jpg"
+    },
+    {
+      "case_id": "TA058",
+      "qa_id": "train_007057",
+      "question": "When does the blue car in the middle of the intersection disappear from view?",
+      "question_stratum": "exit_or_offset",
+      "video": {
+        "fps": 24.0,
+        "n_frames": 132,
+        "duration": 5.5,
+        "width": 640,
+        "height": 640
+      },
+      "contact_sheet": "runs/temporal_training_data_audit/review_material/TA058.jpg"
+    },
+    {
+      "case_id": "TA059",
+      "qa_id": "train_012714",
+      "question": "When does the white car disappear from the frame?",
+      "question_stratum": "exit_or_offset",
+      "video": {
+        "fps": 29.97002997002997,
+        "n_frames": 240,
+        "duration": 8.008000000000001,
+        "width": 640,
+        "height": 360
+      },
+      "contact_sheet": "runs/temporal_training_data_audit/review_material/TA059.jpg"
+    },
+    {
+      "case_id": "TA062",
+      "qa_id": "train_015017",
+      "question": "At what point in the video does the large brick building with the green roof first become visible?",
+      "question_stratum": "onset_or_entry",
+      "video": {
+        "fps": 29.97002997002997,
+        "n_frames": 167,
+        "duration": 5.572233333333333,
+        "width": 640,
+        "height": 360
+      },
+      "contact_sheet": "runs/temporal_training_data_audit/review_material/TA062.jpg"
+    },
+    {
+      "case_id": "TA063",
+      "qa_id": "train_012096",
+      "question": "At what time does the blue car first appear in the video?",
+      "question_stratum": "onset_or_entry",
+      "video": {
+        "fps": 30.0,
+        "n_frames": 445,
+        "duration": 14.833333333333334,
+        "width": 640,
+        "height": 360
+      },
+      "contact_sheet": "runs/temporal_training_data_audit/review_material/TA063.jpg"
+    },
+    {
+      "case_id": "TA065",
+      "qa_id": "train_003927",
+      "question": "When does the black car with 'ARIV' on its side first become visible in the video?",
+      "question_stratum": "onset_or_entry",
+      "video": {
+        "fps": 23.823529411764707,
+        "n_frames": 135,
+        "duration": 5.666666666666666,
+        "width": 640,
+        "height": 640
+      },
+      "contact_sheet": "runs/temporal_training_data_audit/review_material/TA065.jpg"
+    },
+    {
+      "case_id": "TA076",
+      "qa_id": "train_000322",
+      "question": "At what timestamp does the black car first appear in the frame and begin moving across the lower right lane of the road?",
+      "question_stratum": "onset_or_entry",
+      "video": {
+        "fps": 30.0,
+        "n_frames": 180,
+        "duration": 6.0,
+        "width": 640,
+        "height": 360
+      },
+      "contact_sheet": "runs/temporal_training_data_audit/review_material/TA076.jpg"
+    },
+    {
+      "case_id": "TA083",
+      "qa_id": "train_012045",
+      "question": "How long do the pedestrians remain visible while crossing the road at the intersection?",
+      "question_stratum": "duration",
+      "video": {
+        "fps": 30.0,
+        "n_frames": 787,
+        "duration": 26.233333333333334,
+        "width": 640,
+        "height": 360
+      },
+      "contact_sheet": "runs/temporal_training_data_audit/review_material/TA083.jpg"
+    },
+    {
+      "case_id": "TA087",
+      "qa_id": "train_010879",
+      "question": "For how long are the cars visible in the left lane of the road?",
+      "question_stratum": "duration",
+      "video": {
+        "fps": 30.0,
+        "n_frames": 660,
+        "duration": 22.0,
+        "width": 640,
+        "height": 360
+      },
+      "contact_sheet": "runs/temporal_training_data_audit/review_material/TA087.jpg"
+    },
+    {
+      "case_id": "TA091",
+      "qa_id": "train_013626",
+      "question": "How long does the toll booth complex remain visible in the video?",
+      "question_stratum": "duration",
+      "video": {
+        "fps": 30.0,
+        "n_frames": 480,
+        "duration": 16.0,
+        "width": 640,
+        "height": 360
+      },
+      "contact_sheet": "runs/temporal_training_data_audit/review_material/TA091.jpg"
+    },
+    {
+      "case_id": "TA097",
+      "qa_id": "train_003870",
+      "question": "How long is the white race car with the number 18 visible in the video?",
+      "question_stratum": "duration",
+      "video": {
+        "fps": 24.0,
+        "n_frames": 137,
+        "duration": 5.708333333333333,
+        "width": 640,
+        "height": 640
+      },
+      "contact_sheet": "runs/temporal_training_data_audit/review_material/TA097.jpg"
+    }
+  ]
+}

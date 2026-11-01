@@ -1,0 +1,436 @@
+{
+  "schema_version": 1,
+  "status": "design_only_no_inference",
+  "selection_seed": "ReVA-QCSRR-final-v1",
+  "source": {
+    "split": "train",
+    "dataset_repo": "ReVA-Benchmark/ReVA",
+    "dataset_revision": "06224fa1b42e5e35677a8b7f2145e06307a9a4ee",
+    "selection_uses_only": [
+      "qa_id",
+      "video_path",
+      "task",
+      "question",
+      "prior-artifact exposure IDs/video paths"
+    ],
+    "selection_does_not_use": [
+      "options",
+      "correct_answer",
+      "gold answers",
+      "baseline predictions or correctness",
+      "model rankings",
+      "source-video appearance"
+    ]
+  },
+  "selection_rule": {
+    "eligible_population": "train question rows whose video_path does not occur in prior tasks/results/runs artifacts or the already-audited Phase 3A/Gate 1 videos",
+    "prior_exposure_scan": {
+      "exposed_train_question_ids": 1754,
+      "excluded_video_paths": 604,
+      "eligible_distinct_videos": 441,
+      "excluded_current_design_artifacts": [
+        "tasks/qcsrr_final_benchmark_selection.json",
+        "tasks/qcsrr_final_benchmark_design.md"
+      ]
+    },
+    "within_stratum_order": "ascending SHA-256 of \"ReVA-QCSRR-final-v1|\" + qa_id",
+    "video_constraint": "greedily take first hash-ranked row with a video_path not already selected; one question per video",
+    "stratum_quotas": {
+      "geometric": 4,
+      "temporal": 4,
+      "scene_region": 2,
+      "ambiguity_probe_singular": 1,
+      "ambiguity_probe_group": 1
+    },
+    "hash_only_after_rule_freeze": true,
+    "stratum_definitions": {
+      "geometric": {
+        "task_equals": "Geometric Relation",
+        "question_regex_ignore_case": "\\b(left of|right of|above|below|behind|in front of|between|relative to|closer to|farther from|distance between|adjacent to|inside|within|overlap|intersect|position relative|located to the (?:left|right)|orientation .* relative to|compared to)\\b"
+      },
+      "temporal": {
+        "task_in": [
+          "Temporal Grounding",
+          "Trend and Pattern"
+        ],
+        "question_regex_ignore_case": "\\b(first appear|first become visible|appear|disappear|remain visible|visible|visibility|enter|exit|leave|at what point|at what time|how long|when does|when do|continuously visible)\\b",
+        "exclude_question_regex_ignore_case": "\\bcamera\\b"
+      },
+      "scene_region": {
+        "task_equals": "Object and Land Cover Recognition",
+        "scene_term_regex_ignore_case": "\\b(land cover|vegetation|spectator area|baseball field|field|court|parking lot|road network|green space|river|water body|playing area|construction site|landscape)\\b",
+        "question_form_regex_ignore_case": "\\b(what type|which type|where is|what is visible|what dominates|dominates|main|primary|most prominent|most common|describe the)\\b",
+        "exclude_question_regex_ignore_case": "\\bhow many\\b"
+      },
+      "ambiguity_probe_singular": {
+        "task_in": [
+          "Temporal Grounding",
+          "Geometric Relation"
+        ],
+        "question_regex_ignore_case": "\\bthe (?:car|vehicle|bus|truck|motorcycle|building|field|house|person|player)\\b"
+      },
+      "ambiguity_probe_group": {
+        "task_equals": "Trend and Pattern",
+        "question_regex_ignore_case": "\\b(?:vehicles|cars|players|people)\\b"
+      }
+    }
+  },
+  "cohort_counts": {
+    "questions": 12,
+    "distinct_videos": 12,
+    "datasets": {
+      "Hawk_UAV": 7,
+      "ERA_Tra": 2,
+      "VisDrone": 2,
+      "UAVDT": 1
+    },
+    "question_taxonomy_strata": {
+      "geometric": 4,
+      "temporal": 4,
+      "scene_region": 2,
+      "ambiguity_probe": 2
+    }
+  },
+  "questions": [
+    {
+      "qa_id": "train_014154",
+      "video_path": "Hawk_UAV/BE/DJI_0338_02.mp4",
+      "dataset_name": "Hawk_UAV",
+      "task": "Geometric Relation",
+      "selection_stratum": "geometric",
+      "wording_complexity": "straightforward",
+      "question": "Is the commercial building located to the left of or to the right of the apartment complex?",
+      "question_only_decomposition": {
+        "target_entity": "commercial building",
+        "visual_attributes": [
+          "commercial"
+        ],
+        "reference_entities": [
+          "apartment complex"
+        ],
+        "spatial_constraints": [
+          "Determine whether the commercial-building region is left or right of the apartment-complex region; the direction is not supplied."
+        ],
+        "geometric_operation": "Compute the left/right relation from region centers.",
+        "temporal_operation": null,
+        "ambiguity_probe": false
+      },
+      "entity_prompt_phrases": [
+        "commercial building",
+        "apartment complex"
+      ],
+      "selection_hash_sha256": "0018533a2f86ad185711d1a9aebfb5825dd3d0568b51575cd44ab7c9ca3edbe7"
+    },
+    {
+      "qa_id": "train_005918",
+      "video_path": "ERA_Select/NonEvent/NonEvent_132.mp4",
+      "dataset_name": "ERA_Tra",
+      "task": "Geometric Relation",
+      "selection_stratum": "geometric",
+      "wording_complexity": "difficult_multi_region",
+      "question": "From the aerial perspective, how is the orientation of the large green space in the roundabout relative to the surrounding roads?",
+      "question_only_decomposition": {
+        "target_entity": "green space",
+        "visual_attributes": [
+          "large",
+          "green"
+        ],
+        "reference_entities": [
+          "roundabout",
+          "surrounding roads"
+        ],
+        "spatial_constraints": [
+          "Relate the large green-space region to the roundabout and road network."
+        ],
+        "geometric_operation": "Estimate the target mask principal axis and compare it with road-region orientation; report unassessable if masks do not support a stable axis.",
+        "temporal_operation": null,
+        "ambiguity_probe": false
+      },
+      "entity_prompt_phrases": [
+        "green space",
+        "roundabout",
+        "surrounding roads"
+      ],
+      "selection_hash_sha256": "00461eb0298f2a42e995b61e5effb14d7bbc766d4aec17e2a62912cb4dcc4d5b"
+    },
+    {
+      "qa_id": "train_011679",
+      "video_path": "Hawk_UAV/BE/DJI_0377_01.mp4",
+      "dataset_name": "Hawk_UAV",
+      "task": "Geometric Relation",
+      "selection_stratum": "geometric",
+      "wording_complexity": "difficult_multi_region",
+      "question": "How does the distance between the AMC theater and the Cinemark building compare to the distance between the AMC theater and the parking lot?",
+      "question_only_decomposition": {
+        "target_entity": "AMC theater",
+        "visual_attributes": [
+          "named landmark: AMC"
+        ],
+        "reference_entities": [
+          "Cinemark building",
+          "parking lot"
+        ],
+        "spatial_constraints": [
+          "Compare the distance from AMC theater to Cinemark building with the distance from AMC theater to parking lot."
+        ],
+        "geometric_operation": "Compute region-to-region center and edge distances for the two pairs; report both measures.",
+        "temporal_operation": null,
+        "ambiguity_probe": false
+      },
+      "entity_prompt_phrases": [
+        "AMC theater",
+        "Cinemark building",
+        "parking lot"
+      ],
+      "selection_hash_sha256": "00a45f2ad29285e854b3e96f6e969c2a0fbcc621be5a02e234a99debab98d934"
+    },
+    {
+      "qa_id": "train_012957",
+      "video_path": "Hawk_UAV/BE/DJI_0387_01.mp4",
+      "dataset_name": "Hawk_UAV",
+      "task": "Geometric Relation",
+      "selection_stratum": "geometric",
+      "wording_complexity": "difficult_multi_region",
+      "question": "Are the vehicles in the intersection closer to the traffic lights than to the white building with the green roof?",
+      "question_only_decomposition": {
+        "target_entity": "vehicles",
+        "visual_attributes": [],
+        "reference_entities": [
+          "intersection",
+          "traffic lights",
+          "white building with green roof"
+        ],
+        "spatial_constraints": [
+          "Vehicles are within the intersection; compare distance to traffic lights against distance to the white building with green roof."
+        ],
+        "geometric_operation": "For the vehicle set and both anchor regions, compare normalized centroid and box-edge distances; retain all required entities in a same-frame tuple.",
+        "temporal_operation": null,
+        "ambiguity_probe": false,
+        "target_identity_scope": "group/set; individual-instance identity is not presumed"
+      },
+      "entity_prompt_phrases": [
+        "vehicles",
+        "intersection",
+        "traffic lights",
+        "white building with green roof"
+      ],
+      "selection_hash_sha256": "0199ba2b0bbce3decb82f1aed32d7502e2ffe8b93ae09e4d74ef95deb90a4c75"
+    },
+    {
+      "qa_id": "train_008503",
+      "video_path": "Hawk_UAV/IL/DJI_0062_d4_01.mp4",
+      "dataset_name": "Hawk_UAV",
+      "task": "Temporal Grounding",
+      "selection_stratum": "temporal",
+      "wording_complexity": "straightforward_temporal",
+      "question": "At what point in the video does the large white-roofed building first appear in the frame?",
+      "question_only_decomposition": {
+        "target_entity": "building",
+        "visual_attributes": [
+          "large",
+          "white roof"
+        ],
+        "reference_entities": [],
+        "spatial_constraints": [],
+        "geometric_operation": null,
+        "temporal_operation": "Find first visible sampled frame for the large white-roofed building.",
+        "ambiguity_probe": false
+      },
+      "entity_prompt_phrases": [
+        "building"
+      ],
+      "selection_hash_sha256": "001f74f957e0cb47d0ca648296f6530ffcfd81efdd4947b3d634b08bd2915c64"
+    },
+    {
+      "qa_id": "train_008163",
+      "video_path": "Hawk_UAV/IL/DJI_0037_d4_02.mp4",
+      "dataset_name": "Hawk_UAV",
+      "task": "Temporal Grounding",
+      "selection_stratum": "temporal",
+      "wording_complexity": "straightforward_temporal",
+      "question": "How long is the construction site visible in the video?",
+      "question_only_decomposition": {
+        "target_entity": "construction site",
+        "visual_attributes": [],
+        "reference_entities": [],
+        "spatial_constraints": [],
+        "geometric_operation": null,
+        "temporal_operation": "Estimate first-to-last visible interval for the construction-site region.",
+        "ambiguity_probe": false
+      },
+      "entity_prompt_phrases": [
+        "construction site"
+      ],
+      "selection_hash_sha256": "0031af7b26ba11d59cbd858fc0371552c88ef71e520df71ce42ea07f27a759c9"
+    },
+    {
+      "qa_id": "train_001478",
+      "video_path": "VisDrone/uav0000266_04830_v_01.mp4",
+      "dataset_name": "VisDrone",
+      "task": "Temporal Grounding",
+      "selection_stratum": "temporal",
+      "wording_complexity": "straightforward_temporal",
+      "question": "How long does the white and red bus appear in the video?",
+      "question_only_decomposition": {
+        "target_entity": "bus",
+        "visual_attributes": [
+          "white",
+          "red"
+        ],
+        "reference_entities": [],
+        "spatial_constraints": [],
+        "geometric_operation": null,
+        "temporal_operation": "Estimate the visible interval of the described bus.",
+        "ambiguity_probe": false
+      },
+      "entity_prompt_phrases": [
+        "bus"
+      ],
+      "selection_hash_sha256": "003a749df453ce75e6c663d19d66b8f632fee55edc57d007c901945cfffe4c27"
+    },
+    {
+      "qa_id": "train_010200",
+      "video_path": "Hawk_UAV/PH/DJI_0250_d4_01.mp4",
+      "dataset_name": "Hawk_UAV",
+      "task": "Temporal Grounding",
+      "selection_stratum": "temporal",
+      "wording_complexity": "straightforward_temporal",
+      "question": "At what point in the video does the baseball field first appear in the frame?",
+      "question_only_decomposition": {
+        "target_entity": "baseball field",
+        "visual_attributes": [],
+        "reference_entities": [],
+        "spatial_constraints": [],
+        "geometric_operation": null,
+        "temporal_operation": "Find first visible sampled frame for the baseball-field region.",
+        "ambiguity_probe": false
+      },
+      "entity_prompt_phrases": [
+        "baseball field"
+      ],
+      "selection_hash_sha256": "005b656286002bab112d3bfc7c0ce87ef735f8aecdac1325ab42de8b17795a2c"
+    },
+    {
+      "qa_id": "train_003224",
+      "video_path": "ERA_Select/Baseball/Baseball_027.mp4",
+      "dataset_name": "ERA_Tra",
+      "task": "Object and Land Cover Recognition",
+      "selection_stratum": "scene_region",
+      "wording_complexity": "straightforward_scene",
+      "question": "What type of structure is visible on the left side of the baseball field in the video?",
+      "question_only_decomposition": {
+        "target_entity": "structure",
+        "visual_attributes": [],
+        "reference_entities": [
+          "baseball field"
+        ],
+        "spatial_constraints": [
+          "The requested structure is on the left side of the baseball-field region."
+        ],
+        "geometric_operation": "Apply the left-of relation to candidate-region centers, then assess category and region coverage separately.",
+        "temporal_operation": null,
+        "ambiguity_probe": false
+      },
+      "entity_prompt_phrases": [
+        "structure",
+        "baseball field"
+      ],
+      "selection_hash_sha256": "01a7ccc64698920a1238805891ab4ca65f1c603ba756bf06ff37f737c8d55285"
+    },
+    {
+      "qa_id": "train_002092",
+      "video_path": "VisDrone/uav0000300_00000_v_03.mp4",
+      "dataset_name": "VisDrone",
+      "task": "Object and Land Cover Recognition",
+      "selection_stratum": "scene_region",
+      "wording_complexity": "straightforward_scene",
+      "question": "What type of land cover is primarily visible in the central median strip of the road?",
+      "question_only_decomposition": {
+        "target_entity": "land-cover region",
+        "visual_attributes": [],
+        "reference_entities": [
+          "central median strip",
+          "road"
+        ],
+        "spatial_constraints": [
+          "The target land-cover patch is within the central road median."
+        ],
+        "geometric_operation": "Test candidate containment in the median-strip region; use area coverage and center containment.",
+        "temporal_operation": null,
+        "ambiguity_probe": false
+      },
+      "entity_prompt_phrases": [
+        "land-cover region",
+        "central median strip",
+        "road"
+      ],
+      "selection_hash_sha256": "0439898b5d97ff6836782a593ce9e3d0cb3d1f94ae4e20c8795d8a6bc76b8036"
+    },
+    {
+      "qa_id": "train_012936",
+      "video_path": "Hawk_UAV/BE/DJI_0370_06.mp4",
+      "dataset_name": "Hawk_UAV",
+      "task": "Temporal Grounding",
+      "selection_stratum": "ambiguity_probe_singular",
+      "wording_complexity": "ambiguity_probe",
+      "question": "At what time does the motorcycle disappear from the video?",
+      "question_only_decomposition": {
+        "target_entity": "motorcycle",
+        "visual_attributes": [],
+        "reference_entities": [],
+        "spatial_constraints": [],
+        "geometric_operation": null,
+        "temporal_operation": "Find the last visible sample and disappearance interval for the referenced motorcycle.",
+        "ambiguity_probe": true
+      },
+      "entity_prompt_phrases": [
+        "motorcycle"
+      ],
+      "selection_hash_sha256": "00f2da556939ab1354b262886a4628e4e940cab99e300de11d1a05862ca5211b"
+    },
+    {
+      "qa_id": "train_014264",
+      "video_path": "UAVDT/M0301.mp4",
+      "dataset_name": "UAVDT",
+      "task": "Trend and Pattern",
+      "selection_stratum": "ambiguity_probe_group",
+      "wording_complexity": "ambiguity_probe",
+      "question": "Are there any repeated patterns in the movement of vehicles on the highway?",
+      "question_only_decomposition": {
+        "target_entity": "vehicles",
+        "visual_attributes": [],
+        "reference_entities": [
+          "highway"
+        ],
+        "spatial_constraints": [
+          "Vehicle regions are on the highway."
+        ],
+        "geometric_operation": "Assess category-level highway occupancy; do not assign one vehicle as the unique target.",
+        "temporal_operation": "Identify repeated movement patterns across sampled frames; instance-level identity applies only if independently verifiable.",
+        "ambiguity_probe": true,
+        "target_identity_scope": "group/set; no individual vehicle is singled out by the question"
+      },
+      "entity_prompt_phrases": [
+        "vehicles",
+        "highway"
+      ],
+      "selection_hash_sha256": "005264aca637b7fef6f1a67385380bb8b3b7baa5e97ef97187656888bc83a943"
+    }
+  ],
+  "expected_run_plan": {
+    "question_frame_sampling": {
+      "mode": "legacy",
+      "offset": 0.0,
+      "frame_count": 16,
+      "timestamp_source": "original source frame index / source FPS"
+    },
+    "entity_prompt_occurrences": 24,
+    "distinct_casefolded_entity_prompts": 22,
+    "replicate_primary_predictions": 24,
+    "replicate_retry_reserve": 5,
+    "replicate_total_attempt_max": 29,
+    "raw_union_mask_frame_outputs": 384,
+    "target_component_cap_per_target_prompt_frame": 2,
+    "maximum_candidate_regions_before_dedup": 768
+  }
+}

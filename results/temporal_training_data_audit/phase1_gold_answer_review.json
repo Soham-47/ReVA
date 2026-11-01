@@ -1,0 +1,1011 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "case_id": "TA001",
+      "qa_id": "train_005844",
+      "question": "When does the pedestrian overpass become fully visible in the frame?",
+      "gold_letter": "B",
+      "gold_text": "At the beginning of the video",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Overpass is present at opening; “fully visible” has no crisp threshold."
+    },
+    {
+      "case_id": "TA002",
+      "qa_id": "train_007202",
+      "question": "At what point in the video does the drone first reveal the street crosswalks and a more complete parking lot layout?",
+      "gold_letter": "C",
+      "gold_text": "At 3.0 seconds",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Camera turn reveals crosswalks and parking area; “more complete layout” is subjective."
+    },
+    {
+      "case_id": "TA003",
+      "qa_id": "train_010609",
+      "question": "When does the camera begin to show the full extent of the road and surrounding buildings?",
+      "gold_letter": "C",
+      "gold_text": "At 0.0 seconds",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Road/buildings are visible early; “full extent” is a composition judgment."
+    },
+    {
+      "case_id": "TA004",
+      "qa_id": "train_001873",
+      "question": "During which time interval is the first white car that enters from the bottom of the frame visible as it crosses the intersection?",
+      "gold_letter": "B",
+      "gold_text": "From 1.0s to 4.0s",
+      "gold_review": "supported",
+      "review_note": "The selected gold is broadly consistent with the visible event; the samples support a coarse bracket/order, not exact-frame precision.",
+      "visual_note": "White car entering from bottom and crossing is distinguishable; samples bracket its passage."
+    },
+    {
+      "case_id": "TA005",
+      "qa_id": "train_002886",
+      "question": "When does the camera begin to zoom in on the central action of the baseball game?",
+      "gold_letter": "A",
+      "gold_text": "In the first half of the video",
+      "gold_review": "supported",
+      "review_note": "The selected gold is broadly consistent with the visible event; the samples support a coarse bracket/order, not exact-frame precision.",
+      "visual_note": "Baseball-camera zoom is visible as a clear change in framing."
+    },
+    {
+      "case_id": "TA006",
+      "qa_id": "train_008977",
+      "question": "When does the camera begin to focus more closely on the shoreline and the interaction between the water and sand?",
+      "gold_letter": "C",
+      "gold_text": "In the first half of the video",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "Shoreline/water remain the scene; no clear focus-change event in sampled frames."
+    },
+    {
+      "case_id": "TA007",
+      "qa_id": "train_005174",
+      "question": "When does the landslide event occur in the video?",
+      "gold_letter": "B",
+      "gold_text": "Around the middle of the video",
+      "gold_review": "supported",
+      "review_note": "The selected gold is broadly consistent with the visible event; the samples support a coarse bracket/order, not exact-frame precision.",
+      "visual_note": "Landslide onset is visibly bracketed in the sampled sequence."
+    },
+    {
+      "case_id": "TA008",
+      "qa_id": "train_008839",
+      "question": "When is the vehicle movement visible on the highway throughout the video?",
+      "gold_letter": "A",
+      "gold_text": "Near the end",
+      "gold_review": "not_supported",
+      "review_note": "The selected gold conflicts with the visible sample sequence; preserve the source label and verify before any correction.",
+      "visual_note": "Highway traffic is present throughout; no event supports “near the end.”"
+    },
+    {
+      "case_id": "TA009",
+      "qa_id": "train_003459",
+      "question": "When does the person first move away from the manhole cover?",
+      "gold_letter": "B",
+      "gold_text": "Near the end of the video",
+      "gold_review": "not_supported",
+      "review_note": "The selected gold conflicts with the visible sample sequence; preserve the source label and verify before any correction.",
+      "visual_note": "Person moves away from the manhole earlier than the gold “near end” answer suggests."
+    },
+    {
+      "case_id": "TA010",
+      "qa_id": "train_013132",
+      "question": "At what point in the video does the camera begin to move?",
+      "gold_letter": "A",
+      "gold_text": "The camera begins to move at 0.0 seconds and continues until 7.9 seconds",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Camera drift is subtle; beginning of movement is difficult to define."
+    },
+    {
+      "case_id": "TA011",
+      "qa_id": "train_005432",
+      "question": "When do the clouds in the sky begin to move across the frame?",
+      "gold_letter": "C",
+      "gold_text": "At the beginning of the video",
+      "gold_review": "not_supported",
+      "review_note": "The selected gold conflicts with the visible sample sequence; preserve the source label and verify before any correction.",
+      "visual_note": "Cloud movement is not reliably visible at this sampling resolution."
+    },
+    {
+      "case_id": "TA012",
+      "qa_id": "train_007187",
+      "question": "When does the camera first reveal the complete curve of the athletic track?",
+      "gold_letter": "D",
+      "gold_text": "Within the first half of the video",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Track curve is progressively revealed by camera motion; “complete” is subjective."
+    },
+    {
+      "case_id": "TA013",
+      "qa_id": "train_005995",
+      "question": "When does the sun begin to set behind the mountains in the video?",
+      "gold_letter": "C",
+      "gold_text": "Around the middle of the video",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "Sunset onset behind mountains is gradual and not time-localizable in these frames."
+    },
+    {
+      "case_id": "TA014",
+      "qa_id": "train_011522",
+      "question": "At what point in the video does the cluster of red brick buildings first start to move out of the frame as the camera pans to the right?",
+      "gold_letter": "A",
+      "gold_text": "At 4.5 seconds",
+      "gold_review": "supported",
+      "review_note": "The selected gold is broadly consistent with the visible event; the samples support a coarse bracket/order, not exact-frame precision.",
+      "visual_note": "Brick-building cluster leaves view during a clear rightward pan; event is bracketable."
+    },
+    {
+      "case_id": "TA015",
+      "qa_id": "train_004866",
+      "question": "When does the combine harvester begin to create a visible trail of harvested land in the field?",
+      "gold_letter": "D",
+      "gold_text": "At the beginning of the video",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Harvest trail is already present at the opening; onset is left-censored."
+    },
+    {
+      "case_id": "TA016",
+      "qa_id": "train_013143",
+      "question": "At what time does the white car in the upper right section of the intersection first appear and disappear?",
+      "gold_letter": "B",
+      "gold_text": "The white car appears at 0.0 seconds and disappears at 7.0 seconds.",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "Several similar white cars; upper-right target cannot be followed confidently."
+    },
+    {
+      "case_id": "TA017",
+      "qa_id": "train_010359",
+      "question": "At what point in the video does the large blue-roofed structure first appear and when does it disappear?",
+      "gold_letter": "D",
+      "gold_text": "The large blue-roofed structure appears at 0.0 seconds and disappears at 19.4 seconds (duration: 19.4 seconds)",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Large blue-roof structure is visible at opening; visibility interval is clip-boundary censored and camera-dependent."
+    },
+    {
+      "case_id": "TA018",
+      "qa_id": "train_002610",
+      "question": "At what time does the black car first appear in the frame and disappear by the end of the clip?",
+      "gold_letter": "D",
+      "gold_text": "Appears at 0.0s and disappears at 3.0s",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "Night intersection has several similar black cars; target identity is unstable."
+    },
+    {
+      "case_id": "TA019",
+      "qa_id": "train_014528",
+      "question": "How long does the black car remain visible on the elevated highway from its first appearance to its disappearance?",
+      "gold_letter": "C",
+      "gold_text": "7.8 seconds",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "Black vehicles are small and multiple; exact highway target cannot be tracked confidently."
+    },
+    {
+      "case_id": "TA020",
+      "qa_id": "train_002500",
+      "question": "At what time does the white car in the lower left of the frame first appear and disappear?",
+      "gold_letter": "D",
+      "gold_text": "Appears at 0.0s and disappears at 1.5s",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "A plausible lower-left white car can be followed, but similar cars make identity uncertain."
+    },
+    {
+      "case_id": "TA021",
+      "qa_id": "train_012661",
+      "question": "At what time does the white car first appear on the bridge and when does it disappear from view?",
+      "gold_letter": "A",
+      "gold_text": "The white car appears at 0.0 seconds and disappears at 4.8 seconds.",
+      "gold_review": "not_supported",
+      "review_note": "Gold time is outside the decoded clip; verify the source QA/video pair and replace only after source review.",
+      "visual_note": "White-car identity is ambiguous and gold disappearance is beyond clip duration."
+    },
+    {
+      "case_id": "TA022",
+      "qa_id": "train_002516",
+      "question": "At what time does the white van first appear in the frame and disappear by the end of the clip?",
+      "gold_letter": "B",
+      "gold_text": "Appears at 0.5s and disappears at 3.5s",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "Multiple white vans/cars; no unique target can be tracked."
+    },
+    {
+      "case_id": "TA023",
+      "qa_id": "train_011846",
+      "question": "At what point does the vehicle first appear in the video and when does it disappear?",
+      "gold_letter": "D",
+      "gold_text": "The vehicle appears at 0.0 seconds and disappears at 5.0 seconds.",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "Question says only “the vehicle” in a multi-vehicle scene."
+    },
+    {
+      "case_id": "TA024",
+      "qa_id": "train_010017",
+      "question": "At what point in the video does the white car first appear and when does it disappear?",
+      "gold_letter": "C",
+      "gold_text": "Appears at 0.0s and disappears at 1.5s",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "White car is already visible at opening and camera pans away; onset is censored."
+    },
+    {
+      "case_id": "TA025",
+      "qa_id": "train_011424",
+      "question": "At what time does the car on the road on the left side of the frame first appear and disappear?",
+      "gold_letter": "D",
+      "gold_text": "The car appears at 0.0 seconds and disappears at 2.5 seconds.",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "Several cars on the left-side road; no unique target."
+    },
+    {
+      "case_id": "TA026",
+      "qa_id": "train_012217",
+      "question": "At what time does the black car first appear in the lower center of the frame and when does it disappear?",
+      "gold_letter": "B",
+      "gold_text": "The black car appears at 5.5 seconds and disappears at 7.5 seconds.",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "Several parked/moving black cars; lower-center target identity is unclear."
+    },
+    {
+      "case_id": "TA027",
+      "qa_id": "train_012333",
+      "question": "At what time does the red car first appear in the frame and when does it disappear?",
+      "gold_letter": "B",
+      "gold_text": "The red car appears at 0.0 seconds and disappears at 8.0 seconds.",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "Multiple red cars; target is not uniquely identified."
+    },
+    {
+      "case_id": "TA028",
+      "qa_id": "train_012780",
+      "question": "When does the dark SUV first appear and when does it disappear from the frame?",
+      "gold_letter": "B",
+      "gold_text": "The dark SUV appears at 0.0 seconds and disappears at 3.2 seconds.",
+      "gold_review": "not_supported",
+      "review_note": "Gold time is outside the decoded clip; verify the source QA/video pair and replace only after source review.",
+      "visual_note": "Six-frame 0.20-second clip cannot support a 3.2-second disappearance label."
+    },
+    {
+      "case_id": "TA029",
+      "qa_id": "train_012511",
+      "question": "When does the black car first appear in the video and when does it disappear?",
+      "gold_letter": "C",
+      "gold_text": "The black car appears at 0.0 seconds and disappears at 4.0 seconds (duration: 4.0s)",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "Multiple black cars on the roadway; the selected target cannot be tracked reliably."
+    },
+    {
+      "case_id": "TA030",
+      "qa_id": "train_014999",
+      "question": "At what point does the white car first appear in the video and when does it disappear?",
+      "gold_letter": "B",
+      "gold_text": "The white car appears at 0.0 seconds and disappears at 0.5 seconds (duration: 0.5s)",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "Several white cars and a very short claimed interval; target is unclear."
+    },
+    {
+      "case_id": "TA031",
+      "qa_id": "train_004456",
+      "question": "When does the fire truck first become clearly visible in the video?",
+      "gold_letter": "C",
+      "gold_text": "At the beginning of the video",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Fire truck is visible from the opening; “first clearly visible” is clip-censored and threshold-sensitive."
+    },
+    {
+      "case_id": "TA032",
+      "qa_id": "train_007566",
+      "question": "When does the train appear in the video?",
+      "gold_letter": "B",
+      "gold_text": "At the beginning",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Train is already visible at opening; first in-clip observation is left-censored."
+    },
+    {
+      "case_id": "TA033",
+      "qa_id": "train_012126",
+      "question": "At what point in the video does the first car appear in the frame?",
+      "gold_letter": "A",
+      "gold_text": "At 0.0 seconds",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Cars are already visible at opening; “first car” is a group/category boundary, not an onset."
+    },
+    {
+      "case_id": "TA034",
+      "qa_id": "train_001854",
+      "question": "At what point in the video is the white car in the lower center of the frame already moving forward through the intersection?",
+      "gold_letter": "D",
+      "gold_text": "0.0 seconds",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "White car is already moving at opening; visible state is censored at the left boundary."
+    },
+    {
+      "case_id": "TA035",
+      "qa_id": "train_004762",
+      "question": "When does the flooded road become the primary focus of the video's composition?",
+      "gold_letter": "A",
+      "gold_text": "Near the end, as the camera provides a close-up view of the flooded road",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Flooded-road “primary focus” is a subjective composition change."
+    },
+    {
+      "case_id": "TA036",
+      "qa_id": "train_007658",
+      "question": "When does the football field with 'MORAVIAN' become clearly visible in the video?",
+      "gold_letter": "A",
+      "gold_text": "Around the middle of the video",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "MORAVIAN field becomes more readable during the pan; “clearly visible” threshold is subjective."
+    },
+    {
+      "case_id": "TA037",
+      "qa_id": "train_002309",
+      "question": "At what time does the blue car enter and leave the intersection area marked with yellow lines?",
+      "gold_letter": "A",
+      "gold_text": "0.5s - 3.0s",
+      "gold_review": "supported",
+      "review_note": "The selected gold is broadly consistent with the visible event; the samples support a coarse bracket/order, not exact-frame precision.",
+      "visual_note": "Distinct blue car crosses the yellow-marked intersection; entry/exit are observable."
+    },
+    {
+      "case_id": "TA038",
+      "qa_id": "train_006899",
+      "question": "When does the white bus appear on the bridge in the video?",
+      "gold_letter": "C",
+      "gold_text": "At the beginning of the video",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "White bus is already on the bridge at opening; first appearance is left-censored."
+    },
+    {
+      "case_id": "TA039",
+      "qa_id": "train_008069",
+      "question": "When do the industrial buildings and parking lots on the right side of the highway become most prominent in the video?",
+      "gold_letter": "A",
+      "gold_text": "Near the end of the video",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Industrial buildings/parking lots are a scene-composition prominence judgment."
+    },
+    {
+      "case_id": "TA040",
+      "qa_id": "train_000858",
+      "question": "At what point in the video does the red billboard with white text become clearly visible as the camera pans?",
+      "gold_letter": "C",
+      "gold_text": "At 3.0 seconds",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Billboard display/visibility changes during pan; exact “clearly visible” threshold needs relabeling."
+    },
+    {
+      "case_id": "TA041",
+      "qa_id": "train_003144",
+      "question": "When does the American flag remain at half-mast throughout the video?",
+      "gold_letter": "B",
+      "gold_text": "At the beginning and throughout the video",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Flag state is visible throughout; interval is clipped at both ends and wording is static-state based."
+    },
+    {
+      "case_id": "TA042",
+      "qa_id": "train_007418",
+      "question": "At what point in the video does the cluster of townhouses first become clearly visible?",
+      "gold_letter": "A",
+      "gold_text": "At 1.5 seconds",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Townhouse visibility is gradual and “clearly visible” is subjective."
+    },
+    {
+      "case_id": "TA043",
+      "qa_id": "train_002472",
+      "question": "When does the blue car appear in the video?",
+      "gold_letter": "C",
+      "gold_text": "At 2.5 seconds",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Blue car may be identifiable, but several similar cars and sparse samples weaken identity."
+    },
+    {
+      "case_id": "TA044",
+      "qa_id": "train_006640",
+      "question": "When does the white van appear in the video?",
+      "gold_letter": "B",
+      "gold_text": "Near the end of the video",
+      "gold_review": "not_supported",
+      "review_note": "The selected gold conflicts with the visible sample sequence; preserve the source label and verify before any correction.",
+      "visual_note": "No confidently identifiable white van in the sampled scene."
+    },
+    {
+      "case_id": "TA045",
+      "qa_id": "train_014664",
+      "question": "Does the traffic light change state during the video?",
+      "gold_letter": "B",
+      "gold_text": "No, the traffic light does not change state during the video.",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "Traffic signal is too small to confirm state change or no-change from these sheets."
+    },
+    {
+      "case_id": "TA046",
+      "qa_id": "train_003746",
+      "question": "When does the red rowing boat disappear from view?",
+      "gold_letter": "B",
+      "gold_text": "Near the end of the video",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "Small rowing boats are not distinguishable enough to identify the red target and exit."
+    },
+    {
+      "case_id": "TA047",
+      "qa_id": "train_009269",
+      "question": "When does the railway line disappear from the frame?",
+      "gold_letter": "D",
+      "gold_text": "At 2.8 seconds",
+      "gold_review": "supported",
+      "review_note": "The selected gold is broadly consistent with the visible event; the samples support a coarse bracket/order, not exact-frame precision.",
+      "visual_note": "Railway line leaves the frame during a visible camera move; disappearance is bracketable."
+    },
+    {
+      "case_id": "TA048",
+      "qa_id": "train_014600",
+      "question": "At what time does the delivery person on a bicycle disappear from the video?",
+      "gold_letter": "D",
+      "gold_text": "0:13",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Cyclist may be followed, but target is tiny and temporal sample gaps are large."
+    },
+    {
+      "case_id": "TA049",
+      "qa_id": "train_002750",
+      "question": "A silver sedan is visible on the right side of the road in the foreground. At what point does it appear and disappear in the video?",
+      "gold_letter": "C",
+      "gold_text": "Appears at 0.0s and disappears at 2.5s (duration: 2.5s)",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Silver sedan is visible at opening; onset is censored though a later exit may be observable."
+    },
+    {
+      "case_id": "TA050",
+      "qa_id": "train_005724",
+      "question": "When does the white triangular building disappear from the frame?",
+      "gold_letter": "C",
+      "gold_text": "Around the middle of the video",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Triangular building exits during camera movement; target and coarse “middle” answer need review."
+    },
+    {
+      "case_id": "TA051",
+      "qa_id": "train_014483",
+      "question": "At what time does the white car disappear from the video?",
+      "gold_letter": "B",
+      "gold_text": "7.8 seconds",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "White cars are small and multiple; no reliable single-car disappearance track."
+    },
+    {
+      "case_id": "TA052",
+      "qa_id": "train_010911",
+      "question": "At what time does the red car disappear from the video?",
+      "gold_letter": "C",
+      "gold_text": "at 12.0 seconds",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "Many red cars over a long clip; target identity cannot be maintained."
+    },
+    {
+      "case_id": "TA053",
+      "qa_id": "train_001790",
+      "question": "At what point in the video does the aerial view of the 'YUN FANG YUAN' building disappear and the scene transition to the city street?",
+      "gold_letter": "A",
+      "gold_text": "At 0.5 seconds",
+      "gold_review": "supported",
+      "review_note": "The selected gold is broadly consistent with the visible event; the samples support a coarse bracket/order, not exact-frame precision.",
+      "visual_note": "Aerial building view transitions clearly to a city street near the start."
+    },
+    {
+      "case_id": "TA054",
+      "qa_id": "train_002951",
+      "question": "When does the man in the light-colored shirt and dark shorts, who is initially seen standing in the foreground, disappear from view?",
+      "gold_letter": "D",
+      "gold_text": "In the first half of the video",
+      "gold_review": "supported",
+      "review_note": "The selected gold is broadly consistent with the visible event; the samples support a coarse bracket/order, not exact-frame precision.",
+      "visual_note": "Man in foreground is distinguishable and walks out of view; exit is observable."
+    },
+    {
+      "case_id": "TA055",
+      "qa_id": "train_013186",
+      "question": "At what point does the house with the gray roof and driveway leading to a parking lot disappear from view?",
+      "gold_letter": "B",
+      "gold_text": "At 6.5 seconds",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Gray-roof house leaves view during camera turn; similar houses make identity only moderately certain."
+    },
+    {
+      "case_id": "TA056",
+      "qa_id": "train_014275",
+      "question": "At what time does the first car appear in the frame and at what time does it disappear from view?",
+      "gold_letter": "D",
+      "gold_text": "The first car appears at 2.3 seconds and disappears at 18.9 seconds.",
+      "gold_review": "not_supported",
+      "review_note": "Gold time is outside the decoded clip; verify the source QA/video pair and replace only after source review.",
+      "visual_note": "Multiple cars and gold exit beyond clip duration."
+    },
+    {
+      "case_id": "TA057",
+      "qa_id": "train_001600",
+      "question": "At what point in the video does the red truck with the green container completely disappear from view?",
+      "gold_letter": "A",
+      "gold_text": "At 5.5 seconds",
+      "gold_review": "supported",
+      "review_note": "The selected gold is broadly consistent with the visible event; the samples support a coarse bracket/order, not exact-frame precision.",
+      "visual_note": "Red truck with green container is distinctive and exits near the clip end."
+    },
+    {
+      "case_id": "TA058",
+      "qa_id": "train_007057",
+      "question": "When does the blue car in the middle of the intersection disappear from view?",
+      "gold_letter": "B",
+      "gold_text": "Around the middle of the video",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "Several blue cars in the intersection; target cannot be tracked reliably."
+    },
+    {
+      "case_id": "TA059",
+      "qa_id": "train_012714",
+      "question": "When does the white car disappear from the frame?",
+      "gold_letter": "B",
+      "gold_text": "At 7.8 seconds",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "Small white cars on bridge/road are not uniquely identifiable."
+    },
+    {
+      "case_id": "TA060",
+      "qa_id": "train_015046",
+      "question": "At what time does the white van disappear from the video?",
+      "gold_letter": "A",
+      "gold_text": "at 16.0 seconds",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "Long intersection clip has multiple white vehicles; van identity is unclear."
+    },
+    {
+      "case_id": "TA061",
+      "qa_id": "train_006819",
+      "question": "When does the player in the red jersey near the bottom right of the field first become visible?",
+      "gold_letter": "D",
+      "gold_text": "At the beginning of the video",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "Red-jersey player is tiny among many players; target track is unreliable."
+    },
+    {
+      "case_id": "TA062",
+      "qa_id": "train_015017",
+      "question": "At what point in the video does the large brick building with the green roof first become visible?",
+      "gold_letter": "D",
+      "gold_text": "At 0.0 seconds",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Green-roof brick building is present at opening; onset is left-censored."
+    },
+    {
+      "case_id": "TA063",
+      "qa_id": "train_012096",
+      "question": "At what time does the blue car first appear in the video?",
+      "gold_letter": "A",
+      "gold_text": "0.0 seconds",
+      "gold_review": "not_supported",
+      "review_note": "The selected gold conflicts with the visible sample sequence; preserve the source label and verify before any correction.",
+      "visual_note": "Several blue cars; the visible candidate appears later than the gold 0.0-second onset."
+    },
+    {
+      "case_id": "TA064",
+      "qa_id": "train_000952",
+      "question": "At what time does the red bus first appear in the video?",
+      "gold_letter": "A",
+      "gold_text": "At 0.0 seconds",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Red bus is already visible at opening; onset is left-censored."
+    },
+    {
+      "case_id": "TA065",
+      "qa_id": "train_003927",
+      "question": "When does the black car with 'ARIV' on its side first become visible in the video?",
+      "gold_letter": "B",
+      "gold_text": "In the first half of the video",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "ARIV car is distinctive but obscured by smoke; “first visible” versus “clear visibility” is ambiguous."
+    },
+    {
+      "case_id": "TA066",
+      "qa_id": "train_015316",
+      "question": "At what point in the video does the red brick building first appear in the frame?",
+      "gold_letter": "B",
+      "gold_text": "The red brick building appears at 0.0 seconds and is visible for the entire duration of the video.",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Red-brick building is visible at opening and throughout; onset is left-censored."
+    },
+    {
+      "case_id": "TA067",
+      "qa_id": "train_014241",
+      "question": "At what point does the smoke first appear in the video?",
+      "gold_letter": "B",
+      "gold_text": "At 3.5 seconds",
+      "gold_review": "not_supported",
+      "review_note": "The selected gold conflicts with the visible sample sequence; preserve the source label and verify before any correction.",
+      "visual_note": "Smoke is already present at opening, conflicting with a later first-appearance claim."
+    },
+    {
+      "case_id": "TA068",
+      "qa_id": "train_000235",
+      "question": "At what time does the red truck carrying a large load first appear in the video?",
+      "gold_letter": "B",
+      "gold_text": "At 0.5 seconds",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Distinct loaded red truck appears, but the sampled first-visible time does not clearly support the gold time."
+    },
+    {
+      "case_id": "TA069",
+      "qa_id": "train_006853",
+      "question": "When does the long line of vehicles become visible in the video?",
+      "gold_letter": "C",
+      "gold_text": "At the beginning of the video",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Vehicle line is present at opening; group onset is left-censored."
+    },
+    {
+      "case_id": "TA070",
+      "qa_id": "train_011788",
+      "question": "At what point in the video does the white car first appear in the parking lot?",
+      "gold_letter": "B",
+      "gold_text": "At 0.0 seconds",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "Parking lot has multiple white cars, with no unique target."
+    },
+    {
+      "case_id": "TA071",
+      "qa_id": "train_015677",
+      "question": "At what point in the video does the white van first appear at the top right of the intersection?",
+      "gold_letter": "C",
+      "gold_text": "3.0 seconds",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "Several white vehicles at upper-right; no uniquely identifiable van."
+    },
+    {
+      "case_id": "TA072",
+      "qa_id": "train_000488",
+      "question": "At what point does the motorized rickshaw first appear in the video?",
+      "gold_letter": "C",
+      "gold_text": "At 0.0 seconds",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Rickshaw may be followed, but it is near the frame edge at opening and exact first visibility is uncertain."
+    },
+    {
+      "case_id": "TA073",
+      "qa_id": "train_003440",
+      "question": "When does the basketball hoop first become visible in the video?",
+      "gold_letter": "D",
+      "gold_text": "Around the middle of the video",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Basketball hoop is faintly present early; later “first visible” depends on camera framing/visibility threshold."
+    },
+    {
+      "case_id": "TA074",
+      "qa_id": "train_010146",
+      "question": "When does the basketball court first appear in the video?",
+      "gold_letter": "C",
+      "gold_text": "At the beginning of the video",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Court/field is visible early; first appearance is effectively clip-boundary censored."
+    },
+    {
+      "case_id": "TA075",
+      "qa_id": "train_013982",
+      "question": "At what time does the red bus first appear in the video?",
+      "gold_letter": "B",
+      "gold_text": "0.0 seconds",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Red bus is already visible at opening; first appearance is left-censored, though later motion is visible."
+    },
+    {
+      "case_id": "TA076",
+      "qa_id": "train_000322",
+      "question": "At what timestamp does the black car first appear in the frame and begin moving across the lower right lane of the road?",
+      "gold_letter": "A",
+      "gold_text": "at 3.0 seconds",
+      "gold_review": "supported",
+      "review_note": "The selected gold is broadly consistent with the visible event; the samples support a coarse bracket/order, not exact-frame precision.",
+      "visual_note": "Distinct black car enters/moves across lower-right lane around the middle; samples bracket the event."
+    },
+    {
+      "case_id": "TA077",
+      "qa_id": "train_006880",
+      "question": "When does the person in the orange jacket first become visible in the video?",
+      "gold_letter": "B",
+      "gold_text": "At the beginning of the video",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Orange-jacket person is visible at opening; onset is left-censored."
+    },
+    {
+      "case_id": "TA078",
+      "qa_id": "train_008624",
+      "question": "When does the winding road become visible in the video?",
+      "gold_letter": "B",
+      "gold_text": "In the first half, as the camera moves upward",
+      "gold_review": "not_supported",
+      "review_note": "The selected gold conflicts with the visible sample sequence; preserve the source label and verify before any correction.",
+      "visual_note": "Winding road is already visible at opening; gold first-half timing is unsupported by that view."
+    },
+    {
+      "case_id": "TA079",
+      "qa_id": "train_013463",
+      "question": "At what time does the green bus first appear in the video?",
+      "gold_letter": "D",
+      "gold_text": "At 0.0 seconds",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Green bus is visible at opening; first in-clip observation is left-censored."
+    },
+    {
+      "case_id": "TA080",
+      "qa_id": "train_001567",
+      "question": "At what point in the video does the white car in the foreground first appear?",
+      "gold_letter": "B",
+      "gold_text": "At 0.0 seconds",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "Several white vehicles and foreground target is not unambiguous."
+    },
+    {
+      "case_id": "TA081",
+      "qa_id": "train_006709",
+      "question": "How long does the boy's running motion towards the soccer ball last in the video?",
+      "gold_letter": "B",
+      "gold_text": "Briefly at the beginning",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Boy and ball are identifiable, but running is already underway at opening; duration start is censored."
+    },
+    {
+      "case_id": "TA082",
+      "qa_id": "train_007245",
+      "question": "How long are the tennis courts visible in the video?",
+      "gold_letter": "B",
+      "gold_text": "For most of the video",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Tennis courts are a broad static scene feature visible through most/all of clip; no clear event boundary."
+    },
+    {
+      "case_id": "TA083",
+      "qa_id": "train_012045",
+      "question": "How long do the pedestrians remain visible while crossing the road at the intersection?",
+      "gold_letter": "C",
+      "gold_text": "From 0.0 seconds to 8.0 seconds (duration: 8.0 seconds)",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Pedestrian group crosses; group membership and coarse crossing boundaries need explicit review."
+    },
+    {
+      "case_id": "TA084",
+      "qa_id": "train_000383",
+      "question": "How long is the white and purple bus visible in the video?",
+      "gold_letter": "D",
+      "gold_text": "From 0.0 seconds to 2.5 seconds",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "White/purple bus is visible at opening and exits later; onset is clip-censored and interval approximate."
+    },
+    {
+      "case_id": "TA085",
+      "qa_id": "train_005153",
+      "question": "How long does the muddy river remain visible in the video?",
+      "gold_letter": "A",
+      "gold_text": "For most of the video",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Muddy river is a static scene feature with both visibility boundaries clipped."
+    },
+    {
+      "case_id": "TA086",
+      "qa_id": "train_007284",
+      "question": "How long does the golf course remain visible in the video frame?",
+      "gold_letter": "A",
+      "gold_text": "From 0.0s to 5.8s (duration: 5.8s)",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Golf course is visible through nearly the full clip; both boundaries are effectively clipped."
+    },
+    {
+      "case_id": "TA087",
+      "qa_id": "train_010879",
+      "question": "For how long are the cars visible in the left lane of the road?",
+      "gold_letter": "D",
+      "gold_text": "From 0.0 seconds to 21.9 seconds (duration: 21.9 seconds)",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "“Cars in left lane” is an unbounded group with changing membership."
+    },
+    {
+      "case_id": "TA088",
+      "qa_id": "train_001923",
+      "question": "How long is the white van with a red light on its roof visible in the video?",
+      "gold_letter": "A",
+      "gold_text": "From 0:03 to 0:06 (duration: 3 seconds)",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "White van/red roof is not consistently identifiable across the sampled views."
+    },
+    {
+      "case_id": "TA089",
+      "qa_id": "train_005268",
+      "question": "How long is the large excavation pit visible in the video?",
+      "gold_letter": "B",
+      "gold_text": "For most of the video",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Excavation pit is a static scene feature with no visible onset/exit."
+    },
+    {
+      "case_id": "TA090",
+      "qa_id": "train_012999",
+      "question": "How long is the church with the white steeple visible in the video?",
+      "gold_letter": "B",
+      "gold_text": "From 0.0 seconds to 7.9 seconds (duration: 7.9 seconds)",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Church is identifiable but already visible at opening and remains through most/all clip."
+    },
+    {
+      "case_id": "TA091",
+      "qa_id": "train_013626",
+      "question": "How long does the toll booth complex remain visible in the video?",
+      "gold_letter": "C",
+      "gold_text": "For the entire duration of the video",
+      "gold_review": "not_supported",
+      "review_note": "The selected gold conflicts with the visible sample sequence; preserve the source label and verify before any correction.",
+      "visual_note": "Toll-booth complex visibility changes as the camera advances; gold “entire duration” is not supported by the sampled sequence."
+    },
+    {
+      "case_id": "TA092",
+      "qa_id": "train_002673",
+      "question": "How long does the silver sedan remain visible in the video?",
+      "gold_letter": "C",
+      "gold_text": "From 0.0s to 6.0s (duration: 6.0s)",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Silver sedan may be trackable, but small scale and clip-end visibility make the full interval uncertain."
+    },
+    {
+      "case_id": "TA093",
+      "qa_id": "train_006527",
+      "question": "How long are the cars visible in the parking lots throughout the video?",
+      "gold_letter": "B",
+      "gold_text": "For most of the video",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "Many parked cars; “cars in parking lots” has no stable target identity or event."
+    },
+    {
+      "case_id": "TA094",
+      "qa_id": "train_014364",
+      "question": "How long does the camera maintain its aerial perspective over the intersection?",
+      "gold_letter": "A",
+      "gold_text": "From 0.0s to 7.8s",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Aerial perspective is a scene/camera state, not a target visibility event, and is present throughout."
+    },
+    {
+      "case_id": "TA095",
+      "qa_id": "train_015766",
+      "question": "How long does the bus remain visible in the video frame?",
+      "gold_letter": "D",
+      "gold_text": "Approximately 3.0 seconds",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "Bus target is small/ambiguous; no reliable visible-duration boundary."
+    },
+    {
+      "case_id": "TA096",
+      "qa_id": "train_002341",
+      "question": "At what point in the video does the red bus appear and disappear, and what is its duration of presence in the frame?",
+      "gold_letter": "D",
+      "gold_text": "Appears at 0.0s and disappears at 2.5s (duration: 2.5s)",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Prominent red bus can be followed, but there are multiple red buses and onset is clip-censored."
+    },
+    {
+      "case_id": "TA097",
+      "qa_id": "train_003870",
+      "question": "How long is the white race car with the number 18 visible in the video?",
+      "gold_letter": "B",
+      "gold_text": "Only at the beginning",
+      "gold_review": "not_assessable",
+      "review_note": "The target/event is too ambiguous or weak in the contact sheets to validate the gold reliably.",
+      "visual_note": "Race-car number/identity is unreadable at sheet resolution; claimed “only at beginning” cannot be verified."
+    },
+    {
+      "case_id": "TA098",
+      "qa_id": "train_008702",
+      "question": "How long are the solar panels visible on the rooftops throughout the video?",
+      "gold_letter": "B",
+      "gold_text": "Briefly at the beginning",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Several rooftop solar arrays; question does not identify a particular roof and panels recur throughout."
+    },
+    {
+      "case_id": "TA099",
+      "qa_id": "train_011114",
+      "question": "How long does the toll booth structure remain visible in the video?",
+      "gold_letter": "A",
+      "gold_text": "From 0.0 seconds to 11.5 seconds",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Toll-booth structure starts visible and leaves as camera advances; left-censored start and end bracket are coarse."
+    },
+    {
+      "case_id": "TA100",
+      "qa_id": "train_000984",
+      "question": "How long does the yellow car remain visible in the video?",
+      "gold_letter": "B",
+      "gold_text": "From 0.0s to 3.0s (duration: 3.0s)",
+      "gold_review": "partially_supported_or_censored",
+      "review_note": "Some visual evidence exists, but identity, event definition, clip censoring, or gold timing needs review before use.",
+      "visual_note": "Several yellow/green cars appear; a single yellow-car track is not unambiguous."
+    }
+  ],
+  "status_definitions": {
+    "supported": "Broadly agrees with sampled visual evidence.",
+    "partially_supported_or_censored": "May be valid with explicit censoring or relabeling; not ready as-is.",
+    "not_supported": "Visible evidence conflicts with gold or gold exceeds clip.",
+    "not_assessable": "The sheets do not support a reliable judgment."
+  }
+}

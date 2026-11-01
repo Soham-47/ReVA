@@ -1,0 +1,1388 @@
+{
+  "selection_seed": 20261017,
+  "selection_method": "uniform pseudo-random sample without replacement within baseline error/control pools, separately by task; RNG seeds 20261017 and 20261018",
+  "baseline_run": "runs/stageA_q3vl8b_r16/legacy",
+  "split": "valT",
+  "records": [
+    {
+      "qa_id": "train_008027",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "Hawk_UAV/IL/DJI_0028_d4_02.mp4",
+      "question": "At what point in the video does the large open field first appear in the frame?",
+      "options": {
+        "A": "At 4.5 seconds",
+        "B": "At 0.0 seconds",
+        "C": "At 1.5 seconds",
+        "D": "At 3.0 seconds"
+      },
+      "gold": "B",
+      "baseline_prediction": "D",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.020695467246696353,
+        0.06727579608559608,
+        0.2216796614229679,
+        0.6903490722179413
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_005621",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "ERA_Select/NonEvent/NonEvent_073.mp4",
+      "question": "When does the camera begin to reveal the full extent of the snow-covered forest canopy?",
+      "options": {
+        "A": "In the first half of the video",
+        "B": "Near the end of the video",
+        "C": "At the beginning of the video",
+        "D": "Around the middle of the video"
+      },
+      "gold": "C",
+      "baseline_prediction": "A",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.5290502980351448,
+        0.021725533064454794,
+        0.3313473127782345,
+        0.11787689477205276
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_007117",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "ERA_Select/TrafficCongestion/TrafficCongestion_050.mp4",
+      "question": "When does the red car first appear in the traffic jam?",
+      "options": {
+        "A": "In the first half of the video",
+        "B": "At the beginning of the video",
+        "C": "Around the middle of the video",
+        "D": "Near the end of the video"
+      },
+      "gold": "C",
+      "baseline_prediction": "B",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.23798715136945248,
+        0.7491828501224518,
+        0.010586913907900453,
+        0.002243057737359777
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_001319",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "VisDrone/uav0000263_03289_v_03.mp4",
+      "question": "At what time does the white bus first appear under the bridge in the video?",
+      "options": {
+        "A": "At 1.8 seconds",
+        "B": "At 3.2 seconds",
+        "C": "At 2.5 seconds",
+        "D": "At 0.0 seconds"
+      },
+      "gold": "D",
+      "baseline_prediction": "B",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.08594429679214954,
+        0.5136879533529282,
+        0.19391881301999092,
+        0.20644894987344742
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_013884",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "UAVDT/M0101.mp4",
+      "question": "How long does the white car remain visible at the intersection before it exits the frame?",
+      "options": {
+        "A": "2.0 seconds",
+        "B": "5.0 seconds",
+        "C": "4.0 seconds",
+        "D": "3.0 seconds"
+      },
+      "gold": "B",
+      "baseline_prediction": "C",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.22384651005268097,
+        0.15796691551804543,
+        0.33429399877786636,
+        0.28389259427785873
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_008246",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "Hawk_UAV/IL/DJI_0039_d4_02.mp4",
+      "question": "When does the freight train appear in the video?",
+      "options": {
+        "A": "In the first half of the video",
+        "B": "At the beginning of the video",
+        "C": "Near the end of the video",
+        "D": "Around the middle of the video"
+      },
+      "gold": "A",
+      "baseline_prediction": "B",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.4203745499253273,
+        0.4304291680455208,
+        0.050996579229831696,
+        0.09819969534873962
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_015451",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "Hawk_UAV/BE/DJI_0337_01.mp4",
+      "question": "At what point does the solar panel field first appear in the video?",
+      "options": {
+        "A": "At 3.0 seconds",
+        "B": "At 4.5 seconds",
+        "C": "At 0.0 seconds",
+        "D": "At 1.5 seconds"
+      },
+      "gold": "C",
+      "baseline_prediction": "A",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.5633310154080391,
+        0.03948084590956569,
+        0.32397183030843735,
+        0.07321633584797382
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_009656",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "Hawk_UAV/PH/DJI_0211_d4_01.mp4",
+      "question": "At what point in the video does the community center complex first appear in the frame?",
+      "options": {
+        "A": "At 4.5 seconds",
+        "B": "At 3.0 seconds",
+        "C": "At 0.5 seconds",
+        "D": "At 2.0 seconds"
+      },
+      "gold": "D",
+      "baseline_prediction": "B",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.005205054942052811,
+        0.6108916252851486,
+        0.02721431665122509,
+        0.3566890172660351
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_004135",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "ERA_Select/Cycling/Cycling_007.mp4",
+      "question": "When does the road first appear to disappear from view before reappearing around a bend?",
+      "options": {
+        "A": "Around the middle of the video",
+        "B": "At the beginning of the video",
+        "C": "Near the end of the video",
+        "D": "In the first half of the video"
+      },
+      "gold": "A",
+      "baseline_prediction": "D",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.28565485775470734,
+        0.12401141971349716,
+        0.0556156225502491,
+        0.5347181260585785
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_010397",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "Hawk_UAV/BE/DJI_0376_03.mp4",
+      "question": "At what time does the black car appear in the lower right section of the parking lot and when does it disappear?",
+      "options": {
+        "A": "The black car appears at 1.0 seconds and disappears at 5.0 seconds.",
+        "B": "The black car appears at 2.0 seconds and disappears at 6.0 seconds.",
+        "C": "The black car appears at 0.0 seconds and disappears at 3.0 seconds.",
+        "D": "The black car appears at 0.0 seconds and disappears at 7.0 seconds."
+      },
+      "gold": "C",
+      "baseline_prediction": "D",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.01651766081340611,
+        0.022199274506419897,
+        0.044227625243365765,
+        0.9170554578304291
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_008007",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "Hawk_UAV/IL/DJI_0028_d4_01.mp4",
+      "question": "At what point in the video does the white car first appear in the frame?",
+      "options": {
+        "A": "At 0.0 seconds",
+        "B": "At 3.0 seconds",
+        "C": "At 2.0 seconds",
+        "D": "At 1.0 seconds"
+      },
+      "gold": "A",
+      "baseline_prediction": "D",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.3185793496668339,
+        0.019651224138215184,
+        0.07880506478250027,
+        0.5829643309116364
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_001774",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "VisDrone/uav0000279_00001_v_04.mp4",
+      "question": "How long is the white van moving towards the camera visible in the video?",
+      "options": {
+        "A": "From 0.0s to 1.5s (duration: 1.5s)",
+        "B": "From 0.0s to 2.5s (duration: 2.5s)",
+        "C": "From 0.0s to 3.5s (duration: 3.5s)",
+        "D": "From 0.0s to 4.0s (duration: 4.0s)"
+      },
+      "gold": "D",
+      "baseline_prediction": "A",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.5222460702061653,
+        0.264335073530674,
+        0.08193174749612808,
+        0.13148712739348412
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_015452",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "Hawk_UAV/BE/DJI_0337_01.mp4",
+      "question": "How long are the solar panels visible in the video?",
+      "options": {
+        "A": "From 0.5 seconds to 5.0 seconds (duration: 4.5 seconds)",
+        "B": "From 2.5 seconds to 7.8 seconds (duration: 5.3 seconds)",
+        "C": "From 1.0 seconds to 6.5 seconds (duration: 5.5 seconds)",
+        "D": "From 3.0 seconds to 8.0 seconds (duration: 5.0 seconds)"
+      },
+      "gold": "B",
+      "baseline_prediction": "D",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.0288829377386719,
+        0.33553437143564224,
+        0.023349647875875235,
+        0.6122330576181412
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_007335",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "Hawk_UAV/BE/DJI_0100_d4_02.mp4",
+      "question": "What is the duration of the aerial view of the golf course shown in the video?",
+      "options": {
+        "A": "From 0.0s to 8.0s",
+        "B": "From 0.0s to 7.0s",
+        "C": "From 0.0s to 6.0s",
+        "D": "From 0.0s to 5.0s"
+      },
+      "gold": "D",
+      "baseline_prediction": "C",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.00322378016426228,
+        0.01578637375496328,
+        0.8065410256385803,
+        0.17444884404540062
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_007334",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "Hawk_UAV/BE/DJI_0100_d4_02.mp4",
+      "question": "At what point in the video does the residential area with houses first become visible?",
+      "options": {
+        "A": "At 2.0 seconds",
+        "B": "At 0.5 seconds",
+        "C": "At 5.0 seconds",
+        "D": "At 3.5 seconds"
+      },
+      "gold": "B",
+      "baseline_prediction": "A",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.38541603833436966,
+        0.37108778208494186,
+        0.031996884383261204,
+        0.21149930357933044
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_008008",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "Hawk_UAV/IL/DJI_0028_d4_01.mp4",
+      "question": "How long does the white vehicle remain visible in the frame as it moves along the road?",
+      "options": {
+        "A": "From 0.0s to 3.0s (duration: 3.0s)",
+        "B": "From 0.0s to 4.0s (duration: 4.0s)",
+        "C": "From 0.0s to 2.5s (duration: 2.5s)",
+        "D": "From 0.0s to 5.0s (duration: 5.0s)"
+      },
+      "gold": "B",
+      "baseline_prediction": "C",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.2296696938574314,
+        0.1701218318194151,
+        0.5114316791296005,
+        0.0887768529355526
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_011932",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "Hawk_UAV/BE/DJI_0339_15.mp4",
+      "question": "At what point in the video does the first car appear on the two-lane road to the left of the residential area?",
+      "options": {
+        "A": "At 0.0 seconds",
+        "B": "At 2.0 seconds",
+        "C": "At 6.0 seconds",
+        "D": "At 4.0 seconds"
+      },
+      "gold": "C",
+      "baseline_prediction": "A",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.791832908987999,
+        0.08196830004453659,
+        0.06389804510399699,
+        0.06230071559548378
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_012851",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "UAVDT/M0202.mp4",
+      "question": "When does the blue taxi that is initially visible at the bottom left of the frame at 0.0 seconds reappear after exiting the frame?",
+      "options": {
+        "A": "At 0.5 seconds",
+        "B": "At 1.8 seconds",
+        "C": "At 3.2 seconds",
+        "D": "At 5.0 seconds"
+      },
+      "gold": "C",
+      "baseline_prediction": "B",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.27046995237469673,
+        0.4134823977947235,
+        0.18167713657021523,
+        0.13437051884829998
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_014123",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "Hawk_UAV/BE/DJI_0392_03.mp4",
+      "question": "How long does the red car remain visible in the video?",
+      "options": {
+        "A": "3.5 seconds",
+        "B": "6.8 seconds",
+        "C": "5.0 seconds",
+        "D": "2.2 seconds"
+      },
+      "gold": "C",
+      "baseline_prediction": "B",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.05734133627265692,
+        0.7460405677556992,
+        0.1393580473959446,
+        0.05726005882024765
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_009316",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "Hawk_UAV/NJ/DJI_0174_d4_02.mp4",
+      "question": "At what point in the video does the first building appear in the frame?",
+      "options": {
+        "A": "At 4.0 seconds",
+        "B": "At 2.8 seconds",
+        "C": "At 3.2 seconds",
+        "D": "At 1.5 seconds"
+      },
+      "gold": "C",
+      "baseline_prediction": "B",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.014698568265885115,
+        0.5936751365661621,
+        0.3480384014546871,
+        0.04358788160607219
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_011406",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "Hawk_UAV/BE/DJI_0385_02.mp4",
+      "question": "When does the white SUV become visible in the video and when does it disappear?",
+      "options": {
+        "A": "The white SUV appears at 0.0 seconds and disappears at 3.0 seconds.",
+        "B": "The white SUV appears at 0.0 seconds and remains visible until 7.8 seconds, so it does not disappear within the video duration.",
+        "C": "The white SUV appears at 2.0 seconds and disappears at 5.0 seconds.",
+        "D": "The white SUV appears at 4.0 seconds and disappears at 7.0 seconds."
+      },
+      "gold": "B",
+      "baseline_prediction": "B",
+      "baseline_correct": true,
+      "baseline_probabilities": [
+        0.001315296598477289,
+        0.9977786540985107,
+        0.0005686817094101571,
+        0.00033738594720489345
+      ],
+      "review_role": "correct_control"
+    },
+    {
+      "qa_id": "train_002905",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "ERA_Select/Baseball/Baseball_007.mp4",
+      "question": "When does the camera begin to focus on the baseball field in the lower-left portion of the frame?",
+      "options": {
+        "A": "At the beginning of the video",
+        "B": "Around the middle of the video",
+        "C": "Near the end of the video",
+        "D": "In the first half of the video"
+      },
+      "gold": "A",
+      "baseline_prediction": "A",
+      "baseline_correct": true,
+      "baseline_probabilities": [
+        0.8967897742986679,
+        0.027391412295401096,
+        0.013150226091966033,
+        0.06266859360039234
+      ],
+      "review_role": "correct_control"
+    },
+    {
+      "qa_id": "train_004682",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "ERA_Select/Flood/Flood_008.mp4",
+      "question": "When does the submerged vehicle first become visible in the flooded area?",
+      "options": {
+        "A": "Near the end of the video",
+        "B": "At the beginning of the video",
+        "C": "In the first half of the video",
+        "D": "Around the middle of the video"
+      },
+      "gold": "B",
+      "baseline_prediction": "B",
+      "baseline_correct": true,
+      "baseline_probabilities": [
+        0.006493263994343579,
+        0.834490031003952,
+        0.1445410382002592,
+        0.014475646778009832
+      ],
+      "review_role": "correct_control"
+    },
+    {
+      "qa_id": "train_009131",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "Hawk_UAV/NJ/DJI_0147_d4_01.mp4",
+      "question": "How long is the red-roofed building visible in the video?",
+      "options": {
+        "A": "Near the end",
+        "B": "For most of the video",
+        "C": "Only in the first half",
+        "D": "Briefly at the beginning"
+      },
+      "gold": "A",
+      "baseline_prediction": "A",
+      "baseline_correct": true,
+      "baseline_probabilities": [
+        0.9897397309541702,
+        0.006797925569117069,
+        0.001488013454945758,
+        0.0019742931181099266
+      ],
+      "review_role": "correct_control"
+    },
+    {
+      "qa_id": "train_002637",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "VisDrone/uav0000137_00458_v_01.mp4",
+      "question": "How long does the red traffic light remain illuminated on the right side of the intersection from the beginning of the video?",
+      "options": {
+        "A": "From 0.0s to 5.5s (duration: 5.5s)",
+        "B": "From 0.0s to 3.2s (duration: 3.2s)",
+        "C": "From 0.0s to 4.0s (duration: 4.0s)",
+        "D": "From 0.0s to 6.0s (duration: 6.0s)"
+      },
+      "gold": "D",
+      "baseline_prediction": "D",
+      "baseline_correct": true,
+      "baseline_probabilities": [
+        0.34568723291158676,
+        0.05397224333137274,
+        0.15087763406336308,
+        0.4494628868997097
+      ],
+      "review_role": "correct_control"
+    },
+    {
+      "qa_id": "train_004664",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "ERA_Select/Flood/Flood_006.mp4",
+      "question": "How long is the castle visible in the frame throughout the video?",
+      "options": {
+        "A": "Near the end only",
+        "B": "Intermittently throughout",
+        "C": "Briefly at the beginning",
+        "D": "For most of the video"
+      },
+      "gold": "D",
+      "baseline_prediction": "D",
+      "baseline_correct": true,
+      "baseline_probabilities": [
+        0.0002793719104374759,
+        0.0004911099604214542,
+        0.0008333097212016582,
+        0.9983962029218674
+      ],
+      "review_role": "correct_control"
+    },
+    {
+      "qa_id": "train_004822",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "ERA_Select/Flood/Flood_036.mp4",
+      "question": "When does the streetlight first become visible in the video?",
+      "options": {
+        "A": "Near the end of the video",
+        "B": "In the first half of the video",
+        "C": "At the beginning of the video",
+        "D": "Around the middle of the video"
+      },
+      "gold": "C",
+      "baseline_prediction": "C",
+      "baseline_correct": true,
+      "baseline_probabilities": [
+        0.13679873198270798,
+        0.2448967844247818,
+        0.5706196427345276,
+        0.04768479894846678
+      ],
+      "review_role": "correct_control"
+    },
+    {
+      "qa_id": "train_002906",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "ERA_Select/Baseball/Baseball_007.mp4",
+      "question": "How long does the activity on the baseball fields last throughout the video?",
+      "options": {
+        "A": "Intermittently throughout",
+        "B": "Near the end",
+        "C": "For most of the video",
+        "D": "Briefly at the beginning"
+      },
+      "gold": "C",
+      "baseline_prediction": "C",
+      "baseline_correct": true,
+      "baseline_probabilities": [
+        0.0017287272785324603,
+        0.001607139885891229,
+        0.9952118098735809,
+        0.001452277268981561
+      ],
+      "review_role": "correct_control"
+    },
+    {
+      "qa_id": "train_004853",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "ERA_Select/Harvesting/Harvesting_005.mp4",
+      "question": "When does the combine harvester begin transferring grain to the trailer?",
+      "options": {
+        "A": "Around the middle of the video",
+        "B": "Near the end of the video",
+        "C": "In the first half of the video",
+        "D": "At the beginning of the video"
+      },
+      "gold": "D",
+      "baseline_prediction": "D",
+      "baseline_correct": true,
+      "baseline_probabilities": [
+        0.009472999139688909,
+        0.005795128759928048,
+        0.07078683469444513,
+        0.9139450341463089
+      ],
+      "review_role": "correct_control"
+    },
+    {
+      "qa_id": "train_015639",
+      "split": "valT",
+      "task": "Temporal Grounding",
+      "video_path": "Hawk_UAV/BE/DJI_0346_03.mp4",
+      "question": "How long is the small fenced area with the white structure visible in the video?",
+      "options": {
+        "A": "5.2 seconds",
+        "B": "7.9 seconds",
+        "C": "3.8 seconds",
+        "D": "10.1 seconds"
+      },
+      "gold": "B",
+      "baseline_prediction": "B",
+      "baseline_correct": true,
+      "baseline_probabilities": [
+        0.04425636259838939,
+        0.8807013630867004,
+        0.07405797485262156,
+        0.0009843093430390581
+      ],
+      "review_role": "correct_control"
+    },
+    {
+      "qa_id": "train_011807",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "Hawk_UAV/BE/DJI_0364_04.mp4",
+      "question": "What is the orientation of the large white building with the flat roof in relation to the road?",
+      "options": {
+        "A": "The building is oriented with its long side parallel to the road and its front face facing away from the road.",
+        "B": "The building is oriented with its long side perpendicular to the road and its front face facing away from the road.",
+        "C": "The building is oriented with its long side perpendicular to the road and its front face facing the road.",
+        "D": "The building is oriented with its long side parallel to the road and its front face facing the road."
+      },
+      "gold": "D",
+      "baseline_prediction": "C",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.028284688480198383,
+        0.023377508390694857,
+        0.6228466331958771,
+        0.32549116760492325
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_009660",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "Hawk_UAV/PH/DJI_0211_d4_01.mp4",
+      "question": "From the aerial perspective, how is the basketball court positioned relative to the main church building?",
+      "options": {
+        "A": "The basketball court is to the right of the church building and slightly behind it.",
+        "B": "The basketball court is to the left of the church building and adjacent to the parking lot.",
+        "C": "The basketball court is above the church building, elevated on a hill.",
+        "D": "The basketball court is directly in front of the church building, closer to the parking lot."
+      },
+      "gold": "A",
+      "baseline_prediction": "D",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.3038060571998358,
+        0.012661734246648848,
+        0.0015277254424290732,
+        0.6820045039057732
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_015644",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "Hawk_UAV/BE/DJI_0346_03.mp4",
+      "question": "Is the small fenced area with the white structure closer to the parking lot or to the grassy field?",
+      "options": {
+        "A": "closer to the grassy field",
+        "B": "equally distant from both",
+        "C": "farther from the parking lot",
+        "D": "closer to the parking lot"
+      },
+      "gold": "A",
+      "baseline_prediction": "D",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.007960719987750053,
+        0.006743896519765258,
+        0.0028976595494896173,
+        0.9823977500200272
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_004666",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "ERA_Select/Flood/Flood_006.mp4",
+      "question": "In the video, how is the small boat positioned relative to the castle?",
+      "options": {
+        "A": "The boat is very close to the castle, almost adjacent to its base.",
+        "B": "The boat is positioned behind the castle from the camera's perspective.",
+        "C": "The boat is located to the left of the castle and is significantly farther away.",
+        "D": "The boat is above the castle, floating in the air."
+      },
+      "gold": "C",
+      "baseline_prediction": "A",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.9452352821826935,
+        0.0049478449509479105,
+        0.04918307124171406,
+        0.0006338140810839832
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_007122",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "ERA_Select/TrafficCongestion/TrafficCongestion_050.mp4",
+      "question": "How is the gas station positioned relative to the main traffic jam?",
+      "options": {
+        "A": "The gas station is to the left of the traffic jam and is only moderately distant from the main line of cars.",
+        "B": "The gas station is to the left of the traffic jam and very close to the front of the queue.",
+        "C": "The gas station is behind the traffic jam and appears smaller due to distance.",
+        "D": "The gas station is to the right of the traffic jam and far away from the main congestion."
+      },
+      "gold": "B",
+      "baseline_prediction": "A",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.7956336140632629,
+        0.20116768777370453,
+        0.001805072941351682,
+        0.0013936529430793598
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_000050",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "VisDrone/uav0000077_00720_v_01.mp4",
+      "question": "From the camera's initial position, which vehicle is positioned to the left of the white sedan?",
+      "options": {
+        "A": "The white van further down the street",
+        "B": "The black car parked near the blue fence",
+        "C": "The large truck with an open bed",
+        "D": "The red car parked in front of the building"
+      },
+      "gold": "C",
+      "baseline_prediction": "B",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.000986672966973856,
+        0.5948602110147476,
+        0.4028991684317589,
+        0.0012539317249320447
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_011416",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "Hawk_UAV/BE/DJI_0385_02.mp4",
+      "question": "How does the relative position of the parked white car compare to the parked black car?",
+      "options": {
+        "A": "The white car is to the right of the black car and is closer to the camera.",
+        "B": "The white car is to the left of the black car and is closer to the camera.",
+        "C": "The white car is to the right of the black car and is farther down the street.",
+        "D": "The white car is to the left of the black car and is farther down the street."
+      },
+      "gold": "C",
+      "baseline_prediction": "B",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.3698018491268158,
+        0.6114174202084541,
+        0.004896683967672288,
+        0.013884057058021426
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_012856",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "UAVDT/M0202.mp4",
+      "question": "Are the pedestrians waiting at the crosswalk on the lower right side of the intersection closer to the camera than the vehicles moving through the intersection?",
+      "options": {
+        "A": "The pedestrians and vehicles are at the same distance from the camera.",
+        "B": "No, the pedestrians are farther from the camera than the vehicles.",
+        "C": "Yes, the pedestrians are closer to the camera than the vehicles.",
+        "D": "It is impossible to determine the relative distances from the video."
+      },
+      "gold": "B",
+      "baseline_prediction": "C",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.0116240328643471,
+        0.02263116929680109,
+        0.9586213678121567,
+        0.007123406161554158
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_008012",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "Hawk_UAV/IL/DJI_0028_d4_01.mp4",
+      "question": "How does the distance between the large commercial complex and the forest on the left compare to the distance between the commercial complex and the road on the right?",
+      "options": {
+        "A": "The commercial complex is approximately the same distance from both the forest and the road",
+        "B": "The commercial complex is closer to the forest than to the road",
+        "C": "The commercial complex is closer to the road than to the forest",
+        "D": "The commercial complex is farther from the road than from the forest"
+      },
+      "gold": "C",
+      "baseline_prediction": "B",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.06870458647608757,
+        0.7336294949054718,
+        0.1955149583518505,
+        0.0021509859652724117
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_012156",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "Hawk_UAV/BE/DJI_0339_11.mp4",
+      "question": "How does the distance between the basketball court and the parking lot compare to the distance between the basketball court and the road?",
+      "options": {
+        "A": "The basketball court is closer to the road than to the parking lot.",
+        "B": "The distance to the parking lot is much greater than the distance to the road.",
+        "C": "The basketball court is closer to the parking lot than to the road.",
+        "D": "The basketball court is equidistant from both the parking lot and the road."
+      },
+      "gold": "C",
+      "baseline_prediction": "A",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.6076199561357498,
+        0.005053259723354131,
+        0.36908431723713875,
+        0.018242511432617903
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_008031",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "Hawk_UAV/IL/DJI_0028_d4_02.mp4",
+      "question": "How does the distance between the large parking lot and the residential apartment buildings compare to the distance between the parking lot and the open field?",
+      "options": {
+        "A": "The open field is much farther from the parking lot than the apartment buildings are.",
+        "B": "The apartment buildings and the open field are approximately the same distance from the parking lot.",
+        "C": "The apartment buildings are closer to the parking lot than the open field is.",
+        "D": "The open field is closer to the parking lot than the apartment buildings are."
+      },
+      "gold": "C",
+      "baseline_prediction": "D",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.01626163301989436,
+        0.11321992985904217,
+        0.40268028154969215,
+        0.4678381457924843
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_009133",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "Hawk_UAV/NJ/DJI_0147_d4_01.mp4",
+      "question": "In the video, how is the red-roofed building positioned relative to the green lake?",
+      "options": {
+        "A": "The building is located to the left of the lake and slightly behind it in the frame.",
+        "B": "The building is situated above the lake and appears closer to the camera.",
+        "C": "The building is far to the right of the lake, separated by a large grassy area.",
+        "D": "The building is directly adjacent to the lake's edge, with the path running between them."
+      },
+      "gold": "A",
+      "baseline_prediction": "B",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.1626353058964014,
+        0.658198170363903,
+        0.010166232008486986,
+        0.16900025866925716
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_011412",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "Hawk_UAV/BE/DJI_0385_02.mp4",
+      "question": "How is the orientation of the parked white SUV relative to the black sedan that is driving down the street?",
+      "options": {
+        "A": "The white SUV is to the right of the black sedan and behind it, with both vehicles oriented parallel to the street.",
+        "B": "The white SUV is to the left of the black sedan and behind it, with both vehicles oriented perpendicular to the street.",
+        "C": "The white SUV is to the left of the black sedan and ahead of it, with both vehicles oriented parallel to the street.",
+        "D": "The white SUV is to the right of the black sedan and ahead of it, with both vehicles oriented perpendicular to the street."
+      },
+      "gold": "A",
+      "baseline_prediction": "C",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.17712484952062368,
+        0.27869969606399536,
+        0.519445426762104,
+        0.024730038829147816
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_015645",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "Hawk_UAV/BE/DJI_0346_03.mp4",
+      "question": "How far is the small fenced area with the white structure from the main parking lot compared to its distance from the grassy field?",
+      "options": {
+        "A": "The fenced area is equidistant from both the parking lot and the grassy field.",
+        "B": "The fenced area is slightly farther from the parking lot than from the grassy field.",
+        "C": "The fenced area is much closer to the parking lot than to the grassy field.",
+        "D": "The fenced area is much closer to the grassy field than to the parking lot."
+      },
+      "gold": "B",
+      "baseline_prediction": "C",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.013064982136711478,
+        0.009112308965995908,
+        0.9693361222743988,
+        0.008486563805490732
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_004826",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "ERA_Select/Flood/Flood_036.mp4",
+      "question": "From the top-down aerial view, how is the orientation of the red car relative to the silver car?",
+      "options": {
+        "A": "The red car is positioned below the silver car",
+        "B": "The red car is positioned to the left of the silver car",
+        "C": "The red car is positioned above the silver car",
+        "D": "The red car is positioned to the right of the silver car"
+      },
+      "gold": "A",
+      "baseline_prediction": "B",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.4326329529285431,
+        0.47935888171195984,
+        0.07056230679154396,
+        0.01744582550600171
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_002263",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "VisDrone/uav0000315_00000_v_03.mp4",
+      "question": "From the camera's perspective, how is the row of green trees positioned relative to the buildings on the left side of the street?",
+      "options": {
+        "A": "The trees are in front of the buildings on the left, closer to the camera's viewpoint",
+        "B": "The trees are positioned behind the buildings on the left, further down the street",
+        "C": "The trees are located to the right of the buildings on the left, separated by the road",
+        "D": "The trees are directly adjacent to the buildings on the left, forming a continuous line along the sidewalk"
+      },
+      "gold": "A",
+      "baseline_prediction": "D",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.11519436095841229,
+        0.0027554477856028825,
+        0.007778300670906901,
+        0.8742718994617462
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_002909",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "ERA_Select/Baseball/Baseball_007.mp4",
+      "question": "How does the distance between the baseball field in the foreground and the field in the middle compare to the distance between the middle field and the field in the background?",
+      "options": {
+        "A": "The middle field is closer to the background field than to the foreground field.",
+        "B": "The foreground field and the background field are approximately the same distance from the middle field.",
+        "C": "The background field is closer to the middle field than the foreground field is.",
+        "D": "The foreground field is closer to the middle field than the middle field is to the background field."
+      },
+      "gold": "B",
+      "baseline_prediction": "D",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.014053974417038262,
+        0.004297216539271176,
+        0.00448685500305146,
+        0.9771620184183121
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_015460",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "Hawk_UAV/BE/DJI_0337_01.mp4",
+      "question": "How is the orientation of the solar panels relative to the camera's view as it pans across the landscape?",
+      "options": {
+        "A": "The solar panels are oriented perpendicular to the camera's direction of movement, facing towards the camera.",
+        "B": "The solar panels are oriented at a 45-degree angle to the camera's direction of movement, creating a diagonal pattern.",
+        "C": "The solar panels are oriented parallel to the camera's direction of movement, forming a line that recedes into the distance.",
+        "D": "The solar panels are oriented perpendicular to the camera's direction of movement, facing away from the camera."
+      },
+      "gold": "A",
+      "baseline_prediction": "C",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.020325317978858948,
+        0.059506699442863464,
+        0.8886512219905853,
+        0.03151676803827286
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_015353",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "Hawk_UAV/BE/DJI_0366_01.mp4",
+      "question": "How does the distance between the white car and the house in the background compare as the car moves along the road?",
+      "options": {
+        "A": "The distance between the white car and the house remains constant throughout the video.",
+        "B": "The white car is initially farther from the house, and it remains at a constant distance as it moves along the road.",
+        "C": "The white car is initially closer to the house, but as it moves along the road, it becomes farther from the house.",
+        "D": "The white car is initially farther from the house, but as it moves along the road, it becomes closer to the house."
+      },
+      "gold": "C",
+      "baseline_prediction": "D",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.018859281903132796,
+        0.13088163174688816,
+        0.10973659809678793,
+        0.7405225187540054
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_012501",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "Hawk_UAV/BE/DJI_0352_07.mp4",
+      "question": "Is the red barn closer to the camera than the house?",
+      "options": {
+        "A": "The red barn and the house are at the same distance from the camera.",
+        "B": "It is impossible to determine the relative distance between the red barn and the house.",
+        "C": "No, the house is closer to the camera than the red barn.",
+        "D": "Yes, the red barn is closer to the camera than the house."
+      },
+      "gold": "C",
+      "baseline_prediction": "D",
+      "baseline_correct": false,
+      "baseline_probabilities": [
+        0.010886021773330867,
+        0.01330450875684619,
+        0.007654097164049745,
+        0.9681553989648819
+      ],
+      "review_role": "baseline_error"
+    },
+    {
+      "qa_id": "train_015283",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "Hawk_UAV/BE/DJI_0363_03.mp4",
+      "question": "How does the distance between the parking lot and the building compare to the distance between the parking lot and the trees along the edge?",
+      "options": {
+        "A": "The distance between the parking lot and the building cannot be determined.",
+        "B": "The parking lot is closer to the building than to the trees.",
+        "C": "The parking lot is closer to the trees than to the building.",
+        "D": "The parking lot is equidistant from the building and the trees."
+      },
+      "gold": "B",
+      "baseline_prediction": "B",
+      "baseline_correct": true,
+      "baseline_probabilities": [
+        0.004273719328921288,
+        0.9572543501853943,
+        0.029014880768954754,
+        0.009457052685320377
+      ],
+      "review_role": "correct_control"
+    },
+    {
+      "qa_id": "train_009135",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "Hawk_UAV/NJ/DJI_0147_d4_01.mp4",
+      "question": "How does the distance between the red-roofed building and the lake compare to the distance between the building and the winding path?",
+      "options": {
+        "A": "The building is closer to the lake than to the path",
+        "B": "The building is farther from the lake than from the path",
+        "C": "The building is closer to the path than to the lake",
+        "D": "The building is approximately the same distance from both the lake and the path"
+      },
+      "gold": "C",
+      "baseline_prediction": "C",
+      "baseline_correct": true,
+      "baseline_probabilities": [
+        0.2942862128838897,
+        0.04661889048293233,
+        0.6483006551861763,
+        0.010794251225888729
+      ],
+      "review_role": "correct_control"
+    },
+    {
+      "qa_id": "train_001141",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "VisDrone/uav0000243_00001_v_04.mp4",
+      "question": "How does the distance between the camera and the buildings on the left side compare to the distance between the camera and the buildings on the right side?",
+      "options": {
+        "A": "The buildings on the left are much farther than the buildings on the right",
+        "B": "The buildings on the left are closer than the buildings on the right",
+        "C": "The buildings on the right are closer than the buildings on the left",
+        "D": "The buildings on both sides are at approximately the same distance"
+      },
+      "gold": "D",
+      "baseline_prediction": "D",
+      "baseline_correct": true,
+      "baseline_probabilities": [
+        0.001567088118463289,
+        0.015505070798099041,
+        0.005471792770549655,
+        0.9774560481309891
+      ],
+      "review_role": "correct_control"
+    },
+    {
+      "qa_id": "train_008218",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "Hawk_UAV/IL/DJI_0038_d4_02.mp4",
+      "question": "How does the distance between the main road and the large apartment complex compare to the distance between the main road and the single-family homes on the left side of the frame?",
+      "options": {
+        "A": "The apartment complex is closer to the main road than the single-family homes are.",
+        "B": "The single-family homes are closer to the main road than the apartment complex is.",
+        "C": "The main road is equidistant from both the apartment complex and the single-family homes.",
+        "D": "The apartment complex and the single-family homes are approximately the same distance from the main road."
+      },
+      "gold": "A",
+      "baseline_prediction": "A",
+      "baseline_correct": true,
+      "baseline_probabilities": [
+        0.8384192138910294,
+        0.06600058730691671,
+        0.03375434363260865,
+        0.0618258249014616
+      ],
+      "review_role": "correct_control"
+    },
+    {
+      "qa_id": "train_011937",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "Hawk_UAV/BE/DJI_0339_15.mp4",
+      "question": "How does the orientation of the curved driveway in the central parking area relate to the orientation of the two-lane road on the left side of the frame?",
+      "options": {
+        "A": "The curved driveway runs in the opposite direction of the two-lane road, with the road moving from left to right and the driveway curving from right to left.",
+        "B": "The curved driveway runs parallel to the two-lane road, both extending horizontally across the frame.",
+        "C": "The curved driveway is oriented perpendicular to the two-lane road, with the road running parallel to the left side of the frame and the driveway curving around the central area of the neighborhood.",
+        "D": "The curved driveway is oriented at a 45-degree angle to the two-lane road, creating a diagonal intersection."
+      },
+      "gold": "C",
+      "baseline_prediction": "C",
+      "baseline_correct": true,
+      "baseline_probabilities": [
+        0.0022695601801387966,
+        0.001980303379241377,
+        0.9949430674314499,
+        0.0008070764888543636
+      ],
+      "review_role": "correct_control"
+    },
+    {
+      "qa_id": "train_003578",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "ERA_Select/Boating/Boating_001.mp4",
+      "question": "How is the orientation of the rowing boat relative to the concrete wall in the background?",
+      "options": {
+        "A": "The boat is angled toward the wall and getting closer",
+        "B": "The boat is perpendicular to the wall and moving away from it",
+        "C": "The boat is positioned behind the wall and moving forward",
+        "D": "The boat is parallel to the wall and moving alongside it"
+      },
+      "gold": "D",
+      "baseline_prediction": "D",
+      "baseline_correct": true,
+      "baseline_probabilities": [
+        0.0024012925277929753,
+        0.007361055468209088,
+        0.000946334985201247,
+        0.989291325211525
+      ],
+      "review_role": "correct_control"
+    },
+    {
+      "qa_id": "train_004825",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "ERA_Select/Flood/Flood_036.mp4",
+      "question": "How does the relative position of the streetlight change as the camera moves across the scene?",
+      "options": {
+        "A": "It starts to the right of the frame and moves to the right edge as the camera pans left.",
+        "B": "It starts at the top and moves to the bottom of the frame as the camera moves down.",
+        "C": "It starts to the left of the frame and moves to the left edge as the camera pans right.",
+        "D": "It starts near the center and moves to the right edge as the camera pans left."
+      },
+      "gold": "C",
+      "baseline_prediction": "C",
+      "baseline_correct": true,
+      "baseline_probabilities": [
+        0.05229866225272417,
+        0.04193264711648226,
+        0.8897513002157211,
+        0.016017360147088766
+      ],
+      "review_role": "correct_control"
+    },
+    {
+      "qa_id": "train_000051",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "VisDrone/uav0000077_00720_v_01.mp4",
+      "question": "From the camera's perspective, which object is positioned farthest away from the viewer?",
+      "options": {
+        "A": "The white car parked in the middle of the road",
+        "B": "The red-roofed building on the right",
+        "C": "The green trees on the left side of the street",
+        "D": "The large archway at the end of the street"
+      },
+      "gold": "D",
+      "baseline_prediction": "D",
+      "baseline_correct": true,
+      "baseline_probabilities": [
+        0.0017571185890119523,
+        0.0007123894902179018,
+        0.002249579061754048,
+        0.9952808916568756
+      ],
+      "review_role": "correct_control"
+    },
+    {
+      "qa_id": "train_004685",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "ERA_Select/Flood/Flood_008.mp4",
+      "question": "In the video, how is the cluster of houses with white roofs positioned relative to the houses with brown roofs?",
+      "options": {
+        "A": "The white-roofed houses are above the brown-roofed houses",
+        "B": "The white-roofed houses are below the brown-roofed houses",
+        "C": "The white-roofed houses are to the right of the brown-roofed houses",
+        "D": "The white-roofed houses are to the left of the brown-roofed houses"
+      },
+      "gold": "C",
+      "baseline_prediction": "C",
+      "baseline_correct": true,
+      "baseline_probabilities": [
+        0.005611075670458376,
+        0.032049613539129496,
+        0.9132278859615326,
+        0.04911148827522993
+      ],
+      "review_role": "correct_control"
+    },
+    {
+      "qa_id": "train_011941",
+      "split": "valT",
+      "task": "Geometric Relation",
+      "video_path": "Hawk_UAV/BE/DJI_0339_15.mp4",
+      "question": "How does the orientation of the tennis court relative to the residential homes affect its visibility from the aerial view?",
+      "options": {
+        "A": "The tennis court is oriented perpendicular to the road and is visible from the aerial view because it is elevated above the surrounding area, allowing it to stand out from the homes.",
+        "B": "The tennis court is oriented at a 45-degree angle to the road, which creates shadows that obscure it from the aerial view during the time of day the video was recorded.",
+        "C": "The tennis court is oriented parallel to the road and is visible from the aerial view because it is located near the road and is not obstructed by the homes, making it clearly visible despite being behind the residential area.",
+        "D": "The tennis court is oriented perpendicular to the road and is hidden behind the homes, making it invisible from the aerial view."
+      },
+      "gold": "C",
+      "baseline_prediction": "C",
+      "baseline_correct": true,
+      "baseline_probabilities": [
+        0.010145721695153043,
+        0.002015759702771902,
+        0.9852153360843658,
+        0.0026231585652567446
+      ],
+      "review_role": "correct_control"
+    }
+  ]
+}

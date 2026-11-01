@@ -1,0 +1,161 @@
+{
+  "valQ": {
+    "n": 595,
+    "errors": 97,
+    "correct": 498,
+    "tta_rescued": 8,
+    "tta_harmed": 4,
+    "errors_all_views_agree": 72,
+    "errors_confidence_ge_90": 28,
+    "mean_confidence_correct": 0.9173306950020144,
+    "mean_confidence_wrong": 0.7164253552165842,
+    "errors_by_task": {
+      "Geometric Relation": 23,
+      "Object and Land Cover Recognition": 8,
+      "Perspective and Viewpoint": 11,
+      "Temporal Grounding": 18,
+      "Trend and Pattern": 12,
+      "Structural Layout": 14,
+      "Change Detection": 8,
+      "Hypothetical Reasoning": 2,
+      "Causation Reasoning": 1
+    },
+    "aggregation_valid": true
+  },
+  "valT": {
+    "n": 1059,
+    "errors": 174,
+    "correct": 885,
+    "tta_rescued": 13,
+    "tta_harmed": 10,
+    "errors_all_views_agree": 127,
+    "errors_confidence_ge_90": 39,
+    "mean_confidence_correct": 0.9123639806947214,
+    "mean_confidence_wrong": 0.698349356287341,
+    "errors_by_task": {
+      "Trend and Pattern": 17,
+      "Geometric Relation": 37,
+      "Structural Layout": 17,
+      "Object and Land Cover Recognition": 23,
+      "Temporal Grounding": 34,
+      "Causation Reasoning": 5,
+      "Change Detection": 12,
+      "Perspective and Viewpoint": 25,
+      "Consequence Reasoning": 1,
+      "Hypothetical Reasoning": 2,
+      "General Understanding": 1
+    },
+    "aggregation_valid": true
+  },
+  "val": {
+    "n": 2000,
+    "errors": 243,
+    "correct": 1757,
+    "tta_rescued": 34,
+    "tta_harmed": 19,
+    "errors_all_views_agree": 168,
+    "errors_confidence_ge_90": 48,
+    "mean_confidence_correct": 0.907451027138164,
+    "mean_confidence_wrong": 0.6806433282240674,
+    "errors_by_task": {
+      "Temporal Grounding": 77,
+      "Change Detection": 35,
+      "Object and Land Cover Recognition": 40,
+      "Perspective and Viewpoint": 28,
+      "Structural Layout": 22,
+      "Geometric Relation": 20,
+      "Trend and Pattern": 14,
+      "Causation Reasoning": 2,
+      "Hypothetical Reasoning": 4,
+      "Consequence Reasoning": 1
+    },
+    "aggregation_valid": true
+  },
+  "integrity": {
+    "fit_qa_overlap_valQ": 0,
+    "fit_qa_overlap_valT": 0,
+    "fit_video_overlap_valT": 0,
+    "frame_cap": 16,
+    "target_fps": 4.0,
+    "fit_question_group_overlap_valQ": 0
+  },
+  "decode_checks": {
+    "ERA_Select/Harvesting/Harvesting_031.mp4": {
+      "manifest_frames": 139,
+      "decoded_frames": 139,
+      "first_pts": 0.0,
+      "last_pts": 5.75,
+      "max_timestamp_drift_seconds": 0
+    },
+    "Hawk_UAV/NJ/DJI_0186_d4_02.mp4": {
+      "manifest_frames": 180,
+      "decoded_frames": 180,
+      "first_pts": 0.0,
+      "last_pts": 5.9726333333333335,
+      "max_timestamp_drift_seconds": 8.881784197001252e-16
+    },
+    "Hawk_UAV/IL/DJI_0022_d4_01.mp4": {
+      "manifest_frames": 180,
+      "decoded_frames": 180,
+      "first_pts": 0.0,
+      "last_pts": 5.9726333333333335,
+      "max_timestamp_drift_seconds": 8.881784197001252e-16
+    },
+    "Hawk_UAV/NJ/DJI_0140_d4_01.mp4": {
+      "manifest_frames": 180,
+      "decoded_frames": 180,
+      "first_pts": 0.0,
+      "last_pts": 5.9726333333333335,
+      "max_timestamp_drift_seconds": 8.881784197001252e-16
+    },
+    "Hawk_UAV/NJ/DJI_0191_d4_01.mp4": {
+      "manifest_frames": 180,
+      "decoded_frames": 180,
+      "first_pts": 0.0,
+      "last_pts": 5.9726333333333335,
+      "max_timestamp_drift_seconds": 8.881784197001252e-16
+    },
+    "ERA_Select/NonEvent/NonEvent_093.mp4": {
+      "manifest_frames": 131,
+      "decoded_frames": 131,
+      "first_pts": 0.0,
+      "last_pts": 5.708333333333333,
+      "max_timestamp_drift_seconds": 0.07856234096692116
+    },
+    "Hawk_UAV/BE/DJI_0339_12.mp4": {
+      "manifest_frames": 240,
+      "decoded_frames": 240,
+      "first_pts": 0.0,
+      "last_pts": 7.974633333333333,
+      "max_timestamp_drift_seconds": 8.881784197001252e-16
+    },
+    "VisDrone/uav0000244_01440_v_01.mp4": {
+      "manifest_frames": 180,
+      "decoded_frames": 180,
+      "first_pts": 0.0,
+      "last_pts": 5.966666666666667,
+      "max_timestamp_drift_seconds": 0
+    },
+    "ERA_Select/Soccer/Soccer_025.mp4": {
+      "manifest_frames": 137,
+      "decoded_frames": 137,
+      "first_pts": 0.0,
+      "last_pts": 5.666666666666667,
+      "max_timestamp_drift_seconds": 0
+    },
+    "Hawk_UAV/BE/DJI_0364_03.mp4": {
+      "manifest_frames": 240,
+      "decoded_frames": 240,
+      "first_pts": 0.0,
+      "last_pts": 7.974633333333333,
+      "max_timestamp_drift_seconds": 8.881784197001252e-16
+    },
+    "VisDrone/uav0000079_00480_v_01.mp4": {
+      "manifest_frames": 180,
+      "decoded_frames": 180,
+      "first_pts": 0.0,
+      "last_pts": 5.966666666666667,
+      "max_timestamp_drift_seconds": 0
+    }
+  }
+}

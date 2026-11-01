@@ -1,0 +1,11 @@
+---
+description: ReVA research repo conventions
+globs:
+alwaysApply: true
+---
+
+Read AGENTS.md before changing code or claiming experiment results.
+
+Experiments: experiments/INDEX.md and experiments/EXP-NNN/experiment.md (EXP-001–036). Metrics: results/registry.csv and results/evaluations.csv. Archived code: archive/implementation/.
+
+Do not start GPU training or full scoring without user approval. Do not overwrite runs/ artifacts.

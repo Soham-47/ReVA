@@ -1,0 +1,65 @@
+# Opt-in research branch.  Existing Stage A/Phase 6 configs do not read this
+# section and therefore retain the historical Qwen3-VL appearance-only path.
+run_name: dualstream_temporal_q3vl8b_r16
+train_json: data/splits/fit_A.json
+output_dir: runs/dualstream_temporal_q3vl8b_r16
+seed: 42
+data_seed: 42
+deterministic_sampling: true
+attn_implementation: sdpa
+chat_template:
+  enable_thinking: false
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+
+# Install the official OpenGVLab InternVideo2 code in the runtime.  The
+# checkpoint is intentionally not downloaded or bundled by ReVA.  A typical
+# approved checkpoint is
+# InternVideo2-stage2_1b-224p-f4.pt.
+temporal_stream:
+  enabled: true
+  checkpoint: /path/to/InternVideo2-stage2_1b-224p-f4.pt
+  checkpoint_num_frames: 4
+  builder: temporal_grounding:build_official_internvideo2
+  builder_config:
+    vision_encoder:
+      num_frames: 8
+      tubelet_size: 1
+      clip_embed_dim: 768
+      sep_image_video_pos_embed: true
+      use_flash_attn: false
+      use_fused_rmsnorm: false
+      use_fused_mlp: false
+      use_checkpoint: false
+      checkpoint_num: 0
+  feature_dim: 768
+  projector_hidden: 2048
+  num_bins: 300
+  num_segments: 12
+  frames_per_segment: 8
+  num_frames: 96
+  image_size: 224
+  duration_manifest: data/manifest.json
+
+train:
+  # Resume is intentionally fail-closed until an approved Transformers/PEFT
+  # runtime smoke test validates the wrapped checkpoint loader.
+  epochs: 2
+  lr: 2.0e-4
+  temporal_lr: 2.0e-4
+  weight_decay: 0.0
+  warmup_ratio: 0.03
+  scheduler: cosine
+  grad_accum: 16
+  max_grad_norm: 1.0
+  bf16: true
+  gradient_checkpointing: true
+  max_tokens: 12000
+  save_steps: 300
+  save_total_limit: 2
+  logging_steps: 10
+  dataloader_workers: 8
+  benchmark_steps: 50
+  explicit_optimizer: true

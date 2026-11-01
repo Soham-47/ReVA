@@ -1,0 +1,317 @@
+{
+  "automatic_screen_only": true,
+  "rule": "Flag an option if its largest explicitly annotated seconds value exceeds manifest duration by more than one frame. This is triage only; it does not adjudicate timestamps, source quality, or labels.",
+  "records_screened": 100,
+  "records_with_any_option_flag": 10,
+  "gold_choices_outside_by_more_than_one_frame": 3,
+  "gold_choices_more_than_1s_outside": 1,
+  "option_counts": {
+    "distractor_out_of_bounds": 15,
+    "gold_out_of_bounds": 3
+  },
+  "gold_records": [
+    {
+      "case_id": "TA021",
+      "qa_id": "train_012661",
+      "clip_duration_s": 4.6046000000000005,
+      "gold_option": "The white car appears at 0.0 seconds and disappears at 4.8 seconds.",
+      "overrun_s": 0.1954
+    },
+    {
+      "case_id": "TA028",
+      "qa_id": "train_012780",
+      "clip_duration_s": 0.20020000000000002,
+      "gold_option": "The dark SUV appears at 0.0 seconds and disappears at 3.2 seconds.",
+      "overrun_s": 2.9998
+    },
+    {
+      "case_id": "TA056",
+      "qa_id": "train_014275",
+      "clip_duration_s": 18.733333333333334,
+      "gold_option": "The first car appears at 2.3 seconds and disappears at 18.9 seconds.",
+      "overrun_s": 0.1667
+    }
+  ],
+  "records": [
+    {
+      "case_id": "TA019",
+      "qa_id": "train_014528",
+      "video_path": "Hawk_UAV/BE/DJI_0394_01.mp4",
+      "clip_duration_s": 8.008000000000001,
+      "fps": 29.97002997002997,
+      "frames": 240,
+      "flags": [
+        {
+          "letter": "A",
+          "values_s": [
+            10.1
+          ],
+          "option": "10.1 seconds",
+          "is_gold": false,
+          "overrun_s": 2.092
+        }
+      ]
+    },
+    {
+      "case_id": "TA021",
+      "qa_id": "train_012661",
+      "video_path": "Hawk_UAV/BE/DJI_0378_09.mp4",
+      "clip_duration_s": 4.6046000000000005,
+      "fps": 29.97002997002997,
+      "frames": 138,
+      "flags": [
+        {
+          "letter": "A",
+          "values_s": [
+            0.0,
+            4.8
+          ],
+          "option": "The white car appears at 0.0 seconds and disappears at 4.8 seconds.",
+          "is_gold": true,
+          "overrun_s": 0.1954
+        },
+        {
+          "letter": "C",
+          "values_s": [
+            1.2,
+            5.6
+          ],
+          "option": "The white car appears at 1.2 seconds and disappears at 5.6 seconds.",
+          "is_gold": false,
+          "overrun_s": 0.9954
+        }
+      ]
+    },
+    {
+      "case_id": "TA026",
+      "qa_id": "train_012217",
+      "video_path": "Hawk_UAV/BE/DJI_0376_01.mp4",
+      "clip_duration_s": 8.008000000000001,
+      "fps": 29.97002997002997,
+      "frames": 240,
+      "flags": [
+        {
+          "letter": "C",
+          "values_s": [
+            6.5,
+            8.5
+          ],
+          "option": "The black car appears at 6.5 seconds and disappears at 8.5 seconds.",
+          "is_gold": false,
+          "overrun_s": 0.492
+        }
+      ]
+    },
+    {
+      "case_id": "TA028",
+      "qa_id": "train_012780",
+      "video_path": "Hawk_UAV/BE/DJI_0376_06.mp4",
+      "clip_duration_s": 0.20020000000000002,
+      "fps": 29.97002997002997,
+      "frames": 6,
+      "flags": [
+        {
+          "letter": "A",
+          "values_s": [
+            0.0,
+            1.5
+          ],
+          "option": "The dark SUV appears at 0.0 seconds and disappears at 1.5 seconds.",
+          "is_gold": false,
+          "overrun_s": 1.2998
+        },
+        {
+          "letter": "B",
+          "values_s": [
+            0.0,
+            3.2
+          ],
+          "option": "The dark SUV appears at 0.0 seconds and disappears at 3.2 seconds.",
+          "is_gold": true,
+          "overrun_s": 2.9998
+        },
+        {
+          "letter": "C",
+          "values_s": [
+            0.0,
+            4.5
+          ],
+          "option": "The dark SUV appears at 0.0 seconds and disappears at 4.5 seconds.",
+          "is_gold": false,
+          "overrun_s": 4.2998
+        },
+        {
+          "letter": "D",
+          "values_s": [
+            1.5,
+            3.2
+          ],
+          "option": "The dark SUV appears at 1.5 seconds and disappears at 3.2 seconds.",
+          "is_gold": false,
+          "overrun_s": 2.9998
+        }
+      ]
+    },
+    {
+      "case_id": "TA049",
+      "qa_id": "train_002750",
+      "video_path": "VisDrone/uav0000268_05773_v_06.mp4",
+      "clip_duration_s": 2.6,
+      "fps": 30.0,
+      "frames": 78,
+      "flags": [
+        {
+          "letter": "A",
+          "values_s": [
+            0.0,
+            3.0,
+            3.0
+          ],
+          "option": "Appears at 0.0s and disappears at 3.0s (duration: 3.0s)",
+          "is_gold": false,
+          "overrun_s": 0.4
+        },
+        {
+          "letter": "B",
+          "values_s": [
+            1.0,
+            3.5,
+            2.5
+          ],
+          "option": "Appears at 1.0s and disappears at 3.5s (duration: 2.5s)",
+          "is_gold": false,
+          "overrun_s": 0.9
+        },
+        {
+          "letter": "D",
+          "values_s": [
+            0.5,
+            3.0,
+            2.5
+          ],
+          "option": "Appears at 0.5s and disappears at 3.0s (duration: 2.5s)",
+          "is_gold": false,
+          "overrun_s": 0.4
+        }
+      ]
+    },
+    {
+      "case_id": "TA056",
+      "qa_id": "train_014275",
+      "video_path": "UAVDT/M0206.mp4",
+      "clip_duration_s": 18.733333333333334,
+      "fps": 30.0,
+      "frames": 562,
+      "flags": [
+        {
+          "letter": "C",
+          "values_s": [
+            0.0,
+            18.9
+          ],
+          "option": "The first car appears at 0.0 seconds and disappears at 18.9 seconds.",
+          "is_gold": false,
+          "overrun_s": 0.1667
+        },
+        {
+          "letter": "D",
+          "values_s": [
+            2.3,
+            18.9
+          ],
+          "option": "The first car appears at 2.3 seconds and disappears at 18.9 seconds.",
+          "is_gold": true,
+          "overrun_s": 0.1667
+        }
+      ]
+    },
+    {
+      "case_id": "TA057",
+      "qa_id": "train_001600",
+      "video_path": "VisDrone/uav0000273_00001_v_03.mp4",
+      "clip_duration_s": 6.0,
+      "fps": 30.0,
+      "frames": 180,
+      "flags": [
+        {
+          "letter": "C",
+          "values_s": [
+            7.2
+          ],
+          "option": "At 7.2 seconds",
+          "is_gold": false,
+          "overrun_s": 1.2
+        }
+      ]
+    },
+    {
+      "case_id": "TA090",
+      "qa_id": "train_012999",
+      "video_path": "Hawk_UAV/BE/DJI_0341_01.mp4",
+      "clip_duration_s": 8.008000000000001,
+      "fps": 29.97002997002997,
+      "frames": 240,
+      "flags": [
+        {
+          "letter": "A",
+          "values_s": [
+            0.0,
+            8.5,
+            8.5
+          ],
+          "option": "From 0.0 seconds to 8.5 seconds (duration: 8.5 seconds)",
+          "is_gold": false,
+          "overrun_s": 0.492
+        }
+      ]
+    },
+    {
+      "case_id": "TA095",
+      "qa_id": "train_015766",
+      "video_path": "UAVDT/S0310.mp4",
+      "clip_duration_s": 3.933333333333333,
+      "fps": 30.0,
+      "frames": 118,
+      "flags": [
+        {
+          "letter": "A",
+          "values_s": [
+            4.2
+          ],
+          "option": "Approximately 4.2 seconds",
+          "is_gold": false,
+          "overrun_s": 0.2667
+        },
+        {
+          "letter": "C",
+          "values_s": [
+            5.0
+          ],
+          "option": "Approximately 5.0 seconds",
+          "is_gold": false,
+          "overrun_s": 1.0667
+        }
+      ]
+    },
+    {
+      "case_id": "TA099",
+      "qa_id": "train_011114",
+      "video_path": "UAVDT/M0601.mp4",
+      "clip_duration_s": 12.4,
+      "fps": 30.0,
+      "frames": 372,
+      "flags": [
+        {
+          "letter": "C",
+          "values_s": [
+            5.0,
+            15.0
+          ],
+          "option": "From 5.0 seconds to 15.0 seconds",
+          "is_gold": false,
+          "overrun_s": 2.6
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4658 @@
+{
+  "ERA_Select/Baseball/Baseball_007.mp4": {
+    "contact_sheet": "contact_sheets/train_002905_29cd076a.png",
+    "qa_items": [
+      {
+        "qa_id": "train_002905",
+        "task": "Temporal Grounding",
+        "review_role": "correct_control",
+        "gold": "A",
+        "baseline_prediction": "A",
+        "question": "When does the camera begin to focus on the baseball field in the lower-left portion of the frame?",
+        "options": {
+          "A": "At the beginning of the video",
+          "B": "Around the middle of the video",
+          "C": "Near the end of the video",
+          "D": "In the first half of the video"
+        }
+      },
+      {
+        "qa_id": "train_002906",
+        "task": "Temporal Grounding",
+        "review_role": "correct_control",
+        "gold": "C",
+        "baseline_prediction": "C",
+        "question": "How long does the activity on the baseball fields last throughout the video?",
+        "options": {
+          "A": "Intermittently throughout",
+          "B": "Near the end",
+          "C": "For most of the video",
+          "D": "Briefly at the beginning"
+        }
+      },
+      {
+        "qa_id": "train_002909",
+        "task": "Geometric Relation",
+        "review_role": "baseline_error",
+        "gold": "B",
+        "baseline_prediction": "D",
+        "question": "How does the distance between the baseball field in the foreground and the field in the middle compare to the distance between the middle field and the field in the background?",
+        "options": {
+          "A": "The middle field is closer to the background field than to the foreground field.",
+          "B": "The foreground field and the background field are approximately the same distance from the middle field.",
+          "C": "The background field is closer to the middle field than the foreground field is.",
+          "D": "The foreground field is closer to the middle field than the middle field is to the background field."
+        }
+      }
+    ],
+    "fps": 24.0,
+    "decoded_frame_count": 140,
+    "duration_s": 5.833333333333333,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.25362318840579706,
+        "decoded_time_s": 0.25
+      },
+      {
+        "target_time_s": 0.5072463768115941,
+        "decoded_time_s": 0.5
+      },
+      {
+        "target_time_s": 0.7608695652173914,
+        "decoded_time_s": 0.75
+      },
+      {
+        "target_time_s": 1.0144927536231882,
+        "decoded_time_s": 1.0
+      },
+      {
+        "target_time_s": 1.2681159420289854,
+        "decoded_time_s": 1.25
+      },
+      {
+        "target_time_s": 1.5217391304347827,
+        "decoded_time_s": 1.5416666666666667
+      },
+      {
+        "target_time_s": 1.7753623188405796,
+        "decoded_time_s": 1.7916666666666667
+      },
+      {
+        "target_time_s": 2.0289855072463765,
+        "decoded_time_s": 2.0416666666666665
+      },
+      {
+        "target_time_s": 2.282608695652174,
+        "decoded_time_s": 2.2916666666666665
+      },
+      {
+        "target_time_s": 2.5362318840579707,
+        "decoded_time_s": 2.5416666666666665
+      },
+      {
+        "target_time_s": 2.7898550724637676,
+        "decoded_time_s": 2.7916666666666665
+      },
+      {
+        "target_time_s": 3.0434782608695654,
+        "decoded_time_s": 3.0416666666666665
+      },
+      {
+        "target_time_s": 3.2971014492753623,
+        "decoded_time_s": 3.2916666666666665
+      },
+      {
+        "target_time_s": 3.550724637681159,
+        "decoded_time_s": 3.5416666666666665
+      },
+      {
+        "target_time_s": 3.8043478260869565,
+        "decoded_time_s": 3.7916666666666665
+      },
+      {
+        "target_time_s": 4.057971014492753,
+        "decoded_time_s": 4.041666666666667
+      },
+      {
+        "target_time_s": 4.31159420289855,
+        "decoded_time_s": 4.291666666666667
+      },
+      {
+        "target_time_s": 4.565217391304348,
+        "decoded_time_s": 4.583333333333333
+      },
+      {
+        "target_time_s": 4.818840579710145,
+        "decoded_time_s": 4.833333333333333
+      },
+      {
+        "target_time_s": 5.0724637681159415,
+        "decoded_time_s": 5.083333333333333
+      },
+      {
+        "target_time_s": 5.326086956521739,
+        "decoded_time_s": 5.333333333333333
+      },
+      {
+        "target_time_s": 5.579710144927535,
+        "decoded_time_s": 5.583333333333333
+      },
+      {
+        "target_time_s": 5.833333333333333,
+        "decoded_time_s": 5.791666666666667
+      }
+    ]
+  },
+  "ERA_Select/Boating/Boating_001.mp4": {
+    "contact_sheet": "contact_sheets/train_003578_3239235a.png",
+    "qa_items": [
+      {
+        "qa_id": "train_003578",
+        "task": "Geometric Relation",
+        "review_role": "correct_control",
+        "gold": "D",
+        "baseline_prediction": "D",
+        "question": "How is the orientation of the rowing boat relative to the concrete wall in the background?",
+        "options": {
+          "A": "The boat is angled toward the wall and getting closer",
+          "B": "The boat is perpendicular to the wall and moving away from it",
+          "C": "The boat is positioned behind the wall and moving forward",
+          "D": "The boat is parallel to the wall and moving alongside it"
+        }
+      }
+    ],
+    "fps": 24.0,
+    "decoded_frame_count": 140,
+    "duration_s": 5.833333333333333,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.25362318840579706,
+        "decoded_time_s": 0.25
+      },
+      {
+        "target_time_s": 0.5072463768115941,
+        "decoded_time_s": 0.5
+      },
+      {
+        "target_time_s": 0.7608695652173914,
+        "decoded_time_s": 0.75
+      },
+      {
+        "target_time_s": 1.0144927536231882,
+        "decoded_time_s": 1.0
+      },
+      {
+        "target_time_s": 1.2681159420289854,
+        "decoded_time_s": 1.25
+      },
+      {
+        "target_time_s": 1.5217391304347827,
+        "decoded_time_s": 1.5416666666666667
+      },
+      {
+        "target_time_s": 1.7753623188405796,
+        "decoded_time_s": 1.7916666666666667
+      },
+      {
+        "target_time_s": 2.0289855072463765,
+        "decoded_time_s": 2.0416666666666665
+      },
+      {
+        "target_time_s": 2.282608695652174,
+        "decoded_time_s": 2.2916666666666665
+      },
+      {
+        "target_time_s": 2.5362318840579707,
+        "decoded_time_s": 2.5416666666666665
+      },
+      {
+        "target_time_s": 2.7898550724637676,
+        "decoded_time_s": 2.7916666666666665
+      },
+      {
+        "target_time_s": 3.0434782608695654,
+        "decoded_time_s": 3.0416666666666665
+      },
+      {
+        "target_time_s": 3.2971014492753623,
+        "decoded_time_s": 3.2916666666666665
+      },
+      {
+        "target_time_s": 3.550724637681159,
+        "decoded_time_s": 3.5416666666666665
+      },
+      {
+        "target_time_s": 3.8043478260869565,
+        "decoded_time_s": 3.7916666666666665
+      },
+      {
+        "target_time_s": 4.057971014492753,
+        "decoded_time_s": 4.041666666666667
+      },
+      {
+        "target_time_s": 4.31159420289855,
+        "decoded_time_s": 4.291666666666667
+      },
+      {
+        "target_time_s": 4.565217391304348,
+        "decoded_time_s": 4.583333333333333
+      },
+      {
+        "target_time_s": 4.818840579710145,
+        "decoded_time_s": 4.833333333333333
+      },
+      {
+        "target_time_s": 5.0724637681159415,
+        "decoded_time_s": 5.083333333333333
+      },
+      {
+        "target_time_s": 5.326086956521739,
+        "decoded_time_s": 5.333333333333333
+      },
+      {
+        "target_time_s": 5.579710144927535,
+        "decoded_time_s": 5.583333333333333
+      },
+      {
+        "target_time_s": 5.833333333333333,
+        "decoded_time_s": 5.791666666666667
+      }
+    ]
+  },
+  "ERA_Select/Cycling/Cycling_007.mp4": {
+    "contact_sheet": "contact_sheets/train_004135_dbf987d2.png",
+    "qa_items": [
+      {
+        "qa_id": "train_004135",
+        "task": "Temporal Grounding",
+        "review_role": "baseline_error",
+        "gold": "A",
+        "baseline_prediction": "D",
+        "question": "When does the road first appear to disappear from view before reappearing around a bend?",
+        "options": {
+          "A": "Around the middle of the video",
+          "B": "At the beginning of the video",
+          "C": "Near the end of the video",
+          "D": "In the first half of the video"
+        }
+      }
+    ],
+    "fps": 24.0,
+    "decoded_frame_count": 135,
+    "duration_s": 5.625,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.24456521739130435,
+        "decoded_time_s": 0.25
+      },
+      {
+        "target_time_s": 0.4891304347826087,
+        "decoded_time_s": 0.5
+      },
+      {
+        "target_time_s": 0.7336956521739131,
+        "decoded_time_s": 0.75
+      },
+      {
+        "target_time_s": 0.9782608695652174,
+        "decoded_time_s": 0.9583333333333334
+      },
+      {
+        "target_time_s": 1.2228260869565217,
+        "decoded_time_s": 1.2083333333333333
+      },
+      {
+        "target_time_s": 1.4673913043478262,
+        "decoded_time_s": 1.4583333333333333
+      },
+      {
+        "target_time_s": 1.7119565217391304,
+        "decoded_time_s": 1.7083333333333333
+      },
+      {
+        "target_time_s": 1.9565217391304348,
+        "decoded_time_s": 1.9583333333333333
+      },
+      {
+        "target_time_s": 2.2010869565217392,
+        "decoded_time_s": 2.2083333333333335
+      },
+      {
+        "target_time_s": 2.4456521739130435,
+        "decoded_time_s": 2.4583333333333335
+      },
+      {
+        "target_time_s": 2.6902173913043477,
+        "decoded_time_s": 2.7083333333333335
+      },
+      {
+        "target_time_s": 2.9347826086956523,
+        "decoded_time_s": 2.9166666666666665
+      },
+      {
+        "target_time_s": 3.1793478260869565,
+        "decoded_time_s": 3.1666666666666665
+      },
+      {
+        "target_time_s": 3.4239130434782608,
+        "decoded_time_s": 3.4166666666666665
+      },
+      {
+        "target_time_s": 3.6684782608695654,
+        "decoded_time_s": 3.6666666666666665
+      },
+      {
+        "target_time_s": 3.9130434782608696,
+        "decoded_time_s": 3.9166666666666665
+      },
+      {
+        "target_time_s": 4.157608695652174,
+        "decoded_time_s": 4.166666666666667
+      },
+      {
+        "target_time_s": 4.4021739130434785,
+        "decoded_time_s": 4.416666666666667
+      },
+      {
+        "target_time_s": 4.646739130434782,
+        "decoded_time_s": 4.666666666666667
+      },
+      {
+        "target_time_s": 4.891304347826087,
+        "decoded_time_s": 4.875
+      },
+      {
+        "target_time_s": 5.135869565217392,
+        "decoded_time_s": 5.125
+      },
+      {
+        "target_time_s": 5.380434782608695,
+        "decoded_time_s": 5.375
+      },
+      {
+        "target_time_s": 5.625,
+        "decoded_time_s": 5.583333333333333
+      }
+    ]
+  },
+  "ERA_Select/Flood/Flood_006.mp4": {
+    "contact_sheet": "contact_sheets/train_004664_74d6d430.png",
+    "qa_items": [
+      {
+        "qa_id": "train_004664",
+        "task": "Temporal Grounding",
+        "review_role": "correct_control",
+        "gold": "D",
+        "baseline_prediction": "D",
+        "question": "How long is the castle visible in the frame throughout the video?",
+        "options": {
+          "A": "Near the end only",
+          "B": "Intermittently throughout",
+          "C": "Briefly at the beginning",
+          "D": "For most of the video"
+        }
+      },
+      {
+        "qa_id": "train_004666",
+        "task": "Geometric Relation",
+        "review_role": "baseline_error",
+        "gold": "C",
+        "baseline_prediction": "A",
+        "question": "In the video, how is the small boat positioned relative to the castle?",
+        "options": {
+          "A": "The boat is very close to the castle, almost adjacent to its base.",
+          "B": "The boat is positioned behind the castle from the camera's perspective.",
+          "C": "The boat is located to the left of the castle and is significantly farther away.",
+          "D": "The boat is above the castle, floating in the air."
+        }
+      }
+    ],
+    "fps": 24.0,
+    "decoded_frame_count": 139,
+    "duration_s": 5.791666666666667,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.25181159420289856,
+        "decoded_time_s": 0.25
+      },
+      {
+        "target_time_s": 0.5036231884057971,
+        "decoded_time_s": 0.5
+      },
+      {
+        "target_time_s": 0.7554347826086957,
+        "decoded_time_s": 0.75
+      },
+      {
+        "target_time_s": 1.0072463768115942,
+        "decoded_time_s": 1.0
+      },
+      {
+        "target_time_s": 1.259057971014493,
+        "decoded_time_s": 1.25
+      },
+      {
+        "target_time_s": 1.5108695652173914,
+        "decoded_time_s": 1.5
+      },
+      {
+        "target_time_s": 1.76268115942029,
+        "decoded_time_s": 1.75
+      },
+      {
+        "target_time_s": 2.0144927536231885,
+        "decoded_time_s": 2.0
+      },
+      {
+        "target_time_s": 2.266304347826087,
+        "decoded_time_s": 2.25
+      },
+      {
+        "target_time_s": 2.518115942028986,
+        "decoded_time_s": 2.5
+      },
+      {
+        "target_time_s": 2.7699275362318843,
+        "decoded_time_s": 2.75
+      },
+      {
+        "target_time_s": 3.0217391304347827,
+        "decoded_time_s": 3.0416666666666665
+      },
+      {
+        "target_time_s": 3.273550724637681,
+        "decoded_time_s": 3.2916666666666665
+      },
+      {
+        "target_time_s": 3.52536231884058,
+        "decoded_time_s": 3.5416666666666665
+      },
+      {
+        "target_time_s": 3.777173913043478,
+        "decoded_time_s": 3.7916666666666665
+      },
+      {
+        "target_time_s": 4.028985507246377,
+        "decoded_time_s": 4.041666666666667
+      },
+      {
+        "target_time_s": 4.280797101449275,
+        "decoded_time_s": 4.291666666666667
+      },
+      {
+        "target_time_s": 4.532608695652174,
+        "decoded_time_s": 4.541666666666667
+      },
+      {
+        "target_time_s": 4.784420289855072,
+        "decoded_time_s": 4.791666666666667
+      },
+      {
+        "target_time_s": 5.036231884057972,
+        "decoded_time_s": 5.041666666666667
+      },
+      {
+        "target_time_s": 5.288043478260869,
+        "decoded_time_s": 5.291666666666667
+      },
+      {
+        "target_time_s": 5.5398550724637685,
+        "decoded_time_s": 5.541666666666667
+      },
+      {
+        "target_time_s": 5.791666666666667,
+        "decoded_time_s": 5.75
+      }
+    ]
+  },
+  "ERA_Select/Flood/Flood_008.mp4": {
+    "contact_sheet": "contact_sheets/train_004682_5567ef75.png",
+    "qa_items": [
+      {
+        "qa_id": "train_004682",
+        "task": "Temporal Grounding",
+        "review_role": "correct_control",
+        "gold": "B",
+        "baseline_prediction": "B",
+        "question": "When does the submerged vehicle first become visible in the flooded area?",
+        "options": {
+          "A": "Near the end of the video",
+          "B": "At the beginning of the video",
+          "C": "In the first half of the video",
+          "D": "Around the middle of the video"
+        }
+      },
+      {
+        "qa_id": "train_004685",
+        "task": "Geometric Relation",
+        "review_role": "correct_control",
+        "gold": "C",
+        "baseline_prediction": "C",
+        "question": "In the video, how is the cluster of houses with white roofs positioned relative to the houses with brown roofs?",
+        "options": {
+          "A": "The white-roofed houses are above the brown-roofed houses",
+          "B": "The white-roofed houses are below the brown-roofed houses",
+          "C": "The white-roofed houses are to the right of the brown-roofed houses",
+          "D": "The white-roofed houses are to the left of the brown-roofed houses"
+        }
+      }
+    ],
+    "fps": 23.82608695652174,
+    "decoded_frame_count": 137,
+    "duration_s": 5.75,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.25,
+        "decoded_time_s": 0.25
+      },
+      {
+        "target_time_s": 0.5,
+        "decoded_time_s": 0.5
+      },
+      {
+        "target_time_s": 0.75,
+        "decoded_time_s": 0.75
+      },
+      {
+        "target_time_s": 1.0,
+        "decoded_time_s": 1.0
+      },
+      {
+        "target_time_s": 1.25,
+        "decoded_time_s": 1.25
+      },
+      {
+        "target_time_s": 1.5,
+        "decoded_time_s": 1.5
+      },
+      {
+        "target_time_s": 1.75,
+        "decoded_time_s": 1.75
+      },
+      {
+        "target_time_s": 2.0,
+        "decoded_time_s": 2.0
+      },
+      {
+        "target_time_s": 2.25,
+        "decoded_time_s": 2.25
+      },
+      {
+        "target_time_s": 2.5,
+        "decoded_time_s": 2.5
+      },
+      {
+        "target_time_s": 2.75,
+        "decoded_time_s": 2.75
+      },
+      {
+        "target_time_s": 3.0,
+        "decoded_time_s": 3.0
+      },
+      {
+        "target_time_s": 3.25,
+        "decoded_time_s": 3.25
+      },
+      {
+        "target_time_s": 3.5,
+        "decoded_time_s": 3.5
+      },
+      {
+        "target_time_s": 3.75,
+        "decoded_time_s": 3.75
+      },
+      {
+        "target_time_s": 4.0,
+        "decoded_time_s": 4.0
+      },
+      {
+        "target_time_s": 4.25,
+        "decoded_time_s": 4.25
+      },
+      {
+        "target_time_s": 4.5,
+        "decoded_time_s": 4.5
+      },
+      {
+        "target_time_s": 4.75,
+        "decoded_time_s": 4.75
+      },
+      {
+        "target_time_s": 5.0,
+        "decoded_time_s": 5.0
+      },
+      {
+        "target_time_s": 5.25,
+        "decoded_time_s": 5.25
+      },
+      {
+        "target_time_s": 5.5,
+        "decoded_time_s": 5.5
+      },
+      {
+        "target_time_s": 5.75,
+        "decoded_time_s": 5.708333333333333
+      }
+    ]
+  },
+  "ERA_Select/Flood/Flood_036.mp4": {
+    "contact_sheet": "contact_sheets/train_004822_36061581.png",
+    "qa_items": [
+      {
+        "qa_id": "train_004822",
+        "task": "Temporal Grounding",
+        "review_role": "correct_control",
+        "gold": "C",
+        "baseline_prediction": "C",
+        "question": "When does the streetlight first become visible in the video?",
+        "options": {
+          "A": "Near the end of the video",
+          "B": "In the first half of the video",
+          "C": "At the beginning of the video",
+          "D": "Around the middle of the video"
+        }
+      },
+      {
+        "qa_id": "train_004826",
+        "task": "Geometric Relation",
+        "review_role": "baseline_error",
+        "gold": "A",
+        "baseline_prediction": "B",
+        "question": "From the top-down aerial view, how is the orientation of the red car relative to the silver car?",
+        "options": {
+          "A": "The red car is positioned below the silver car",
+          "B": "The red car is positioned to the left of the silver car",
+          "C": "The red car is positioned above the silver car",
+          "D": "The red car is positioned to the right of the silver car"
+        }
+      },
+      {
+        "qa_id": "train_004825",
+        "task": "Geometric Relation",
+        "review_role": "correct_control",
+        "gold": "C",
+        "baseline_prediction": "C",
+        "question": "How does the relative position of the streetlight change as the camera moves across the scene?",
+        "options": {
+          "A": "It starts to the right of the frame and moves to the right edge as the camera pans left.",
+          "B": "It starts at the top and moves to the bottom of the frame as the camera moves down.",
+          "C": "It starts to the left of the frame and moves to the left edge as the camera pans right.",
+          "D": "It starts near the center and moves to the right edge as the camera pans left."
+        }
+      }
+    ],
+    "fps": 24.0,
+    "decoded_frame_count": 139,
+    "duration_s": 5.791666666666667,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.25181159420289856,
+        "decoded_time_s": 0.25
+      },
+      {
+        "target_time_s": 0.5036231884057971,
+        "decoded_time_s": 0.5
+      },
+      {
+        "target_time_s": 0.7554347826086957,
+        "decoded_time_s": 0.75
+      },
+      {
+        "target_time_s": 1.0072463768115942,
+        "decoded_time_s": 1.0
+      },
+      {
+        "target_time_s": 1.259057971014493,
+        "decoded_time_s": 1.25
+      },
+      {
+        "target_time_s": 1.5108695652173914,
+        "decoded_time_s": 1.5
+      },
+      {
+        "target_time_s": 1.76268115942029,
+        "decoded_time_s": 1.75
+      },
+      {
+        "target_time_s": 2.0144927536231885,
+        "decoded_time_s": 2.0
+      },
+      {
+        "target_time_s": 2.266304347826087,
+        "decoded_time_s": 2.25
+      },
+      {
+        "target_time_s": 2.518115942028986,
+        "decoded_time_s": 2.5
+      },
+      {
+        "target_time_s": 2.7699275362318843,
+        "decoded_time_s": 2.75
+      },
+      {
+        "target_time_s": 3.0217391304347827,
+        "decoded_time_s": 3.0416666666666665
+      },
+      {
+        "target_time_s": 3.273550724637681,
+        "decoded_time_s": 3.2916666666666665
+      },
+      {
+        "target_time_s": 3.52536231884058,
+        "decoded_time_s": 3.5416666666666665
+      },
+      {
+        "target_time_s": 3.777173913043478,
+        "decoded_time_s": 3.7916666666666665
+      },
+      {
+        "target_time_s": 4.028985507246377,
+        "decoded_time_s": 4.041666666666667
+      },
+      {
+        "target_time_s": 4.280797101449275,
+        "decoded_time_s": 4.291666666666667
+      },
+      {
+        "target_time_s": 4.532608695652174,
+        "decoded_time_s": 4.541666666666667
+      },
+      {
+        "target_time_s": 4.784420289855072,
+        "decoded_time_s": 4.791666666666667
+      },
+      {
+        "target_time_s": 5.036231884057972,
+        "decoded_time_s": 5.041666666666667
+      },
+      {
+        "target_time_s": 5.288043478260869,
+        "decoded_time_s": 5.291666666666667
+      },
+      {
+        "target_time_s": 5.5398550724637685,
+        "decoded_time_s": 5.541666666666667
+      },
+      {
+        "target_time_s": 5.791666666666667,
+        "decoded_time_s": 5.75
+      }
+    ]
+  },
+  "ERA_Select/Harvesting/Harvesting_005.mp4": {
+    "contact_sheet": "contact_sheets/train_004853_00d82fe5.png",
+    "qa_items": [
+      {
+        "qa_id": "train_004853",
+        "task": "Temporal Grounding",
+        "review_role": "correct_control",
+        "gold": "D",
+        "baseline_prediction": "D",
+        "question": "When does the combine harvester begin transferring grain to the trailer?",
+        "options": {
+          "A": "Around the middle of the video",
+          "B": "Near the end of the video",
+          "C": "In the first half of the video",
+          "D": "At the beginning of the video"
+        }
+      }
+    ],
+    "fps": 24.0,
+    "decoded_frame_count": 139,
+    "duration_s": 5.791666666666667,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.25181159420289856,
+        "decoded_time_s": 0.25
+      },
+      {
+        "target_time_s": 0.5036231884057971,
+        "decoded_time_s": 0.5
+      },
+      {
+        "target_time_s": 0.7554347826086957,
+        "decoded_time_s": 0.75
+      },
+      {
+        "target_time_s": 1.0072463768115942,
+        "decoded_time_s": 1.0
+      },
+      {
+        "target_time_s": 1.259057971014493,
+        "decoded_time_s": 1.25
+      },
+      {
+        "target_time_s": 1.5108695652173914,
+        "decoded_time_s": 1.5
+      },
+      {
+        "target_time_s": 1.76268115942029,
+        "decoded_time_s": 1.75
+      },
+      {
+        "target_time_s": 2.0144927536231885,
+        "decoded_time_s": 2.0
+      },
+      {
+        "target_time_s": 2.266304347826087,
+        "decoded_time_s": 2.25
+      },
+      {
+        "target_time_s": 2.518115942028986,
+        "decoded_time_s": 2.5
+      },
+      {
+        "target_time_s": 2.7699275362318843,
+        "decoded_time_s": 2.75
+      },
+      {
+        "target_time_s": 3.0217391304347827,
+        "decoded_time_s": 3.0416666666666665
+      },
+      {
+        "target_time_s": 3.273550724637681,
+        "decoded_time_s": 3.2916666666666665
+      },
+      {
+        "target_time_s": 3.52536231884058,
+        "decoded_time_s": 3.5416666666666665
+      },
+      {
+        "target_time_s": 3.777173913043478,
+        "decoded_time_s": 3.7916666666666665
+      },
+      {
+        "target_time_s": 4.028985507246377,
+        "decoded_time_s": 4.041666666666667
+      },
+      {
+        "target_time_s": 4.280797101449275,
+        "decoded_time_s": 4.291666666666667
+      },
+      {
+        "target_time_s": 4.532608695652174,
+        "decoded_time_s": 4.541666666666667
+      },
+      {
+        "target_time_s": 4.784420289855072,
+        "decoded_time_s": 4.791666666666667
+      },
+      {
+        "target_time_s": 5.036231884057972,
+        "decoded_time_s": 5.041666666666667
+      },
+      {
+        "target_time_s": 5.288043478260869,
+        "decoded_time_s": 5.291666666666667
+      },
+      {
+        "target_time_s": 5.5398550724637685,
+        "decoded_time_s": 5.541666666666667
+      },
+      {
+        "target_time_s": 5.791666666666667,
+        "decoded_time_s": 5.75
+      }
+    ]
+  },
+  "ERA_Select/NonEvent/NonEvent_073.mp4": {
+    "contact_sheet": "contact_sheets/train_005621_40a21816.png",
+    "qa_items": [
+      {
+        "qa_id": "train_005621",
+        "task": "Temporal Grounding",
+        "review_role": "baseline_error",
+        "gold": "C",
+        "baseline_prediction": "A",
+        "question": "When does the camera begin to reveal the full extent of the snow-covered forest canopy?",
+        "options": {
+          "A": "In the first half of the video",
+          "B": "Near the end of the video",
+          "C": "At the beginning of the video",
+          "D": "Around the middle of the video"
+        }
+      }
+    ],
+    "fps": 23.824817518248175,
+    "decoded_frame_count": 136,
+    "duration_s": 5.708333333333333,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.24818840579710144,
+        "decoded_time_s": 0.25
+      },
+      {
+        "target_time_s": 0.4963768115942029,
+        "decoded_time_s": 0.5
+      },
+      {
+        "target_time_s": 0.7445652173913043,
+        "decoded_time_s": 0.75
+      },
+      {
+        "target_time_s": 0.9927536231884058,
+        "decoded_time_s": 1.0
+      },
+      {
+        "target_time_s": 1.240942028985507,
+        "decoded_time_s": 1.25
+      },
+      {
+        "target_time_s": 1.4891304347826086,
+        "decoded_time_s": 1.5
+      },
+      {
+        "target_time_s": 1.73731884057971,
+        "decoded_time_s": 1.75
+      },
+      {
+        "target_time_s": 1.9855072463768115,
+        "decoded_time_s": 2.0
+      },
+      {
+        "target_time_s": 2.233695652173913,
+        "decoded_time_s": 2.25
+      },
+      {
+        "target_time_s": 2.481884057971014,
+        "decoded_time_s": 2.5
+      },
+      {
+        "target_time_s": 2.7300724637681157,
+        "decoded_time_s": 2.75
+      },
+      {
+        "target_time_s": 2.9782608695652173,
+        "decoded_time_s": 2.9583333333333335
+      },
+      {
+        "target_time_s": 3.226449275362319,
+        "decoded_time_s": 3.2083333333333335
+      },
+      {
+        "target_time_s": 3.47463768115942,
+        "decoded_time_s": 3.4583333333333335
+      },
+      {
+        "target_time_s": 3.722826086956522,
+        "decoded_time_s": 3.7083333333333335
+      },
+      {
+        "target_time_s": 3.971014492753623,
+        "decoded_time_s": 3.9583333333333335
+      },
+      {
+        "target_time_s": 4.219202898550725,
+        "decoded_time_s": 4.208333333333333
+      },
+      {
+        "target_time_s": 4.467391304347826,
+        "decoded_time_s": 4.458333333333333
+      },
+      {
+        "target_time_s": 4.715579710144928,
+        "decoded_time_s": 4.708333333333333
+      },
+      {
+        "target_time_s": 4.963768115942028,
+        "decoded_time_s": 4.958333333333333
+      },
+      {
+        "target_time_s": 5.211956521739131,
+        "decoded_time_s": 5.208333333333333
+      },
+      {
+        "target_time_s": 5.4601449275362315,
+        "decoded_time_s": 5.458333333333333
+      },
+      {
+        "target_time_s": 5.708333333333333,
+        "decoded_time_s": 5.666666666666667
+      }
+    ]
+  },
+  "ERA_Select/TrafficCongestion/TrafficCongestion_050.mp4": {
+    "contact_sheet": "contact_sheets/train_007117_ba03c8a6.png",
+    "qa_items": [
+      {
+        "qa_id": "train_007117",
+        "task": "Temporal Grounding",
+        "review_role": "baseline_error",
+        "gold": "C",
+        "baseline_prediction": "B",
+        "question": "When does the red car first appear in the traffic jam?",
+        "options": {
+          "A": "In the first half of the video",
+          "B": "At the beginning of the video",
+          "C": "Around the middle of the video",
+          "D": "Near the end of the video"
+        }
+      },
+      {
+        "qa_id": "train_007122",
+        "task": "Geometric Relation",
+        "review_role": "baseline_error",
+        "gold": "B",
+        "baseline_prediction": "A",
+        "question": "How is the gas station positioned relative to the main traffic jam?",
+        "options": {
+          "A": "The gas station is to the left of the traffic jam and is only moderately distant from the main line of cars.",
+          "B": "The gas station is to the left of the traffic jam and very close to the front of the queue.",
+          "C": "The gas station is behind the traffic jam and appears smaller due to distance.",
+          "D": "The gas station is to the right of the traffic jam and far away from the main congestion."
+        }
+      }
+    ],
+    "fps": 24.0,
+    "decoded_frame_count": 139,
+    "duration_s": 5.791666666666667,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.25181159420289856,
+        "decoded_time_s": 0.25
+      },
+      {
+        "target_time_s": 0.5036231884057971,
+        "decoded_time_s": 0.5
+      },
+      {
+        "target_time_s": 0.7554347826086957,
+        "decoded_time_s": 0.75
+      },
+      {
+        "target_time_s": 1.0072463768115942,
+        "decoded_time_s": 1.0
+      },
+      {
+        "target_time_s": 1.259057971014493,
+        "decoded_time_s": 1.25
+      },
+      {
+        "target_time_s": 1.5108695652173914,
+        "decoded_time_s": 1.5
+      },
+      {
+        "target_time_s": 1.76268115942029,
+        "decoded_time_s": 1.75
+      },
+      {
+        "target_time_s": 2.0144927536231885,
+        "decoded_time_s": 2.0
+      },
+      {
+        "target_time_s": 2.266304347826087,
+        "decoded_time_s": 2.25
+      },
+      {
+        "target_time_s": 2.518115942028986,
+        "decoded_time_s": 2.5
+      },
+      {
+        "target_time_s": 2.7699275362318843,
+        "decoded_time_s": 2.75
+      },
+      {
+        "target_time_s": 3.0217391304347827,
+        "decoded_time_s": 3.0416666666666665
+      },
+      {
+        "target_time_s": 3.273550724637681,
+        "decoded_time_s": 3.2916666666666665
+      },
+      {
+        "target_time_s": 3.52536231884058,
+        "decoded_time_s": 3.5416666666666665
+      },
+      {
+        "target_time_s": 3.777173913043478,
+        "decoded_time_s": 3.7916666666666665
+      },
+      {
+        "target_time_s": 4.028985507246377,
+        "decoded_time_s": 4.041666666666667
+      },
+      {
+        "target_time_s": 4.280797101449275,
+        "decoded_time_s": 4.291666666666667
+      },
+      {
+        "target_time_s": 4.532608695652174,
+        "decoded_time_s": 4.541666666666667
+      },
+      {
+        "target_time_s": 4.784420289855072,
+        "decoded_time_s": 4.791666666666667
+      },
+      {
+        "target_time_s": 5.036231884057972,
+        "decoded_time_s": 5.041666666666667
+      },
+      {
+        "target_time_s": 5.288043478260869,
+        "decoded_time_s": 5.291666666666667
+      },
+      {
+        "target_time_s": 5.5398550724637685,
+        "decoded_time_s": 5.541666666666667
+      },
+      {
+        "target_time_s": 5.791666666666667,
+        "decoded_time_s": 5.75
+      }
+    ]
+  },
+  "Hawk_UAV/BE/DJI_0100_d4_02.mp4": {
+    "contact_sheet": "contact_sheets/train_007335_929554c8.png",
+    "qa_items": [
+      {
+        "qa_id": "train_007335",
+        "task": "Temporal Grounding",
+        "review_role": "baseline_error",
+        "gold": "D",
+        "baseline_prediction": "C",
+        "question": "What is the duration of the aerial view of the golf course shown in the video?",
+        "options": {
+          "A": "From 0.0s to 8.0s",
+          "B": "From 0.0s to 7.0s",
+          "C": "From 0.0s to 6.0s",
+          "D": "From 0.0s to 5.0s"
+        }
+      },
+      {
+        "qa_id": "train_007334",
+        "task": "Temporal Grounding",
+        "review_role": "baseline_error",
+        "gold": "B",
+        "baseline_prediction": "A",
+        "question": "At what point in the video does the residential area with houses first become visible?",
+        "options": {
+          "A": "At 2.0 seconds",
+          "B": "At 0.5 seconds",
+          "C": "At 5.0 seconds",
+          "D": "At 3.5 seconds"
+        }
+      }
+    ],
+    "fps": 29.97002997002997,
+    "decoded_frame_count": 180,
+    "duration_s": 6.006,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.2611304347826087,
+        "decoded_time_s": 0.26693333333333336
+      },
+      {
+        "target_time_s": 0.5222608695652174,
+        "decoded_time_s": 0.5338666666666667
+      },
+      {
+        "target_time_s": 0.7833913043478261,
+        "decoded_time_s": 0.7674333333333333
+      },
+      {
+        "target_time_s": 1.044521739130435,
+        "decoded_time_s": 1.0343666666666667
+      },
+      {
+        "target_time_s": 1.3056521739130436,
+        "decoded_time_s": 1.3013
+      },
+      {
+        "target_time_s": 1.5667826086956522,
+        "decoded_time_s": 1.5682333333333334
+      },
+      {
+        "target_time_s": 1.827913043478261,
+        "decoded_time_s": 1.8351666666666666
+      },
+      {
+        "target_time_s": 2.08904347826087,
+        "decoded_time_s": 2.1021
+      },
+      {
+        "target_time_s": 2.3501739130434784,
+        "decoded_time_s": 2.3356666666666666
+      },
+      {
+        "target_time_s": 2.611304347826087,
+        "decoded_time_s": 2.6026
+      },
+      {
+        "target_time_s": 2.872434782608696,
+        "decoded_time_s": 2.8695333333333335
+      },
+      {
+        "target_time_s": 3.1335652173913044,
+        "decoded_time_s": 3.1364666666666667
+      },
+      {
+        "target_time_s": 3.394695652173913,
+        "decoded_time_s": 3.4034
+      },
+      {
+        "target_time_s": 3.655826086956522,
+        "decoded_time_s": 3.6703333333333332
+      },
+      {
+        "target_time_s": 3.9169565217391304,
+        "decoded_time_s": 3.9039
+      },
+      {
+        "target_time_s": 4.17808695652174,
+        "decoded_time_s": 4.170833333333333
+      },
+      {
+        "target_time_s": 4.439217391304348,
+        "decoded_time_s": 4.437766666666667
+      },
+      {
+        "target_time_s": 4.700347826086957,
+        "decoded_time_s": 4.7047
+      },
+      {
+        "target_time_s": 4.961478260869566,
+        "decoded_time_s": 4.971633333333333
+      },
+      {
+        "target_time_s": 5.222608695652174,
+        "decoded_time_s": 5.238566666666666
+      },
+      {
+        "target_time_s": 5.483739130434783,
+        "decoded_time_s": 5.472133333333334
+      },
+      {
+        "target_time_s": 5.744869565217392,
+        "decoded_time_s": 5.739066666666667
+      },
+      {
+        "target_time_s": 6.006,
+        "decoded_time_s": 5.9726333333333335
+      }
+    ]
+  },
+  "Hawk_UAV/BE/DJI_0337_01.mp4": {
+    "contact_sheet": "contact_sheets/train_015451_9d695ece.png",
+    "qa_items": [
+      {
+        "qa_id": "train_015451",
+        "task": "Temporal Grounding",
+        "review_role": "baseline_error",
+        "gold": "C",
+        "baseline_prediction": "A",
+        "question": "At what point does the solar panel field first appear in the video?",
+        "options": {
+          "A": "At 3.0 seconds",
+          "B": "At 4.5 seconds",
+          "C": "At 0.0 seconds",
+          "D": "At 1.5 seconds"
+        }
+      },
+      {
+        "qa_id": "train_015452",
+        "task": "Temporal Grounding",
+        "review_role": "baseline_error",
+        "gold": "B",
+        "baseline_prediction": "D",
+        "question": "How long are the solar panels visible in the video?",
+        "options": {
+          "A": "From 0.5 seconds to 5.0 seconds (duration: 4.5 seconds)",
+          "B": "From 2.5 seconds to 7.8 seconds (duration: 5.3 seconds)",
+          "C": "From 1.0 seconds to 6.5 seconds (duration: 5.5 seconds)",
+          "D": "From 3.0 seconds to 8.0 seconds (duration: 5.0 seconds)"
+        }
+      },
+      {
+        "qa_id": "train_015460",
+        "task": "Geometric Relation",
+        "review_role": "baseline_error",
+        "gold": "A",
+        "baseline_prediction": "C",
+        "question": "How is the orientation of the solar panels relative to the camera's view as it pans across the landscape?",
+        "options": {
+          "A": "The solar panels are oriented perpendicular to the camera's direction of movement, facing towards the camera.",
+          "B": "The solar panels are oriented at a 45-degree angle to the camera's direction of movement, creating a diagonal pattern.",
+          "C": "The solar panels are oriented parallel to the camera's direction of movement, forming a line that recedes into the distance.",
+          "D": "The solar panels are oriented perpendicular to the camera's direction of movement, facing away from the camera."
+        }
+      }
+    ],
+    "fps": 29.97002997002997,
+    "decoded_frame_count": 240,
+    "duration_s": 8.040633333333334,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.066
+      },
+      {
+        "target_time_s": 0.3495927536231884,
+        "decoded_time_s": 0.33293333333333336
+      },
+      {
+        "target_time_s": 0.6991855072463768,
+        "decoded_time_s": 0.6999666666666666
+      },
+      {
+        "target_time_s": 1.0487782608695653,
+        "decoded_time_s": 1.0336333333333334
+      },
+      {
+        "target_time_s": 1.3983710144927537,
+        "decoded_time_s": 1.4006666666666667
+      },
+      {
+        "target_time_s": 1.7479637681159421,
+        "decoded_time_s": 1.7343333333333333
+      },
+      {
+        "target_time_s": 2.0975565217391305,
+        "decoded_time_s": 2.101366666666667
+      },
+      {
+        "target_time_s": 2.447149275362319,
+        "decoded_time_s": 2.435033333333333
+      },
+      {
+        "target_time_s": 2.7967420289855074,
+        "decoded_time_s": 2.8020666666666667
+      },
+      {
+        "target_time_s": 3.146334782608696,
+        "decoded_time_s": 3.1357333333333335
+      },
+      {
+        "target_time_s": 3.4959275362318842,
+        "decoded_time_s": 3.5027666666666666
+      },
+      {
+        "target_time_s": 3.8455202898550724,
+        "decoded_time_s": 3.8364333333333334
+      },
+      {
+        "target_time_s": 4.195113043478261,
+        "decoded_time_s": 4.2034666666666665
+      },
+      {
+        "target_time_s": 4.54470579710145,
+        "decoded_time_s": 4.537133333333333
+      },
+      {
+        "target_time_s": 4.894298550724638,
+        "decoded_time_s": 4.904166666666667
+      },
+      {
+        "target_time_s": 5.243891304347827,
+        "decoded_time_s": 5.237833333333334
+      },
+      {
+        "target_time_s": 5.593484057971015,
+        "decoded_time_s": 5.604866666666667
+      },
+      {
+        "target_time_s": 5.943076811594204,
+        "decoded_time_s": 5.938533333333333
+      },
+      {
+        "target_time_s": 6.292669565217392,
+        "decoded_time_s": 6.3055666666666665
+      },
+      {
+        "target_time_s": 6.64226231884058,
+        "decoded_time_s": 6.639233333333333
+      },
+      {
+        "target_time_s": 6.9918550724637685,
+        "decoded_time_s": 7.006266666666667
+      },
+      {
+        "target_time_s": 7.341447826086958,
+        "decoded_time_s": 7.339933333333334
+      },
+      {
+        "target_time_s": 7.691040579710145,
+        "decoded_time_s": 7.706966666666666
+      },
+      {
+        "target_time_s": 8.040633333333334,
+        "decoded_time_s": 8.040633333333334
+      }
+    ]
+  },
+  "Hawk_UAV/BE/DJI_0339_11.mp4": {
+    "contact_sheet": "contact_sheets/train_012156_45405c38.png",
+    "qa_items": [
+      {
+        "qa_id": "train_012156",
+        "task": "Geometric Relation",
+        "review_role": "baseline_error",
+        "gold": "C",
+        "baseline_prediction": "A",
+        "question": "How does the distance between the basketball court and the parking lot compare to the distance between the basketball court and the road?",
+        "options": {
+          "A": "The basketball court is closer to the road than to the parking lot.",
+          "B": "The distance to the parking lot is much greater than the distance to the road.",
+          "C": "The basketball court is closer to the parking lot than to the road.",
+          "D": "The basketball court is equidistant from both the parking lot and the road."
+        }
+      }
+    ],
+    "fps": 29.97002997002997,
+    "decoded_frame_count": 240,
+    "duration_s": 8.008,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.3481739130434782,
+        "decoded_time_s": 0.33366666666666667
+      },
+      {
+        "target_time_s": 0.6963478260869564,
+        "decoded_time_s": 0.7007
+      },
+      {
+        "target_time_s": 1.0445217391304347,
+        "decoded_time_s": 1.0343666666666667
+      },
+      {
+        "target_time_s": 1.392695652173913,
+        "decoded_time_s": 1.4014
+      },
+      {
+        "target_time_s": 1.740869565217391,
+        "decoded_time_s": 1.7350666666666668
+      },
+      {
+        "target_time_s": 2.0890434782608693,
+        "decoded_time_s": 2.1021
+      },
+      {
+        "target_time_s": 2.4372173913043476,
+        "decoded_time_s": 2.435766666666667
+      },
+      {
+        "target_time_s": 2.785391304347826,
+        "decoded_time_s": 2.769433333333333
+      },
+      {
+        "target_time_s": 3.133565217391304,
+        "decoded_time_s": 3.1364666666666667
+      },
+      {
+        "target_time_s": 3.481739130434782,
+        "decoded_time_s": 3.4701333333333335
+      },
+      {
+        "target_time_s": 3.8299130434782604,
+        "decoded_time_s": 3.8371666666666666
+      },
+      {
+        "target_time_s": 4.178086956521739,
+        "decoded_time_s": 4.170833333333333
+      },
+      {
+        "target_time_s": 4.526260869565217,
+        "decoded_time_s": 4.537866666666667
+      },
+      {
+        "target_time_s": 4.874434782608695,
+        "decoded_time_s": 4.871533333333334
+      },
+      {
+        "target_time_s": 5.222608695652173,
+        "decoded_time_s": 5.238566666666666
+      },
+      {
+        "target_time_s": 5.570782608695652,
+        "decoded_time_s": 5.572233333333333
+      },
+      {
+        "target_time_s": 5.918956521739131,
+        "decoded_time_s": 5.9059
+      },
+      {
+        "target_time_s": 6.267130434782608,
+        "decoded_time_s": 6.2729333333333335
+      },
+      {
+        "target_time_s": 6.615304347826086,
+        "decoded_time_s": 6.6066
+      },
+      {
+        "target_time_s": 6.963478260869564,
+        "decoded_time_s": 6.973633333333333
+      },
+      {
+        "target_time_s": 7.311652173913043,
+        "decoded_time_s": 7.3073
+      },
+      {
+        "target_time_s": 7.659826086956521,
+        "decoded_time_s": 7.674333333333333
+      },
+      {
+        "target_time_s": 8.008,
+        "decoded_time_s": 7.974633333333333
+      }
+    ]
+  },
+  "Hawk_UAV/BE/DJI_0339_15.mp4": {
+    "contact_sheet": "contact_sheets/train_011932_2a7ecc6a.png",
+    "qa_items": [
+      {
+        "qa_id": "train_011932",
+        "task": "Temporal Grounding",
+        "review_role": "baseline_error",
+        "gold": "C",
+        "baseline_prediction": "A",
+        "question": "At what point in the video does the first car appear on the two-lane road to the left of the residential area?",
+        "options": {
+          "A": "At 0.0 seconds",
+          "B": "At 2.0 seconds",
+          "C": "At 6.0 seconds",
+          "D": "At 4.0 seconds"
+        }
+      },
+      {
+        "qa_id": "train_011937",
+        "task": "Geometric Relation",
+        "review_role": "correct_control",
+        "gold": "C",
+        "baseline_prediction": "C",
+        "question": "How does the orientation of the curved driveway in the central parking area relate to the orientation of the two-lane road on the left side of the frame?",
+        "options": {
+          "A": "The curved driveway runs in the opposite direction of the two-lane road, with the road moving from left to right and the driveway curving from right to left.",
+          "B": "The curved driveway runs parallel to the two-lane road, both extending horizontally across the frame.",
+          "C": "The curved driveway is oriented perpendicular to the two-lane road, with the road running parallel to the left side of the frame and the driveway curving around the central area of the neighborhood.",
+          "D": "The curved driveway is oriented at a 45-degree angle to the two-lane road, creating a diagonal intersection."
+        }
+      },
+      {
+        "qa_id": "train_011941",
+        "task": "Geometric Relation",
+        "review_role": "correct_control",
+        "gold": "C",
+        "baseline_prediction": "C",
+        "question": "How does the orientation of the tennis court relative to the residential homes affect its visibility from the aerial view?",
+        "options": {
+          "A": "The tennis court is oriented perpendicular to the road and is visible from the aerial view because it is elevated above the surrounding area, allowing it to stand out from the homes.",
+          "B": "The tennis court is oriented at a 45-degree angle to the road, which creates shadows that obscure it from the aerial view during the time of day the video was recorded.",
+          "C": "The tennis court is oriented parallel to the road and is visible from the aerial view because it is located near the road and is not obstructed by the homes, making it clearly visible despite being behind the residential area.",
+          "D": "The tennis court is oriented perpendicular to the road and is hidden behind the homes, making it invisible from the aerial view."
+        }
+      }
+    ],
+    "fps": 29.97002997002997,
+    "decoded_frame_count": 240,
+    "duration_s": 8.008,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.3481739130434782,
+        "decoded_time_s": 0.33366666666666667
+      },
+      {
+        "target_time_s": 0.6963478260869564,
+        "decoded_time_s": 0.7007
+      },
+      {
+        "target_time_s": 1.0445217391304347,
+        "decoded_time_s": 1.0343666666666667
+      },
+      {
+        "target_time_s": 1.392695652173913,
+        "decoded_time_s": 1.4014
+      },
+      {
+        "target_time_s": 1.740869565217391,
+        "decoded_time_s": 1.7350666666666668
+      },
+      {
+        "target_time_s": 2.0890434782608693,
+        "decoded_time_s": 2.1021
+      },
+      {
+        "target_time_s": 2.4372173913043476,
+        "decoded_time_s": 2.435766666666667
+      },
+      {
+        "target_time_s": 2.785391304347826,
+        "decoded_time_s": 2.769433333333333
+      },
+      {
+        "target_time_s": 3.133565217391304,
+        "decoded_time_s": 3.1364666666666667
+      },
+      {
+        "target_time_s": 3.481739130434782,
+        "decoded_time_s": 3.4701333333333335
+      },
+      {
+        "target_time_s": 3.8299130434782604,
+        "decoded_time_s": 3.8371666666666666
+      },
+      {
+        "target_time_s": 4.178086956521739,
+        "decoded_time_s": 4.170833333333333
+      },
+      {
+        "target_time_s": 4.526260869565217,
+        "decoded_time_s": 4.537866666666667
+      },
+      {
+        "target_time_s": 4.874434782608695,
+        "decoded_time_s": 4.871533333333334
+      },
+      {
+        "target_time_s": 5.222608695652173,
+        "decoded_time_s": 5.238566666666666
+      },
+      {
+        "target_time_s": 5.570782608695652,
+        "decoded_time_s": 5.572233333333333
+      },
+      {
+        "target_time_s": 5.918956521739131,
+        "decoded_time_s": 5.9059
+      },
+      {
+        "target_time_s": 6.267130434782608,
+        "decoded_time_s": 6.2729333333333335
+      },
+      {
+        "target_time_s": 6.615304347826086,
+        "decoded_time_s": 6.6066
+      },
+      {
+        "target_time_s": 6.963478260869564,
+        "decoded_time_s": 6.973633333333333
+      },
+      {
+        "target_time_s": 7.311652173913043,
+        "decoded_time_s": 7.3073
+      },
+      {
+        "target_time_s": 7.659826086956521,
+        "decoded_time_s": 7.674333333333333
+      },
+      {
+        "target_time_s": 8.008,
+        "decoded_time_s": 7.974633333333333
+      }
+    ]
+  },
+  "Hawk_UAV/BE/DJI_0346_03.mp4": {
+    "contact_sheet": "contact_sheets/train_015639_c331bc7d.png",
+    "qa_items": [
+      {
+        "qa_id": "train_015639",
+        "task": "Temporal Grounding",
+        "review_role": "correct_control",
+        "gold": "B",
+        "baseline_prediction": "B",
+        "question": "How long is the small fenced area with the white structure visible in the video?",
+        "options": {
+          "A": "5.2 seconds",
+          "B": "7.9 seconds",
+          "C": "3.8 seconds",
+          "D": "10.1 seconds"
+        }
+      },
+      {
+        "qa_id": "train_015644",
+        "task": "Geometric Relation",
+        "review_role": "baseline_error",
+        "gold": "A",
+        "baseline_prediction": "D",
+        "question": "Is the small fenced area with the white structure closer to the parking lot or to the grassy field?",
+        "options": {
+          "A": "closer to the grassy field",
+          "B": "equally distant from both",
+          "C": "farther from the parking lot",
+          "D": "closer to the parking lot"
+        }
+      },
+      {
+        "qa_id": "train_015645",
+        "task": "Geometric Relation",
+        "review_role": "baseline_error",
+        "gold": "B",
+        "baseline_prediction": "C",
+        "question": "How far is the small fenced area with the white structure from the main parking lot compared to its distance from the grassy field?",
+        "options": {
+          "A": "The fenced area is equidistant from both the parking lot and the grassy field.",
+          "B": "The fenced area is slightly farther from the parking lot than from the grassy field.",
+          "C": "The fenced area is much closer to the parking lot than to the grassy field.",
+          "D": "The fenced area is much closer to the grassy field than to the parking lot."
+        }
+      }
+    ],
+    "fps": 29.97002997002997,
+    "decoded_frame_count": 240,
+    "duration_s": 8.008,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.3481739130434782,
+        "decoded_time_s": 0.33366666666666667
+      },
+      {
+        "target_time_s": 0.6963478260869564,
+        "decoded_time_s": 0.7007
+      },
+      {
+        "target_time_s": 1.0445217391304347,
+        "decoded_time_s": 1.0343666666666667
+      },
+      {
+        "target_time_s": 1.392695652173913,
+        "decoded_time_s": 1.4014
+      },
+      {
+        "target_time_s": 1.740869565217391,
+        "decoded_time_s": 1.7350666666666668
+      },
+      {
+        "target_time_s": 2.0890434782608693,
+        "decoded_time_s": 2.1021
+      },
+      {
+        "target_time_s": 2.4372173913043476,
+        "decoded_time_s": 2.435766666666667
+      },
+      {
+        "target_time_s": 2.785391304347826,
+        "decoded_time_s": 2.769433333333333
+      },
+      {
+        "target_time_s": 3.133565217391304,
+        "decoded_time_s": 3.1364666666666667
+      },
+      {
+        "target_time_s": 3.481739130434782,
+        "decoded_time_s": 3.4701333333333335
+      },
+      {
+        "target_time_s": 3.8299130434782604,
+        "decoded_time_s": 3.8371666666666666
+      },
+      {
+        "target_time_s": 4.178086956521739,
+        "decoded_time_s": 4.170833333333333
+      },
+      {
+        "target_time_s": 4.526260869565217,
+        "decoded_time_s": 4.537866666666667
+      },
+      {
+        "target_time_s": 4.874434782608695,
+        "decoded_time_s": 4.871533333333334
+      },
+      {
+        "target_time_s": 5.222608695652173,
+        "decoded_time_s": 5.238566666666666
+      },
+      {
+        "target_time_s": 5.570782608695652,
+        "decoded_time_s": 5.572233333333333
+      },
+      {
+        "target_time_s": 5.918956521739131,
+        "decoded_time_s": 5.9059
+      },
+      {
+        "target_time_s": 6.267130434782608,
+        "decoded_time_s": 6.2729333333333335
+      },
+      {
+        "target_time_s": 6.615304347826086,
+        "decoded_time_s": 6.6066
+      },
+      {
+        "target_time_s": 6.963478260869564,
+        "decoded_time_s": 6.973633333333333
+      },
+      {
+        "target_time_s": 7.311652173913043,
+        "decoded_time_s": 7.3073
+      },
+      {
+        "target_time_s": 7.659826086956521,
+        "decoded_time_s": 7.674333333333333
+      },
+      {
+        "target_time_s": 8.008,
+        "decoded_time_s": 7.974633333333333
+      }
+    ]
+  },
+  "Hawk_UAV/BE/DJI_0352_07.mp4": {
+    "contact_sheet": "contact_sheets/train_012501_373fc565.png",
+    "qa_items": [
+      {
+        "qa_id": "train_012501",
+        "task": "Geometric Relation",
+        "review_role": "baseline_error",
+        "gold": "C",
+        "baseline_prediction": "D",
+        "question": "Is the red barn closer to the camera than the house?",
+        "options": {
+          "A": "The red barn and the house are at the same distance from the camera.",
+          "B": "It is impossible to determine the relative distance between the red barn and the house.",
+          "C": "No, the house is closer to the camera than the red barn.",
+          "D": "Yes, the red barn is closer to the camera than the house."
+        }
+      }
+    ],
+    "fps": 29.97002997002997,
+    "decoded_frame_count": 240,
+    "duration_s": 8.008,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.3481739130434782,
+        "decoded_time_s": 0.33366666666666667
+      },
+      {
+        "target_time_s": 0.6963478260869564,
+        "decoded_time_s": 0.7007
+      },
+      {
+        "target_time_s": 1.0445217391304347,
+        "decoded_time_s": 1.0343666666666667
+      },
+      {
+        "target_time_s": 1.392695652173913,
+        "decoded_time_s": 1.4014
+      },
+      {
+        "target_time_s": 1.740869565217391,
+        "decoded_time_s": 1.7350666666666668
+      },
+      {
+        "target_time_s": 2.0890434782608693,
+        "decoded_time_s": 2.1021
+      },
+      {
+        "target_time_s": 2.4372173913043476,
+        "decoded_time_s": 2.435766666666667
+      },
+      {
+        "target_time_s": 2.785391304347826,
+        "decoded_time_s": 2.769433333333333
+      },
+      {
+        "target_time_s": 3.133565217391304,
+        "decoded_time_s": 3.1364666666666667
+      },
+      {
+        "target_time_s": 3.481739130434782,
+        "decoded_time_s": 3.4701333333333335
+      },
+      {
+        "target_time_s": 3.8299130434782604,
+        "decoded_time_s": 3.8371666666666666
+      },
+      {
+        "target_time_s": 4.178086956521739,
+        "decoded_time_s": 4.170833333333333
+      },
+      {
+        "target_time_s": 4.526260869565217,
+        "decoded_time_s": 4.537866666666667
+      },
+      {
+        "target_time_s": 4.874434782608695,
+        "decoded_time_s": 4.871533333333334
+      },
+      {
+        "target_time_s": 5.222608695652173,
+        "decoded_time_s": 5.238566666666666
+      },
+      {
+        "target_time_s": 5.570782608695652,
+        "decoded_time_s": 5.572233333333333
+      },
+      {
+        "target_time_s": 5.918956521739131,
+        "decoded_time_s": 5.9059
+      },
+      {
+        "target_time_s": 6.267130434782608,
+        "decoded_time_s": 6.2729333333333335
+      },
+      {
+        "target_time_s": 6.615304347826086,
+        "decoded_time_s": 6.6066
+      },
+      {
+        "target_time_s": 6.963478260869564,
+        "decoded_time_s": 6.973633333333333
+      },
+      {
+        "target_time_s": 7.311652173913043,
+        "decoded_time_s": 7.3073
+      },
+      {
+        "target_time_s": 7.659826086956521,
+        "decoded_time_s": 7.674333333333333
+      },
+      {
+        "target_time_s": 8.008,
+        "decoded_time_s": 7.974633333333333
+      }
+    ]
+  },
+  "Hawk_UAV/BE/DJI_0363_03.mp4": {
+    "contact_sheet": "contact_sheets/train_015283_718df400.png",
+    "qa_items": [
+      {
+        "qa_id": "train_015283",
+        "task": "Geometric Relation",
+        "review_role": "correct_control",
+        "gold": "B",
+        "baseline_prediction": "B",
+        "question": "How does the distance between the parking lot and the building compare to the distance between the parking lot and the trees along the edge?",
+        "options": {
+          "A": "The distance between the parking lot and the building cannot be determined.",
+          "B": "The parking lot is closer to the building than to the trees.",
+          "C": "The parking lot is closer to the trees than to the building.",
+          "D": "The parking lot is equidistant from the building and the trees."
+        }
+      }
+    ],
+    "fps": 29.97002997002997,
+    "decoded_frame_count": 240,
+    "duration_s": 8.008,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.3481739130434782,
+        "decoded_time_s": 0.33366666666666667
+      },
+      {
+        "target_time_s": 0.6963478260869564,
+        "decoded_time_s": 0.7007
+      },
+      {
+        "target_time_s": 1.0445217391304347,
+        "decoded_time_s": 1.0343666666666667
+      },
+      {
+        "target_time_s": 1.392695652173913,
+        "decoded_time_s": 1.4014
+      },
+      {
+        "target_time_s": 1.740869565217391,
+        "decoded_time_s": 1.7350666666666668
+      },
+      {
+        "target_time_s": 2.0890434782608693,
+        "decoded_time_s": 2.1021
+      },
+      {
+        "target_time_s": 2.4372173913043476,
+        "decoded_time_s": 2.435766666666667
+      },
+      {
+        "target_time_s": 2.785391304347826,
+        "decoded_time_s": 2.769433333333333
+      },
+      {
+        "target_time_s": 3.133565217391304,
+        "decoded_time_s": 3.1364666666666667
+      },
+      {
+        "target_time_s": 3.481739130434782,
+        "decoded_time_s": 3.4701333333333335
+      },
+      {
+        "target_time_s": 3.8299130434782604,
+        "decoded_time_s": 3.8371666666666666
+      },
+      {
+        "target_time_s": 4.178086956521739,
+        "decoded_time_s": 4.170833333333333
+      },
+      {
+        "target_time_s": 4.526260869565217,
+        "decoded_time_s": 4.537866666666667
+      },
+      {
+        "target_time_s": 4.874434782608695,
+        "decoded_time_s": 4.871533333333334
+      },
+      {
+        "target_time_s": 5.222608695652173,
+        "decoded_time_s": 5.238566666666666
+      },
+      {
+        "target_time_s": 5.570782608695652,
+        "decoded_time_s": 5.572233333333333
+      },
+      {
+        "target_time_s": 5.918956521739131,
+        "decoded_time_s": 5.9059
+      },
+      {
+        "target_time_s": 6.267130434782608,
+        "decoded_time_s": 6.2729333333333335
+      },
+      {
+        "target_time_s": 6.615304347826086,
+        "decoded_time_s": 6.6066
+      },
+      {
+        "target_time_s": 6.963478260869564,
+        "decoded_time_s": 6.973633333333333
+      },
+      {
+        "target_time_s": 7.311652173913043,
+        "decoded_time_s": 7.3073
+      },
+      {
+        "target_time_s": 7.659826086956521,
+        "decoded_time_s": 7.674333333333333
+      },
+      {
+        "target_time_s": 8.008,
+        "decoded_time_s": 7.974633333333333
+      }
+    ]
+  },
+  "Hawk_UAV/BE/DJI_0364_04.mp4": {
+    "contact_sheet": "contact_sheets/train_011807_e926886b.png",
+    "qa_items": [
+      {
+        "qa_id": "train_011807",
+        "task": "Geometric Relation",
+        "review_role": "baseline_error",
+        "gold": "D",
+        "baseline_prediction": "C",
+        "question": "What is the orientation of the large white building with the flat roof in relation to the road?",
+        "options": {
+          "A": "The building is oriented with its long side parallel to the road and its front face facing away from the road.",
+          "B": "The building is oriented with its long side perpendicular to the road and its front face facing away from the road.",
+          "C": "The building is oriented with its long side perpendicular to the road and its front face facing the road.",
+          "D": "The building is oriented with its long side parallel to the road and its front face facing the road."
+        }
+      }
+    ],
+    "fps": 29.97002997002997,
+    "decoded_frame_count": 240,
+    "duration_s": 8.008,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.3481739130434782,
+        "decoded_time_s": 0.33366666666666667
+      },
+      {
+        "target_time_s": 0.6963478260869564,
+        "decoded_time_s": 0.7007
+      },
+      {
+        "target_time_s": 1.0445217391304347,
+        "decoded_time_s": 1.0343666666666667
+      },
+      {
+        "target_time_s": 1.392695652173913,
+        "decoded_time_s": 1.4014
+      },
+      {
+        "target_time_s": 1.740869565217391,
+        "decoded_time_s": 1.7350666666666668
+      },
+      {
+        "target_time_s": 2.0890434782608693,
+        "decoded_time_s": 2.1021
+      },
+      {
+        "target_time_s": 2.4372173913043476,
+        "decoded_time_s": 2.435766666666667
+      },
+      {
+        "target_time_s": 2.785391304347826,
+        "decoded_time_s": 2.769433333333333
+      },
+      {
+        "target_time_s": 3.133565217391304,
+        "decoded_time_s": 3.1364666666666667
+      },
+      {
+        "target_time_s": 3.481739130434782,
+        "decoded_time_s": 3.4701333333333335
+      },
+      {
+        "target_time_s": 3.8299130434782604,
+        "decoded_time_s": 3.8371666666666666
+      },
+      {
+        "target_time_s": 4.178086956521739,
+        "decoded_time_s": 4.170833333333333
+      },
+      {
+        "target_time_s": 4.526260869565217,
+        "decoded_time_s": 4.537866666666667
+      },
+      {
+        "target_time_s": 4.874434782608695,
+        "decoded_time_s": 4.871533333333334
+      },
+      {
+        "target_time_s": 5.222608695652173,
+        "decoded_time_s": 5.238566666666666
+      },
+      {
+        "target_time_s": 5.570782608695652,
+        "decoded_time_s": 5.572233333333333
+      },
+      {
+        "target_time_s": 5.918956521739131,
+        "decoded_time_s": 5.9059
+      },
+      {
+        "target_time_s": 6.267130434782608,
+        "decoded_time_s": 6.2729333333333335
+      },
+      {
+        "target_time_s": 6.615304347826086,
+        "decoded_time_s": 6.6066
+      },
+      {
+        "target_time_s": 6.963478260869564,
+        "decoded_time_s": 6.973633333333333
+      },
+      {
+        "target_time_s": 7.311652173913043,
+        "decoded_time_s": 7.3073
+      },
+      {
+        "target_time_s": 7.659826086956521,
+        "decoded_time_s": 7.674333333333333
+      },
+      {
+        "target_time_s": 8.008,
+        "decoded_time_s": 7.974633333333333
+      }
+    ]
+  },
+  "Hawk_UAV/BE/DJI_0366_01.mp4": {
+    "contact_sheet": "contact_sheets/train_015353_bbf64753.png",
+    "qa_items": [
+      {
+        "qa_id": "train_015353",
+        "task": "Geometric Relation",
+        "review_role": "baseline_error",
+        "gold": "C",
+        "baseline_prediction": "D",
+        "question": "How does the distance between the white car and the house in the background compare as the car moves along the road?",
+        "options": {
+          "A": "The distance between the white car and the house remains constant throughout the video.",
+          "B": "The white car is initially farther from the house, and it remains at a constant distance as it moves along the road.",
+          "C": "The white car is initially closer to the house, but as it moves along the road, it becomes farther from the house.",
+          "D": "The white car is initially farther from the house, but as it moves along the road, it becomes closer to the house."
+        }
+      }
+    ],
+    "fps": 29.97002997002997,
+    "decoded_frame_count": 240,
+    "duration_s": 8.040633333333334,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.066
+      },
+      {
+        "target_time_s": 0.3495927536231884,
+        "decoded_time_s": 0.33293333333333336
+      },
+      {
+        "target_time_s": 0.6991855072463768,
+        "decoded_time_s": 0.6999666666666666
+      },
+      {
+        "target_time_s": 1.0487782608695653,
+        "decoded_time_s": 1.0336333333333334
+      },
+      {
+        "target_time_s": 1.3983710144927537,
+        "decoded_time_s": 1.4006666666666667
+      },
+      {
+        "target_time_s": 1.7479637681159421,
+        "decoded_time_s": 1.7343333333333333
+      },
+      {
+        "target_time_s": 2.0975565217391305,
+        "decoded_time_s": 2.101366666666667
+      },
+      {
+        "target_time_s": 2.447149275362319,
+        "decoded_time_s": 2.435033333333333
+      },
+      {
+        "target_time_s": 2.7967420289855074,
+        "decoded_time_s": 2.8020666666666667
+      },
+      {
+        "target_time_s": 3.146334782608696,
+        "decoded_time_s": 3.1357333333333335
+      },
+      {
+        "target_time_s": 3.4959275362318842,
+        "decoded_time_s": 3.5027666666666666
+      },
+      {
+        "target_time_s": 3.8455202898550724,
+        "decoded_time_s": 3.8364333333333334
+      },
+      {
+        "target_time_s": 4.195113043478261,
+        "decoded_time_s": 4.2034666666666665
+      },
+      {
+        "target_time_s": 4.54470579710145,
+        "decoded_time_s": 4.537133333333333
+      },
+      {
+        "target_time_s": 4.894298550724638,
+        "decoded_time_s": 4.904166666666667
+      },
+      {
+        "target_time_s": 5.243891304347827,
+        "decoded_time_s": 5.237833333333334
+      },
+      {
+        "target_time_s": 5.593484057971015,
+        "decoded_time_s": 5.604866666666667
+      },
+      {
+        "target_time_s": 5.943076811594204,
+        "decoded_time_s": 5.938533333333333
+      },
+      {
+        "target_time_s": 6.292669565217392,
+        "decoded_time_s": 6.3055666666666665
+      },
+      {
+        "target_time_s": 6.64226231884058,
+        "decoded_time_s": 6.639233333333333
+      },
+      {
+        "target_time_s": 6.9918550724637685,
+        "decoded_time_s": 7.006266666666667
+      },
+      {
+        "target_time_s": 7.341447826086958,
+        "decoded_time_s": 7.339933333333334
+      },
+      {
+        "target_time_s": 7.691040579710145,
+        "decoded_time_s": 7.706966666666666
+      },
+      {
+        "target_time_s": 8.040633333333334,
+        "decoded_time_s": 8.040633333333334
+      }
+    ]
+  },
+  "Hawk_UAV/BE/DJI_0376_03.mp4": {
+    "contact_sheet": "contact_sheets/train_010397_00f4394e.png",
+    "qa_items": [
+      {
+        "qa_id": "train_010397",
+        "task": "Temporal Grounding",
+        "review_role": "baseline_error",
+        "gold": "C",
+        "baseline_prediction": "D",
+        "question": "At what time does the black car appear in the lower right section of the parking lot and when does it disappear?",
+        "options": {
+          "A": "The black car appears at 1.0 seconds and disappears at 5.0 seconds.",
+          "B": "The black car appears at 2.0 seconds and disappears at 6.0 seconds.",
+          "C": "The black car appears at 0.0 seconds and disappears at 3.0 seconds.",
+          "D": "The black car appears at 0.0 seconds and disappears at 7.0 seconds."
+        }
+      }
+    ],
+    "fps": 29.97002997002997,
+    "decoded_frame_count": 240,
+    "duration_s": 8.008,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.3481739130434782,
+        "decoded_time_s": 0.33366666666666667
+      },
+      {
+        "target_time_s": 0.6963478260869564,
+        "decoded_time_s": 0.7007
+      },
+      {
+        "target_time_s": 1.0445217391304347,
+        "decoded_time_s": 1.0343666666666667
+      },
+      {
+        "target_time_s": 1.392695652173913,
+        "decoded_time_s": 1.4014
+      },
+      {
+        "target_time_s": 1.740869565217391,
+        "decoded_time_s": 1.7350666666666668
+      },
+      {
+        "target_time_s": 2.0890434782608693,
+        "decoded_time_s": 2.1021
+      },
+      {
+        "target_time_s": 2.4372173913043476,
+        "decoded_time_s": 2.435766666666667
+      },
+      {
+        "target_time_s": 2.785391304347826,
+        "decoded_time_s": 2.769433333333333
+      },
+      {
+        "target_time_s": 3.133565217391304,
+        "decoded_time_s": 3.1364666666666667
+      },
+      {
+        "target_time_s": 3.481739130434782,
+        "decoded_time_s": 3.4701333333333335
+      },
+      {
+        "target_time_s": 3.8299130434782604,
+        "decoded_time_s": 3.8371666666666666
+      },
+      {
+        "target_time_s": 4.178086956521739,
+        "decoded_time_s": 4.170833333333333
+      },
+      {
+        "target_time_s": 4.526260869565217,
+        "decoded_time_s": 4.537866666666667
+      },
+      {
+        "target_time_s": 4.874434782608695,
+        "decoded_time_s": 4.871533333333334
+      },
+      {
+        "target_time_s": 5.222608695652173,
+        "decoded_time_s": 5.238566666666666
+      },
+      {
+        "target_time_s": 5.570782608695652,
+        "decoded_time_s": 5.572233333333333
+      },
+      {
+        "target_time_s": 5.918956521739131,
+        "decoded_time_s": 5.9059
+      },
+      {
+        "target_time_s": 6.267130434782608,
+        "decoded_time_s": 6.2729333333333335
+      },
+      {
+        "target_time_s": 6.615304347826086,
+        "decoded_time_s": 6.6066
+      },
+      {
+        "target_time_s": 6.963478260869564,
+        "decoded_time_s": 6.973633333333333
+      },
+      {
+        "target_time_s": 7.311652173913043,
+        "decoded_time_s": 7.3073
+      },
+      {
+        "target_time_s": 7.659826086956521,
+        "decoded_time_s": 7.674333333333333
+      },
+      {
+        "target_time_s": 8.008,
+        "decoded_time_s": 7.974633333333333
+      }
+    ]
+  },
+  "Hawk_UAV/BE/DJI_0385_02.mp4": {
+    "contact_sheet": "contact_sheets/train_011406_883ad065.png",
+    "qa_items": [
+      {
+        "qa_id": "train_011406",
+        "task": "Temporal Grounding",
+        "review_role": "correct_control",
+        "gold": "B",
+        "baseline_prediction": "B",
+        "question": "When does the white SUV become visible in the video and when does it disappear?",
+        "options": {
+          "A": "The white SUV appears at 0.0 seconds and disappears at 3.0 seconds.",
+          "B": "The white SUV appears at 0.0 seconds and remains visible until 7.8 seconds, so it does not disappear within the video duration.",
+          "C": "The white SUV appears at 2.0 seconds and disappears at 5.0 seconds.",
+          "D": "The white SUV appears at 4.0 seconds and disappears at 7.0 seconds."
+        }
+      },
+      {
+        "qa_id": "train_011416",
+        "task": "Geometric Relation",
+        "review_role": "baseline_error",
+        "gold": "C",
+        "baseline_prediction": "B",
+        "question": "How does the relative position of the parked white car compare to the parked black car?",
+        "options": {
+          "A": "The white car is to the right of the black car and is closer to the camera.",
+          "B": "The white car is to the left of the black car and is closer to the camera.",
+          "C": "The white car is to the right of the black car and is farther down the street.",
+          "D": "The white car is to the left of the black car and is farther down the street."
+        }
+      },
+      {
+        "qa_id": "train_011412",
+        "task": "Geometric Relation",
+        "review_role": "baseline_error",
+        "gold": "A",
+        "baseline_prediction": "C",
+        "question": "How is the orientation of the parked white SUV relative to the black sedan that is driving down the street?",
+        "options": {
+          "A": "The white SUV is to the right of the black sedan and behind it, with both vehicles oriented parallel to the street.",
+          "B": "The white SUV is to the left of the black sedan and behind it, with both vehicles oriented perpendicular to the street.",
+          "C": "The white SUV is to the left of the black sedan and ahead of it, with both vehicles oriented parallel to the street.",
+          "D": "The white SUV is to the right of the black sedan and ahead of it, with both vehicles oriented perpendicular to the street."
+        }
+      }
+    ],
+    "fps": 29.97002997002997,
+    "decoded_frame_count": 240,
+    "duration_s": 8.008,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.3481739130434782,
+        "decoded_time_s": 0.33366666666666667
+      },
+      {
+        "target_time_s": 0.6963478260869564,
+        "decoded_time_s": 0.7007
+      },
+      {
+        "target_time_s": 1.0445217391304347,
+        "decoded_time_s": 1.0343666666666667
+      },
+      {
+        "target_time_s": 1.392695652173913,
+        "decoded_time_s": 1.4014
+      },
+      {
+        "target_time_s": 1.740869565217391,
+        "decoded_time_s": 1.7350666666666668
+      },
+      {
+        "target_time_s": 2.0890434782608693,
+        "decoded_time_s": 2.1021
+      },
+      {
+        "target_time_s": 2.4372173913043476,
+        "decoded_time_s": 2.435766666666667
+      },
+      {
+        "target_time_s": 2.785391304347826,
+        "decoded_time_s": 2.769433333333333
+      },
+      {
+        "target_time_s": 3.133565217391304,
+        "decoded_time_s": 3.1364666666666667
+      },
+      {
+        "target_time_s": 3.481739130434782,
+        "decoded_time_s": 3.4701333333333335
+      },
+      {
+        "target_time_s": 3.8299130434782604,
+        "decoded_time_s": 3.8371666666666666
+      },
+      {
+        "target_time_s": 4.178086956521739,
+        "decoded_time_s": 4.170833333333333
+      },
+      {
+        "target_time_s": 4.526260869565217,
+        "decoded_time_s": 4.537866666666667
+      },
+      {
+        "target_time_s": 4.874434782608695,
+        "decoded_time_s": 4.871533333333334
+      },
+      {
+        "target_time_s": 5.222608695652173,
+        "decoded_time_s": 5.238566666666666
+      },
+      {
+        "target_time_s": 5.570782608695652,
+        "decoded_time_s": 5.572233333333333
+      },
+      {
+        "target_time_s": 5.918956521739131,
+        "decoded_time_s": 5.9059
+      },
+      {
+        "target_time_s": 6.267130434782608,
+        "decoded_time_s": 6.2729333333333335
+      },
+      {
+        "target_time_s": 6.615304347826086,
+        "decoded_time_s": 6.6066
+      },
+      {
+        "target_time_s": 6.963478260869564,
+        "decoded_time_s": 6.973633333333333
+      },
+      {
+        "target_time_s": 7.311652173913043,
+        "decoded_time_s": 7.3073
+      },
+      {
+        "target_time_s": 7.659826086956521,
+        "decoded_time_s": 7.674333333333333
+      },
+      {
+        "target_time_s": 8.008,
+        "decoded_time_s": 7.974633333333333
+      }
+    ]
+  },
+  "Hawk_UAV/BE/DJI_0392_03.mp4": {
+    "contact_sheet": "contact_sheets/train_014123_eb285529.png",
+    "qa_items": [
+      {
+        "qa_id": "train_014123",
+        "task": "Temporal Grounding",
+        "review_role": "baseline_error",
+        "gold": "C",
+        "baseline_prediction": "B",
+        "question": "How long does the red car remain visible in the video?",
+        "options": {
+          "A": "3.5 seconds",
+          "B": "6.8 seconds",
+          "C": "5.0 seconds",
+          "D": "2.2 seconds"
+        }
+      }
+    ],
+    "fps": 29.97002997002997,
+    "decoded_frame_count": 240,
+    "duration_s": 8.008,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.3481739130434782,
+        "decoded_time_s": 0.33366666666666667
+      },
+      {
+        "target_time_s": 0.6963478260869564,
+        "decoded_time_s": 0.7007
+      },
+      {
+        "target_time_s": 1.0445217391304347,
+        "decoded_time_s": 1.0343666666666667
+      },
+      {
+        "target_time_s": 1.392695652173913,
+        "decoded_time_s": 1.4014
+      },
+      {
+        "target_time_s": 1.740869565217391,
+        "decoded_time_s": 1.7350666666666668
+      },
+      {
+        "target_time_s": 2.0890434782608693,
+        "decoded_time_s": 2.1021
+      },
+      {
+        "target_time_s": 2.4372173913043476,
+        "decoded_time_s": 2.435766666666667
+      },
+      {
+        "target_time_s": 2.785391304347826,
+        "decoded_time_s": 2.769433333333333
+      },
+      {
+        "target_time_s": 3.133565217391304,
+        "decoded_time_s": 3.1364666666666667
+      },
+      {
+        "target_time_s": 3.481739130434782,
+        "decoded_time_s": 3.4701333333333335
+      },
+      {
+        "target_time_s": 3.8299130434782604,
+        "decoded_time_s": 3.8371666666666666
+      },
+      {
+        "target_time_s": 4.178086956521739,
+        "decoded_time_s": 4.170833333333333
+      },
+      {
+        "target_time_s": 4.526260869565217,
+        "decoded_time_s": 4.537866666666667
+      },
+      {
+        "target_time_s": 4.874434782608695,
+        "decoded_time_s": 4.871533333333334
+      },
+      {
+        "target_time_s": 5.222608695652173,
+        "decoded_time_s": 5.238566666666666
+      },
+      {
+        "target_time_s": 5.570782608695652,
+        "decoded_time_s": 5.572233333333333
+      },
+      {
+        "target_time_s": 5.918956521739131,
+        "decoded_time_s": 5.9059
+      },
+      {
+        "target_time_s": 6.267130434782608,
+        "decoded_time_s": 6.2729333333333335
+      },
+      {
+        "target_time_s": 6.615304347826086,
+        "decoded_time_s": 6.6066
+      },
+      {
+        "target_time_s": 6.963478260869564,
+        "decoded_time_s": 6.973633333333333
+      },
+      {
+        "target_time_s": 7.311652173913043,
+        "decoded_time_s": 7.3073
+      },
+      {
+        "target_time_s": 7.659826086956521,
+        "decoded_time_s": 7.674333333333333
+      },
+      {
+        "target_time_s": 8.008,
+        "decoded_time_s": 7.974633333333333
+      }
+    ]
+  },
+  "Hawk_UAV/IL/DJI_0028_d4_01.mp4": {
+    "contact_sheet": "contact_sheets/train_008007_c9437137.png",
+    "qa_items": [
+      {
+        "qa_id": "train_008007",
+        "task": "Temporal Grounding",
+        "review_role": "baseline_error",
+        "gold": "A",
+        "baseline_prediction": "D",
+        "question": "At what point in the video does the white car first appear in the frame?",
+        "options": {
+          "A": "At 0.0 seconds",
+          "B": "At 3.0 seconds",
+          "C": "At 2.0 seconds",
+          "D": "At 1.0 seconds"
+        }
+      },
+      {
+        "qa_id": "train_008008",
+        "task": "Temporal Grounding",
+        "review_role": "baseline_error",
+        "gold": "B",
+        "baseline_prediction": "C",
+        "question": "How long does the white vehicle remain visible in the frame as it moves along the road?",
+        "options": {
+          "A": "From 0.0s to 3.0s (duration: 3.0s)",
+          "B": "From 0.0s to 4.0s (duration: 4.0s)",
+          "C": "From 0.0s to 2.5s (duration: 2.5s)",
+          "D": "From 0.0s to 5.0s (duration: 5.0s)"
+        }
+      },
+      {
+        "qa_id": "train_008012",
+        "task": "Geometric Relation",
+        "review_role": "baseline_error",
+        "gold": "C",
+        "baseline_prediction": "B",
+        "question": "How does the distance between the large commercial complex and the forest on the left compare to the distance between the commercial complex and the road on the right?",
+        "options": {
+          "A": "The commercial complex is approximately the same distance from both the forest and the road",
+          "B": "The commercial complex is closer to the forest than to the road",
+          "C": "The commercial complex is closer to the road than to the forest",
+          "D": "The commercial complex is farther from the road than from the forest"
+        }
+      }
+    ],
+    "fps": 29.97002997002997,
+    "decoded_frame_count": 180,
+    "duration_s": 6.006,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.2611304347826087,
+        "decoded_time_s": 0.26693333333333336
+      },
+      {
+        "target_time_s": 0.5222608695652174,
+        "decoded_time_s": 0.5338666666666667
+      },
+      {
+        "target_time_s": 0.7833913043478261,
+        "decoded_time_s": 0.7674333333333333
+      },
+      {
+        "target_time_s": 1.044521739130435,
+        "decoded_time_s": 1.0343666666666667
+      },
+      {
+        "target_time_s": 1.3056521739130436,
+        "decoded_time_s": 1.3013
+      },
+      {
+        "target_time_s": 1.5667826086956522,
+        "decoded_time_s": 1.5682333333333334
+      },
+      {
+        "target_time_s": 1.827913043478261,
+        "decoded_time_s": 1.8351666666666666
+      },
+      {
+        "target_time_s": 2.08904347826087,
+        "decoded_time_s": 2.1021
+      },
+      {
+        "target_time_s": 2.3501739130434784,
+        "decoded_time_s": 2.3356666666666666
+      },
+      {
+        "target_time_s": 2.611304347826087,
+        "decoded_time_s": 2.6026
+      },
+      {
+        "target_time_s": 2.872434782608696,
+        "decoded_time_s": 2.8695333333333335
+      },
+      {
+        "target_time_s": 3.1335652173913044,
+        "decoded_time_s": 3.1364666666666667
+      },
+      {
+        "target_time_s": 3.394695652173913,
+        "decoded_time_s": 3.4034
+      },
+      {
+        "target_time_s": 3.655826086956522,
+        "decoded_time_s": 3.6703333333333332
+      },
+      {
+        "target_time_s": 3.9169565217391304,
+        "decoded_time_s": 3.9039
+      },
+      {
+        "target_time_s": 4.17808695652174,
+        "decoded_time_s": 4.170833333333333
+      },
+      {
+        "target_time_s": 4.439217391304348,
+        "decoded_time_s": 4.437766666666667
+      },
+      {
+        "target_time_s": 4.700347826086957,
+        "decoded_time_s": 4.7047
+      },
+      {
+        "target_time_s": 4.961478260869566,
+        "decoded_time_s": 4.971633333333333
+      },
+      {
+        "target_time_s": 5.222608695652174,
+        "decoded_time_s": 5.238566666666666
+      },
+      {
+        "target_time_s": 5.483739130434783,
+        "decoded_time_s": 5.472133333333334
+      },
+      {
+        "target_time_s": 5.744869565217392,
+        "decoded_time_s": 5.739066666666667
+      },
+      {
+        "target_time_s": 6.006,
+        "decoded_time_s": 5.9726333333333335
+      }
+    ]
+  },
+  "Hawk_UAV/IL/DJI_0028_d4_02.mp4": {
+    "contact_sheet": "contact_sheets/train_008027_67e5b8af.png",
+    "qa_items": [
+      {
+        "qa_id": "train_008027",
+        "task": "Temporal Grounding",
+        "review_role": "baseline_error",
+        "gold": "B",
+        "baseline_prediction": "D",
+        "question": "At what point in the video does the large open field first appear in the frame?",
+        "options": {
+          "A": "At 4.5 seconds",
+          "B": "At 0.0 seconds",
+          "C": "At 1.5 seconds",
+          "D": "At 3.0 seconds"
+        }
+      },
+      {
+        "qa_id": "train_008031",
+        "task": "Geometric Relation",
+        "review_role": "baseline_error",
+        "gold": "C",
+        "baseline_prediction": "D",
+        "question": "How does the distance between the large parking lot and the residential apartment buildings compare to the distance between the parking lot and the open field?",
+        "options": {
+          "A": "The open field is much farther from the parking lot than the apartment buildings are.",
+          "B": "The apartment buildings and the open field are approximately the same distance from the parking lot.",
+          "C": "The apartment buildings are closer to the parking lot than the open field is.",
+          "D": "The open field is closer to the parking lot than the apartment buildings are."
+        }
+      }
+    ],
+    "fps": 29.97002997002997,
+    "decoded_frame_count": 180,
+    "duration_s": 6.006,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.2611304347826087,
+        "decoded_time_s": 0.26693333333333336
+      },
+      {
+        "target_time_s": 0.5222608695652174,
+        "decoded_time_s": 0.5338666666666667
+      },
+      {
+        "target_time_s": 0.7833913043478261,
+        "decoded_time_s": 0.7674333333333333
+      },
+      {
+        "target_time_s": 1.044521739130435,
+        "decoded_time_s": 1.0343666666666667
+      },
+      {
+        "target_time_s": 1.3056521739130436,
+        "decoded_time_s": 1.3013
+      },
+      {
+        "target_time_s": 1.5667826086956522,
+        "decoded_time_s": 1.5682333333333334
+      },
+      {
+        "target_time_s": 1.827913043478261,
+        "decoded_time_s": 1.8351666666666666
+      },
+      {
+        "target_time_s": 2.08904347826087,
+        "decoded_time_s": 2.1021
+      },
+      {
+        "target_time_s": 2.3501739130434784,
+        "decoded_time_s": 2.3356666666666666
+      },
+      {
+        "target_time_s": 2.611304347826087,
+        "decoded_time_s": 2.6026
+      },
+      {
+        "target_time_s": 2.872434782608696,
+        "decoded_time_s": 2.8695333333333335
+      },
+      {
+        "target_time_s": 3.1335652173913044,
+        "decoded_time_s": 3.1364666666666667
+      },
+      {
+        "target_time_s": 3.394695652173913,
+        "decoded_time_s": 3.4034
+      },
+      {
+        "target_time_s": 3.655826086956522,
+        "decoded_time_s": 3.6703333333333332
+      },
+      {
+        "target_time_s": 3.9169565217391304,
+        "decoded_time_s": 3.9039
+      },
+      {
+        "target_time_s": 4.17808695652174,
+        "decoded_time_s": 4.170833333333333
+      },
+      {
+        "target_time_s": 4.439217391304348,
+        "decoded_time_s": 4.437766666666667
+      },
+      {
+        "target_time_s": 4.700347826086957,
+        "decoded_time_s": 4.7047
+      },
+      {
+        "target_time_s": 4.961478260869566,
+        "decoded_time_s": 4.971633333333333
+      },
+      {
+        "target_time_s": 5.222608695652174,
+        "decoded_time_s": 5.238566666666666
+      },
+      {
+        "target_time_s": 5.483739130434783,
+        "decoded_time_s": 5.472133333333334
+      },
+      {
+        "target_time_s": 5.744869565217392,
+        "decoded_time_s": 5.739066666666667
+      },
+      {
+        "target_time_s": 6.006,
+        "decoded_time_s": 5.9726333333333335
+      }
+    ]
+  },
+  "Hawk_UAV/IL/DJI_0038_d4_02.mp4": {
+    "contact_sheet": "contact_sheets/train_008218_9a4f35e0.png",
+    "qa_items": [
+      {
+        "qa_id": "train_008218",
+        "task": "Geometric Relation",
+        "review_role": "correct_control",
+        "gold": "A",
+        "baseline_prediction": "A",
+        "question": "How does the distance between the main road and the large apartment complex compare to the distance between the main road and the single-family homes on the left side of the frame?",
+        "options": {
+          "A": "The apartment complex is closer to the main road than the single-family homes are.",
+          "B": "The single-family homes are closer to the main road than the apartment complex is.",
+          "C": "The main road is equidistant from both the apartment complex and the single-family homes.",
+          "D": "The apartment complex and the single-family homes are approximately the same distance from the main road."
+        }
+      }
+    ],
+    "fps": 29.97002997002997,
+    "decoded_frame_count": 180,
+    "duration_s": 6.006,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.2611304347826087,
+        "decoded_time_s": 0.26693333333333336
+      },
+      {
+        "target_time_s": 0.5222608695652174,
+        "decoded_time_s": 0.5338666666666667
+      },
+      {
+        "target_time_s": 0.7833913043478261,
+        "decoded_time_s": 0.7674333333333333
+      },
+      {
+        "target_time_s": 1.044521739130435,
+        "decoded_time_s": 1.0343666666666667
+      },
+      {
+        "target_time_s": 1.3056521739130436,
+        "decoded_time_s": 1.3013
+      },
+      {
+        "target_time_s": 1.5667826086956522,
+        "decoded_time_s": 1.5682333333333334
+      },
+      {
+        "target_time_s": 1.827913043478261,
+        "decoded_time_s": 1.8351666666666666
+      },
+      {
+        "target_time_s": 2.08904347826087,
+        "decoded_time_s": 2.1021
+      },
+      {
+        "target_time_s": 2.3501739130434784,
+        "decoded_time_s": 2.3356666666666666
+      },
+      {
+        "target_time_s": 2.611304347826087,
+        "decoded_time_s": 2.6026
+      },
+      {
+        "target_time_s": 2.872434782608696,
+        "decoded_time_s": 2.8695333333333335
+      },
+      {
+        "target_time_s": 3.1335652173913044,
+        "decoded_time_s": 3.1364666666666667
+      },
+      {
+        "target_time_s": 3.394695652173913,
+        "decoded_time_s": 3.4034
+      },
+      {
+        "target_time_s": 3.655826086956522,
+        "decoded_time_s": 3.6703333333333332
+      },
+      {
+        "target_time_s": 3.9169565217391304,
+        "decoded_time_s": 3.9039
+      },
+      {
+        "target_time_s": 4.17808695652174,
+        "decoded_time_s": 4.170833333333333
+      },
+      {
+        "target_time_s": 4.439217391304348,
+        "decoded_time_s": 4.437766666666667
+      },
+      {
+        "target_time_s": 4.700347826086957,
+        "decoded_time_s": 4.7047
+      },
+      {
+        "target_time_s": 4.961478260869566,
+        "decoded_time_s": 4.971633333333333
+      },
+      {
+        "target_time_s": 5.222608695652174,
+        "decoded_time_s": 5.238566666666666
+      },
+      {
+        "target_time_s": 5.483739130434783,
+        "decoded_time_s": 5.472133333333334
+      },
+      {
+        "target_time_s": 5.744869565217392,
+        "decoded_time_s": 5.739066666666667
+      },
+      {
+        "target_time_s": 6.006,
+        "decoded_time_s": 5.9726333333333335
+      }
+    ]
+  },
+  "Hawk_UAV/IL/DJI_0039_d4_02.mp4": {
+    "contact_sheet": "contact_sheets/train_008246_254bd859.png",
+    "qa_items": [
+      {
+        "qa_id": "train_008246",
+        "task": "Temporal Grounding",
+        "review_role": "baseline_error",
+        "gold": "A",
+        "baseline_prediction": "B",
+        "question": "When does the freight train appear in the video?",
+        "options": {
+          "A": "In the first half of the video",
+          "B": "At the beginning of the video",
+          "C": "Near the end of the video",
+          "D": "Around the middle of the video"
+        }
+      }
+    ],
+    "fps": 29.97002997002997,
+    "decoded_frame_count": 180,
+    "duration_s": 6.006,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.2611304347826087,
+        "decoded_time_s": 0.26693333333333336
+      },
+      {
+        "target_time_s": 0.5222608695652174,
+        "decoded_time_s": 0.5338666666666667
+      },
+      {
+        "target_time_s": 0.7833913043478261,
+        "decoded_time_s": 0.7674333333333333
+      },
+      {
+        "target_time_s": 1.044521739130435,
+        "decoded_time_s": 1.0343666666666667
+      },
+      {
+        "target_time_s": 1.3056521739130436,
+        "decoded_time_s": 1.3013
+      },
+      {
+        "target_time_s": 1.5667826086956522,
+        "decoded_time_s": 1.5682333333333334
+      },
+      {
+        "target_time_s": 1.827913043478261,
+        "decoded_time_s": 1.8351666666666666
+      },
+      {
+        "target_time_s": 2.08904347826087,
+        "decoded_time_s": 2.1021
+      },
+      {
+        "target_time_s": 2.3501739130434784,
+        "decoded_time_s": 2.3356666666666666
+      },
+      {
+        "target_time_s": 2.611304347826087,
+        "decoded_time_s": 2.6026
+      },
+      {
+        "target_time_s": 2.872434782608696,
+        "decoded_time_s": 2.8695333333333335
+      },
+      {
+        "target_time_s": 3.1335652173913044,
+        "decoded_time_s": 3.1364666666666667
+      },
+      {
+        "target_time_s": 3.394695652173913,
+        "decoded_time_s": 3.4034
+      },
+      {
+        "target_time_s": 3.655826086956522,
+        "decoded_time_s": 3.6703333333333332
+      },
+      {
+        "target_time_s": 3.9169565217391304,
+        "decoded_time_s": 3.9039
+      },
+      {
+        "target_time_s": 4.17808695652174,
+        "decoded_time_s": 4.170833333333333
+      },
+      {
+        "target_time_s": 4.439217391304348,
+        "decoded_time_s": 4.437766666666667
+      },
+      {
+        "target_time_s": 4.700347826086957,
+        "decoded_time_s": 4.7047
+      },
+      {
+        "target_time_s": 4.961478260869566,
+        "decoded_time_s": 4.971633333333333
+      },
+      {
+        "target_time_s": 5.222608695652174,
+        "decoded_time_s": 5.238566666666666
+      },
+      {
+        "target_time_s": 5.483739130434783,
+        "decoded_time_s": 5.472133333333334
+      },
+      {
+        "target_time_s": 5.744869565217392,
+        "decoded_time_s": 5.739066666666667
+      },
+      {
+        "target_time_s": 6.006,
+        "decoded_time_s": 5.9726333333333335
+      }
+    ]
+  },
+  "Hawk_UAV/NJ/DJI_0147_d4_01.mp4": {
+    "contact_sheet": "contact_sheets/train_009131_0fc74ed3.png",
+    "qa_items": [
+      {
+        "qa_id": "train_009131",
+        "task": "Temporal Grounding",
+        "review_role": "correct_control",
+        "gold": "A",
+        "baseline_prediction": "A",
+        "question": "How long is the red-roofed building visible in the video?",
+        "options": {
+          "A": "Near the end",
+          "B": "For most of the video",
+          "C": "Only in the first half",
+          "D": "Briefly at the beginning"
+        }
+      },
+      {
+        "qa_id": "train_009133",
+        "task": "Geometric Relation",
+        "review_role": "baseline_error",
+        "gold": "A",
+        "baseline_prediction": "B",
+        "question": "In the video, how is the red-roofed building positioned relative to the green lake?",
+        "options": {
+          "A": "The building is located to the left of the lake and slightly behind it in the frame.",
+          "B": "The building is situated above the lake and appears closer to the camera.",
+          "C": "The building is far to the right of the lake, separated by a large grassy area.",
+          "D": "The building is directly adjacent to the lake's edge, with the path running between them."
+        }
+      },
+      {
+        "qa_id": "train_009135",
+        "task": "Geometric Relation",
+        "review_role": "correct_control",
+        "gold": "C",
+        "baseline_prediction": "C",
+        "question": "How does the distance between the red-roofed building and the lake compare to the distance between the building and the winding path?",
+        "options": {
+          "A": "The building is closer to the lake than to the path",
+          "B": "The building is farther from the lake than from the path",
+          "C": "The building is closer to the path than to the lake",
+          "D": "The building is approximately the same distance from both the lake and the path"
+        }
+      }
+    ],
+    "fps": 29.97002997002997,
+    "decoded_frame_count": 180,
+    "duration_s": 6.006,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.2611304347826087,
+        "decoded_time_s": 0.26693333333333336
+      },
+      {
+        "target_time_s": 0.5222608695652174,
+        "decoded_time_s": 0.5338666666666667
+      },
+      {
+        "target_time_s": 0.7833913043478261,
+        "decoded_time_s": 0.7674333333333333
+      },
+      {
+        "target_time_s": 1.044521739130435,
+        "decoded_time_s": 1.0343666666666667
+      },
+      {
+        "target_time_s": 1.3056521739130436,
+        "decoded_time_s": 1.3013
+      },
+      {
+        "target_time_s": 1.5667826086956522,
+        "decoded_time_s": 1.5682333333333334
+      },
+      {
+        "target_time_s": 1.827913043478261,
+        "decoded_time_s": 1.8351666666666666
+      },
+      {
+        "target_time_s": 2.08904347826087,
+        "decoded_time_s": 2.1021
+      },
+      {
+        "target_time_s": 2.3501739130434784,
+        "decoded_time_s": 2.3356666666666666
+      },
+      {
+        "target_time_s": 2.611304347826087,
+        "decoded_time_s": 2.6026
+      },
+      {
+        "target_time_s": 2.872434782608696,
+        "decoded_time_s": 2.8695333333333335
+      },
+      {
+        "target_time_s": 3.1335652173913044,
+        "decoded_time_s": 3.1364666666666667
+      },
+      {
+        "target_time_s": 3.394695652173913,
+        "decoded_time_s": 3.4034
+      },
+      {
+        "target_time_s": 3.655826086956522,
+        "decoded_time_s": 3.6703333333333332
+      },
+      {
+        "target_time_s": 3.9169565217391304,
+        "decoded_time_s": 3.9039
+      },
+      {
+        "target_time_s": 4.17808695652174,
+        "decoded_time_s": 4.170833333333333
+      },
+      {
+        "target_time_s": 4.439217391304348,
+        "decoded_time_s": 4.437766666666667
+      },
+      {
+        "target_time_s": 4.700347826086957,
+        "decoded_time_s": 4.7047
+      },
+      {
+        "target_time_s": 4.961478260869566,
+        "decoded_time_s": 4.971633333333333
+      },
+      {
+        "target_time_s": 5.222608695652174,
+        "decoded_time_s": 5.238566666666666
+      },
+      {
+        "target_time_s": 5.483739130434783,
+        "decoded_time_s": 5.472133333333334
+      },
+      {
+        "target_time_s": 5.744869565217392,
+        "decoded_time_s": 5.739066666666667
+      },
+      {
+        "target_time_s": 6.006,
+        "decoded_time_s": 5.9726333333333335
+      }
+    ]
+  },
+  "Hawk_UAV/NJ/DJI_0174_d4_02.mp4": {
+    "contact_sheet": "contact_sheets/train_009316_a3d8359f.png",
+    "qa_items": [
+      {
+        "qa_id": "train_009316",
+        "task": "Temporal Grounding",
+        "review_role": "baseline_error",
+        "gold": "C",
+        "baseline_prediction": "B",
+        "question": "At what point in the video does the first building appear in the frame?",
+        "options": {
+          "A": "At 4.0 seconds",
+          "B": "At 2.8 seconds",
+          "C": "At 3.2 seconds",
+          "D": "At 1.5 seconds"
+        }
+      }
+    ],
+    "fps": 29.97002997002997,
+    "decoded_frame_count": 180,
+    "duration_s": 6.006,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.2611304347826087,
+        "decoded_time_s": 0.26693333333333336
+      },
+      {
+        "target_time_s": 0.5222608695652174,
+        "decoded_time_s": 0.5338666666666667
+      },
+      {
+        "target_time_s": 0.7833913043478261,
+        "decoded_time_s": 0.7674333333333333
+      },
+      {
+        "target_time_s": 1.044521739130435,
+        "decoded_time_s": 1.0343666666666667
+      },
+      {
+        "target_time_s": 1.3056521739130436,
+        "decoded_time_s": 1.3013
+      },
+      {
+        "target_time_s": 1.5667826086956522,
+        "decoded_time_s": 1.5682333333333334
+      },
+      {
+        "target_time_s": 1.827913043478261,
+        "decoded_time_s": 1.8351666666666666
+      },
+      {
+        "target_time_s": 2.08904347826087,
+        "decoded_time_s": 2.1021
+      },
+      {
+        "target_time_s": 2.3501739130434784,
+        "decoded_time_s": 2.3356666666666666
+      },
+      {
+        "target_time_s": 2.611304347826087,
+        "decoded_time_s": 2.6026
+      },
+      {
+        "target_time_s": 2.872434782608696,
+        "decoded_time_s": 2.8695333333333335
+      },
+      {
+        "target_time_s": 3.1335652173913044,
+        "decoded_time_s": 3.1364666666666667
+      },
+      {
+        "target_time_s": 3.394695652173913,
+        "decoded_time_s": 3.4034
+      },
+      {
+        "target_time_s": 3.655826086956522,
+        "decoded_time_s": 3.6703333333333332
+      },
+      {
+        "target_time_s": 3.9169565217391304,
+        "decoded_time_s": 3.9039
+      },
+      {
+        "target_time_s": 4.17808695652174,
+        "decoded_time_s": 4.170833333333333
+      },
+      {
+        "target_time_s": 4.439217391304348,
+        "decoded_time_s": 4.437766666666667
+      },
+      {
+        "target_time_s": 4.700347826086957,
+        "decoded_time_s": 4.7047
+      },
+      {
+        "target_time_s": 4.961478260869566,
+        "decoded_time_s": 4.971633333333333
+      },
+      {
+        "target_time_s": 5.222608695652174,
+        "decoded_time_s": 5.238566666666666
+      },
+      {
+        "target_time_s": 5.483739130434783,
+        "decoded_time_s": 5.472133333333334
+      },
+      {
+        "target_time_s": 5.744869565217392,
+        "decoded_time_s": 5.739066666666667
+      },
+      {
+        "target_time_s": 6.006,
+        "decoded_time_s": 5.9726333333333335
+      }
+    ]
+  },
+  "Hawk_UAV/PH/DJI_0211_d4_01.mp4": {
+    "contact_sheet": "contact_sheets/train_009656_b3c1693e.png",
+    "qa_items": [
+      {
+        "qa_id": "train_009656",
+        "task": "Temporal Grounding",
+        "review_role": "baseline_error",
+        "gold": "D",
+        "baseline_prediction": "B",
+        "question": "At what point in the video does the community center complex first appear in the frame?",
+        "options": {
+          "A": "At 4.5 seconds",
+          "B": "At 3.0 seconds",
+          "C": "At 0.5 seconds",
+          "D": "At 2.0 seconds"
+        }
+      },
+      {
+        "qa_id": "train_009660",
+        "task": "Geometric Relation",
+        "review_role": "baseline_error",
+        "gold": "A",
+        "baseline_prediction": "D",
+        "question": "From the aerial perspective, how is the basketball court positioned relative to the main church building?",
+        "options": {
+          "A": "The basketball court is to the right of the church building and slightly behind it.",
+          "B": "The basketball court is to the left of the church building and adjacent to the parking lot.",
+          "C": "The basketball court is above the church building, elevated on a hill.",
+          "D": "The basketball court is directly in front of the church building, closer to the parking lot."
+        }
+      }
+    ],
+    "fps": 29.97002997002997,
+    "decoded_frame_count": 180,
+    "duration_s": 6.006,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.2611304347826087,
+        "decoded_time_s": 0.26693333333333336
+      },
+      {
+        "target_time_s": 0.5222608695652174,
+        "decoded_time_s": 0.5338666666666667
+      },
+      {
+        "target_time_s": 0.7833913043478261,
+        "decoded_time_s": 0.7674333333333333
+      },
+      {
+        "target_time_s": 1.044521739130435,
+        "decoded_time_s": 1.0343666666666667
+      },
+      {
+        "target_time_s": 1.3056521739130436,
+        "decoded_time_s": 1.3013
+      },
+      {
+        "target_time_s": 1.5667826086956522,
+        "decoded_time_s": 1.5682333333333334
+      },
+      {
+        "target_time_s": 1.827913043478261,
+        "decoded_time_s": 1.8351666666666666
+      },
+      {
+        "target_time_s": 2.08904347826087,
+        "decoded_time_s": 2.1021
+      },
+      {
+        "target_time_s": 2.3501739130434784,
+        "decoded_time_s": 2.3356666666666666
+      },
+      {
+        "target_time_s": 2.611304347826087,
+        "decoded_time_s": 2.6026
+      },
+      {
+        "target_time_s": 2.872434782608696,
+        "decoded_time_s": 2.8695333333333335
+      },
+      {
+        "target_time_s": 3.1335652173913044,
+        "decoded_time_s": 3.1364666666666667
+      },
+      {
+        "target_time_s": 3.394695652173913,
+        "decoded_time_s": 3.4034
+      },
+      {
+        "target_time_s": 3.655826086956522,
+        "decoded_time_s": 3.6703333333333332
+      },
+      {
+        "target_time_s": 3.9169565217391304,
+        "decoded_time_s": 3.9039
+      },
+      {
+        "target_time_s": 4.17808695652174,
+        "decoded_time_s": 4.170833333333333
+      },
+      {
+        "target_time_s": 4.439217391304348,
+        "decoded_time_s": 4.437766666666667
+      },
+      {
+        "target_time_s": 4.700347826086957,
+        "decoded_time_s": 4.7047
+      },
+      {
+        "target_time_s": 4.961478260869566,
+        "decoded_time_s": 4.971633333333333
+      },
+      {
+        "target_time_s": 5.222608695652174,
+        "decoded_time_s": 5.238566666666666
+      },
+      {
+        "target_time_s": 5.483739130434783,
+        "decoded_time_s": 5.472133333333334
+      },
+      {
+        "target_time_s": 5.744869565217392,
+        "decoded_time_s": 5.739066666666667
+      },
+      {
+        "target_time_s": 6.006,
+        "decoded_time_s": 5.9726333333333335
+      }
+    ]
+  },
+  "UAVDT/M0101.mp4": {
+    "contact_sheet": "contact_sheets/train_013884_58ff9722.png",
+    "qa_items": [
+      {
+        "qa_id": "train_013884",
+        "task": "Temporal Grounding",
+        "review_role": "baseline_error",
+        "gold": "B",
+        "baseline_prediction": "C",
+        "question": "How long does the white car remain visible at the intersection before it exits the frame?",
+        "options": {
+          "A": "2.0 seconds",
+          "B": "5.0 seconds",
+          "C": "4.0 seconds",
+          "D": "3.0 seconds"
+        }
+      }
+    ],
+    "fps": 30.0,
+    "decoded_frame_count": 407,
+    "duration_s": 13.566666666666666,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.5898550724637681,
+        "decoded_time_s": 0.6
+      },
+      {
+        "target_time_s": 1.1797101449275362,
+        "decoded_time_s": 1.1666666666666667
+      },
+      {
+        "target_time_s": 1.7695652173913046,
+        "decoded_time_s": 1.7666666666666666
+      },
+      {
+        "target_time_s": 2.3594202898550725,
+        "decoded_time_s": 2.3666666666666667
+      },
+      {
+        "target_time_s": 2.9492753623188404,
+        "decoded_time_s": 2.933333333333333
+      },
+      {
+        "target_time_s": 3.539130434782609,
+        "decoded_time_s": 3.533333333333333
+      },
+      {
+        "target_time_s": 4.128985507246377,
+        "decoded_time_s": 4.133333333333334
+      },
+      {
+        "target_time_s": 4.718840579710145,
+        "decoded_time_s": 4.733333333333333
+      },
+      {
+        "target_time_s": 5.308695652173912,
+        "decoded_time_s": 5.3
+      },
+      {
+        "target_time_s": 5.898550724637681,
+        "decoded_time_s": 5.9
+      },
+      {
+        "target_time_s": 6.488405797101449,
+        "decoded_time_s": 6.5
+      },
+      {
+        "target_time_s": 7.078260869565218,
+        "decoded_time_s": 7.066666666666666
+      },
+      {
+        "target_time_s": 7.668115942028986,
+        "decoded_time_s": 7.666666666666667
+      },
+      {
+        "target_time_s": 8.257971014492753,
+        "decoded_time_s": 8.266666666666667
+      },
+      {
+        "target_time_s": 8.847826086956522,
+        "decoded_time_s": 8.833333333333334
+      },
+      {
+        "target_time_s": 9.43768115942029,
+        "decoded_time_s": 9.433333333333334
+      },
+      {
+        "target_time_s": 10.027536231884058,
+        "decoded_time_s": 10.033333333333333
+      },
+      {
+        "target_time_s": 10.617391304347825,
+        "decoded_time_s": 10.633333333333333
+      },
+      {
+        "target_time_s": 11.207246376811593,
+        "decoded_time_s": 11.2
+      },
+      {
+        "target_time_s": 11.797101449275361,
+        "decoded_time_s": 11.8
+      },
+      {
+        "target_time_s": 12.38695652173913,
+        "decoded_time_s": 12.4
+      },
+      {
+        "target_time_s": 12.976811594202898,
+        "decoded_time_s": 12.966666666666667
+      },
+      {
+        "target_time_s": 13.566666666666665,
+        "decoded_time_s": 13.533333333333333
+      }
+    ]
+  },
+  "UAVDT/M0202.mp4": {
+    "contact_sheet": "contact_sheets/train_012851_abbb07ab.png",
+    "qa_items": [
+      {
+        "qa_id": "train_012851",
+        "task": "Temporal Grounding",
+        "review_role": "baseline_error",
+        "gold": "C",
+        "baseline_prediction": "B",
+        "question": "When does the blue taxi that is initially visible at the bottom left of the frame at 0.0 seconds reappear after exiting the frame?",
+        "options": {
+          "A": "At 0.5 seconds",
+          "B": "At 1.8 seconds",
+          "C": "At 3.2 seconds",
+          "D": "At 5.0 seconds"
+        }
+      },
+      {
+        "qa_id": "train_012856",
+        "task": "Geometric Relation",
+        "review_role": "baseline_error",
+        "gold": "B",
+        "baseline_prediction": "C",
+        "question": "Are the pedestrians waiting at the crosswalk on the lower right side of the intersection closer to the camera than the vehicles moving through the intersection?",
+        "options": {
+          "A": "The pedestrians and vehicles are at the same distance from the camera.",
+          "B": "No, the pedestrians are farther from the camera than the vehicles.",
+          "C": "Yes, the pedestrians are closer to the camera than the vehicles.",
+          "D": "It is impossible to determine the relative distances from the video."
+        }
+      }
+    ],
+    "fps": 30.0,
+    "decoded_frame_count": 291,
+    "duration_s": 9.7,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.42173913043478256,
+        "decoded_time_s": 0.43333333333333335
+      },
+      {
+        "target_time_s": 0.8434782608695651,
+        "decoded_time_s": 0.8333333333333334
+      },
+      {
+        "target_time_s": 1.2652173913043476,
+        "decoded_time_s": 1.2666666666666666
+      },
+      {
+        "target_time_s": 1.6869565217391302,
+        "decoded_time_s": 1.7
+      },
+      {
+        "target_time_s": 2.108695652173913,
+        "decoded_time_s": 2.1
+      },
+      {
+        "target_time_s": 2.5304347826086953,
+        "decoded_time_s": 2.533333333333333
+      },
+      {
+        "target_time_s": 2.952173913043478,
+        "decoded_time_s": 2.966666666666667
+      },
+      {
+        "target_time_s": 3.3739130434782605,
+        "decoded_time_s": 3.3666666666666667
+      },
+      {
+        "target_time_s": 3.7956521739130435,
+        "decoded_time_s": 3.8
+      },
+      {
+        "target_time_s": 4.217391304347826,
+        "decoded_time_s": 4.233333333333333
+      },
+      {
+        "target_time_s": 4.639130434782608,
+        "decoded_time_s": 4.633333333333334
+      },
+      {
+        "target_time_s": 5.0608695652173905,
+        "decoded_time_s": 5.066666666666666
+      },
+      {
+        "target_time_s": 5.482608695652174,
+        "decoded_time_s": 5.466666666666667
+      },
+      {
+        "target_time_s": 5.904347826086956,
+        "decoded_time_s": 5.9
+      },
+      {
+        "target_time_s": 6.326086956521739,
+        "decoded_time_s": 6.333333333333333
+      },
+      {
+        "target_time_s": 6.747826086956521,
+        "decoded_time_s": 6.733333333333333
+      },
+      {
+        "target_time_s": 7.169565217391304,
+        "decoded_time_s": 7.166666666666667
+      },
+      {
+        "target_time_s": 7.591304347826087,
+        "decoded_time_s": 7.6
+      },
+      {
+        "target_time_s": 8.013043478260869,
+        "decoded_time_s": 8.0
+      },
+      {
+        "target_time_s": 8.434782608695652,
+        "decoded_time_s": 8.433333333333334
+      },
+      {
+        "target_time_s": 8.856521739130434,
+        "decoded_time_s": 8.866666666666667
+      },
+      {
+        "target_time_s": 9.278260869565216,
+        "decoded_time_s": 9.266666666666667
+      },
+      {
+        "target_time_s": 9.7,
+        "decoded_time_s": 9.666666666666666
+      }
+    ]
+  },
+  "VisDrone/uav0000077_00720_v_01.mp4": {
+    "contact_sheet": "contact_sheets/train_000050_48529496.png",
+    "qa_items": [
+      {
+        "qa_id": "train_000050",
+        "task": "Geometric Relation",
+        "review_role": "baseline_error",
+        "gold": "C",
+        "baseline_prediction": "B",
+        "question": "From the camera's initial position, which vehicle is positioned to the left of the white sedan?",
+        "options": {
+          "A": "The white van further down the street",
+          "B": "The black car parked near the blue fence",
+          "C": "The large truck with an open bed",
+          "D": "The red car parked in front of the building"
+        }
+      },
+      {
+        "qa_id": "train_000051",
+        "task": "Geometric Relation",
+        "review_role": "correct_control",
+        "gold": "D",
+        "baseline_prediction": "D",
+        "question": "From the camera's perspective, which object is positioned farthest away from the viewer?",
+        "options": {
+          "A": "The white car parked in the middle of the road",
+          "B": "The red-roofed building on the right",
+          "C": "The green trees on the left side of the street",
+          "D": "The large archway at the end of the street"
+        }
+      }
+    ],
+    "fps": 30.0,
+    "decoded_frame_count": 180,
+    "duration_s": 6.0,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.2608695652173913,
+        "decoded_time_s": 0.26666666666666666
+      },
+      {
+        "target_time_s": 0.5217391304347826,
+        "decoded_time_s": 0.5333333333333333
+      },
+      {
+        "target_time_s": 0.782608695652174,
+        "decoded_time_s": 0.7666666666666667
+      },
+      {
+        "target_time_s": 1.0434782608695652,
+        "decoded_time_s": 1.0333333333333334
+      },
+      {
+        "target_time_s": 1.3043478260869565,
+        "decoded_time_s": 1.3
+      },
+      {
+        "target_time_s": 1.565217391304348,
+        "decoded_time_s": 1.5666666666666667
+      },
+      {
+        "target_time_s": 1.826086956521739,
+        "decoded_time_s": 1.8333333333333333
+      },
+      {
+        "target_time_s": 2.0869565217391304,
+        "decoded_time_s": 2.1
+      },
+      {
+        "target_time_s": 2.347826086956522,
+        "decoded_time_s": 2.3333333333333335
+      },
+      {
+        "target_time_s": 2.608695652173913,
+        "decoded_time_s": 2.6
+      },
+      {
+        "target_time_s": 2.869565217391304,
+        "decoded_time_s": 2.8666666666666667
+      },
+      {
+        "target_time_s": 3.130434782608696,
+        "decoded_time_s": 3.1333333333333333
+      },
+      {
+        "target_time_s": 3.391304347826087,
+        "decoded_time_s": 3.4
+      },
+      {
+        "target_time_s": 3.652173913043478,
+        "decoded_time_s": 3.6666666666666665
+      },
+      {
+        "target_time_s": 3.9130434782608696,
+        "decoded_time_s": 3.9
+      },
+      {
+        "target_time_s": 4.173913043478261,
+        "decoded_time_s": 4.166666666666667
+      },
+      {
+        "target_time_s": 4.434782608695652,
+        "decoded_time_s": 4.433333333333334
+      },
+      {
+        "target_time_s": 4.695652173913044,
+        "decoded_time_s": 4.7
+      },
+      {
+        "target_time_s": 4.956521739130435,
+        "decoded_time_s": 4.966666666666667
+      },
+      {
+        "target_time_s": 5.217391304347826,
+        "decoded_time_s": 5.233333333333333
+      },
+      {
+        "target_time_s": 5.478260869565218,
+        "decoded_time_s": 5.466666666666667
+      },
+      {
+        "target_time_s": 5.739130434782608,
+        "decoded_time_s": 5.733333333333333
+      },
+      {
+        "target_time_s": 6.0,
+        "decoded_time_s": 5.966666666666667
+      }
+    ]
+  },
+  "VisDrone/uav0000137_00458_v_01.mp4": {
+    "contact_sheet": "contact_sheets/train_002637_079c649e.png",
+    "qa_items": [
+      {
+        "qa_id": "train_002637",
+        "task": "Temporal Grounding",
+        "review_role": "correct_control",
+        "gold": "D",
+        "baseline_prediction": "D",
+        "question": "How long does the red traffic light remain illuminated on the right side of the intersection from the beginning of the video?",
+        "options": {
+          "A": "From 0.0s to 5.5s (duration: 5.5s)",
+          "B": "From 0.0s to 3.2s (duration: 3.2s)",
+          "C": "From 0.0s to 4.0s (duration: 4.0s)",
+          "D": "From 0.0s to 6.0s (duration: 6.0s)"
+        }
+      }
+    ],
+    "fps": 30.0,
+    "decoded_frame_count": 180,
+    "duration_s": 6.0,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.2608695652173913,
+        "decoded_time_s": 0.26666666666666666
+      },
+      {
+        "target_time_s": 0.5217391304347826,
+        "decoded_time_s": 0.5333333333333333
+      },
+      {
+        "target_time_s": 0.782608695652174,
+        "decoded_time_s": 0.7666666666666667
+      },
+      {
+        "target_time_s": 1.0434782608695652,
+        "decoded_time_s": 1.0333333333333334
+      },
+      {
+        "target_time_s": 1.3043478260869565,
+        "decoded_time_s": 1.3
+      },
+      {
+        "target_time_s": 1.565217391304348,
+        "decoded_time_s": 1.5666666666666667
+      },
+      {
+        "target_time_s": 1.826086956521739,
+        "decoded_time_s": 1.8333333333333333
+      },
+      {
+        "target_time_s": 2.0869565217391304,
+        "decoded_time_s": 2.1
+      },
+      {
+        "target_time_s": 2.347826086956522,
+        "decoded_time_s": 2.3333333333333335
+      },
+      {
+        "target_time_s": 2.608695652173913,
+        "decoded_time_s": 2.6
+      },
+      {
+        "target_time_s": 2.869565217391304,
+        "decoded_time_s": 2.8666666666666667
+      },
+      {
+        "target_time_s": 3.130434782608696,
+        "decoded_time_s": 3.1333333333333333
+      },
+      {
+        "target_time_s": 3.391304347826087,
+        "decoded_time_s": 3.4
+      },
+      {
+        "target_time_s": 3.652173913043478,
+        "decoded_time_s": 3.6666666666666665
+      },
+      {
+        "target_time_s": 3.9130434782608696,
+        "decoded_time_s": 3.9
+      },
+      {
+        "target_time_s": 4.173913043478261,
+        "decoded_time_s": 4.166666666666667
+      },
+      {
+        "target_time_s": 4.434782608695652,
+        "decoded_time_s": 4.433333333333334
+      },
+      {
+        "target_time_s": 4.695652173913044,
+        "decoded_time_s": 4.7
+      },
+      {
+        "target_time_s": 4.956521739130435,
+        "decoded_time_s": 4.966666666666667
+      },
+      {
+        "target_time_s": 5.217391304347826,
+        "decoded_time_s": 5.233333333333333
+      },
+      {
+        "target_time_s": 5.478260869565218,
+        "decoded_time_s": 5.466666666666667
+      },
+      {
+        "target_time_s": 5.739130434782608,
+        "decoded_time_s": 5.733333333333333
+      },
+      {
+        "target_time_s": 6.0,
+        "decoded_time_s": 5.966666666666667
+      }
+    ]
+  },
+  "VisDrone/uav0000243_00001_v_04.mp4": {
+    "contact_sheet": "contact_sheets/train_001141_207685d6.png",
+    "qa_items": [
+      {
+        "qa_id": "train_001141",
+        "task": "Geometric Relation",
+        "review_role": "correct_control",
+        "gold": "D",
+        "baseline_prediction": "D",
+        "question": "How does the distance between the camera and the buildings on the left side compare to the distance between the camera and the buildings on the right side?",
+        "options": {
+          "A": "The buildings on the left are much farther than the buildings on the right",
+          "B": "The buildings on the left are closer than the buildings on the right",
+          "C": "The buildings on the right are closer than the buildings on the left",
+          "D": "The buildings on both sides are at approximately the same distance"
+        }
+      }
+    ],
+    "fps": 30.0,
+    "decoded_frame_count": 180,
+    "duration_s": 6.0,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.2608695652173913,
+        "decoded_time_s": 0.26666666666666666
+      },
+      {
+        "target_time_s": 0.5217391304347826,
+        "decoded_time_s": 0.5333333333333333
+      },
+      {
+        "target_time_s": 0.782608695652174,
+        "decoded_time_s": 0.7666666666666667
+      },
+      {
+        "target_time_s": 1.0434782608695652,
+        "decoded_time_s": 1.0333333333333334
+      },
+      {
+        "target_time_s": 1.3043478260869565,
+        "decoded_time_s": 1.3
+      },
+      {
+        "target_time_s": 1.565217391304348,
+        "decoded_time_s": 1.5666666666666667
+      },
+      {
+        "target_time_s": 1.826086956521739,
+        "decoded_time_s": 1.8333333333333333
+      },
+      {
+        "target_time_s": 2.0869565217391304,
+        "decoded_time_s": 2.1
+      },
+      {
+        "target_time_s": 2.347826086956522,
+        "decoded_time_s": 2.3333333333333335
+      },
+      {
+        "target_time_s": 2.608695652173913,
+        "decoded_time_s": 2.6
+      },
+      {
+        "target_time_s": 2.869565217391304,
+        "decoded_time_s": 2.8666666666666667
+      },
+      {
+        "target_time_s": 3.130434782608696,
+        "decoded_time_s": 3.1333333333333333
+      },
+      {
+        "target_time_s": 3.391304347826087,
+        "decoded_time_s": 3.4
+      },
+      {
+        "target_time_s": 3.652173913043478,
+        "decoded_time_s": 3.6666666666666665
+      },
+      {
+        "target_time_s": 3.9130434782608696,
+        "decoded_time_s": 3.9
+      },
+      {
+        "target_time_s": 4.173913043478261,
+        "decoded_time_s": 4.166666666666667
+      },
+      {
+        "target_time_s": 4.434782608695652,
+        "decoded_time_s": 4.433333333333334
+      },
+      {
+        "target_time_s": 4.695652173913044,
+        "decoded_time_s": 4.7
+      },
+      {
+        "target_time_s": 4.956521739130435,
+        "decoded_time_s": 4.966666666666667
+      },
+      {
+        "target_time_s": 5.217391304347826,
+        "decoded_time_s": 5.233333333333333
+      },
+      {
+        "target_time_s": 5.478260869565218,
+        "decoded_time_s": 5.466666666666667
+      },
+      {
+        "target_time_s": 5.739130434782608,
+        "decoded_time_s": 5.733333333333333
+      },
+      {
+        "target_time_s": 6.0,
+        "decoded_time_s": 5.966666666666667
+      }
+    ]
+  },
+  "VisDrone/uav0000263_03289_v_03.mp4": {
+    "contact_sheet": "contact_sheets/train_001319_be3b6bc3.png",
+    "qa_items": [
+      {
+        "qa_id": "train_001319",
+        "task": "Temporal Grounding",
+        "review_role": "baseline_error",
+        "gold": "D",
+        "baseline_prediction": "B",
+        "question": "At what time does the white bus first appear under the bridge in the video?",
+        "options": {
+          "A": "At 1.8 seconds",
+          "B": "At 3.2 seconds",
+          "C": "At 2.5 seconds",
+          "D": "At 0.0 seconds"
+        }
+      }
+    ],
+    "fps": 30.0,
+    "decoded_frame_count": 180,
+    "duration_s": 6.0,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.2608695652173913,
+        "decoded_time_s": 0.26666666666666666
+      },
+      {
+        "target_time_s": 0.5217391304347826,
+        "decoded_time_s": 0.5333333333333333
+      },
+      {
+        "target_time_s": 0.782608695652174,
+        "decoded_time_s": 0.7666666666666667
+      },
+      {
+        "target_time_s": 1.0434782608695652,
+        "decoded_time_s": 1.0333333333333334
+      },
+      {
+        "target_time_s": 1.3043478260869565,
+        "decoded_time_s": 1.3
+      },
+      {
+        "target_time_s": 1.565217391304348,
+        "decoded_time_s": 1.5666666666666667
+      },
+      {
+        "target_time_s": 1.826086956521739,
+        "decoded_time_s": 1.8333333333333333
+      },
+      {
+        "target_time_s": 2.0869565217391304,
+        "decoded_time_s": 2.1
+      },
+      {
+        "target_time_s": 2.347826086956522,
+        "decoded_time_s": 2.3333333333333335
+      },
+      {
+        "target_time_s": 2.608695652173913,
+        "decoded_time_s": 2.6
+      },
+      {
+        "target_time_s": 2.869565217391304,
+        "decoded_time_s": 2.8666666666666667
+      },
+      {
+        "target_time_s": 3.130434782608696,
+        "decoded_time_s": 3.1333333333333333
+      },
+      {
+        "target_time_s": 3.391304347826087,
+        "decoded_time_s": 3.4
+      },
+      {
+        "target_time_s": 3.652173913043478,
+        "decoded_time_s": 3.6666666666666665
+      },
+      {
+        "target_time_s": 3.9130434782608696,
+        "decoded_time_s": 3.9
+      },
+      {
+        "target_time_s": 4.173913043478261,
+        "decoded_time_s": 4.166666666666667
+      },
+      {
+        "target_time_s": 4.434782608695652,
+        "decoded_time_s": 4.433333333333334
+      },
+      {
+        "target_time_s": 4.695652173913044,
+        "decoded_time_s": 4.7
+      },
+      {
+        "target_time_s": 4.956521739130435,
+        "decoded_time_s": 4.966666666666667
+      },
+      {
+        "target_time_s": 5.217391304347826,
+        "decoded_time_s": 5.233333333333333
+      },
+      {
+        "target_time_s": 5.478260869565218,
+        "decoded_time_s": 5.466666666666667
+      },
+      {
+        "target_time_s": 5.739130434782608,
+        "decoded_time_s": 5.733333333333333
+      },
+      {
+        "target_time_s": 6.0,
+        "decoded_time_s": 5.966666666666667
+      }
+    ]
+  },
+  "VisDrone/uav0000279_00001_v_04.mp4": {
+    "contact_sheet": "contact_sheets/train_001774_748f7636.png",
+    "qa_items": [
+      {
+        "qa_id": "train_001774",
+        "task": "Temporal Grounding",
+        "review_role": "baseline_error",
+        "gold": "D",
+        "baseline_prediction": "A",
+        "question": "How long is the white van moving towards the camera visible in the video?",
+        "options": {
+          "A": "From 0.0s to 1.5s (duration: 1.5s)",
+          "B": "From 0.0s to 2.5s (duration: 2.5s)",
+          "C": "From 0.0s to 3.5s (duration: 3.5s)",
+          "D": "From 0.0s to 4.0s (duration: 4.0s)"
+        }
+      }
+    ],
+    "fps": 30.0,
+    "decoded_frame_count": 7,
+    "duration_s": 0.23333333333333334,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.010144927536231885,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.02028985507246377,
+        "decoded_time_s": 0.03333333333333333
+      },
+      {
+        "target_time_s": 0.03043478260869565,
+        "decoded_time_s": 0.03333333333333333
+      },
+      {
+        "target_time_s": 0.04057971014492754,
+        "decoded_time_s": 0.03333333333333333
+      },
+      {
+        "target_time_s": 0.050724637681159424,
+        "decoded_time_s": 0.06666666666666667
+      },
+      {
+        "target_time_s": 0.0608695652173913,
+        "decoded_time_s": 0.06666666666666667
+      },
+      {
+        "target_time_s": 0.07101449275362319,
+        "decoded_time_s": 0.06666666666666667
+      },
+      {
+        "target_time_s": 0.08115942028985508,
+        "decoded_time_s": 0.06666666666666667
+      },
+      {
+        "target_time_s": 0.09130434782608696,
+        "decoded_time_s": 0.1
+      },
+      {
+        "target_time_s": 0.10144927536231885,
+        "decoded_time_s": 0.1
+      },
+      {
+        "target_time_s": 0.11159420289855074,
+        "decoded_time_s": 0.1
+      },
+      {
+        "target_time_s": 0.1217391304347826,
+        "decoded_time_s": 0.13333333333333333
+      },
+      {
+        "target_time_s": 0.1318840579710145,
+        "decoded_time_s": 0.13333333333333333
+      },
+      {
+        "target_time_s": 0.14202898550724638,
+        "decoded_time_s": 0.13333333333333333
+      },
+      {
+        "target_time_s": 0.15217391304347827,
+        "decoded_time_s": 0.16666666666666666
+      },
+      {
+        "target_time_s": 0.16231884057971016,
+        "decoded_time_s": 0.16666666666666666
+      },
+      {
+        "target_time_s": 0.17246376811594202,
+        "decoded_time_s": 0.16666666666666666
+      },
+      {
+        "target_time_s": 0.1826086956521739,
+        "decoded_time_s": 0.16666666666666666
+      },
+      {
+        "target_time_s": 0.1927536231884058,
+        "decoded_time_s": 0.2
+      },
+      {
+        "target_time_s": 0.2028985507246377,
+        "decoded_time_s": 0.2
+      },
+      {
+        "target_time_s": 0.21304347826086958,
+        "decoded_time_s": 0.2
+      },
+      {
+        "target_time_s": 0.22318840579710147,
+        "decoded_time_s": 0.2
+      },
+      {
+        "target_time_s": 0.23333333333333336,
+        "decoded_time_s": 0.2
+      }
+    ]
+  },
+  "VisDrone/uav0000315_00000_v_03.mp4": {
+    "contact_sheet": "contact_sheets/train_002263_72ab7ad2.png",
+    "qa_items": [
+      {
+        "qa_id": "train_002263",
+        "task": "Geometric Relation",
+        "review_role": "baseline_error",
+        "gold": "A",
+        "baseline_prediction": "D",
+        "question": "From the camera's perspective, how is the row of green trees positioned relative to the buildings on the left side of the street?",
+        "options": {
+          "A": "The trees are in front of the buildings on the left, closer to the camera's viewpoint",
+          "B": "The trees are positioned behind the buildings on the left, further down the street",
+          "C": "The trees are located to the right of the buildings on the left, separated by the road",
+          "D": "The trees are directly adjacent to the buildings on the left, forming a continuous line along the sidewalk"
+        }
+      }
+    ],
+    "fps": 30.0,
+    "decoded_frame_count": 180,
+    "duration_s": 6.0,
+    "sampled_frames": [
+      {
+        "target_time_s": 0.0,
+        "decoded_time_s": 0.0
+      },
+      {
+        "target_time_s": 0.2608695652173913,
+        "decoded_time_s": 0.26666666666666666
+      },
+      {
+        "target_time_s": 0.5217391304347826,
+        "decoded_time_s": 0.5333333333333333
+      },
+      {
+        "target_time_s": 0.782608695652174,
+        "decoded_time_s": 0.7666666666666667
+      },
+      {
+        "target_time_s": 1.0434782608695652,
+        "decoded_time_s": 1.0333333333333334
+      },
+      {
+        "target_time_s": 1.3043478260869565,
+        "decoded_time_s": 1.3
+      },
+      {
+        "target_time_s": 1.565217391304348,
+        "decoded_time_s": 1.5666666666666667
+      },
+      {
+        "target_time_s": 1.826086956521739,
+        "decoded_time_s": 1.8333333333333333
+      },
+      {
+        "target_time_s": 2.0869565217391304,
+        "decoded_time_s": 2.1
+      },
+      {
+        "target_time_s": 2.347826086956522,
+        "decoded_time_s": 2.3333333333333335
+      },
+      {
+        "target_time_s": 2.608695652173913,
+        "decoded_time_s": 2.6
+      },
+      {
+        "target_time_s": 2.869565217391304,
+        "decoded_time_s": 2.8666666666666667
+      },
+      {
+        "target_time_s": 3.130434782608696,
+        "decoded_time_s": 3.1333333333333333
+      },
+      {
+        "target_time_s": 3.391304347826087,
+        "decoded_time_s": 3.4
+      },
+      {
+        "target_time_s": 3.652173913043478,
+        "decoded_time_s": 3.6666666666666665
+      },
+      {
+        "target_time_s": 3.9130434782608696,
+        "decoded_time_s": 3.9
+      },
+      {
+        "target_time_s": 4.173913043478261,
+        "decoded_time_s": 4.166666666666667
+      },
+      {
+        "target_time_s": 4.434782608695652,
+        "decoded_time_s": 4.433333333333334
+      },
+      {
+        "target_time_s": 4.695652173913044,
+        "decoded_time_s": 4.7
+      },
+      {
+        "target_time_s": 4.956521739130435,
+        "decoded_time_s": 4.966666666666667
+      },
+      {
+        "target_time_s": 5.217391304347826,
+        "decoded_time_s": 5.233333333333333
+      },
+      {
+        "target_time_s": 5.478260869565218,
+        "decoded_time_s": 5.466666666666667
+      },
+      {
+        "target_time_s": 5.739130434782608,
+        "decoded_time_s": 5.733333333333333
+      },
+      {
+        "target_time_s": 6.0,
+        "decoded_time_s": 5.966666666666667
+      }
+    ]
+  }
+}

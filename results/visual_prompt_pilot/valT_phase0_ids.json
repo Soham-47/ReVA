@@ -1,0 +1,313 @@
+{
+  "source": "results/phase0_temporal_geometry_review/selection.json",
+  "split": "valT",
+  "n": 60,
+  "roles": {
+    "train_008027": {
+      "task": "Temporal Grounding",
+      "review_role": "baseline_error"
+    },
+    "train_005621": {
+      "task": "Temporal Grounding",
+      "review_role": "baseline_error"
+    },
+    "train_007117": {
+      "task": "Temporal Grounding",
+      "review_role": "baseline_error"
+    },
+    "train_001319": {
+      "task": "Temporal Grounding",
+      "review_role": "baseline_error"
+    },
+    "train_013884": {
+      "task": "Temporal Grounding",
+      "review_role": "baseline_error"
+    },
+    "train_008246": {
+      "task": "Temporal Grounding",
+      "review_role": "baseline_error"
+    },
+    "train_015451": {
+      "task": "Temporal Grounding",
+      "review_role": "baseline_error"
+    },
+    "train_009656": {
+      "task": "Temporal Grounding",
+      "review_role": "baseline_error"
+    },
+    "train_004135": {
+      "task": "Temporal Grounding",
+      "review_role": "baseline_error"
+    },
+    "train_010397": {
+      "task": "Temporal Grounding",
+      "review_role": "baseline_error"
+    },
+    "train_008007": {
+      "task": "Temporal Grounding",
+      "review_role": "baseline_error"
+    },
+    "train_001774": {
+      "task": "Temporal Grounding",
+      "review_role": "baseline_error"
+    },
+    "train_015452": {
+      "task": "Temporal Grounding",
+      "review_role": "baseline_error"
+    },
+    "train_007335": {
+      "task": "Temporal Grounding",
+      "review_role": "baseline_error"
+    },
+    "train_007334": {
+      "task": "Temporal Grounding",
+      "review_role": "baseline_error"
+    },
+    "train_008008": {
+      "task": "Temporal Grounding",
+      "review_role": "baseline_error"
+    },
+    "train_011932": {
+      "task": "Temporal Grounding",
+      "review_role": "baseline_error"
+    },
+    "train_012851": {
+      "task": "Temporal Grounding",
+      "review_role": "baseline_error"
+    },
+    "train_014123": {
+      "task": "Temporal Grounding",
+      "review_role": "baseline_error"
+    },
+    "train_009316": {
+      "task": "Temporal Grounding",
+      "review_role": "baseline_error"
+    },
+    "train_011406": {
+      "task": "Temporal Grounding",
+      "review_role": "correct_control"
+    },
+    "train_002905": {
+      "task": "Temporal Grounding",
+      "review_role": "correct_control"
+    },
+    "train_004682": {
+      "task": "Temporal Grounding",
+      "review_role": "correct_control"
+    },
+    "train_009131": {
+      "task": "Temporal Grounding",
+      "review_role": "correct_control"
+    },
+    "train_002637": {
+      "task": "Temporal Grounding",
+      "review_role": "correct_control"
+    },
+    "train_004664": {
+      "task": "Temporal Grounding",
+      "review_role": "correct_control"
+    },
+    "train_004822": {
+      "task": "Temporal Grounding",
+      "review_role": "correct_control"
+    },
+    "train_002906": {
+      "task": "Temporal Grounding",
+      "review_role": "correct_control"
+    },
+    "train_004853": {
+      "task": "Temporal Grounding",
+      "review_role": "correct_control"
+    },
+    "train_015639": {
+      "task": "Temporal Grounding",
+      "review_role": "correct_control"
+    },
+    "train_011807": {
+      "task": "Geometric Relation",
+      "review_role": "baseline_error"
+    },
+    "train_009660": {
+      "task": "Geometric Relation",
+      "review_role": "baseline_error"
+    },
+    "train_015644": {
+      "task": "Geometric Relation",
+      "review_role": "baseline_error"
+    },
+    "train_004666": {
+      "task": "Geometric Relation",
+      "review_role": "baseline_error"
+    },
+    "train_007122": {
+      "task": "Geometric Relation",
+      "review_role": "baseline_error"
+    },
+    "train_000050": {
+      "task": "Geometric Relation",
+      "review_role": "baseline_error"
+    },
+    "train_011416": {
+      "task": "Geometric Relation",
+      "review_role": "baseline_error"
+    },
+    "train_012856": {
+      "task": "Geometric Relation",
+      "review_role": "baseline_error"
+    },
+    "train_008012": {
+      "task": "Geometric Relation",
+      "review_role": "baseline_error"
+    },
+    "train_012156": {
+      "task": "Geometric Relation",
+      "review_role": "baseline_error"
+    },
+    "train_008031": {
+      "task": "Geometric Relation",
+      "review_role": "baseline_error"
+    },
+    "train_009133": {
+      "task": "Geometric Relation",
+      "review_role": "baseline_error"
+    },
+    "train_011412": {
+      "task": "Geometric Relation",
+      "review_role": "baseline_error"
+    },
+    "train_015645": {
+      "task": "Geometric Relation",
+      "review_role": "baseline_error"
+    },
+    "train_004826": {
+      "task": "Geometric Relation",
+      "review_role": "baseline_error"
+    },
+    "train_002263": {
+      "task": "Geometric Relation",
+      "review_role": "baseline_error"
+    },
+    "train_002909": {
+      "task": "Geometric Relation",
+      "review_role": "baseline_error"
+    },
+    "train_015460": {
+      "task": "Geometric Relation",
+      "review_role": "baseline_error"
+    },
+    "train_015353": {
+      "task": "Geometric Relation",
+      "review_role": "baseline_error"
+    },
+    "train_012501": {
+      "task": "Geometric Relation",
+      "review_role": "baseline_error"
+    },
+    "train_015283": {
+      "task": "Geometric Relation",
+      "review_role": "correct_control"
+    },
+    "train_009135": {
+      "task": "Geometric Relation",
+      "review_role": "correct_control"
+    },
+    "train_001141": {
+      "task": "Geometric Relation",
+      "review_role": "correct_control"
+    },
+    "train_008218": {
+      "task": "Geometric Relation",
+      "review_role": "correct_control"
+    },
+    "train_011937": {
+      "task": "Geometric Relation",
+      "review_role": "correct_control"
+    },
+    "train_003578": {
+      "task": "Geometric Relation",
+      "review_role": "correct_control"
+    },
+    "train_004825": {
+      "task": "Geometric Relation",
+      "review_role": "correct_control"
+    },
+    "train_000051": {
+      "task": "Geometric Relation",
+      "review_role": "correct_control"
+    },
+    "train_004685": {
+      "task": "Geometric Relation",
+      "review_role": "correct_control"
+    },
+    "train_011941": {
+      "task": "Geometric Relation",
+      "review_role": "correct_control"
+    }
+  },
+  "splits": {
+    "valT": {
+      "ids": [
+        "train_008027",
+        "train_005621",
+        "train_007117",
+        "train_001319",
+        "train_013884",
+        "train_008246",
+        "train_015451",
+        "train_009656",
+        "train_004135",
+        "train_010397",
+        "train_008007",
+        "train_001774",
+        "train_015452",
+        "train_007335",
+        "train_007334",
+        "train_008008",
+        "train_011932",
+        "train_012851",
+        "train_014123",
+        "train_009316",
+        "train_011406",
+        "train_002905",
+        "train_004682",
+        "train_009131",
+        "train_002637",
+        "train_004664",
+        "train_004822",
+        "train_002906",
+        "train_004853",
+        "train_015639",
+        "train_011807",
+        "train_009660",
+        "train_015644",
+        "train_004666",
+        "train_007122",
+        "train_000050",
+        "train_011416",
+        "train_012856",
+        "train_008012",
+        "train_012156",
+        "train_008031",
+        "train_009133",
+        "train_011412",
+        "train_015645",
+        "train_004826",
+        "train_002263",
+        "train_002909",
+        "train_015460",
+        "train_015353",
+        "train_012501",
+        "train_015283",
+        "train_009135",
+        "train_001141",
+        "train_008218",
+        "train_011937",
+        "train_003578",
+        "train_004825",
+        "train_000051",
+        "train_004685",
+        "train_011941"
+      ]
+    }
+  }
+}

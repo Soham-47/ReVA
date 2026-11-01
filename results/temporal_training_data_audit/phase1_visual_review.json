@@ -1,0 +1,713 @@
+{
+  "schema_version": 1,
+  "reviewer": "single visual reviewer",
+  "blindness": "Visual dispositions were recorded before revealing options and gold. Gold review is stored separately.",
+  "limitation": "Contact sheets show the exact legacy sample indices at thumbnail resolution; this is not continuous-video or full-resolution review.",
+  "records": [
+    {
+      "case_id": "TA001",
+      "qa_id": "train_005844",
+      "disposition": "conditional",
+      "visual_evidence_note": "Overpass is present at opening; “fully visible” has no crisp threshold.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA002",
+      "qa_id": "train_007202",
+      "disposition": "conditional",
+      "visual_evidence_note": "Camera turn reveals crosswalks and parking area; “more complete layout” is subjective.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA003",
+      "qa_id": "train_010609",
+      "disposition": "conditional",
+      "visual_evidence_note": "Road/buildings are visible early; “full extent” is a composition judgment.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA004",
+      "qa_id": "train_001873",
+      "disposition": "usable",
+      "visual_evidence_note": "White car entering from bottom and crossing is distinguishable; samples bracket its passage.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA005",
+      "qa_id": "train_002886",
+      "disposition": "usable",
+      "visual_evidence_note": "Baseball-camera zoom is visible as a clear change in framing.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA006",
+      "qa_id": "train_008977",
+      "disposition": "exclude",
+      "visual_evidence_note": "Shoreline/water remain the scene; no clear focus-change event in sampled frames.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA007",
+      "qa_id": "train_005174",
+      "disposition": "usable",
+      "visual_evidence_note": "Landslide onset is visibly bracketed in the sampled sequence.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA008",
+      "qa_id": "train_008839",
+      "disposition": "conditional",
+      "visual_evidence_note": "Traffic motion is visible throughout, but the question/gold do not define one event; rewrite as a clip-wide interval or exclude.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA009",
+      "qa_id": "train_003459",
+      "disposition": "conditional",
+      "visual_evidence_note": "The person moving away is visible; correct the near-end answer against the verified interval.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA010",
+      "qa_id": "train_013132",
+      "disposition": "conditional",
+      "visual_evidence_note": "Camera drift is subtle; beginning of movement is difficult to define.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA011",
+      "qa_id": "train_005432",
+      "disposition": "exclude",
+      "visual_evidence_note": "Cloud movement is not reliably visible at this sampling resolution.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA012",
+      "qa_id": "train_007187",
+      "disposition": "conditional",
+      "visual_evidence_note": "Track curve is progressively revealed by camera motion; “complete” is subjective.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA013",
+      "qa_id": "train_005995",
+      "disposition": "exclude",
+      "visual_evidence_note": "Sunset onset behind mountains is gradual and not time-localizable in these frames.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA014",
+      "qa_id": "train_011522",
+      "disposition": "usable",
+      "visual_evidence_note": "Brick-building cluster leaves view during a clear rightward pan; event is bracketable.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA015",
+      "qa_id": "train_004866",
+      "disposition": "conditional",
+      "visual_evidence_note": "Harvest trail is already present at the opening; onset is left-censored.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA016",
+      "qa_id": "train_013143",
+      "disposition": "exclude",
+      "visual_evidence_note": "Several similar white cars; upper-right target cannot be followed confidently.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA017",
+      "qa_id": "train_010359",
+      "disposition": "conditional",
+      "visual_evidence_note": "Large blue-roof structure is visible at opening; visibility interval is clip-boundary censored and camera-dependent.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA018",
+      "qa_id": "train_002610",
+      "disposition": "exclude",
+      "visual_evidence_note": "Night intersection has several similar black cars; target identity is unstable.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA019",
+      "qa_id": "train_014528",
+      "disposition": "exclude",
+      "visual_evidence_note": "Black vehicles are small and multiple; exact highway target cannot be tracked confidently.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA020",
+      "qa_id": "train_002500",
+      "disposition": "conditional",
+      "visual_evidence_note": "A plausible lower-left white car can be followed, but similar cars make identity uncertain.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA021",
+      "qa_id": "train_012661",
+      "disposition": "exclude",
+      "visual_evidence_note": "White-car identity is ambiguous and gold disappearance is beyond clip duration.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA022",
+      "qa_id": "train_002516",
+      "disposition": "exclude",
+      "visual_evidence_note": "Multiple white vans/cars; no unique target can be tracked.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA023",
+      "qa_id": "train_011846",
+      "disposition": "exclude",
+      "visual_evidence_note": "Question says only “the vehicle” in a multi-vehicle scene.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA024",
+      "qa_id": "train_010017",
+      "disposition": "conditional",
+      "visual_evidence_note": "White car is already visible at opening and camera pans away; onset is censored.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA025",
+      "qa_id": "train_011424",
+      "disposition": "exclude",
+      "visual_evidence_note": "Several cars on the left-side road; no unique target.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA026",
+      "qa_id": "train_012217",
+      "disposition": "exclude",
+      "visual_evidence_note": "Several parked/moving black cars; lower-center target identity is unclear.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA027",
+      "qa_id": "train_012333",
+      "disposition": "exclude",
+      "visual_evidence_note": "Multiple red cars; target is not uniquely identified.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA028",
+      "qa_id": "train_012780",
+      "disposition": "exclude",
+      "visual_evidence_note": "Six-frame 0.20-second clip cannot support a 3.2-second disappearance label.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA029",
+      "qa_id": "train_012511",
+      "disposition": "exclude",
+      "visual_evidence_note": "Multiple black cars on the roadway; the selected target cannot be tracked reliably.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA030",
+      "qa_id": "train_014999",
+      "disposition": "exclude",
+      "visual_evidence_note": "Several white cars and a very short claimed interval; target is unclear.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA031",
+      "qa_id": "train_004456",
+      "disposition": "conditional",
+      "visual_evidence_note": "Fire truck is visible from the opening; “first clearly visible” is clip-censored and threshold-sensitive.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA032",
+      "qa_id": "train_007566",
+      "disposition": "conditional",
+      "visual_evidence_note": "Train is already visible at opening; first in-clip observation is left-censored.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA033",
+      "qa_id": "train_012126",
+      "disposition": "conditional",
+      "visual_evidence_note": "Cars are already visible at opening; “first car” is a group/category boundary, not an onset.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA034",
+      "qa_id": "train_001854",
+      "disposition": "conditional",
+      "visual_evidence_note": "White car is already moving at opening; visible state is censored at the left boundary.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA035",
+      "qa_id": "train_004762",
+      "disposition": "conditional",
+      "visual_evidence_note": "A close-up of the flooded road occurs late, but “primary focus” needs an operational definition.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA036",
+      "qa_id": "train_007658",
+      "disposition": "conditional",
+      "visual_evidence_note": "MORAVIAN field becomes more readable during the pan; “clearly visible” threshold is subjective.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA037",
+      "qa_id": "train_002309",
+      "disposition": "usable",
+      "visual_evidence_note": "Distinct blue car crosses the yellow-marked intersection; entry/exit are observable.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA038",
+      "qa_id": "train_006899",
+      "disposition": "conditional",
+      "visual_evidence_note": "White bus is already on the bridge at opening; first appearance is left-censored.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA039",
+      "qa_id": "train_008069",
+      "disposition": "conditional",
+      "visual_evidence_note": "Prominence of buildings/parking changes with the camera view; define a reproducible event before labeling.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA040",
+      "qa_id": "train_000858",
+      "disposition": "conditional",
+      "visual_evidence_note": "Billboard display/visibility changes during pan; exact “clearly visible” threshold needs relabeling.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA041",
+      "qa_id": "train_003144",
+      "disposition": "conditional",
+      "visual_evidence_note": "Flag state is visible throughout; interval is clipped at both ends and wording is static-state based.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA042",
+      "qa_id": "train_007418",
+      "disposition": "conditional",
+      "visual_evidence_note": "Townhouses become more discernible during the pan, but “clearly visible” needs a threshold.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA043",
+      "qa_id": "train_002472",
+      "disposition": "conditional",
+      "visual_evidence_note": "Blue car may be identifiable, but several similar cars and sparse samples weaken identity.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA044",
+      "qa_id": "train_006640",
+      "disposition": "exclude",
+      "visual_evidence_note": "No confidently identifiable white van in the sampled scene.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA045",
+      "qa_id": "train_014664",
+      "disposition": "exclude",
+      "visual_evidence_note": "Traffic signal is too small to confirm state change or no-change from these sheets.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA046",
+      "qa_id": "train_003746",
+      "disposition": "exclude",
+      "visual_evidence_note": "Small rowing boats are not distinguishable enough to identify the red target and exit.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA047",
+      "qa_id": "train_009269",
+      "disposition": "usable",
+      "visual_evidence_note": "Railway line leaves the frame during a visible camera move; disappearance is bracketable.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA048",
+      "qa_id": "train_014600",
+      "disposition": "conditional",
+      "visual_evidence_note": "Cyclist may be followed, but target is tiny and temporal sample gaps are large.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA049",
+      "qa_id": "train_002750",
+      "disposition": "conditional",
+      "visual_evidence_note": "Silver sedan is visible at opening; onset is censored though a later exit may be observable.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA050",
+      "qa_id": "train_005724",
+      "disposition": "conditional",
+      "visual_evidence_note": "Triangular building exits during camera movement; target and coarse “middle” answer need review.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA051",
+      "qa_id": "train_014483",
+      "disposition": "exclude",
+      "visual_evidence_note": "White cars are small and multiple; no reliable single-car disappearance track.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA052",
+      "qa_id": "train_010911",
+      "disposition": "exclude",
+      "visual_evidence_note": "Many red cars over a long clip; target identity cannot be maintained.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA053",
+      "qa_id": "train_001790",
+      "disposition": "usable",
+      "visual_evidence_note": "Aerial building view transitions clearly to a city street near the start.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA054",
+      "qa_id": "train_002951",
+      "disposition": "usable",
+      "visual_evidence_note": "Man in foreground is distinguishable and walks out of view; exit is observable.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA055",
+      "qa_id": "train_013186",
+      "disposition": "conditional",
+      "visual_evidence_note": "Gray-roof house leaves view during camera turn; similar houses make identity only moderately certain.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA056",
+      "qa_id": "train_014275",
+      "disposition": "exclude",
+      "visual_evidence_note": "Multiple cars and gold exit beyond clip duration.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA057",
+      "qa_id": "train_001600",
+      "disposition": "usable",
+      "visual_evidence_note": "Red truck with green container is distinctive and exits near the clip end.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA058",
+      "qa_id": "train_007057",
+      "disposition": "exclude",
+      "visual_evidence_note": "Several blue cars in the intersection; target cannot be tracked reliably.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA059",
+      "qa_id": "train_012714",
+      "disposition": "exclude",
+      "visual_evidence_note": "Small white cars on bridge/road are not uniquely identifiable.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA060",
+      "qa_id": "train_015046",
+      "disposition": "exclude",
+      "visual_evidence_note": "Long intersection clip has multiple white vehicles; van identity is unclear.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA061",
+      "qa_id": "train_006819",
+      "disposition": "exclude",
+      "visual_evidence_note": "Red-jersey player is tiny among many players; target track is unreliable.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA062",
+      "qa_id": "train_015017",
+      "disposition": "conditional",
+      "visual_evidence_note": "Green-roof brick building is present at opening; onset is left-censored.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA063",
+      "qa_id": "train_012096",
+      "disposition": "conditional",
+      "visual_evidence_note": "A plausible blue-car appearance occurs later in the sequence; identify the exact car and correct the opening-time gold.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA064",
+      "qa_id": "train_000952",
+      "disposition": "conditional",
+      "visual_evidence_note": "Red bus is already visible at opening; onset is left-censored.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA065",
+      "qa_id": "train_003927",
+      "disposition": "conditional",
+      "visual_evidence_note": "ARIV car is distinctive but obscured by smoke; “first visible” versus “clear visibility” is ambiguous.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA066",
+      "qa_id": "train_015316",
+      "disposition": "conditional",
+      "visual_evidence_note": "Red-brick building is visible at opening and throughout; onset is left-censored.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA067",
+      "qa_id": "train_014241",
+      "disposition": "conditional",
+      "visual_evidence_note": "Smoke is present at the opening; use a left-censored onset and correct the later gold time.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA068",
+      "qa_id": "train_000235",
+      "disposition": "conditional",
+      "visual_evidence_note": "Distinct loaded red truck appears, but the sampled first-visible time does not clearly support the gold time.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA069",
+      "qa_id": "train_006853",
+      "disposition": "conditional",
+      "visual_evidence_note": "Vehicle line is present at opening; group onset is left-censored.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA070",
+      "qa_id": "train_011788",
+      "disposition": "exclude",
+      "visual_evidence_note": "Parking lot has multiple white cars, with no unique target.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA071",
+      "qa_id": "train_015677",
+      "disposition": "exclude",
+      "visual_evidence_note": "Several white vehicles at upper-right; no uniquely identifiable van.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA072",
+      "qa_id": "train_000488",
+      "disposition": "conditional",
+      "visual_evidence_note": "Rickshaw may be followed, but it is near the frame edge at opening and exact first visibility is uncertain.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA073",
+      "qa_id": "train_003440",
+      "disposition": "conditional",
+      "visual_evidence_note": "The hoop is faintly present early and becomes prominent later; define “visible” versus “clear.”",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA074",
+      "qa_id": "train_010146",
+      "disposition": "conditional",
+      "visual_evidence_note": "Court/field is visible early; first appearance is effectively clip-boundary censored.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA075",
+      "qa_id": "train_013982",
+      "disposition": "conditional",
+      "visual_evidence_note": "Red bus is already visible at opening; first appearance is left-censored, though later motion is visible.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA076",
+      "qa_id": "train_000322",
+      "disposition": "usable",
+      "visual_evidence_note": "Distinct black car enters/moves across lower-right lane around the middle; samples bracket the event.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA077",
+      "qa_id": "train_006880",
+      "disposition": "conditional",
+      "visual_evidence_note": "Orange-jacket person is visible at opening; onset is left-censored.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA078",
+      "qa_id": "train_008624",
+      "disposition": "conditional",
+      "visual_evidence_note": "The winding road is visible at opening; annotate as left-censored and correct the later gold timing.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA079",
+      "qa_id": "train_013463",
+      "disposition": "conditional",
+      "visual_evidence_note": "Green bus is visible at opening; first in-clip observation is left-censored.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA080",
+      "qa_id": "train_001567",
+      "disposition": "exclude",
+      "visual_evidence_note": "Several white vehicles and foreground target is not unambiguous.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA081",
+      "qa_id": "train_006709",
+      "disposition": "conditional",
+      "visual_evidence_note": "Boy and ball are identifiable, but running is already underway at opening; duration start is censored.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA082",
+      "qa_id": "train_007245",
+      "disposition": "conditional",
+      "visual_evidence_note": "Courts remain visible through most/all of the clip; both visibility boundaries are clipped.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA083",
+      "qa_id": "train_012045",
+      "disposition": "conditional",
+      "visual_evidence_note": "Pedestrian group crosses; group membership and coarse crossing boundaries need explicit review.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA084",
+      "qa_id": "train_000383",
+      "disposition": "conditional",
+      "visual_evidence_note": "White/purple bus is visible at opening and exits later; onset is clip-censored and interval approximate.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA085",
+      "qa_id": "train_005153",
+      "disposition": "conditional",
+      "visual_evidence_note": "The muddy river is visible through the static clip; both visibility boundaries are clipped.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA086",
+      "qa_id": "train_007284",
+      "disposition": "conditional",
+      "visual_evidence_note": "The golf course is visible nearly throughout; interval is clip-censored and lacks an internal event.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA087",
+      "qa_id": "train_010879",
+      "disposition": "exclude",
+      "visual_evidence_note": "“Cars in left lane” is an unbounded group with changing membership.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA088",
+      "qa_id": "train_001923",
+      "disposition": "exclude",
+      "visual_evidence_note": "White van/red roof is not consistently identifiable across the sampled views.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA089",
+      "qa_id": "train_005268",
+      "disposition": "conditional",
+      "visual_evidence_note": "The excavation pit is visible through the clip; duration is censored at both boundaries.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA090",
+      "qa_id": "train_012999",
+      "disposition": "conditional",
+      "visual_evidence_note": "Church is identifiable but already visible at opening and remains through most/all clip.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA091",
+      "qa_id": "train_013626",
+      "disposition": "conditional",
+      "visual_evidence_note": "The toll-booth complex is visible and later leaves view; recheck its exit and correct the “entire duration” gold.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA092",
+      "qa_id": "train_002673",
+      "disposition": "conditional",
+      "visual_evidence_note": "Silver sedan may be trackable, but small scale and clip-end visibility make the full interval uncertain.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA093",
+      "qa_id": "train_006527",
+      "disposition": "exclude",
+      "visual_evidence_note": "Many parked cars; “cars in parking lots” has no stable target identity or event.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA094",
+      "qa_id": "train_014364",
+      "disposition": "conditional",
+      "visual_evidence_note": "Aerial perspective persists as a scene state; use only after defining that state and marking clip censoring.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA095",
+      "qa_id": "train_015766",
+      "disposition": "exclude",
+      "visual_evidence_note": "Bus target is small/ambiguous; no reliable visible-duration boundary.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA096",
+      "qa_id": "train_002341",
+      "disposition": "conditional",
+      "visual_evidence_note": "Prominent red bus can be followed, but there are multiple red buses and onset is clip-censored.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA097",
+      "qa_id": "train_003870",
+      "disposition": "exclude",
+      "visual_evidence_note": "Race-car number/identity is unreadable at sheet resolution; claimed “only at beginning” cannot be verified.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA098",
+      "qa_id": "train_008702",
+      "disposition": "conditional",
+      "visual_evidence_note": "Rooftop panels recur across multiple roofs; specify one roof/array and correct the “briefly” answer if needed.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA099",
+      "qa_id": "train_011114",
+      "disposition": "conditional",
+      "visual_evidence_note": "Toll-booth structure starts visible and leaves as camera advances; left-censored start and end bracket are coarse.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    },
+    {
+      "case_id": "TA100",
+      "qa_id": "train_000984",
+      "disposition": "conditional",
+      "visual_evidence_note": "Several yellow/green cars appear; a single yellow-car track is not unambiguous.",
+      "review_basis": "Two legacy-sampler contact sheets at offsets 0.0 and 0.5; thumbnail-resolution visual review."
+    }
+  ],
+  "disposition_definitions": {
+    "usable": "At the legacy sampled-frame resolution, target/event are clear and evidence supports a coarse label.",
+    "conditional": "Some relevant visual evidence exists, but target/event refinement, relabeling, or explicit censoring is required before training.",
+    "exclude": "No stable target/event or insufficient visual evidence to produce trustworthy temporal supervision."
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "artifact_root": "runs/phase3a_retrieval_smoke",
+  "source_manifest": "tasks/phase3_grounding_pilot_ids.json",
+  "selection_rule": "Predeclared before inference: one diagnostic small-object temporal clip and one diagnostic field-boundary temporal clip from the fixed pilot.",
+  "model": {
+    "replicate_model": "lucataco/sam3-video",
+    "replicate_version": "408f82fc20c300aac5d61d2e34ddb34cd0181e810e9f609d250aed14d5f81269",
+    "siglip_model": "google/siglip2-base-patch16-224",
+    "siglip_revision": "022b6f71160ffb0169ca4709e2d7e25be659598a"
+  },
+  "frame_policy": {
+    "sampling_mode": "legacy",
+    "offset": 0.0,
+    "frame_count": 16,
+    "timestamp_source": "original_source_frame_index_divided_by_source_fps"
+  },
+  "videos": [
+    {
+      "qa_id": "train_010397",
+      "split": "valT",
+      "role": "small-object-temporal",
+      "diagnostic": true,
+      "question_phrases": ["black car", "parking lot"],
+      "operation": "appearance-and-disappearance",
+      "fixed_prompts": ["vehicle", "building", "road", "river", "water", "field", "court", "boat", "tree", "pool"]
+    },
+    {
+      "qa_id": "train_009869",
+      "split": "valQ",
+      "role": "field-boundary-temporal",
+      "diagnostic": true,
+      "question_phrases": ["baseball field"],
+      "operation": "continuous-visibility",
+      "fixed_prompts": ["field", "road", "vehicle"]
+    }
+  ],
+  "tile_probe": {
+    "qa_id": "train_010397",
+    "question_phrase": "black car",
+    "tile_count": 4,
+    "overlap_fraction": 0.25,
+    "source_native_pixels": true
+  },
+  "replicate_budget": {
+    "max_attempts": 30,
+    "max_retries": 5,
+    "monetary_cap_waived_by_user": true,
+    "planning_cost_per_attempt_usd": 0.0017
+  },
+  "modal_budget": {
+    "gpu": "A100",
+    "cpu": 8,
+    "memory_gib": 32,
+    "max_gpu_minutes": 30,
+    "max_wall_minutes": 60,
+    "monetary_cap_waived_by_user": true
+  },
+  "siglip": {
+    "crop_styles": ["padded_rgb_box", "masked_rgb"],
+    "random_draws": 1000,
+    "similarity": "cosine_on_l2_normalized_features",
+    "text_source": "question_only_entity_phrase"
+  }
+}
