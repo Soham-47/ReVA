@@ -2,7 +2,7 @@
 
 ## Experiments
 
-Thirty-six numbered experiments (**EXP-001–036**). Each has one comparable writeup:
+Thirty-nine numbered experiments (**EXP-001–039**). Each has one comparable writeup:
 
 - [`experiments/INDEX.md`](../experiments/INDEX.md)
 - [`experiments/TEMPLATE.md`](../experiments/TEMPLATE.md)
@@ -24,3 +24,7 @@ valQ 595 · valT 1,059 · val 2,000 · test 4,000 hidden. Four-view TTA (`pred` 
 ## Pipeline
 
 [`architecture.md`](architecture.md).
+
+## Harness handover
+
+Runtime sync, closed EXPs, and TG Track A (Brev) / Track B (HPC) queue: [`HARNESS_HANDOVER.md`](HARNESS_HANDOVER.md).

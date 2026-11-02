@@ -141,6 +141,13 @@ class ReVATrain(Dataset):
             if manifest_path.is_file():
                 with manifest_path.open() as handle:
                     self.temporal_manifest = json.load(handle)
+        self.motion_hints = None
+        motion_hints_path = config.get("motion_hints")
+        if motion_hints_path:
+            p = C.work_path(motion_hints_path)
+            if p.is_file():
+                with p.open() as handle:
+                    self.motion_hints = json.load(handle)
 
     def __len__(self) -> int:
         return len(self.rows)
@@ -171,6 +178,7 @@ class ReVATrain(Dataset):
         rng.shuffle(permutation)
         sample_offset = rng.random()
         frames, meta = C.get_video(row["video_path"], sample_offset)
+        motion_context = self.motion_hints.get(row["video_path"]) if self.motion_hints else None
         temporal_ids = None
         temporal_supervision = None
         if self.temporal_contract is not None:
@@ -188,6 +196,7 @@ class ReVATrain(Dataset):
             enable_thinking=self.enable_thinking,
             temporal_token_ids=temporal_ids,
             temporal_supervision=temporal_supervision,
+            temporal_context=motion_context,
         )
         if encoded["input_ids"].shape[1] > self.config["train"]["max_tokens"]:
             frames, meta = C.downsample_video(frames, meta)
@@ -203,6 +212,7 @@ class ReVATrain(Dataset):
                 enable_thinking=self.enable_thinking,
                 temporal_token_ids=temporal_ids,
                 temporal_supervision=temporal_supervision,
+                temporal_context=motion_context,
             )
         if encoded["input_ids"].shape[1] > self.config["train"]["max_tokens"]:
             raise RuntimeError(f"sample {row['qa_id']} still exceeds max_tokens after downsampling")

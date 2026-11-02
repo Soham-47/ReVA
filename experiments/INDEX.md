@@ -43,3 +43,6 @@ Schema: [`TEMPLATE.md`](TEMPLATE.md). Metrics: [`../results/evaluations.csv`](..
 | [034](EXP-034/experiment.md) | `reva-visual-prompt-trend-bar` | `training_free_overlay` | `not_promoted` | [EXP-034](EXP-034/experiment.md) |
 | [035](EXP-035/experiment.md) | `reva-spatial-contract` | `training_free_prompt` | `not_promoted` | [EXP-035](EXP-035/experiment.md) |
 | [036](EXP-036/experiment.md) | `reva-reze-cross-tg` | `training_free_prompt` | `not_promoted` | [EXP-036](EXP-036/experiment.md) |
+| [037](EXP-037/experiment.md) | `reva-cotr-tg-burnin` | `training_free_overlay` | `not_promoted` | [EXP-037](EXP-037/experiment.md) |
+| [038](EXP-038/experiment.md) | `reva-patk-tta-reweight` | `training_free_postprocess` | `not_promoted` | [EXP-038](EXP-038/experiment.md) |
+| [039](EXP-039/experiment.md) | `reva-dse-vtg-brev` | `training_free_decoder` | `not_promoted` | [EXP-039](EXP-039/experiment.md) |

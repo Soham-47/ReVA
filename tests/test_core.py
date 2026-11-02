@@ -17,12 +17,12 @@ class CoreTests(unittest.TestCase):
     def test_registry_and_experiments_json_exist(self):
         self.assertTrue((ROOT / "results" / "registry.csv").is_file())
         bundle = json.loads((ROOT / "results" / "experiments.json").read_text())
-        self.assertEqual(len(bundle["experiments"]), 36)
+        self.assertEqual(len(bundle["experiments"]), 39)
         numbers = [row["exp_number"] for row in bundle["experiments"]]
         self.assertEqual(numbers[0], "001")
-        self.assertEqual(numbers[-1], "036")
+        self.assertEqual(numbers[-1], "039")
         self.assertTrue((ROOT / "experiments" / "EXP-001" / "experiment.md").is_file())
-        self.assertTrue((ROOT / "experiments" / "EXP-036" / "experiment.md").is_file())
+        self.assertTrue((ROOT / "experiments" / "EXP-039" / "experiment.md").is_file())
 
     def test_stage_a_recipe_is_pinned(self):
         config = yaml.safe_load((ROOT / "code" / "configs" / "stageA.yaml").read_text())

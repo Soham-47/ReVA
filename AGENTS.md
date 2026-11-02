@@ -6,7 +6,7 @@ Canonical writeup per experiment: [`experiments/EXP-NNN/experiment.md`](experime
 
 | Source | Purpose |
 | --- | --- |
-| [`experiments/INDEX.md`](experiments/INDEX.md) | EXP-001–036 index |
+| [`experiments/INDEX.md`](experiments/INDEX.md) | EXP-001–039 index |
 | [`results/experiments.json`](results/experiments.json) | Machine-readable metadata |
 | [`results/registry.csv`](results/registry.csv) | Tabular index with `exp_number` |
 | [`results/evaluations.csv`](results/evaluations.csv) | Metrics with denominators |
@@ -30,6 +30,8 @@ tests/             Core pipeline + job syntax
 ```
 
 See [`docs/CONTEXT.md`](docs/CONTEXT.md).
+
+For multi-agent / harness continuity (paths, Brev/HPC, TG remediation queue): [`docs/HARNESS_HANDOVER.md`](docs/HARNESS_HANDOVER.md).
 
 ## Rules
 

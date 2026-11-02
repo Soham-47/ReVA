@@ -32,7 +32,7 @@ score() {
   shift
   local out="$OUT_ROOT/${name}.jsonl"
   echo "scoring $name -> $out"
-  WORK="$WORK" "$PY" code/score.py \
+  WORK="$WORK" "$PY" archive/implementation/code/score_stageA_pilots.py \
     --adapter "$ADAPTER" \
     --split valT \
     --qa-ids-file "$IDS" \

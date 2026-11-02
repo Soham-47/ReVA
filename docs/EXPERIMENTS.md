@@ -43,4 +43,7 @@ Machine-readable: [`results/experiments.json`](../results/experiments.json), [`r
 | [034](../experiments/EXP-034/experiment.md) | `reva-visual-prompt-trend-bar` | Progress bar on Trend and Pattern | `not_promoted` |
 | [035](../experiments/EXP-035/experiment.md) | `reva-spatial-contract` | Spatial-contract prompt on TG and spatial tasks | `not_promoted` |
 | [036](../experiments/EXP-036/experiment.md) | `reva-reze-cross-tg` | CROSS prompt and REZE evidence fusion on Temporal Grounding | `not_promoted` |
+| [037](../experiments/EXP-037/experiment.md) | `reva-cotr-tg-burnin` | CoTR visual time anchors on Temporal Grounding | `not_promoted` |
+| [038](../experiments/EXP-038/experiment.md) | `reva-patk-tta-reweight` | Phase-aligned TTA view reweighting on Temporal Grounding | `not_promoted` |
+| [039](../experiments/EXP-039/experiment.md) | `reva-dse-vtg-brev` | Qwen3-VL-Embedding MSF + gated letter fusion on TG | `not_promoted` |
 

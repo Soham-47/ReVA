@@ -128,6 +128,9 @@ REGISTRY_ORDER = [
     "reva-visual-prompt-trend-bar",
     "reva-spatial-contract",
     "reva-reze-cross-tg",
+    "reva-cotr-tg-burnin",
+    "reva-patk-tta-reweight",
+    "reva-dse-vtg-brev",
 ]
 
 KEEP_CODE_PREFIX = (
@@ -807,6 +810,51 @@ def registry_rows() -> list[dict]:
             "reproducibility_status": "scores_and_report_local",
             "decision_status": "not_promoted",
         },
+        {
+            "experiment_id": "reva-cotr-tg-burnin",
+            "family": "training_free_overlay",
+            "phase_label": "CoTR timestamp burn-in",
+            "title": "CoTR visual time anchors on Temporal Grounding",
+            "description": "Top-right mm:ss + [t s] glyphs on TG cohort (Brev); distinct from EXP-032 progress bar and EXP-008 text timestamps.",
+            "parent_experiment_id": "reva-stage-a-legacy",
+            "baseline_experiment_id": "reva-stage-a-legacy",
+            "code_paths": "archive/implementation/code/score_stageA_pilots.py;archive/implementation/code/visual_prompts.py;archive/implementation/jobs/brev_score_cotr_tg.sh",
+            "config_paths": "",
+            "artifact_paths": "runs/cotr_tg_burnin/",
+            "execution_status": "completed",
+            "reproducibility_status": "scores_and_report_local",
+            "decision_status": "not_promoted",
+        },
+        {
+            "experiment_id": "reva-patk-tta-reweight",
+            "family": "training_free_postprocess",
+            "phase_label": "PATK view reweight",
+            "title": "Phase-aligned TTA view reweighting on Temporal Grounding",
+            "description": "CPU reweight of four TTA views from Stage A JSONL by inverse distance to option time anchors.",
+            "parent_experiment_id": "reva-stage-a-legacy",
+            "baseline_experiment_id": "reva-stage-a-legacy",
+            "code_paths": "archive/implementation/code/patk_reweight.py",
+            "config_paths": "",
+            "artifact_paths": "runs/patk_tg/",
+            "execution_status": "completed",
+            "reproducibility_status": "scores_and_report_local",
+            "decision_status": "not_promoted",
+        },
+        {
+            "experiment_id": "reva-dse-vtg-brev",
+            "family": "training_free_decoder",
+            "phase_label": "DSE-VTG gated fusion",
+            "title": "Qwen3-VL-Embedding MSF + gated letter fusion on TG",
+            "description": "Embedding-8B temporal similarity fused into Stage A letter logits when margin gate passes (Brev pilot).",
+            "parent_experiment_id": "reva-stage-a-legacy",
+            "baseline_experiment_id": "reva-stage-a-legacy",
+            "code_paths": "archive/implementation/code/dse_vtg.py;archive/implementation/code/dse_vtg_embedder.py;archive/implementation/code/score_dse_vtg.py;archive/implementation/jobs/brev_score_dse_tg.sh",
+            "config_paths": "",
+            "artifact_paths": "runs/dse_vtg_brev/",
+            "execution_status": "completed",
+            "reproducibility_status": "scores_and_report_local",
+            "decision_status": "not_promoted",
+        },
     ]
     return rows
 
@@ -1274,6 +1322,120 @@ def evaluation_rows() -> list[dict]:
                 "source_artifact": "runs/reze_tg/report.json",
                 "evaluation_kind": "task_subset",
                 "notes": "Selected α=0. Baseline 99/133.",
+            }
+        )
+    )
+    rows.append(
+        _manual_eval(
+            {
+                "evaluation_id": "reva-cotr-tg-burnin:valQ:temporal_grounding",
+                "experiment_id": "reva-cotr-tg-burnin",
+                "metric_name": "temporal_grounding_task_accuracy",
+                "split": "valQ",
+                "denominator": 69,
+                "numerator": 48,
+                "value": 48 / 69,
+                "value_is_fraction": "true",
+                "comparison_group": "cotr_tg_burnin",
+                "baseline_experiment_id": "reva-stage-a-legacy",
+                "source_artifact": "runs/cotr_tg_burnin/valQ_report.json",
+                "evaluation_kind": "task_subset",
+                "notes": "Reze TG cohort. Baseline 51/69.",
+            }
+        )
+    )
+    rows.append(
+        _manual_eval(
+            {
+                "evaluation_id": "reva-cotr-tg-burnin:valT:temporal_grounding",
+                "experiment_id": "reva-cotr-tg-burnin",
+                "metric_name": "temporal_grounding_task_accuracy",
+                "split": "valT",
+                "denominator": 133,
+                "numerator": 100,
+                "value": 100 / 133,
+                "value_is_fraction": "true",
+                "comparison_group": "cotr_tg_burnin",
+                "baseline_experiment_id": "reva-stage-a-legacy",
+                "source_artifact": "runs/cotr_tg_burnin/valT_report.json",
+                "evaluation_kind": "task_subset",
+                "notes": "Reze TG cohort. Baseline 99/133.",
+            }
+        )
+    )
+    rows.append(
+        _manual_eval(
+            {
+                "evaluation_id": "reva-patk-tta-reweight:valQ:temporal_grounding",
+                "experiment_id": "reva-patk-tta-reweight",
+                "metric_name": "temporal_grounding_task_accuracy",
+                "split": "valQ",
+                "denominator": 69,
+                "numerator": 51,
+                "value": 51 / 69,
+                "value_is_fraction": "true",
+                "comparison_group": "patk_tg",
+                "baseline_experiment_id": "reva-stage-a-legacy",
+                "source_artifact": "runs/patk_tg/valQ_report.json",
+                "evaluation_kind": "task_subset",
+                "notes": "Reze TG cohort. Baseline 51/69.",
+            }
+        )
+    )
+    rows.append(
+        _manual_eval(
+            {
+                "evaluation_id": "reva-patk-tta-reweight:valT:temporal_grounding",
+                "experiment_id": "reva-patk-tta-reweight",
+                "metric_name": "temporal_grounding_task_accuracy",
+                "split": "valT",
+                "denominator": 133,
+                "numerator": 99,
+                "value": 99 / 133,
+                "value_is_fraction": "true",
+                "comparison_group": "patk_tg",
+                "baseline_experiment_id": "reva-stage-a-legacy",
+                "source_artifact": "runs/patk_tg/valT_report.json",
+                "evaluation_kind": "task_subset",
+                "notes": "Reze TG cohort. Baseline 99/133.",
+            }
+        )
+    )
+    rows.append(
+        _manual_eval(
+            {
+                "evaluation_id": "reva-dse-vtg-brev:valQ:temporal_grounding",
+                "experiment_id": "reva-dse-vtg-brev",
+                "metric_name": "temporal_grounding_task_accuracy",
+                "split": "valQ",
+                "denominator": 69,
+                "numerator": 51,
+                "value": 51 / 69,
+                "value_is_fraction": "true",
+                "comparison_group": "dse_vtg_brev",
+                "baseline_experiment_id": "reva-stage-a-legacy",
+                "source_artifact": "runs/dse_vtg_brev/valQ_report.json",
+                "evaluation_kind": "task_subset",
+                "notes": "Reze TG cohort. Baseline 51/69.",
+            }
+        )
+    )
+    rows.append(
+        _manual_eval(
+            {
+                "evaluation_id": "reva-dse-vtg-brev:valT:temporal_grounding",
+                "experiment_id": "reva-dse-vtg-brev",
+                "metric_name": "temporal_grounding_task_accuracy",
+                "split": "valT",
+                "denominator": 133,
+                "numerator": 100,
+                "value": 100 / 133,
+                "value_is_fraction": "true",
+                "comparison_group": "dse_vtg_brev",
+                "baseline_experiment_id": "reva-stage-a-legacy",
+                "source_artifact": "runs/dse_vtg_brev/valT_report.json",
+                "evaluation_kind": "task_subset",
+                "notes": "Reze TG cohort. Baseline 99/133.",
             }
         )
     )

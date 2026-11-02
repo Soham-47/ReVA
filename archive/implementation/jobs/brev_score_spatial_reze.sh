@@ -38,7 +38,7 @@ score_until_done() {
       echo "$split complete ($done/$target)"
       return 0
     fi
-    WORK="$WORK" "$PY" code/score.py \
+    WORK="$WORK" "$PY" archive/implementation/code/score_stageA_pilots.py \
       --adapter "$ADAPTER" \
       --split "$split" \
       --qa-ids-file "$ids" \

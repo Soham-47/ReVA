@@ -28,6 +28,24 @@ class VisualPromptTests(unittest.TestCase):
         hint = V.merge_motion_segments([0.0, 2.0, 4.0], ["panning left, slow", "panning left, slow"], 5.0)
         self.assertEqual(hint, "Camera motion: 0.0s–5.0s panning left, slow")
 
+    def test_cotr_timestamp_label_includes_bracketed_seconds(self):
+        label = V.format_cotr_timestamp(12.345)
+        self.assertIn("[12.35 s]", label)
+        self.assertIn("00:", label)
+
+    def test_cotr_overlay_preserves_shape(self):
+        frames = np.zeros((2, 32, 64, 3), dtype=np.uint8)
+        meta = SimpleNamespace(
+            fps=2.0,
+            frames_indices=[0, 8],
+            total_num_frames=16,
+            duration=8.0,
+            width=64,
+            height=32,
+        )
+        out = V.overlay_cotr_timestamp(frames, meta)
+        self.assertEqual(out.shape, frames.shape)
+
     def test_camera_motion_hint_without_opencv_is_unavailable(self):
         frames = np.zeros((3, 8, 8, 3), dtype=np.uint8)
         meta = SimpleNamespace(fps=2.0, frames_indices=[0, 1, 2], duration=1.5, total_num_frames=3)

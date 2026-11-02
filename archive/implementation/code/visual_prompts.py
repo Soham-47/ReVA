@@ -216,6 +216,45 @@ def _pairwise_affine(prev: np.ndarray, nxt: np.ndarray) -> tuple[float, float, f
     return dx, dy, scale
 
 
+def format_cotr_timestamp(time_s: float) -> str:
+    """CoTR-style absolute time glyph (mm:ss + bracketed seconds)."""
+
+    time_s = max(0.0, float(time_s))
+    minutes = int(time_s // 60)
+    seconds = time_s - minutes * 60
+    return f"{minutes:02d}:{seconds:05.2f} [{time_s:.2f} s]"
+
+
+def overlay_cotr_timestamp(
+    frames: np.ndarray,
+    meta: Any,
+    *,
+    margin: int = 6,
+    band_height: int = 22,
+) -> np.ndarray:
+    """Burn CoTR visual time anchors into the top-right of each frame (no extra pixels)."""
+
+    array = np.asarray(frames).copy()
+    if array.ndim != 4:
+        raise ValueError(f"expected THWC frames, got {array.shape}")
+    times = frame_timestamps(meta)
+    if len(times) != array.shape[0]:
+        raise ValueError("one timestamp per frame is required")
+    channels = int(array.shape[-1])
+    dark = np.array((16, 16, 16), dtype=array.dtype)[:channels]
+    for index, time_s in enumerate(times):
+        label = format_cotr_timestamp(time_s)
+        glyph_w = 6 * len(label)
+        height, width = int(array.shape[1]), int(array.shape[2])
+        x0 = max(margin, width - margin - glyph_w)
+        y0 = margin
+        y1 = min(height, y0 + band_height)
+        x1 = min(width, x0 + glyph_w + 4)
+        array[index, y0:y1, x0:x1] = dark
+        _stamp_glyph(array[index], label, x=x0 + 2, y=y0 + 2)
+    return array
+
+
 def camera_motion_hint(frames: np.ndarray, meta: Any) -> str:
     """One Peekaboo-style sentence, or MOTION_UNAVAILABLE if ORB cannot lock."""
 
