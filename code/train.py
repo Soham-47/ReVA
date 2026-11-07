@@ -20,6 +20,8 @@ from peft import LoraConfig, get_peft_model
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common as C
+import mirror_answers as M
+import specialist_data as S
 
 
 def _temporal_grounding():
@@ -114,7 +116,15 @@ class ReVATrain(Dataset):
         temporal_contract=None,
     ):
         with json_path.open() as f:
-            self.rows = json.load(f)["QA"]
+            payload = json.load(f)
+        if not isinstance(payload, dict) or not isinstance(payload.get("QA"), list):
+            raise ValueError("training JSON must be an object with a QA list")
+        expected_split = config.get("require_split")
+        if expected_split is not None:
+            metadata = payload.get("metadata")
+            if not isinstance(metadata, dict) or metadata.get("split") != expected_split:
+                raise ValueError(f"training JSON metadata.split must be {expected_split!r}")
+        self.rows = payload["QA"]
         if not self.rows or any(not row["qa_id"].startswith("train_") for row in self.rows):
             raise ValueError("training JSON must contain train_* rows only; val/test leakage is forbidden")
         self.processor = processor
@@ -141,13 +151,38 @@ class ReVATrain(Dataset):
             if manifest_path.is_file():
                 with manifest_path.open() as handle:
                     self.temporal_manifest = json.load(handle)
+        self.frame_budget = S.normalize_frame_budget(config.get("frame_budget"))
+        self.preserve_frame_budget = bool(config.get("preserve_frame_budget", False))
+        self.motion_hints_required = bool(config.get("motion_hints_required", False))
+        self.strict_hint_vocabulary = bool(config.get("strict_hint_vocabulary", False))
+        self.mirror_safe = bool(config.get("mirror_safe", False))
+        self.mirror_probability = float(config.get("mirror_probability", 0.0))
+        if self.mirror_safe and not 0 < self.mirror_probability <= 1:
+            raise ValueError("mirror_safe requires mirror_probability in (0, 1]")
+        if self.mirror_safe and self.temporal_contract is not None:
+            raise ValueError("mirror_safe cannot be combined with temporal_stream")
+        train_tasks = config.get("train_tasks")
+        if train_tasks is not None:
+            self.rows = S.filter_rows_by_tasks(self.rows, train_tasks)
+            S.assert_train_only_rows(self.rows)
+        self.hint_formatter = getattr(C, "motion_hint_text", None)
         self.motion_hints = None
         motion_hints_path = config.get("motion_hints")
         if motion_hints_path:
-            p = C.work_path(motion_hints_path)
-            if p.is_file():
-                with p.open() as handle:
-                    self.motion_hints = json.load(handle)
+            hint_path = C.work_path(motion_hints_path)
+            if not hint_path.is_file():
+                if self.motion_hints_required:
+                    raise FileNotFoundError(f"required motion hints are missing: {hint_path}")
+            else:
+                with hint_path.open() as handle:
+                    self.motion_hints = S.load_hint_table(json.load(handle))
+                if self.motion_hints_required:
+                    S.assert_hint_coverage(
+                        self.motion_hints,
+                        self.rows,
+                        strict_vocabulary=self.strict_hint_vocabulary,
+                        formatter=self.hint_formatter,
+                    )
 
     def __len__(self) -> int:
         return len(self.rows)
@@ -177,8 +212,25 @@ class ReVATrain(Dataset):
         permutation = list(C.LETTERS)
         rng.shuffle(permutation)
         sample_offset = rng.random()
-        frames, meta = C.get_video(row["video_path"], sample_offset)
-        motion_context = self.motion_hints.get(row["video_path"]) if self.motion_hints else None
+        row_for_model = row
+        if self.mirror_safe and random.Random(self.data_seed + 917_311 * index).random() < self.mirror_probability:
+            rewritten = M.mirror_qa(row)
+            if rewritten is not None:
+                row_for_model = rewritten
+        frames, meta = C.get_video(row["video_path"], sample_offset, frame_budget=self.frame_budget)
+        if row_for_model is not row:
+            frames = M.flip_horizontal(frames)
+        motion_context = None
+        if self.motion_hints:
+            motion_context = S.motion_context_for(
+                self.motion_hints,
+                row["video_path"],
+                required=self.motion_hints_required,
+                strict_vocabulary=self.strict_hint_vocabulary,
+                formatter=self.hint_formatter,
+            )
+            if row_for_model is not row and motion_context:
+                motion_context = M.swap_left_right(motion_context)
         temporal_ids = None
         temporal_supervision = None
         if self.temporal_contract is not None:
@@ -186,11 +238,11 @@ class ReVATrain(Dataset):
             temporal_supervision = temporal_ids is not None
         encoded, _ = C.encode(
             self.processor,
-            row,
+            row_for_model,
             frames,
             meta,
             permutation,
-            row["correct_answer"],
+            row_for_model["correct_answer"],
             self.im_end_id,
             self.ltr_ids,
             enable_thinking=self.enable_thinking,
@@ -198,15 +250,16 @@ class ReVATrain(Dataset):
             temporal_supervision=temporal_supervision,
             temporal_context=motion_context,
         )
+        S.guard_token_budget(self.config, int(encoded["input_ids"].shape[1]), row["qa_id"])
         if encoded["input_ids"].shape[1] > self.config["train"]["max_tokens"]:
             frames, meta = C.downsample_video(frames, meta)
             encoded, _ = C.encode(
                 self.processor,
-                row,
+                row_for_model,
                 frames,
                 meta,
                 permutation,
-                row["correct_answer"],
+                row_for_model["correct_answer"],
                 self.im_end_id,
                 self.ltr_ids,
                 enable_thinking=self.enable_thinking,
@@ -551,6 +604,60 @@ class StepBenchmark(TrainerCallback):
         return control
 
 
+class KernelStepCheck(TrainerCallback):
+    """Record that one real optimizer step changed a trainable LoRA tensor."""
+
+    def __init__(self, output: Path):
+        self.marker = output / "KERNEL_SMOKE_STEP_OK"
+        self.before = None
+
+    def _lora_tensors(self, model):
+        return {
+            name: parameter.detach().clone()
+            for name, parameter in model.named_parameters()
+            if parameter.requires_grad and "lora_" in name
+        }
+
+    def on_step_begin(self, args, state, control, **kwargs):
+        if self.marker.exists() or self.before is not None:
+            return control
+        model = kwargs.get("model")
+        if model is None:
+            raise RuntimeError("kernel smoke could not see the model to record LoRA weights")
+        self.before = self._lora_tensors(model)
+        if not self.before:
+            raise RuntimeError("kernel smoke found no trainable LoRA tensors")
+        return control
+
+    def on_step_end(self, args, state, control, **kwargs):
+        if self.marker.exists() or self.before is None:
+            return control
+        model = kwargs.get("model")
+        if model is None:
+            raise RuntimeError("kernel smoke could not see the model after the optimizer step")
+        changed = False
+        for name, parameter in model.named_parameters():
+            if name not in self.before:
+                continue
+            if not torch.isfinite(parameter).all():
+                raise RuntimeError(f"kernel smoke LoRA tensor is non-finite: {name}")
+            if not torch.equal(self.before[name], parameter.detach()):
+                changed = True
+        if not changed:
+            raise RuntimeError("kernel smoke optimizer step changed no trainable LoRA tensor")
+        for entry in reversed(state.log_history):
+            loss = entry.get("loss")
+            if loss is None:
+                continue
+            if not math.isfinite(float(loss)):
+                raise RuntimeError("kernel smoke logged a non-finite loss")
+            break
+        self.marker.write_text(f"global_step={state.global_step}\n")
+        self.before = None
+        print(f"kernel_smoke_step_ok global_step={state.global_step}", flush=True)
+        return control
+
+
 class TemporalBundleCheckpoint(TrainerCallback):
     """Write the opt-in temporal state beside each Trainer checkpoint.
 
@@ -577,9 +684,22 @@ def main() -> int:
         raise SystemExit("usage: python code/train.py code/configs/stageA.yaml")
     with Path(sys.argv[1]).open() as f:
         config = yaml.safe_load(f)
+    if config.get("specialist_contract"):
+        S.validate_run_config(config)
+    if config.get("require_smoke_marker"):
+        marker = os.environ.get("REVA_SMOKE_OK")
+        if not marker or not Path(marker).is_file():
+            raise RuntimeError("specialist training requires REVA_SMOKE_OK to point at an existing smoke marker")
     work = C.work_dir()
     output = C.work_path(config["output_dir"])
     output.mkdir(parents=True, exist_ok=True)
+    if config.get("isolate_output"):
+        snapshot = output / "config_snapshot.yaml"
+        incoming = Path(sys.argv[1]).read_text()
+        if snapshot.exists() and snapshot.read_text() != incoming:
+            raise RuntimeError(f"refusing to overwrite {output}; resolved config differs from config_snapshot.yaml")
+        if not snapshot.exists():
+            snapshot.write_text(incoming)
     if (output / "DONE").exists():
         print(f"already complete: {output}")
         return 0
@@ -675,7 +795,15 @@ def main() -> int:
     configured_steps = int(train_cfg.get("max_steps", -1))
     total_steps = configured_steps if configured_steps > 0 else math.ceil(len(dataset) / train_cfg["grad_accum"]) * train_cfg["epochs"]
     optimizer = make_optimizer(adapted, config)
+    if config.get("specialist_contract"):
+        print(
+            f"specialist_contract={config['specialist_contract']} train_rows={len(dataset)} "
+            f"frame_budget={config.get('frame_budget')}",
+            flush=True,
+        )
     callbacks = [Stopper(output / "STOP"), StepBenchmark(total_steps, train_cfg.get("benchmark_steps", 50))]
+    if config.get("kernel_smoke"):
+        callbacks.append(KernelStepCheck(output))
     if temporal_contract is not None:
         callbacks.append(TemporalBundleCheckpoint())
     resume_checkpoint = newest_checkpoint(output)

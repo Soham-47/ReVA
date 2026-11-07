@@ -12,6 +12,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common as C
+import specialist_data as S
 
 SPLITS = {
     "valT": "data/splits/valT.json",
@@ -39,6 +40,8 @@ def main() -> int:
     ap.add_argument("--rots", type=int, default=C.DEFAULT_SCORE_ROTS)
     ap.add_argument("--frame-sampling", choices=C.FRAME_SAMPLING_MODES, default=C.DEFAULT_FRAME_SAMPLING)
     ap.add_argument("--frame-budget", type=int, default=C.MAX_FRAMES)
+    ap.add_argument("--tasks", default="", help="comma-separated exact task names; default scores every row")
+    ap.add_argument("--motion-hints", default="", help="optional video-path hint table; required rows fail if uncovered")
     ap.add_argument("--shard", type=int, default=0)
     ap.add_argument("--nshards", type=int, default=1)
     args = ap.parse_args()
@@ -53,6 +56,15 @@ def main() -> int:
     split_path = C.work_path(SPLITS[args.split])
     with split_path.open() as f:
         all_rows = json.load(f)["QA"]
+    task_names = [part.strip() for part in args.tasks.split(",") if part.strip()]
+    if task_names:
+        allowed = set(task_names)
+        all_rows = [row for row in all_rows if row.get("task") in allowed]
+        if not all_rows:
+            raise RuntimeError(f"tasks matched no rows in {args.split}: {task_names}")
+    hint_checksum = "none"
+    if args.motion_hints:
+        hint_checksum = C.path_checksum(C.work_path(args.motion_hints))
     split_digest = C.split_checksum(all_rows)
     rows = all_rows[args.shard :: args.nshards]
     out = C.work_path(args.out)
@@ -74,6 +86,9 @@ def main() -> int:
         "rots": args.rots,
         "frame_sampling": args.frame_sampling,
         "frame_budget": args.frame_budget,
+        "tasks": task_names,
+        "motion_hints": args.motion_hints or "none",
+        "motion_hints_checksum": hint_checksum,
         "shard": args.shard,
         "nshards": args.nshards,
     }
@@ -82,6 +97,9 @@ def main() -> int:
         actual_manifest = json.loads(manifest_path.read_text())
         actual_manifest.setdefault("frame_sampling", C.DEFAULT_FRAME_SAMPLING)
         actual_manifest.setdefault("frame_budget", C.MAX_FRAMES)
+        actual_manifest.setdefault("tasks", [])
+        actual_manifest.setdefault("motion_hints", "none")
+        actual_manifest.setdefault("motion_hints_checksum", "none")
         actual_manifest.setdefault(
             "adapter_merge_mode",
             "none" if adapter_path is None else "merged",
@@ -115,10 +133,26 @@ def main() -> int:
         dtype=torch.bfloat16,
         attn_implementation=attn_implementation,
     )
+    device = torch.device("cuda")
+    model.to(device)
     if adapter_path is not None:
         model = C.load_peft_for_inference(model, adapter_path, merge=not args.no_merge_adapters)
-    device = torch.device("cuda")
-    model.to(device).eval()
+    if next(model.parameters()).device.type != "cuda":
+        raise RuntimeError("model left CUDA before scoring; refusing a CPU adapter merge")
+    model.eval()
+    hint_table = None
+    if args.motion_hints:
+        with C.work_path(args.motion_hints).open() as handle:
+            hint_table = S.load_hint_table(json.load(handle))
+        hint_formatter = getattr(C, "motion_hint_text", None)
+        for row in rows:
+            S.motion_context_for(
+                hint_table,
+                row["video_path"],
+                required=True,
+                strict_vocabulary=True,
+                formatter=hint_formatter,
+            )
     rotations = [list(C.LETTERS[offset:] + C.LETTERS[:offset]) for offset in range(args.rots)]
 
     with out.open("a") as stream, torch.inference_mode():
@@ -135,7 +169,18 @@ def main() -> int:
                     row["video_path"], offset, mode=args.frame_sampling, frame_budget=args.frame_budget
                 )
                 for permutation in rotations:
-                    encoded, actual_perm = C.encode(processor, row, frames, meta, permutation)
+                    motion_context = None
+                    if hint_table is not None:
+                        motion_context = S.motion_context_for(
+                            hint_table,
+                            row["video_path"],
+                            required=True,
+                            strict_vocabulary=True,
+                            formatter=getattr(C, "motion_hint_text", None),
+                        )
+                    encoded, actual_perm = C.encode(
+                        processor, row, frames, meta, permutation, temporal_context=motion_context
+                    )
                     logits = model(**move_inputs(encoded, device)).logits[0, -1, ltr_ids].float()
                     shown_prob = torch.softmax(logits, dim=-1).cpu().numpy()
                     original_prob = [0.0] * 4

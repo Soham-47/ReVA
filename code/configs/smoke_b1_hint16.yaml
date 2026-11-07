@@ -1,0 +1,41 @@
+# 8 optimizer steps of the motion specialist. This is the kernel smoke, not the 1-epoch run.
+run_name: smoke_b1_hint16
+specialist_contract: smoke_b1
+kernel_smoke: true
+isolate_output: true
+train_json: data/splits/fit_A.json
+require_split: fit_A
+train_tasks:
+  - Perspective and Viewpoint
+  - Change Detection
+init_adapter: runs/stageA_q3vl8b_r16/final_adapter
+require_init_adapter: true
+output_dir: runs/specialists/smoke_b1_hint16/UNRESOLVED
+motion_hints: data/camera_motion_hints.json
+motion_hints_required: true
+strict_hint_vocabulary: true
+frame_budget: 16
+preserve_frame_budget: false
+seed: 42
+attn_implementation: sdpa
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+train:
+  epochs: 1
+  max_steps: 8
+  lr: 2.0e-4
+  weight_decay: 0.0
+  warmup_ratio: 0.03
+  scheduler: cosine
+  grad_accum: 16
+  max_grad_norm: 1.0
+  bf16: true
+  gradient_checkpointing: true
+  max_tokens: 12000
+  save_steps: 8
+  save_total_limit: 2
+  logging_steps: 1
+  dataloader_workers: 8
+  benchmark_steps: 5

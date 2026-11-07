@@ -96,6 +96,22 @@ def configure_attention_backend(attn_implementation: str, torch_module=None) -> 
     if enable_cudnn_sdp is None:
         raise RuntimeError("the installed PyTorch build has no cuDNN SDPA control")
     enable_cudnn_sdp(False)
+    if os.environ.get("REVA_SDPA_MATH_ONLY") == "1":
+        flash = getattr(torch_module.backends.cuda, "enable_flash_sdp", None)
+        mem = getattr(torch_module.backends.cuda, "enable_mem_efficient_sdp", None)
+        math_sdp = getattr(torch_module.backends.cuda, "enable_math_sdp", None)
+        missing = [
+            name
+            for name, fn in (("flash", flash), ("mem_efficient", mem), ("math", math_sdp))
+            if fn is None
+        ]
+        if missing:
+            raise RuntimeError(
+                "REVA_SDPA_MATH_ONLY=1 but this PyTorch build lacks SDPA toggles: " + ", ".join(missing)
+            )
+        flash(False)
+        mem(False)
+        math_sdp(True)
 
 
 def path_checksum(path: str | os.PathLike[str]) -> str:
