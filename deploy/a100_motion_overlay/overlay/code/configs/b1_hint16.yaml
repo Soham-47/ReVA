@@ -1,0 +1,42 @@
+# One epoch from Stage A on fit_A Perspective and Change Detection rows, with camera-motion hints.
+run_name: b1_hint16
+specialist_contract: b1
+require_smoke_marker: true
+requires_smoke_run: smoke_b1_hint16
+isolate_output: true
+train_json: data/splits/fit_A.json
+require_split: fit_A
+train_tasks:
+  - Perspective and Viewpoint
+  - Change Detection
+init_adapter: runs/stageA_q3vl8b_r16/final_adapter
+require_init_adapter: true
+output_dir: runs/specialists/b1_hint16/UNRESOLVED
+motion_hints: data/camera_motion_hints.json
+motion_hints_required: true
+strict_hint_vocabulary: true
+frame_budget: 16
+preserve_frame_budget: false
+seed: 42
+attn_implementation: sdpa
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+train:
+  epochs: 1
+  max_steps: -1
+  lr: 2.0e-4
+  weight_decay: 0.0
+  warmup_ratio: 0.03
+  scheduler: cosine
+  grad_accum: 16
+  max_grad_norm: 1.0
+  bf16: true
+  gradient_checkpointing: true
+  max_tokens: 12000
+  save_steps: 50
+  save_total_limit: 2
+  logging_steps: 10
+  dataloader_workers: 8
+  benchmark_steps: 50

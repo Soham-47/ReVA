@@ -12,6 +12,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common as C
+import specialist_data as S
 
 SPLITS = {
     "valT": "data/splits/valT.json",
@@ -39,6 +40,18 @@ def main() -> int:
     ap.add_argument("--rots", type=int, default=C.DEFAULT_SCORE_ROTS)
     ap.add_argument("--frame-sampling", choices=C.FRAME_SAMPLING_MODES, default=C.DEFAULT_FRAME_SAMPLING)
     ap.add_argument("--frame-budget", type=int, default=C.MAX_FRAMES)
+    ap.add_argument("--tasks", default="", help="comma-separated exact task names; default scores every row")
+    ap.add_argument(
+        "--video-max-pixels",
+        type=int,
+        default=None,
+        help="per-frame pixel cap (default: historical 640×640); must match adapter run_meta.json",
+    )
+    ap.add_argument(
+        "--motion-hints",
+        default=None,
+        help="JSON cache of camera-motion sentences (same temporal_context path as train.py)",
+    )
     ap.add_argument("--shard", type=int, default=0)
     ap.add_argument("--nshards", type=int, default=1)
     args = ap.parse_args()
@@ -53,11 +66,29 @@ def main() -> int:
     split_path = C.work_path(SPLITS[args.split])
     with split_path.open() as f:
         all_rows = json.load(f)["QA"]
+    task_names = [part.strip() for part in args.tasks.split(",") if part.strip()]
+    if task_names:
+        allowed_tasks = set(task_names)
+        all_rows = [row for row in all_rows if row.get("task") in allowed_tasks]
+        if not all_rows:
+            raise RuntimeError(f"tasks matched no rows in {args.split}: {task_names}")
     split_digest = C.split_checksum(all_rows)
     rows = all_rows[args.shard :: args.nshards]
     out = C.work_path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     adapter_path = None if args.adapter == "none" else C.work_path(args.adapter)
+    video_size = C.video_size_for(args.frame_budget, args.video_max_pixels)
+    motion_hints = None
+    if args.motion_hints:
+        hints_path = C.work_path(args.motion_hints)
+        with hints_path.open() as handle:
+            motion_hints = json.load(handle)
+    if adapter_path is not None:
+        C.assert_score_video_contract(
+            adapter_path,
+            frame_budget=args.frame_budget,
+            video_max_pixels=args.video_max_pixels,
+        )
     expected_manifest = {
         "schema_version": 1,
         "adapter": "none" if adapter_path is None else str(adapter_path.resolve()),
@@ -74,6 +105,10 @@ def main() -> int:
         "rots": args.rots,
         "frame_sampling": args.frame_sampling,
         "frame_budget": args.frame_budget,
+        "tasks": task_names,
+        "video_max_pixels": args.video_max_pixels,
+        "video_size": video_size,
+        "motion_hints": None if args.motion_hints is None else str(C.work_path(args.motion_hints).resolve()),
         "shard": args.shard,
         "nshards": args.nshards,
     }
@@ -82,6 +117,10 @@ def main() -> int:
         actual_manifest = json.loads(manifest_path.read_text())
         actual_manifest.setdefault("frame_sampling", C.DEFAULT_FRAME_SAMPLING)
         actual_manifest.setdefault("frame_budget", C.MAX_FRAMES)
+        actual_manifest.setdefault("tasks", [])
+        actual_manifest.setdefault("video_max_pixels", None)
+        actual_manifest.setdefault("video_size", C.VIDEO_SIZE)
+        actual_manifest.setdefault("motion_hints", None)
         actual_manifest.setdefault(
             "adapter_merge_mode",
             "none" if adapter_path is None else "merged",
@@ -115,10 +154,14 @@ def main() -> int:
         dtype=torch.bfloat16,
         attn_implementation=attn_implementation,
     )
+    device = torch.device("cuda")
+    model.to(device)
     if adapter_path is not None:
         model = C.load_peft_for_inference(model, adapter_path, merge=not args.no_merge_adapters)
-    device = torch.device("cuda")
-    model.to(device).eval()
+        model.to(device)
+    if next(model.parameters()).device.type != "cuda":
+        raise RuntimeError("model left CUDA before scoring; refusing a CPU adapter merge")
+    model.eval()
     rotations = [list(C.LETTERS[offset:] + C.LETTERS[:offset]) for offset in range(args.rots)]
 
     with out.open("a") as stream, torch.inference_mode():
@@ -134,8 +177,21 @@ def main() -> int:
                 frames, meta = C.get_video(
                     row["video_path"], offset, mode=args.frame_sampling, frame_budget=args.frame_budget
                 )
+                motion_context = C.motion_hint_text(motion_hints, row["video_path"])
+                if motion_hints is not None:
+                    if not motion_context:
+                        raise KeyError(f"motion hint missing for scoring video {row['video_path']!r}")
+                    motion_context = S.checked_motion_hint(motion_context)
                 for permutation in rotations:
-                    encoded, actual_perm = C.encode(processor, row, frames, meta, permutation)
+                    encoded, actual_perm = C.encode(
+                        processor,
+                        row,
+                        frames,
+                        meta,
+                        permutation,
+                        temporal_context=motion_context,
+                        video_size=video_size,
+                    )
                     logits = model(**move_inputs(encoded, device)).logits[0, -1, ltr_ids].float()
                     shown_prob = torch.softmax(logits, dim=-1).cpu().numpy()
                     original_prob = [0.0] * 4
