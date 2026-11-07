@@ -1,14 +1,16 @@
 #!/bin/bash
 # A100 kernel diagnostic: 5 forward/backward/AdamW steps at grad_accum 1.
-# Wall limit is a kill cap, not an ETA. Reported inference startup is about 6 minutes
-# and the forward probe was 9m15s. Backward duration is unmeasured. No resubmit.
+# Kill cap, not an ETA. Probe 435943 reached CUDA at 368s and one forward at 540s.
+# Load plus five forwards of that measured forward is about 18.4 minutes, before
+# any backward. 45 minutes is the existing cuda_probe.sbatch ceiling and is above
+# that measured lower bound. Backward duration is still unmeasured. No resubmit.
 #SBATCH -p gpu_a100_8
 #SBATCH -N 1
 #SBATCH -n 1
 #SBATCH -c 12
 #SBATCH --gres=gpu:nvidia_a100-sxm4-80gb:1
 #SBATCH --mem=128G
-#SBATCH -t 00:20:00
+#SBATCH -t 00:45:00
 #SBATCH --open-mode=append
 #SBATCH -J reva_a100_smoke
 #SBATCH -o reva_a100_smoke_%j.out
@@ -39,10 +41,14 @@ RESOLVED=$(a100_resolve_output "$CFG")
 OUT=$(dirname "$RESOLVED")
 mkdir -p "$OUT"
 nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv
+python code/specialist_data.py assert-adapter-sha --work "$WORK"
 python code/specialist_data.py audit-eligibility --work "$WORK" --out "$OUT/eligibility_audit.json"
 if python -c 'import sys,yaml; raise SystemExit(0 if yaml.safe_load(open(sys.argv[1])).get("motion_hints_required") else 1)' "$RESOLVED"; then
   mapfile -t TASKS < <(python -c 'import sys,yaml; print("\n".join(yaml.safe_load(open(sys.argv[1]))["train_tasks"]))' "$RESOLVED")
   python code/specialist_data.py audit-hints --work "$WORK" --out "$OUT/hint_audit.json" --tasks "${TASKS[@]}"
+  python code/specialist_data.py assert-live-counts "$OUT/eligibility_audit.json" --hints "$OUT/hint_audit.json"
+else
+  python code/specialist_data.py assert-live-counts "$OUT/eligibility_audit.json"
 fi
 if [[ -f "$OUT/DONE" && -f "$OUT/SMOKE_OK" && -f "$OUT/KERNEL_SMOKE_STEP_OK" ]]; then
   echo "smoke already complete: $OUT"

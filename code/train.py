@@ -151,38 +151,39 @@ class ReVATrain(Dataset):
             if manifest_path.is_file():
                 with manifest_path.open() as handle:
                     self.temporal_manifest = json.load(handle)
-        self.frame_budget = S.normalize_frame_budget(config.get("frame_budget"))
-        self.preserve_frame_budget = bool(config.get("preserve_frame_budget", False))
+        train_tasks = config.get("train_tasks")
+        if train_tasks is not None:
+            self.rows = S.filter_rows_by_tasks(self.rows, train_tasks)
+            S.assert_train_only_rows(self.rows)
         self.motion_hints_required = bool(config.get("motion_hints_required", False))
         self.strict_hint_vocabulary = bool(config.get("strict_hint_vocabulary", False))
+        self.preserve_frame_budget = bool(config.get("preserve_frame_budget", False))
         self.mirror_safe = bool(config.get("mirror_safe", False))
         self.mirror_probability = float(config.get("mirror_probability", 0.0))
         if self.mirror_safe and not 0 < self.mirror_probability <= 1:
             raise ValueError("mirror_safe requires mirror_probability in (0, 1]")
         if self.mirror_safe and self.temporal_contract is not None:
             raise ValueError("mirror_safe cannot be combined with temporal_stream")
-        train_tasks = config.get("train_tasks")
-        if train_tasks is not None:
-            self.rows = S.filter_rows_by_tasks(self.rows, train_tasks)
-            S.assert_train_only_rows(self.rows)
-        self.hint_formatter = getattr(C, "motion_hint_text", None)
         self.motion_hints = None
         motion_hints_path = config.get("motion_hints")
         if motion_hints_path:
-            hint_path = C.work_path(motion_hints_path)
-            if not hint_path.is_file():
-                if self.motion_hints_required:
-                    raise FileNotFoundError(f"required motion hints are missing: {hint_path}")
-            else:
-                with hint_path.open() as handle:
-                    self.motion_hints = S.load_hint_table(json.load(handle))
-                if self.motion_hints_required:
-                    S.assert_hint_coverage(
-                        self.motion_hints,
-                        self.rows,
-                        strict_vocabulary=self.strict_hint_vocabulary,
-                        formatter=self.hint_formatter,
-                    )
+            p = C.work_path(motion_hints_path)
+            if not p.is_file():
+                raise FileNotFoundError(f"motion_hints file missing: {p}")
+            with p.open() as handle:
+                self.motion_hints = S.load_hint_table(json.load(handle))
+            if self.motion_hints_required or self.strict_hint_vocabulary:
+                S.assert_hint_coverage(
+                    self.motion_hints,
+                    self.rows,
+                    strict_vocabulary=self.strict_hint_vocabulary,
+                    formatter=None,
+                )
+        video_cfg = config.get("video", {})
+        self.frame_budget = int(video_cfg.get("frame_budget", config.get("frame_budget", C.MAX_FRAMES)))
+        raw_pixels = video_cfg.get("video_max_pixels", config.get("video_max_pixels"))
+        self.video_max_pixels = int(raw_pixels) if raw_pixels is not None else None
+        self.video_size = C.video_size_for(self.frame_budget, self.video_max_pixels)
 
     def __len__(self) -> int:
         return len(self.rows)
@@ -220,16 +221,12 @@ class ReVATrain(Dataset):
         frames, meta = C.get_video(row["video_path"], sample_offset, frame_budget=self.frame_budget)
         if row_for_model is not row:
             frames = M.flip_horizontal(frames)
-        motion_context = None
-        if self.motion_hints:
-            motion_context = S.motion_context_for(
-                self.motion_hints,
-                row["video_path"],
-                required=self.motion_hints_required,
-                strict_vocabulary=self.strict_hint_vocabulary,
-                formatter=self.hint_formatter,
-            )
-            if row_for_model is not row and motion_context:
+        motion_context = C.motion_hint_text(self.motion_hints, row["video_path"])
+        if self.motion_hints_required and not motion_context:
+            raise KeyError(f"motion hint missing for training video {row['video_path']!r}")
+        if motion_context and (self.motion_hints_required or self.strict_hint_vocabulary):
+            S.validate_hint_text(motion_context, strict_vocabulary=self.strict_hint_vocabulary)
+            if row_for_model is not row:
                 motion_context = M.swap_left_right(motion_context)
         temporal_ids = None
         temporal_supervision = None
@@ -249,9 +246,11 @@ class ReVATrain(Dataset):
             temporal_token_ids=temporal_ids,
             temporal_supervision=temporal_supervision,
             temporal_context=motion_context,
+            video_size=self.video_size,
         )
         S.guard_token_budget(self.config, int(encoded["input_ids"].shape[1]), row["qa_id"])
         if encoded["input_ids"].shape[1] > self.config["train"]["max_tokens"]:
+            print(f"max_tokens_downsample qa_id={row['qa_id']}", flush=True)
             frames, meta = C.downsample_video(frames, meta)
             encoded, _ = C.encode(
                 self.processor,
@@ -266,6 +265,7 @@ class ReVATrain(Dataset):
                 temporal_token_ids=temporal_ids,
                 temporal_supervision=temporal_supervision,
                 temporal_context=motion_context,
+                video_size=self.video_size,
             )
         if encoded["input_ids"].shape[1] > self.config["train"]["max_tokens"]:
             raise RuntimeError(f"sample {row['qa_id']} still exceeds max_tokens after downsampling")
@@ -364,13 +364,42 @@ def load_training_components(config: dict, attn_implementation: str):
         return processor, model
 
     processor = C.load_processor()
+    local_only = os.environ.get("HF_HUB_OFFLINE") == "1" or os.environ.get("TRANSFORMERS_OFFLINE") == "1"
     model = Qwen3VLForConditionalGeneration.from_pretrained(
         C.MODEL_ID,
         revision=C.MODEL_REV,
         dtype=torch.bfloat16,
         attn_implementation=attn_implementation,
+        local_files_only=local_only,
     )
+    pin_attention_implementation(model, attn_implementation)
     return processor, model
+
+
+def pin_attention_implementation(model, attn_implementation: str) -> None:
+    """Force text and vision configs onto the requested attention kernel.
+
+    Qwen3-VL vision reads ``vision_config._attn_implementation`` on every
+    forward. Loading can leave that nested config on SDPA, which then hits the
+    fused kernel that fails with cuModuleLoadData on this cluster.
+    """
+
+    configs = [getattr(model, "config", None)]
+    root = configs[0]
+    if root is not None:
+        configs.extend(getattr(root, name, None) for name in ("vision_config", "text_config"))
+    seen: set[int] = set()
+    for config in configs:
+        if config is None or id(config) in seen:
+            continue
+        seen.add(id(config))
+        if hasattr(config, "_attn_implementation"):
+            config._attn_implementation = attn_implementation
+    for module in model.modules():
+        config = getattr(module, "config", None)
+        if config is None or not hasattr(config, "_attn_implementation"):
+            continue
+        config._attn_implementation = attn_implementation
 
 
 def visual_merger_targets(model, include_deepstack: bool = False) -> list[str]:
@@ -611,20 +640,17 @@ class KernelStepCheck(TrainerCallback):
         self.marker = output / "KERNEL_SMOKE_STEP_OK"
         self.before = None
 
-    def _lora_tensors(self, model):
-        return {
-            name: parameter.detach().clone()
-            for name, parameter in model.named_parameters()
-            if parameter.requires_grad and "lora_" in name
-        }
-
     def on_step_begin(self, args, state, control, **kwargs):
         if self.marker.exists() or self.before is not None:
             return control
         model = kwargs.get("model")
         if model is None:
             raise RuntimeError("kernel smoke could not see the model to record LoRA weights")
-        self.before = self._lora_tensors(model)
+        self.before = {
+            name: parameter.detach().clone()
+            for name, parameter in model.named_parameters()
+            if parameter.requires_grad and "lora_" in name
+        }
         if not self.before:
             raise RuntimeError("kernel smoke found no trainable LoRA tensors")
         return control
@@ -691,6 +717,8 @@ def main() -> int:
         marker = os.environ.get("REVA_SMOKE_OK")
         if not marker or not Path(marker).is_file():
             raise RuntimeError("specialist training requires REVA_SMOKE_OK to point at an existing smoke marker")
+    if "b1_q3vl8b_hint16" in str(config.get("output_dir", "")):
+        raise RuntimeError("refusing to write the existing runs/b1_q3vl8b_hint16 tree")
     work = C.work_dir()
     output = C.work_path(config["output_dir"])
     output.mkdir(parents=True, exist_ok=True)
@@ -701,6 +729,19 @@ def main() -> int:
             raise RuntimeError(f"refusing to overwrite {output}; resolved config differs from config_snapshot.yaml")
         if not snapshot.exists():
             snapshot.write_text(incoming)
+    video_cfg = config.get("video", {})
+    frame_budget = int(video_cfg.get("frame_budget", config.get("frame_budget", C.MAX_FRAMES)))
+    raw_pixels = video_cfg.get("video_max_pixels", config.get("video_max_pixels"))
+    video_max_pixels = int(raw_pixels) if raw_pixels is not None else None
+    video_size = C.video_size_for(frame_budget, video_max_pixels)
+    C.write_run_meta(
+        output / "run_meta.json",
+        frame_budget=frame_budget,
+        video_max_pixels=video_max_pixels,
+        video_size=video_size,
+        train_json=str(config["train_json"]),
+        seed=int(config["seed"]),
+    )
     if (output / "DONE").exists():
         print(f"already complete: {output}")
         return 0
@@ -710,6 +751,10 @@ def main() -> int:
         raise RuntimeError("configured bf16 training is unavailable on this GPU")
     attn_implementation = config.get("attn_implementation", "sdpa")
     C.configure_attention_backend(attn_implementation)
+    print(
+        f"attn_implementation={attn_implementation} cudnn_enabled={torch.backends.cudnn.enabled}",
+        flush=True,
+    )
 
     seed = int(config["seed"])
     torch.manual_seed(seed)
@@ -799,7 +844,7 @@ def main() -> int:
     if config.get("specialist_contract"):
         print(
             f"specialist_contract={config['specialist_contract']} train_rows={len(dataset)} "
-            f"frame_budget={config.get('frame_budget')}",
+            f"frame_budget={dataset.frame_budget} video_size={dataset.video_size}",
             flush=True,
         )
     callbacks = [Stopper(output / "STOP"), StepBenchmark(total_steps, train_cfg.get("benchmark_steps", 50))]
@@ -828,8 +873,17 @@ def main() -> int:
         (output / "STOP").unlink()
         print("stopped after checkpoint; rerun to resume")
         return 0
-    adapted.save_pretrained(output / "final_adapter")
-    processor.save_pretrained(output / "final_adapter")
+    final_adapter = output / "final_adapter"
+    adapted.save_pretrained(final_adapter)
+    processor.save_pretrained(final_adapter)
+    C.write_run_meta(
+        final_adapter / "run_meta.json",
+        frame_budget=frame_budget,
+        video_max_pixels=video_max_pixels,
+        video_size=video_size,
+        train_json=str(config["train_json"]),
+        seed=int(config["seed"]),
+    )
     (output / "DONE").write_text("ok\n")
     print(f"training complete: {output}")
     return 0

@@ -24,7 +24,7 @@ Do not overwrite these local HPC files if they exist:
 
 | File | What changed | What may already differ on HPC |
 | --- | --- | --- |
-| `code/common.py` | `REVA_SDPA_MATH_ONLY=1` also disables flash and memory-efficient SDPA. Unset, behavior stays the previous cuDNN-off path. | Reported HPC helpers `video_size_for`, `motion_hint_text`, `run_meta`, and `assert_score_video_contract`, plus math-only SDPA. Keep those. This patch does not call `video_size_for`. |
+| `code/common.py` | Live file, kept: `video_size_for`, `motion_hint_text`, `run_meta`, `assert_score_video_contract`, and always-on math SDPA with cuDNN off. | Do not replace this with the older GitHub copy. |
 | `code/train.py` | Opt-in `train_tasks`, `frame_budget`, required hint checks, safe mirror, `kernel_smoke`, and `isolate_output`. Stage A/B configs leave the new keys unset. | The dataset loop may already differ. Merge the hooks; do not replace the HPC file with this copy. |
 | `code/score.py` | Move the model to CUDA before `load_peft_for_inference`. Optional `--tasks` and `--motion-hints` are recorded in the score manifest. Old manifests still match when those flags are absent. | Keep any HPC `assert_score_video_contract` / `run_meta` call. The GitHub file now has the CUDA-before-merge order the A100 forward probe used. |
 
@@ -38,11 +38,9 @@ That failed method is uncurated targeted Temporal Grounding letter-SFT, includin
 
 What the failure does not decide: Stage A already trained on mixed tasks and is not retracted. Perspective and Change Detection labels were not in this audit. The official A–D letters remain the evaluation target. The 10 supported ids are not a training allowlist.
 
-## 32-frame tokens
+## Pixel budget
 
-There is no `video_size_for` in this git tree. `code/common.py` defines one pixel budget, `VIDEO_SIZE = {shortest_edge: 131072, longest_edge: 16 * 640 * 640}`, and `_processor_call` passes that dict for every sample. `frame_budget: 32` changes only `sample_index_list`: a long clip requests 32 indices; a short clip keeps fewer. It does not change the pixel dict.
-
-`preserve_frame_budget: true` on the temporal configs calls `guard_token_budget` after the first encode. If `input_ids` is longer than `max_tokens: 12000`, training raises and does not call `downsample_video`. The motion configs leave that flag false, so they still use the Stage A one-step downsample. No GPU run has measured whether a 32-frame sample crosses 12000 tokens. An HPC `video_size_for`, if the live tree has one, is an extra function this patch does not call. Using it to shrink pixels would be a later change, not a dependency of the fail-closed check.
+The live `code/common.py` defines `video_size_for`. For 16 frames and no per-frame override it returns `longest_edge = 16 * 640 * 640`, the same cap as `VIDEO_SIZE`. The motion configs use that 16-frame size. A 32-frame call would scale the cap to `32 * 640 * 640`. Temporal configs stay blocked, so that path is not submitted. `preserve_frame_budget` still aborts a sample above 12000 tokens instead of dropping frames. No GPU run has measured that token count.
 
 ## Smoke work and wall cap
 
@@ -50,7 +48,7 @@ There is no `video_size_for` in this git tree. `code/common.py` defines one pixe
 
 The motion diagnostic is `code/configs/smoke_b1_hint16.yaml`: `max_steps: 5` and `grad_accum: 1`, so five training microbatches. The previous request was 8 steps at `grad_accum: 16`, which is 128 microbatches. The one-epoch motion specialist still uses `grad_accum: 16`. The diagnostic does not reproduce that accumulation; one backward is enough to see whether the backward kernel and one AdamW write run.
 
-`jobs/a100_train_smoke.sbatch` asks for `00:20:00` and does not resubmit. That limit is a kill cap. The reported inference startup is about 6 minutes, and the A100 forward probe was 9 minutes 15 seconds. Backward time is not known, so 20 minutes is not an ETA. If Slurm stops the job before `KERNEL_SMOKE_STEP_OK`, the result is inconclusive.
+`jobs/a100_train_smoke.sbatch` asks for `00:45:00` and does not resubmit. Probe 435943 put the model on CUDA at 368 seconds and finished one forward at 540 seconds. The forward itself, after encode, was 146.7 seconds. Load plus five forwards of that measured forward is 1102 seconds (18.4 minutes) and still includes no backward. A 20-minute cap sits only about 98 seconds above that lower bound, so it is too tight. Forty-five minutes is the ceiling already used by `jobs/cuda_probe.sbatch`. It is a kill cap, not an ETA. A stop before `KERNEL_SMOKE_STEP_OK` is inconclusive because backward time is unmeasured.
 
 ## Environment
 
@@ -68,7 +66,7 @@ export HF_HOME="$WORK/hf_cache"
 
 The wrappers also set `REVA_SDPA_MATH_ONLY=1`. They do not set `CUDA_LAUNCH_BLOCKING` or `CUDA_MODULE_LOADING`; those were probe diagnostics.
 
-Resources on every new GPU wrapper: partition `gpu_a100_8`, `--gres=gpu:nvidia_a100-sxm4-80gb:1`, 12 CPUs, 128G RAM. The motion diagnostic asks for 20 minutes and does not resubmit. The one-epoch motion train and score jobs still ask for `11:50:00` with a 15-minute USR1 checkpoint. A resubmit of those jobs resumes the same `SLURM_JOB_ID` directory. A new submission creates a new timestamped directory.
+Resources on every new GPU wrapper: partition `gpu_a100_8`, `--gres=gpu:nvidia_a100-sxm4-80gb:1`, 12 CPUs, 128G RAM. The motion diagnostic asks for 45 minutes and does not resubmit. The one-epoch motion train and score jobs still ask for `11:50:00` with a 15-minute USR1 checkpoint. A resubmit of those jobs resumes the same `SLURM_JOB_ID` directory. A new submission creates a new timestamped directory. The existing `runs/b1_q3vl8b_hint16` directory is not an output of these jobs.
 
 ## Data rules
 
@@ -110,7 +108,7 @@ python code/specialist_data.py validate-config code/configs/b2_frames32.yaml --a
 python code/specialist_data.py assert-training-allowed code/configs/smoke_b2_frames32.yaml
 python code/specialist_data.py assert-training-allowed code/configs/b2_frames32.yaml
 
-# Motion diagnostic (5 microbatches, 20-minute kill cap), then the 1-epoch motion specialist.
+# Motion diagnostic (5 microbatches, 45-minute kill cap), then the 1-epoch motion specialist.
 python code/specialist_data.py assert-training-allowed code/configs/smoke_b1_hint16.yaml
 sbatch jobs/a100_train_smoke.sbatch code/configs/smoke_b1_hint16.yaml
 # after that job's SMOKE_OK:
@@ -137,13 +135,35 @@ python code/specialist_data.py validate-config code/configs/b1_hint16_mirror.yam
 sbatch jobs/a100_train_specialist.sbatch code/configs/b1_hint16_mirror.yaml
 ```
 
-## What still waits for a live HPC audit
+## Deploy
 
-1. Diff `code/common.py`, `code/train.py`, and `code/score.py` against the copies on `/scratch/ambpdc/soham/ReVA` before copying anything.
-2. List `results/ensemble_ab_20261105/` and choose the prediction file. The filename is not in git.
-3. Read HPC `video_size_for` only if a 32-frame run is reconsidered after a new label audit. This tree does not call it.
-4. Run the hint audit on the real `data/camera_motion_hints.json`.
-5. Run the eligibility audit on `data/splits/{fit_A,valQ,valT,full_train}.json` and `data/ReVA/val.json`, and record the printed counts.
-6. Measure the first backward step. Until `KERNEL_SMOKE_STEP_OK` exists, backward runtime is unknown.
+Transfer `deploy/a100_motion_overlay/` to the executor. From that directory, with the live tree still matching `MANIFEST_BEFORE.sha256`:
 
-Do not submit `smoke_b2_frames32.yaml` or `b2_frames32.yaml` on the current labels. Do not treat this branch as deployment-ready.
+```bash
+bash deploy.sh --work /scratch/ambpdc/soham/ReVA
+bash preflight_motion.sh --work /scratch/ambpdc/soham/ReVA
+cd /scratch/ambpdc/soham/ReVA
+sbatch jobs/a100_train_smoke.sbatch code/configs/smoke_b1_hint16.yaml
+```
+
+Submit the one-epoch job only after that run's directory contains `SMOKE_OK`:
+
+```bash
+cd /scratch/ambpdc/soham/ReVA
+sbatch jobs/a100_train_specialist.sbatch code/configs/b1_hint16.yaml
+```
+
+Rollback, only if the installed files still match `MANIFEST_AFTER.sha256`:
+
+```bash
+bash rollback.sh --work /scratch/ambpdc/soham/ReVA
+```
+
+## What still waits for the executor
+
+1. The deploy script must see the before-hashes. If the live files changed after this archive, it refuses.
+2. `preflight_motion.sh` rechecks the Stage A weight hash, the 14119/595/1059/15773 split counts, and hints on all 2726 motion rows.
+3. Backward time is still unmeasured. The 45-minute diagnostic either writes `KERNEL_SMOKE_STEP_OK` or stops inconclusive.
+4. `results/ensemble_ab_20261105/` filenames are still not in this archive. Scoring and the routing gate wait until the diagnostic and the one-epoch run exist.
+
+Do not submit `smoke_b2_frames32.yaml` or `b2_frames32.yaml`. Do not delete `runs/b1_q3vl8b_hint16`. This branch is the overlay source, not a tree to pull.

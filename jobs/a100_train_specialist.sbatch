@@ -46,10 +46,14 @@ RESOLVED=$(a100_resolve_output "$CFG")
 OUT=$(dirname "$RESOLVED")
 mkdir -p "$OUT"
 nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv
+python code/specialist_data.py assert-adapter-sha --work "$WORK"
 python code/specialist_data.py audit-eligibility --work "$WORK" --out "$OUT/eligibility_audit.json"
 if python -c 'import sys,yaml; raise SystemExit(0 if yaml.safe_load(open(sys.argv[1])).get("motion_hints_required") else 1)' "$RESOLVED"; then
   mapfile -t TASKS < <(python -c 'import sys,yaml; print("\n".join(yaml.safe_load(open(sys.argv[1]))["train_tasks"]))' "$RESOLVED")
   python code/specialist_data.py audit-hints --work "$WORK" --out "$OUT/hint_audit.json" --tasks "${TASKS[@]}"
+  python code/specialist_data.py assert-live-counts "$OUT/eligibility_audit.json" --hints "$OUT/hint_audit.json"
+else
+  python code/specialist_data.py assert-live-counts "$OUT/eligibility_audit.json"
 fi
 if [[ -f "$OUT/DONE" ]]; then
   echo "specialist already complete: $OUT"

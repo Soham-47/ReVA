@@ -15,8 +15,11 @@ a100_prepare_env() {
   fi
   export HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false
   export HF_HOME="${HF_HOME:-$WORK/hf_cache}"
-  export PYTORCH_CUDA_ALLOC_CONF="${PYTORCH_CUDA_ALLOC_CONF:-expandable_segments:True}"
-  export REVA_SDPA_MATH_ONLY=1
+  export PYTHONUNBUFFERED=1
+  # Match the live jobs/train.sbatch allocator. Do not use the expandable-segments setting.
+  export PYTORCH_CUDA_ALLOC_CONF="${PYTORCH_CUDA_ALLOC_CONF:-max_split_size_mb:128}"
+  export TORCH_CUDNN_V8_API_DISABLED=1
+  export CUDNN_FRONTEND_DISABLE=1
   cd "$WORK"
 }
 

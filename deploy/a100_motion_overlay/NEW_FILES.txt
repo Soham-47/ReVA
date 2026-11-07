@@ -1,0 +1,9 @@
+code/specialist_data.py
+code/mirror_answers.py
+code/route_specialist.py
+jobs/a100_prepare.sh
+jobs/a100_train_smoke.sbatch
+jobs/a100_train_specialist.sbatch
+jobs/a100_score_specialist.sbatch
+jobs/a100_route_specialist.sh
+docs/a100_specialists_runbook.md

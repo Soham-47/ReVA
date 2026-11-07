@@ -27,6 +27,25 @@ B2_TASKS = ("Temporal Grounding",)
 MIRROR_TASKS = M.MIRROR_TASKS
 HINTS_REL = "data/camera_motion_hints.json"
 INIT_ADAPTER = "runs/stageA_q3vl8b_r16/final_adapter"
+STAGE_A_WEIGHTS = "runs/stageA_q3vl8b_r16/final_adapter/adapter_model.safetensors"
+STAGE_A_ADAPTER_SHA256 = "604bff63149edde707267a80353e9ffb080c3bcb4f280e6045101a43ebba7990"
+PRESERVED_RUN = "runs/b1_q3vl8b_hint16"
+LIVE_SPLIT_COUNTS = {
+    "fit_A": {"n_qa": 14119, "n_videos": 973},
+    "valQ": {"n_qa": 595, "n_videos": 432},
+    "valT": {"n_qa": 1059, "n_videos": 72},
+    "full_train": {"n_qa": 15773, "n_videos": 1045},
+}
+LIVE_FIT_TASK_ROWS = {
+    "Perspective and Viewpoint": 1826,
+    "Change Detection": 900,
+}
+LIVE_MOTION_ROWS = 2726
+LIVE_HINT_COUNT = 1047
+LIVE_HINT_SAMPLES = (
+    "Camera motion: 0.0s\u20130.8s panning right, slow; 0.8s\u20131.1s panning right, rapid; 1.1s\u20132.7s panning right, slow; 2.7s\u20135.8s panning right, rapid",
+    "Camera motion: 0.0s\u20132.3s hovering stationary; 2.3s\u20134.2s tilting up, slow; 4.2s\u20135.8s hovering stationary",
+)
 TRAIN_JSON = "data/splits/fit_A.json"
 
 _LEAKAGE = re.compile(
@@ -371,10 +390,49 @@ def eligibility_report(paths: dict[str, Path]) -> dict:
             "stageB_family_leaks_into_official_val": overlaps["full_train_val_qa"] > 0,
             "stageB_family_requires_official_val": True,
             "eligible_for_specialist_holdout": specialist_ok,
+            "full_train_id_union": _ids(rows["full_train"]) == (fit_ids | _ids(rows["valQ"]) | _ids(rows["valT"]))
+            and len(rows["full_train"]) == len(rows["fit_A"]) + len(rows["valQ"]) + len(rows["valT"]),
             "blocked_reason": "" if specialist_ok else "fit_A overlaps a holdout QA id or a valT video",
         }
     )
     return report
+
+
+def assert_live_preflight(report: dict, hint_report: dict | None = None) -> None:
+    """Refuse training unless the live split and hint counts match the 2026-11-07 audit."""
+
+    if report.get("missing_files"):
+        raise RuntimeError("live preflight is missing files: " + ", ".join(report["missing_files"]))
+    for name, expected in LIVE_SPLIT_COUNTS.items():
+        actual = report["files"][name]
+        if actual["n_qa"] != expected["n_qa"] or actual["n_videos"] != expected["n_videos"]:
+            raise RuntimeError(f"{name} counts {actual} != live audit {expected}")
+    for task, expected in LIVE_FIT_TASK_ROWS.items():
+        actual = report["fit_A_task_rows"][task]
+        if actual != expected:
+            raise RuntimeError(f"fit_A {task} rows {actual} != {expected}")
+    overlaps = report["overlaps"]
+    if overlaps["fit_A_valQ_qa"] or overlaps["fit_A_valT_qa"] or overlaps["fit_A_valT_videos"]:
+        raise RuntimeError(f"holdout QA or valT video overlap is not zero: {overlaps}")
+    if overlaps["fit_A_valQ_videos"] != LIVE_SPLIT_COUNTS["valQ"]["n_videos"]:
+        raise RuntimeError("valQ videos are not all inside fit_A")
+    if not report.get("full_train_id_union"):
+        raise RuntimeError("full_train is not the exact union of fit_A, valQ, and valT")
+    if hint_report is not None:
+        if hint_report.get("train_rows") != LIVE_MOTION_ROWS:
+            raise RuntimeError(f"motion training rows {hint_report.get('train_rows')} != {LIVE_MOTION_ROWS}")
+        if hint_report.get("hint_values_checked") != LIVE_MOTION_ROWS:
+            raise RuntimeError("not every Perspective and Change Detection training row had a hint")
+
+
+def assert_stage_a_adapter(work: Path) -> str:
+    path = work / STAGE_A_WEIGHTS
+    if not path.is_file():
+        raise FileNotFoundError(path)
+    digest = hashlib.sha256(path.read_bytes()).hexdigest()
+    if digest != STAGE_A_ADAPTER_SHA256:
+        raise RuntimeError(f"Stage A adapter sha256 {digest} != {STAGE_A_ADAPTER_SHA256}")
+    return digest
 
 
 def _close(actual, expected) -> bool:
@@ -554,6 +612,13 @@ def main(argv: list[str] | None = None) -> int:
     allowed = sub.add_parser("assert-training-allowed")
     allowed.add_argument("config")
 
+    live = sub.add_parser("assert-live-counts")
+    live.add_argument("eligibility")
+    live.add_argument("--hints")
+
+    adapter = sub.add_parser("assert-adapter-sha")
+    adapter.add_argument("--work")
+
     validate = sub.add_parser("validate-config")
     validate.add_argument("config")
     validate.add_argument("--allow-unresolved", action="store_true")
@@ -580,6 +645,15 @@ def main(argv: list[str] | None = None) -> int:
     marker.add_argument("--contract", required=True)
 
     args = parser.parse_args(argv)
+    if args.command == "assert-live-counts":
+        report = json.loads(Path(args.eligibility).read_text())
+        hint_report = json.loads(Path(args.hints).read_text()) if args.hints else None
+        assert_live_preflight(report, hint_report)
+        print(f"live counts match motion rows={LIVE_MOTION_ROWS}")
+        return 0
+    if args.command == "assert-adapter-sha":
+        print(assert_stage_a_adapter(_work_from_args(args)))
+        return 0
     if args.command == "assert-training-allowed":
         config = yaml.safe_load(Path(args.config).read_text())
         contract = validate_run_config(config, allow_unresolved=True)

@@ -1,5 +1,6 @@
 """CPU checks for A100 specialist contracts, hint audits, and the routing gate."""
 
+import hashlib
 import json
 import os
 import sys
@@ -193,10 +194,29 @@ class EligibilityAndHintTests(unittest.TestCase):
         self.assertEqual(len(C.sample_index_list(1000, 30.0, 0.0, frame_budget=32)), 32)
         self.assertEqual(len(C.sample_index_list(1000, 30.0, 0.0, frame_budget=16)), 16)
 
-    def test_pixel_budget_is_the_constant_and_video_size_for_is_absent(self):
-        self.assertFalse(hasattr(C, "video_size_for"))
-        self.assertEqual(C.VIDEO_SIZE["longest_edge"], 16 * 640 * 640)
-        self.assertIn("video_size_for", (ROOT / "code" / "specialist_data.py").read_text())
+    def test_live_hint_timelines_pass_the_strict_vocabulary(self):
+        for text in S.LIVE_HINT_SAMPLES:
+            S.validate_hint_text(text, strict_vocabulary=True)
+        self.assertEqual(S.LIVE_FIT_TASK_ROWS["Perspective and Viewpoint"] + S.LIVE_FIT_TASK_ROWS["Change Detection"], S.LIVE_MOTION_ROWS)
+
+    def test_video_size_for_scales_the_historical_pixel_cap(self):
+        self.assertEqual(C.video_size_for(16, None), C.VIDEO_SIZE)
+        self.assertEqual(C.video_size_for(16, None)["longest_edge"], 16 * 640 * 640)
+        self.assertEqual(C.video_size_for(32, None)["longest_edge"], 32 * 640 * 640)
+
+    def test_live_preflight_accepts_only_the_audited_counts(self):
+        report = {
+            "missing_files": [],
+            "files": {name: {"n_qa": counts["n_qa"], "n_videos": counts["n_videos"]} for name, counts in S.LIVE_SPLIT_COUNTS.items()},
+            "fit_A_task_rows": dict(S.LIVE_FIT_TASK_ROWS),
+            "overlaps": {"fit_A_valQ_qa": 0, "fit_A_valT_qa": 0, "fit_A_valT_videos": 0, "fit_A_valQ_videos": 432},
+            "full_train_id_union": True,
+        }
+        hints = {"train_rows": 2726, "hint_values_checked": 2726}
+        S.assert_live_preflight(report, hints)
+        report["files"]["fit_A"]["n_qa"] = 1
+        with self.assertRaises(RuntimeError):
+            S.assert_live_preflight(report, hints)
 
 
 class MirrorTests(unittest.TestCase):
@@ -357,12 +377,14 @@ class StaticJobTests(unittest.TestCase):
             self.assertNotIn("scancel", text)
             self.assertNotIn("432730", text)
         smoke = (ROOT / "jobs" / "a100_train_smoke.sbatch").read_text()
-        self.assertIn("#SBATCH -t 00:20:00", smoke)
+        self.assertIn("#SBATCH -t 00:45:00", smoke)
         self.assertNotIn("--requeue", smoke)
         self.assertNotIn("scontrol requeue", smoke)
         self.assertIn(R.ENSEMBLE_ARTIFACT_DIR, (ROOT / "code" / "route_specialist.py").read_text())
         self.assertNotIn("needs to be score JSONL", (ROOT / "docs" / "a100_specialists_runbook.md").read_text())
-        self.assertIn("REVA_SDPA_MATH_ONLY=1", (ROOT / "jobs" / "a100_prepare.sh").read_text())
+        prepare = (ROOT / "jobs" / "a100_prepare.sh").read_text()
+        self.assertIn("max_split_size_mb:128", prepare)
+        self.assertNotIn("expandable_segments", prepare)
         self.assertIn("activate_reva.sh", (ROOT / "jobs" / "a100_prepare.sh").read_text())
 
     def test_math_only_sdpa_is_opt_in(self):
@@ -385,19 +407,78 @@ class StaticJobTests(unittest.TestCase):
         cuda = Cuda()
         torch_module = type("Torch", (), {})()
         torch_module.backends = type("Backends", (), {"cuda": cuda})()
-        previous = os.environ.pop("REVA_SDPA_MATH_ONLY", None)
-        try:
-            C.configure_attention_backend("sdpa", torch_module)
-            self.assertEqual(cuda.calls, [("cudnn", False)])
-            os.environ["REVA_SDPA_MATH_ONLY"] = "1"
-            cuda.calls.clear()
-            C.configure_attention_backend("sdpa", torch_module)
-            self.assertEqual(cuda.calls, [("cudnn", False), ("flash", False), ("mem", False), ("math", True)])
-        finally:
-            if previous is None:
-                os.environ.pop("REVA_SDPA_MATH_ONLY", None)
-            else:
-                os.environ["REVA_SDPA_MATH_ONLY"] = previous
+        torch_module.backends.cudnn = type("Cudnn", (), {"enabled": True, "benchmark": True})()
+        C.configure_attention_backend("sdpa", torch_module)
+        self.assertFalse(torch_module.backends.cudnn.enabled)
+        self.assertEqual(
+            cuda.calls,
+            [("cudnn", False), ("flash", False), ("mem", False), ("math", True)],
+        )
+
+
+class OverlayDeployTests(unittest.TestCase):
+    def test_overlay_hashes_and_refuses_a_drifted_tree(self):
+        import subprocess
+
+        builder = ROOT / "deploy" / "a100_motion_overlay" / "build_overlay.py"
+        subprocess.check_call([sys.executable, str(builder)])
+        manifest = (ROOT / "deploy" / "a100_motion_overlay" / "MANIFEST_AFTER.sha256").read_text().splitlines()
+        self.assertGreaterEqual(len(manifest), 7)
+        for line in manifest:
+            digest, rel = line.split(None, 1)
+            payload = (ROOT / "deploy" / "a100_motion_overlay" / "overlay" / rel).read_bytes()
+            self.assertEqual(hashlib.sha256(payload).hexdigest(), digest)
+        with tempfile.TemporaryDirectory() as tmp:
+            work = Path(tmp)
+            (work / "code").mkdir()
+            (work / "code" / "common.py").write_text("drift\n")
+            completed = subprocess.run(
+                ["bash", str(ROOT / "deploy" / "a100_motion_overlay" / "deploy.sh"), "--work", str(work)],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertNotEqual(completed.returncode, 0)
+            self.assertIn("REFUSE", completed.stderr)
+
+    def test_overlay_round_trip_on_the_extracted_hpc_tree(self):
+        import subprocess
+
+        hpc = Path("/tmp/hpc")
+        if not (hpc / "code" / "common.py").is_file():
+            self.skipTest("extracted HPC tree is not available")
+        subprocess.check_call([sys.executable, str(ROOT / "deploy" / "a100_motion_overlay" / "build_overlay.py")])
+        with tempfile.TemporaryDirectory() as tmp:
+            work = Path(tmp) / "ReVA"
+            for rel in (
+                "code/common.py",
+                "code/train.py",
+                "code/score.py",
+                "code/configs/b1_hint16.yaml",
+                "code/configs/smoke_b1_hint16.yaml",
+                "code/configs/b2_frames32.yaml",
+                "code/configs/smoke_b2_frames32.yaml",
+            ):
+                target = work / rel
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes((hpc / rel).read_bytes())
+            (work / "runs" / "b1_q3vl8b_hint16").mkdir(parents=True)
+            (work / "runs" / "b1_q3vl8b_hint16" / "run_meta.json").write_text("{}\n")
+            deploy = ROOT / "deploy" / "a100_motion_overlay" / "deploy.sh"
+            subprocess.check_call(["bash", str(deploy), "--work", str(work)])
+            installed = (work / "code" / "configs" / "smoke_b1_hint16.yaml").read_text()
+            self.assertIn("grad_accum: 1", installed)
+            self.assertIn("max_steps: 5", installed)
+            self.assertTrue((work / "runs" / "b1_q3vl8b_hint16" / "run_meta.json").is_file())
+            self.assertIn("def video_size_for", (work / "code" / "common.py").read_text())
+            self.assertLess(
+                (work / "code" / "score.py").read_text().index("model.to(device)"),
+                (work / "code" / "score.py").read_text().index("load_peft_for_inference"),
+            )
+            subprocess.check_call(["bash", str(ROOT / "deploy" / "a100_motion_overlay" / "rollback.sh"), "--work", str(work)])
+            self.assertEqual((work / "code" / "common.py").read_bytes(), (hpc / "code" / "common.py").read_bytes())
+            self.assertFalse((work / "code" / "specialist_data.py").exists())
+            self.assertTrue((work / "runs" / "b1_q3vl8b_hint16" / "run_meta.json").is_file())
 
 
 if __name__ == "__main__":

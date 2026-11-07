@@ -26,7 +26,84 @@ DEFAULT_SCORE_OFFSETS = (0.0, 0.5)
 DEFAULT_SCORE_ROTS = 2
 FRAME_SAMPLING_MODES = ("legacy", "endpoints")
 DEFAULT_FRAME_SAMPLING = "legacy"
-VIDEO_SIZE = {"shortest_edge": 131072, "longest_edge": 16 * 640 * 640}
+DEFAULT_VIDEO_MAX_PIXELS = 640 * 640
+VIDEO_SIZE = {"shortest_edge": 131072, "longest_edge": MAX_FRAMES * DEFAULT_VIDEO_MAX_PIXELS}
+
+
+def video_size_for(frame_budget: int, video_max_pixels: int | None = None) -> dict[str, int]:
+    """Build processor ``size`` kwargs; defaults match historical 16×640×640 cap."""
+
+    budget = max(int(frame_budget), 1)
+    per_frame = int(video_max_pixels) if video_max_pixels is not None else DEFAULT_VIDEO_MAX_PIXELS
+    if per_frame < 1:
+        raise ValueError("video_max_pixels must be positive")
+    return {"shortest_edge": 131072, "longest_edge": budget * per_frame}
+
+
+def motion_hint_text(cache: dict[str, str] | None, video_path: str) -> str | None:
+    if not cache:
+        return None
+    return cache.get(video_path)
+
+
+def write_run_meta(
+    path: Path,
+    *,
+    frame_budget: int,
+    video_max_pixels: int | None,
+    video_size: dict[str, int],
+    train_json: str,
+    seed: int,
+) -> None:
+    payload = {
+        "frame_budget": int(frame_budget),
+        "video_max_pixels": video_max_pixels,
+        "video_size": video_size,
+        "train_json": train_json,
+        "seed": int(seed),
+        "model_id": MODEL_ID,
+        "model_revision": MODEL_REV,
+    }
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w") as handle:
+        json.dump(payload, handle, indent=2, sort_keys=True)
+        handle.write("\n")
+
+
+def read_run_meta(adapter_dir: Path) -> dict[str, Any] | None:
+    meta_path = adapter_dir / "run_meta.json"
+    if not meta_path.is_file():
+        return None
+    with meta_path.open() as handle:
+        return json.load(handle)
+
+
+def assert_score_video_contract(
+    adapter_dir: Path,
+    *,
+    frame_budget: int,
+    video_max_pixels: int | None,
+) -> None:
+    run_meta = read_run_meta(adapter_dir)
+    if run_meta is None:
+        if int(frame_budget) != MAX_FRAMES or video_max_pixels is not None:
+            raise RuntimeError(
+                "legacy adapter has no run_meta.json; scoring requires default "
+                f"frame_budget={MAX_FRAMES} and no --video-max-pixels override"
+            )
+        return
+    expected_budget = int(run_meta["frame_budget"])
+    expected_pixels = run_meta.get("video_max_pixels")
+    if int(frame_budget) != expected_budget:
+        raise RuntimeError(
+            f"frame_budget {frame_budget} != adapter run_meta {expected_budget}; refusing to score"
+        )
+    if video_max_pixels != expected_pixels and not (
+        video_max_pixels is None and expected_pixels is None
+    ):
+        raise RuntimeError(
+            f"video_max_pixels {video_max_pixels!r} != adapter run_meta {expected_pixels!r}; refusing to score"
+        )
 SYSTEM_PROMPT = (
     "You are an expert analyst of aerial drone (UAV) videos. Watch every frame carefully. "
     "Pay attention to small objects, counts, camera motion versus object motion, spatial layout, "
@@ -86,32 +163,29 @@ def estimate_training_hours(
 
 
 def configure_attention_backend(attn_implementation: str, torch_module=None) -> None:
-    """Keep Qwen vision SDPA off the unstable cuDNN fused-MHA path on H200."""
+    """Disable fused CUDA kernels that crash Qwen3-VL vision on this cluster.
 
-    if attn_implementation != "sdpa":
-        return
+    ``cuModuleLoadData`` / ``image cannot be NULL`` showed up on both H200 and
+    H100 with torch 2.14 + cuDNN SDPA, flash SDPA, and cuDNN conv. Math SDPA
+    and eager attention stay available; fused backends stay off for every run.
+    """
+
     if torch_module is None:
         import torch as torch_module
-    enable_cudnn_sdp = getattr(torch_module.backends.cuda, "enable_cudnn_sdp", None)
-    if enable_cudnn_sdp is None:
-        raise RuntimeError("the installed PyTorch build has no cuDNN SDPA control")
-    enable_cudnn_sdp(False)
-    if os.environ.get("REVA_SDPA_MATH_ONLY") == "1":
-        flash = getattr(torch_module.backends.cuda, "enable_flash_sdp", None)
-        mem = getattr(torch_module.backends.cuda, "enable_mem_efficient_sdp", None)
-        math_sdp = getattr(torch_module.backends.cuda, "enable_math_sdp", None)
-        missing = [
-            name
-            for name, fn in (("flash", flash), ("mem_efficient", mem), ("math", math_sdp))
-            if fn is None
-        ]
-        if missing:
-            raise RuntimeError(
-                "REVA_SDPA_MATH_ONLY=1 but this PyTorch build lacks SDPA toggles: " + ", ".join(missing)
-            )
-        flash(False)
-        mem(False)
-        math_sdp(True)
+    torch_module.backends.cudnn.enabled = False
+    torch_module.backends.cudnn.benchmark = False
+    cuda_backends = torch_module.backends.cuda
+    for name, enabled in (
+        ("enable_cudnn_sdp", False),
+        ("enable_flash_sdp", False),
+        ("enable_mem_efficient_sdp", False),
+        ("enable_math_sdp", True),
+    ):
+        toggle = getattr(cuda_backends, name, None)
+        if toggle is not None:
+            toggle(enabled)
+    if attn_implementation not in {"sdpa", "eager"}:
+        raise ValueError(f"unsupported attn_implementation: {attn_implementation}")
 
 
 def path_checksum(path: str | os.PathLike[str]) -> str:
@@ -428,7 +502,8 @@ def downsample_video(frames: Any, meta: Any):
 def load_processor():
     from transformers import AutoProcessor
 
-    return AutoProcessor.from_pretrained(MODEL_ID, revision=MODEL_REV)
+    local_only = os.environ.get("HF_HUB_OFFLINE") == "1" or os.environ.get("TRANSFORMERS_OFFLINE") == "1"
+    return AutoProcessor.from_pretrained(MODEL_ID, revision=MODEL_REV, local_files_only=local_only)
 
 
 def load_peft_adapters(model, adapter_path: str | os.PathLike[str]):
@@ -521,10 +596,10 @@ def user_text(q: dict[str, Any], shown: dict[str, str]) -> str:
     )
 
 
-def _processor_call(processor, text: str, frames: Any, meta: Any):
+def _processor_call(processor, text: str, frames: Any, meta: Any, video_size: dict[str, int] | None = None):
     videos_kwargs = {
         "do_sample_frames": False,
-        "size": VIDEO_SIZE,
+        "size": video_size or VIDEO_SIZE,
         "cap_pixels_per_frame": True,
         "video_metadata": meta,
     }
@@ -568,6 +643,7 @@ def encode(
     enable_thinking: bool | None = None,
     temporal_token_ids: Iterable[int] | None = None,
     temporal_supervision: bool | None = None,
+    video_size: dict[str, int] | None = None,
 ):
     """Build the exact train/inference encoding and optional answer/time labels.
 
@@ -607,7 +683,7 @@ def encode(
     if enable_thinking is not None:
         chat_kwargs["enable_thinking"] = bool(enable_thinking)
     text = processor.apply_chat_template(messages, **chat_kwargs)
-    raw = _processor_call(processor, text, frames, meta)
+    raw = _processor_call(processor, text, frames, meta, video_size=video_size)
     allowed = {
         "input_ids",
         "attention_mask",
