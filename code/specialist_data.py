@@ -221,11 +221,17 @@ def coerce_motion_text(value, formatter=None) -> str:
     return text
 
 
+# ORB could not lock a motion class. This is unknown motion, not hovering stationary.
+UNCLEAR_MOTION_SENTINEL = "Camera motion: unclear."
+
+
 def validate_hint_text(text: str, *, strict_vocabulary: bool) -> None:
     if _LEAKAGE.search(text):
         raise ValueError("motion hint text contains answer or QA-id language")
     if text.strip() in C.LETTERS:
         raise ValueError("motion hint text is a bare answer letter")
+    if text == UNCLEAR_MOTION_SENTINEL:
+        return
     if not strict_vocabulary:
         return
     if text == "Camera motion: unavailable":
@@ -237,6 +243,13 @@ def validate_hint_text(text: str, *, strict_vocabulary: bool) -> None:
     unexpected = sorted({word.lower() for word in words if word.lower() not in _HINT_WORDS})
     if unexpected:
         raise ValueError(f"motion hint has words outside the pixel-motion vocabulary: {unexpected}")
+
+
+def checked_motion_hint(text: str, *, strict_vocabulary: bool = True) -> str:
+    """Return the hint unchanged when it passes the same check used for training."""
+
+    validate_hint_text(text, strict_vocabulary=strict_vocabulary)
+    return text
 
 
 def motion_context_for(table, video_path: str, *, required: bool, strict_vocabulary: bool, formatter=None) -> str | None:
@@ -416,6 +429,9 @@ def assert_live_preflight(report: dict, hint_report: dict | None = None) -> None
         raise RuntimeError(f"holdout QA or valT video overlap is not zero: {overlaps}")
     if overlaps["fit_A_valQ_videos"] != LIVE_SPLIT_COUNTS["valQ"]["n_videos"]:
         raise RuntimeError("valQ videos are not all inside fit_A")
+    # Official val can share videos with fit_A when the QA ids do not. The
+    # 2026-11-07 preflight observed 349 shared videos. That is not a video
+    # holdout, so this check does not require fit_A_val_videos == 0.
     if not report.get("full_train_id_union"):
         raise RuntimeError("full_train is not the exact union of fit_A, valQ, and valT")
     if hint_report is not None:

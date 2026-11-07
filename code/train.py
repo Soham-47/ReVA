@@ -225,7 +225,9 @@ class ReVATrain(Dataset):
         if self.motion_hints_required and not motion_context:
             raise KeyError(f"motion hint missing for training video {row['video_path']!r}")
         if motion_context and (self.motion_hints_required or self.strict_hint_vocabulary):
-            S.validate_hint_text(motion_context, strict_vocabulary=self.strict_hint_vocabulary)
+            motion_context = S.checked_motion_hint(
+                motion_context, strict_vocabulary=self.strict_hint_vocabulary
+            )
             if row_for_model is not row:
                 motion_context = M.swap_left_right(motion_context)
         temporal_ids = None

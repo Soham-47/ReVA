@@ -2,19 +2,27 @@
 # CPU checks before the motion diagnostic. Does not submit a job.
 set -euo pipefail
 
-WORK="${WORK:-/scratch/ambpdc/soham/ReVA}"
+WORK_FROM_FLAG=""
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --work)
-      WORK=$2
+      WORK_FROM_FLAG=$2
       shift 2
       ;;
     *)
-      echo "usage: bash deploy/a100_motion_overlay/preflight_motion.sh --work WORK" >&2
+      echo "usage: bash preflight_motion.sh --work /scratch/ambpdc/soham/ReVA" >&2
       exit 2
       ;;
   esac
 done
+if [[ -n "$WORK_FROM_FLAG" ]]; then
+  WORK=$WORK_FROM_FLAG
+elif [[ -z "${WORK:-}" ]]; then
+  WORK=/scratch/ambpdc/soham/ReVA
+fi
+export WORK
+# shellcheck disable=SC1091
+source "$WORK/jobs/activate_reva.sh"
 cd "$WORK"
 
 python code/specialist_data.py assert-training-allowed code/configs/smoke_b1_hint16.yaml
@@ -49,7 +57,7 @@ if [[ -d "$WORK/runs/b1_q3vl8b_hint16" ]]; then
 fi
 echo "PREFLIGHT_OK"
 echo "Submit the motion diagnostic only:"
-echo "  cd $WORK && sbatch jobs/a100_train_smoke.sbatch code/configs/smoke_b1_hint16.yaml"
+echo "  cd $WORK && sbatch --export=ALL,WORK=$WORK jobs/a100_train_smoke.sbatch code/configs/smoke_b1_hint16.yaml"
 echo "After that directory contains SMOKE_OK, submit the one-epoch motion specialist:"
-echo "  cd $WORK && sbatch jobs/a100_train_specialist.sbatch code/configs/b1_hint16.yaml"
+echo "  cd $WORK && sbatch --export=ALL,WORK=$WORK jobs/a100_train_specialist.sbatch code/configs/b1_hint16.yaml"
 echo "Do not submit smoke_b2_frames32.yaml or b2_frames32.yaml."

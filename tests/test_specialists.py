@@ -196,8 +196,24 @@ class EligibilityAndHintTests(unittest.TestCase):
 
     def test_live_hint_timelines_pass_the_strict_vocabulary(self):
         for text in S.LIVE_HINT_SAMPLES:
-            S.validate_hint_text(text, strict_vocabulary=True)
+            self.assertEqual(S.checked_motion_hint(text), text)
         self.assertEqual(S.LIVE_FIT_TASK_ROWS["Perspective and Viewpoint"] + S.LIVE_FIT_TASK_ROWS["Change Detection"], S.LIVE_MOTION_ROWS)
+
+    def test_unclear_sentinel_is_exact_and_not_stationary(self):
+        sentinel = "Camera motion: unclear."
+        self.assertEqual(S.checked_motion_hint(sentinel), sentinel)
+        self.assertNotIn("stationary", sentinel)
+        for rejected in (
+            "Camera motion: unclear",
+            "Camera motion: Unclear.",
+            "Camera motion: unclear stationary",
+            "Camera motion: hovering unclear",
+            "unclear",
+        ):
+            with self.assertRaises(ValueError):
+                S.validate_hint_text(rejected, strict_vocabulary=True)
+        with self.assertRaises(ValueError):
+            S.validate_hint_text("Camera motion: the answer is B", strict_vocabulary=True)
 
     def test_video_size_for_scales_the_historical_pixel_cap(self):
         self.assertEqual(C.video_size_for(16, None), C.VIDEO_SIZE)
@@ -213,6 +229,7 @@ class EligibilityAndHintTests(unittest.TestCase):
             "full_train_id_union": True,
         }
         hints = {"train_rows": 2726, "hint_values_checked": 2726}
+        report["overlaps"]["fit_A_val_videos"] = 349
         S.assert_live_preflight(report, hints)
         report["files"]["fit_A"]["n_qa"] = 1
         with self.assertRaises(RuntimeError):
@@ -479,6 +496,65 @@ class OverlayDeployTests(unittest.TestCase):
             self.assertEqual((work / "code" / "common.py").read_bytes(), (hpc / "code" / "common.py").read_bytes())
             self.assertFalse((work / "code" / "specialist_data.py").exists())
             self.assertTrue((work / "runs" / "b1_q3vl8b_hint16" / "run_meta.json").is_file())
+
+    def test_unclear_delta_applies_to_the_installed_ade2841_hashes(self):
+        import subprocess
+
+        subprocess.check_call([sys.executable, str(ROOT / "deploy" / "a100_motion_delta_unclear" / "build_delta.py")])
+        delta = ROOT / "deploy" / "a100_motion_delta_unclear"
+        installed_text = subprocess.check_output(
+            ["git", "show", "HEAD:deploy/a100_motion_overlay/MANIFEST_AFTER.sha256"],
+            text=True,
+        )
+        installed = {
+            line.split(None, 1)[1]: line.split(None, 1)[0]
+            for line in installed_text.splitlines()
+            if line.strip()
+        }
+        for line in (delta / "MANIFEST_BEFORE.sha256").read_text().splitlines():
+            digest, rel = line.split(None, 1)
+            self.assertEqual(installed[rel], digest)
+        with tempfile.TemporaryDirectory() as tmp:
+            work = Path(tmp) / "ReVA"
+            for line in (delta / "MANIFEST_BEFORE.sha256").read_text().splitlines():
+                digest, rel = line.split(None, 1)
+                target = work / rel
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(
+                    subprocess.check_output(["git", "show", f"HEAD:deploy/a100_motion_overlay/overlay/{rel}"])
+                )
+                self.assertEqual(hashlib.sha256(target.read_bytes()).hexdigest(), digest)
+            subprocess.check_call(["bash", str(delta / "deploy.sh"), "--work", str(work)])
+            text = (work / "code" / "specialist_data.py").read_text()
+            self.assertIn('UNCLEAR_MOTION_SENTINEL = "Camera motion: unclear."', text)
+            subprocess.check_call(["bash", str(delta / "rollback.sh"), "--work", str(work)])
+            self.assertEqual(
+                hashlib.sha256((work / "code" / "specialist_data.py").read_bytes()).hexdigest(),
+                installed["code/specialist_data.py"],
+            )
+
+    def test_preflight_exports_work_before_sourcing_activate(self):
+        import os
+        import subprocess
+
+        with tempfile.TemporaryDirectory() as tmp:
+            work = Path(tmp) / "ReVA"
+            activate = work / "jobs" / "activate_reva.sh"
+            activate.parent.mkdir(parents=True)
+            activate.write_text("#!/bin/bash\nprintf '%s\\n' \"$WORK\" > \"$WORK/seen_work\"\n")
+            activate.chmod(0o755)
+            script = ROOT / "deploy" / "a100_motion_overlay" / "preflight_motion.sh"
+            env = os.environ.copy()
+            env.pop("WORK", None)
+            completed = subprocess.run(
+                ["bash", str(script), "--work", str(work)],
+                check=False,
+                capture_output=True,
+                text=True,
+                env=env,
+            )
+            self.assertEqual((work / "seen_work").read_text().strip(), str(work))
+            self.assertNotEqual(completed.returncode, 0)
 
 
 if __name__ == "__main__":

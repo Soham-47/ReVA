@@ -76,15 +76,15 @@ Training reads only `data/splits/fit_A.json`, then keeps the task names in the c
 - Temporal recipe (`b2_frames32`): recorded, not launchable. `Temporal Grounding`, `frame_budget: 32`, no motion hints, `training_blocked: EXP-010`.
 - Mirror ablation (`b1_hint16_mirror`): secondary. Geometric Relation, Perspective and Viewpoint, and Change Detection. A row is flipped only when left/right can be swapped and the gold text lands on exactly one rewritten option. Clockwise, forward/back, up/down, and similar wording skips that row. Score the ablation without flipping.
 
-Hints must be a flat video-path map. Strings must use the audited `Camera motion:` vocabulary from the ORB builder, or `Camera motion: unavailable`. Object values are accepted only through HPC `common.motion_hint_text`. Wrapped documents, QA-id keys, and answer language fail the audit. Row counts are whatever the audit prints on the cluster; this checkout does not contain `data/`.
+Hints must be a flat video-path map. Strings must use the audited `Camera motion:` vocabulary from the ORB builder, the exact unavailable sentence, or the exact unknown-motion sentence `Camera motion: unclear.` That sentence means the estimator did not lock a class. It is not rewritten to hovering stationary. Any other use of "unclear" still fails. Object values are accepted only through HPC `common.motion_hint_text`. Wrapped documents, QA-id keys, and answer language fail the audit. The live preflight still requires 2726 motion rows, 1826 Perspective and Viewpoint and 900 Change Detection, each with a hint.
 
-`valQ` / `valT` are usable for a specialist only when the eligibility audit says `fit_A` shares no QA ids with them and no video with `valT`. `valQ` can still share videos with `fit_A`; that is question holdout, not video holdout. Stage B trained on `full_train`, so A+B comparisons on `valQ` or `valT` are refused. Compare A+B on official `data/ReVA/val.json`, and only if that file is also disjoint from `full_train`.
+`valQ` / `valT` are usable for a specialist only when the eligibility audit says `fit_A` shares no QA ids with them and no video with `valT`. `valQ` shares all 432 of its videos with `fit_A`; that is question holdout, not video holdout. Official `data/ReVA/val.json` is the same kind of label holdout when its QA ids are absent from `fit_A`. The 2026-11-07 preflight passed with 349 shared official-val videos and no shared QA ids. The gate does not require those videos to be disjoint. Stage B trained on `full_train`, so A+B comparisons on `valQ` or `valT` are refused. Compare A+B on official val.
 
 The routing rule, fixed before any specialist score exists: on the target-task slice, net fixes (fixes minus regressions) at least 2 and regressions at most 1, with every target row present in both files. A pass writes `routed_<split>_<family>.jsonl`. A failure writes only the gate JSON. This is a routing policy, not an accuracy claim. Task-filtered score files are incomplete for `code/evaluate.py`; use that evaluator only on a full split.
 
 ## Baseline paths
 
-`results/ensemble_ab_20261105/` is the reported Nov 5 A+B artifact directory. It is not in this checkout, so no filename inside it is known here.
+`results/ensemble_ab_20261105/` contains `scores_val_ab_mean.jsonl`, `scores_test_ab_mean.jsonl`, `summary_val.json`, `summary_test.json`, and `README.md`. Those filenames were verified on the live tree. This checkout does not contain the files, so their record schema is not re-derived here. Use `scores_val_ab_mean.jsonl` as the val baseline once its rows match a shape the router already accepts.
 
 `tools/ensemble_scores.py` and `tools/paired_gate.py` are HPC-local scripts. They are not the score file. This repo does not contain either script.
 
@@ -110,9 +110,9 @@ python code/specialist_data.py assert-training-allowed code/configs/b2_frames32.
 
 # Motion diagnostic (5 microbatches, 45-minute kill cap), then the 1-epoch motion specialist.
 python code/specialist_data.py assert-training-allowed code/configs/smoke_b1_hint16.yaml
-sbatch jobs/a100_train_smoke.sbatch code/configs/smoke_b1_hint16.yaml
+sbatch --export=ALL,WORK=/scratch/ambpdc/soham/ReVA jobs/a100_train_smoke.sbatch code/configs/smoke_b1_hint16.yaml
 # after that job's SMOKE_OK:
-sbatch jobs/a100_train_specialist.sbatch code/configs/b1_hint16.yaml
+sbatch --export=ALL,WORK=/scratch/ambpdc/soham/ReVA jobs/a100_train_specialist.sbatch code/configs/b1_hint16.yaml
 ```
 
 Score only after `DONE` in that run's timestamped directory. `RUN_DIR` is the printed `runs/specialists/.../<stamp>_<jobid>` path.
@@ -135,25 +135,29 @@ python code/specialist_data.py validate-config code/configs/b1_hint16_mirror.yam
 sbatch jobs/a100_train_specialist.sbatch code/configs/b1_hint16_mirror.yaml
 ```
 
-## Deploy
+## Unclear-hint delta
 
-Transfer `deploy/a100_motion_overlay/` to the executor. From that directory, with the live tree still matching `MANIFEST_BEFORE.sha256`:
+`deploy/a100_motion_delta_unclear/` installs onto the ade2841 overlay already on the live tree. Its before-hashes are that install's `MANIFEST_AFTER` entries, not the original pre-overlay hashes. Run its `preflight_motion.sh`, which exports `WORK` from `--work` before sourcing `jobs/activate_reva.sh`.
 
 ```bash
+tar -xzf a100_motion_delta_unclear.tgz
+cd a100_motion_delta_unclear
 bash deploy.sh --work /scratch/ambpdc/soham/ReVA
 bash preflight_motion.sh --work /scratch/ambpdc/soham/ReVA
 cd /scratch/ambpdc/soham/ReVA
-sbatch jobs/a100_train_smoke.sbatch code/configs/smoke_b1_hint16.yaml
+sbatch --export=ALL,WORK=/scratch/ambpdc/soham/ReVA jobs/a100_train_smoke.sbatch code/configs/smoke_b1_hint16.yaml
 ```
 
-Submit the one-epoch job only after that run's directory contains `SMOKE_OK`:
+The first overlay remains `deploy/a100_motion_overlay/`. It was for the pre-ade2841 tree. Do not run it again.
+
+After the diagnostic directory contains `SMOKE_OK`:
 
 ```bash
 cd /scratch/ambpdc/soham/ReVA
-sbatch jobs/a100_train_specialist.sbatch code/configs/b1_hint16.yaml
+sbatch --export=ALL,WORK=/scratch/ambpdc/soham/ReVA jobs/a100_train_specialist.sbatch code/configs/b1_hint16.yaml
 ```
 
-Rollback, only if the installed files still match `MANIFEST_AFTER.sha256`:
+Rollback the unclear delta only if the installed files still match its `MANIFEST_AFTER.sha256`:
 
 ```bash
 bash rollback.sh --work /scratch/ambpdc/soham/ReVA

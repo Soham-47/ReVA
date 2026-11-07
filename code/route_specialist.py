@@ -20,6 +20,8 @@ MAX_REGRESSIONS = 1
 _STAGE_B_FAMILIES = {"stageB", "ensemble_ab"}
 # The Nov 5 A+B result is a directory. The HPC scripts are generators, not that result.
 ENSEMBLE_ARTIFACT_DIR = "results/ensemble_ab_20261105"
+ENSEMBLE_VAL_SCORES = "results/ensemble_ab_20261105/scores_val_ab_mean.jsonl"
+ENSEMBLE_TEST_SCORES = "results/ensemble_ab_20261105/scores_test_ab_mean.jsonl"
 ENSEMBLE_GENERATOR = "tools/ensemble_scores.py"
 PAIRED_GATE_SCRIPT = "tools/paired_gate.py"
 # Letter-logit files this repo's scorer writes. Stage A legacy copies use this shape.

@@ -12,6 +12,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common as C
+import specialist_data as S
 
 SPLITS = {
     "valT": "data/splits/valT.json",
@@ -177,6 +178,10 @@ def main() -> int:
                     row["video_path"], offset, mode=args.frame_sampling, frame_budget=args.frame_budget
                 )
                 motion_context = C.motion_hint_text(motion_hints, row["video_path"])
+                if motion_hints is not None:
+                    if not motion_context:
+                        raise KeyError(f"motion hint missing for scoring video {row['video_path']!r}")
+                    motion_context = S.checked_motion_hint(motion_context)
                 for permutation in rotations:
                     encoded, actual_perm = C.encode(
                         processor,
