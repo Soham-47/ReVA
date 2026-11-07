@@ -686,6 +686,7 @@ def main() -> int:
         config = yaml.safe_load(f)
     if config.get("specialist_contract"):
         S.validate_run_config(config)
+        S.assert_training_allowed(str(config["specialist_contract"]))
     if config.get("require_smoke_marker"):
         marker = os.environ.get("REVA_SMOKE_OK")
         if not marker or not Path(marker).is_file():

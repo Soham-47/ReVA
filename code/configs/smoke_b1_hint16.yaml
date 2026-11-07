@@ -1,4 +1,4 @@
-# 8 optimizer steps of the motion specialist. This is the kernel smoke, not the 1-epoch run.
+# Diagnostic only: 5 optimizer steps at grad_accum 1. Not the 1-epoch specialist.
 run_name: smoke_b1_hint16
 specialist_contract: smoke_b1
 kernel_smoke: true
@@ -24,17 +24,17 @@ lora:
   dropout: 0.05
 train:
   epochs: 1
-  max_steps: 8
+  max_steps: 5
   lr: 2.0e-4
   weight_decay: 0.0
   warmup_ratio: 0.03
   scheduler: cosine
-  grad_accum: 16
+  grad_accum: 1
   max_grad_norm: 1.0
   bf16: true
   gradient_checkpointing: true
   max_tokens: 12000
-  save_steps: 8
+  save_steps: 5
   save_total_limit: 2
   logging_steps: 1
   dataloader_workers: 8

@@ -34,6 +34,7 @@ source jobs/a100_prepare.sh
 a100_prepare_env
 # shellcheck disable=SC1091
 source jobs/wait_child.sh
+python code/specialist_data.py assert-training-allowed "$CFG"
 python code/specialist_data.py validate-config "$CFG" --allow-unresolved >/dev/null
 
 SMOKE_RUN=$(python -c 'import sys,yaml; print(yaml.safe_load(open(sys.argv[1]))["requires_smoke_run"])' "$CFG")

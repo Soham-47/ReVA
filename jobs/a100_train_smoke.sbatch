@@ -1,14 +1,14 @@
 #!/bin/bash
-# A100-80GB kernel smoke: Trainer forward, backward, and AdamW. Does not start the 1-epoch run.
+# A100 kernel diagnostic: 5 forward/backward/AdamW steps at grad_accum 1.
+# Wall limit is a kill cap, not an ETA. Reported inference startup is about 6 minutes
+# and the forward probe was 9m15s. Backward duration is unmeasured. No resubmit.
 #SBATCH -p gpu_a100_8
 #SBATCH -N 1
 #SBATCH -n 1
 #SBATCH -c 12
 #SBATCH --gres=gpu:nvidia_a100-sxm4-80gb:1
 #SBATCH --mem=128G
-#SBATCH -t 06:00:00
-#SBATCH --signal=B:USR1@900
-#SBATCH --requeue
+#SBATCH -t 00:20:00
 #SBATCH --open-mode=append
 #SBATCH -J reva_a100_smoke
 #SBATCH -o reva_a100_smoke_%j.out
@@ -32,8 +32,7 @@ cd "$WORK"
 # shellcheck disable=SC1091
 source jobs/a100_prepare.sh
 a100_prepare_env
-# shellcheck disable=SC1091
-source jobs/wait_child.sh
+python code/specialist_data.py assert-training-allowed "$CFG"
 python code/specialist_data.py validate-config "$CFG" --allow-unresolved >/dev/null
 
 RESOLVED=$(a100_resolve_output "$CFG")
@@ -50,21 +49,10 @@ if [[ -f "$OUT/DONE" && -f "$OUT/SMOKE_OK" && -f "$OUT/KERNEL_SMOKE_STEP_OK" ]];
   exit 0
 fi
 
-pid=""
-graceful=0
-on_usr1() {
-  echo "$(date -Is) received USR1; requesting checkpoint and graceful stop"
-  graceful=1
-  if [[ -n ${pid:-} ]]; then
-    touch "$OUT/STOP"
-  fi
-}
-trap on_usr1 USR1
-python code/train.py "$RESOLVED" &
-pid=$!
-rc=0
-wait_child "$pid" || rc=$?
-pid=""
+set +e
+python code/train.py "$RESOLVED"
+rc=$?
+set -e
 if [[ -f "$OUT/DONE" && -f "$OUT/KERNEL_SMOKE_STEP_OK" ]]; then
   python - "$OUT" <<'PY'
 import json
@@ -83,12 +71,7 @@ PY
   echo "kernel smoke complete: $OUT"
   exit 0
 fi
-if ((graceful)); then
-  echo "timeout during kernel smoke; requeueing from the latest checkpoint"
-  scontrol requeue "$SLURM_JOB_ID"
-  exit 0
-fi
-echo "kernel smoke failed (rc=$rc); not requeueing" >&2
+echo "kernel smoke stopped (rc=$rc) before KERNEL_SMOKE_STEP_OK. A wall-clock stop is inconclusive; backward time was not measured." >&2
 if ((rc == 0)); then
   rc=1
 fi

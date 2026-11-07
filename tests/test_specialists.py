@@ -68,6 +68,22 @@ class SpecialistContractTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             S.validate_run_config(config, allow_unresolved=True)
 
+    def test_temporal_training_stays_blocked_and_motion_smoke_is_five_steps(self):
+        smoke = yaml.safe_load((ROOT / "code" / "configs" / "smoke_b1_hint16.yaml").read_text())
+        self.assertEqual(smoke["train"]["max_steps"], 5)
+        self.assertEqual(smoke["train"]["grad_accum"], 1)
+        S.assert_training_allowed("smoke_b1")
+        S.assert_training_allowed("b1")
+        for name in ("smoke_b2_frames32.yaml", "b2_frames32.yaml"):
+            config = yaml.safe_load((ROOT / "code" / "configs" / name).read_text())
+            self.assertEqual(config["training_blocked"], "EXP-010")
+            with self.assertRaises(RuntimeError):
+                S.assert_training_allowed(config["specialist_contract"])
+        specialist = yaml.safe_load((ROOT / "code" / "configs" / "b1_hint16.yaml").read_text())
+        self.assertEqual(specialist["train"]["grad_accum"], 16)
+        self.assertEqual(specialist["train"]["epochs"], 1)
+        self.assertNotIn("training_blocked", specialist)
+
     def test_stage_a_recipe_is_unchanged(self):
         config = yaml.safe_load((ROOT / "code" / "configs" / "stageA.yaml").read_text())
         self.assertNotIn("specialist_contract", config)
@@ -176,6 +192,11 @@ class EligibilityAndHintTests(unittest.TestCase):
     def test_fixed_frame_budget_requests_that_many_frames_on_a_long_clip(self):
         self.assertEqual(len(C.sample_index_list(1000, 30.0, 0.0, frame_budget=32)), 32)
         self.assertEqual(len(C.sample_index_list(1000, 30.0, 0.0, frame_budget=16)), 16)
+
+    def test_pixel_budget_is_the_constant_and_video_size_for_is_absent(self):
+        self.assertFalse(hasattr(C, "video_size_for"))
+        self.assertEqual(C.VIDEO_SIZE["longest_edge"], 16 * 640 * 640)
+        self.assertIn("video_size_for", (ROOT / "code" / "specialist_data.py").read_text())
 
 
 class MirrorTests(unittest.TestCase):
@@ -335,6 +356,12 @@ class StaticJobTests(unittest.TestCase):
             self.assertNotIn("CUDA_MODULE_LOADING", text)
             self.assertNotIn("scancel", text)
             self.assertNotIn("432730", text)
+        smoke = (ROOT / "jobs" / "a100_train_smoke.sbatch").read_text()
+        self.assertIn("#SBATCH -t 00:20:00", smoke)
+        self.assertNotIn("--requeue", smoke)
+        self.assertNotIn("scontrol requeue", smoke)
+        self.assertIn(R.ENSEMBLE_ARTIFACT_DIR, (ROOT / "code" / "route_specialist.py").read_text())
+        self.assertNotIn("needs to be score JSONL", (ROOT / "docs" / "a100_specialists_runbook.md").read_text())
         self.assertIn("REVA_SDPA_MATH_ONLY=1", (ROOT / "jobs" / "a100_prepare.sh").read_text())
         self.assertIn("activate_reva.sh", (ROOT / "jobs" / "a100_prepare.sh").read_text())
 

@@ -18,6 +18,12 @@ import specialist_data as S
 MIN_NET = 2
 MAX_REGRESSIONS = 1
 _STAGE_B_FAMILIES = {"stageB", "ensemble_ab"}
+# The Nov 5 A+B result is a directory. The HPC scripts are generators, not that result.
+ENSEMBLE_ARTIFACT_DIR = "results/ensemble_ab_20261105"
+ENSEMBLE_GENERATOR = "tools/ensemble_scores.py"
+PAIRED_GATE_SCRIPT = "tools/paired_gate.py"
+# Letter-logit files this repo's scorer writes. Stage A legacy copies use this shape.
+SCORE_RECORD_FIELDS = ("qa_id", "p", "pred", "views")
 
 
 def load_predictions(path: Path) -> dict[str, dict]:
@@ -51,7 +57,11 @@ def load_predictions(path: Path) -> dict[str, dict]:
         else:
             keys = sorted(payload)[:8] if isinstance(payload, dict) else [type(payload).__name__]
             raise ValueError(
-                f"{path} is not a score JSONL or a qa_id-to-letter map; reconcile tools/ensemble_scores.py. keys={keys}"
+                f"{path} is not a prediction record this router can read. "
+                "Accepted shapes are a JSONL or list of objects with qa_id and pred, "
+                "a qa_id-to-letter object, or {\"predictions\": {qa_id: letter}}. "
+                f"A+B artifacts belong under {ENSEMBLE_ARTIFACT_DIR}/; "
+                f"{ENSEMBLE_GENERATOR} is the HPC generator, not the artifact. keys={keys}"
             )
     predictions: dict[str, dict] = {}
     for item in records:

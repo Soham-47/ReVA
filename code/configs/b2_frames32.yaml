@@ -1,6 +1,7 @@
-# One epoch from Stage A on fit_A Temporal Grounding rows at a fixed 32-frame budget.
+# Recorded recipe only. EXP-010 blocks launch; this file does not clear that gate.
 run_name: b2_frames32
 specialist_contract: b2
+training_blocked: EXP-010
 require_smoke_marker: true
 requires_smoke_run: smoke_b2_frames32
 isolate_output: true

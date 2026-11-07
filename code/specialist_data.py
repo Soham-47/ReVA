@@ -55,7 +55,6 @@ _PINNED_TRAIN = {
     "weight_decay": 0.0,
     "warmup_ratio": 0.03,
     "scheduler": "cosine",
-    "grad_accum": 16,
     "max_grad_norm": 1.0,
     "bf16": True,
     "gradient_checkpointing": True,
@@ -83,6 +82,7 @@ _CONTRACTS = {
         "mirror": False,
         "kernel_smoke": True,
         "epochs": 1,
+        "training_blocked": "EXP-010",
     },
     "b1": {
         "run_name": "b1_hint16",
@@ -107,6 +107,7 @@ _CONTRACTS = {
         "epochs": 1,
         "requires_smoke_run": "smoke_b2_frames32",
         "requires_smoke_contract": "smoke_b2",
+        "training_blocked": "EXP-010",
     },
     "b1_mirror": {
         "run_name": "b1_hint16_mirror",
@@ -264,9 +265,35 @@ def guard_token_budget(config: dict, n_tokens: int, qa_id: str) -> None:
         return
     raise RuntimeError(
         f"sample {qa_id} has {n_tokens} tokens, above max_tokens={limit}, at "
-        f"frame_budget={config.get('frame_budget')}. Refusing to drop frames because "
-        "preserve_frame_budget is set. Reconcile HPC video_size_for or the token budget "
-        "before training this specialist."
+        f"frame_budget={config.get('frame_budget')}. preserve_frame_budget refuses to "
+        "drop frames. This git tree has no video_size_for; every encode uses "
+        f"common.VIDEO_SIZE={C.VIDEO_SIZE!r}, including a 32-frame sample. "
+        "Fitting the sample by shrinking pixels is not implemented here."
+    )
+
+
+def assert_training_allowed(contract: str) -> None:
+    """Refuse targeted temporal training while EXP-010's label gate is failed.
+
+    The block is the uncurated Temporal Grounding letter-SFT setup. It does not
+    apply to Stage A, to the motion specialist, or to scoring those letters.
+    """
+
+    block = _CONTRACTS.get(contract, {}).get("training_blocked")
+    if not block:
+        return
+    raise RuntimeError(
+        f"{contract} is blocked by {block}. "
+        "The 100-case audit in results/temporal_training_data_audit/phase1_report.md "
+        "is 10/100 directly usable, 57/100 conditional, and 33/100 excluded, "
+        "below the predeclared 80/100 visual-evidence gate. "
+        "Gold review of that same sample is 10 supported, 51 partial or censored, "
+        "11 not supported, and 28 not assessable. "
+        "Do not train on uncurated fit_A Temporal Grounding rows, and do not treat "
+        "the 10 supported qa ids as a cleared training set: the independent review "
+        "was not run and the report says not to train from this sample. "
+        "Stage A weights, Perspective/Change Detection training, and evaluation "
+        "against the official letters are separate and are not blocked."
     )
 
 
@@ -421,6 +448,12 @@ def validate_run_config(config: dict, *, allow_unresolved: bool = False) -> str:
         raise ValueError("train.lr must stay at the audited Stage A value 2.0e-4")
     if train.get("explicit_optimizer"):
         raise ValueError("specialists use the Stage A Trainer AdamW path")
+    expected_block = spec.get("training_blocked")
+    if expected_block is None:
+        if config.get("training_blocked"):
+            raise ValueError(f"{contract} is not under a label block")
+    elif config.get("training_blocked") != expected_block:
+        raise ValueError(f"{contract} must set training_blocked: {expected_block}")
     if int(train.get("epochs", 0)) != spec["epochs"]:
         raise ValueError(f"{contract} epochs must be {spec['epochs']}")
     if bool(config.get("kernel_smoke", False)) != spec["kernel_smoke"]:
@@ -431,9 +464,13 @@ def validate_run_config(config: dict, *, allow_unresolved: bool = False) -> str:
             raise ValueError("kernel smoke max_steps must be from 5 through 20")
         if int(train.get("save_steps", 0)) > steps or int(train.get("logging_steps", 0)) != 1:
             raise ValueError("kernel smoke must log every step and checkpoint within the step budget")
+        if int(train.get("grad_accum", 0)) != 1:
+            raise ValueError("kernel smoke grad_accum must be 1; one-epoch specialists keep 16")
         if config.get("require_smoke_marker"):
             raise ValueError("a smoke config must not require an earlier smoke marker")
     else:
+        if int(train.get("grad_accum", 0)) != 16:
+            raise ValueError("one-epoch specialists keep the Stage A grad_accum of 16")
         if int(train.get("max_steps", -1)) != -1:
             raise ValueError("one-epoch specialists must not set a positive max_steps")
         if config.get("require_smoke_marker") is not True:
@@ -514,6 +551,9 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="A100 specialist data and config checks")
     sub = parser.add_subparsers(dest="command", required=True)
 
+    allowed = sub.add_parser("assert-training-allowed")
+    allowed.add_argument("config")
+
     validate = sub.add_parser("validate-config")
     validate.add_argument("config")
     validate.add_argument("--allow-unresolved", action="store_true")
@@ -540,6 +580,12 @@ def main(argv: list[str] | None = None) -> int:
     marker.add_argument("--contract", required=True)
 
     args = parser.parse_args(argv)
+    if args.command == "assert-training-allowed":
+        config = yaml.safe_load(Path(args.config).read_text())
+        contract = validate_run_config(config, allow_unresolved=True)
+        assert_training_allowed(contract)
+        print(f"training allowed: {contract}")
+        return 0
     if args.command == "validate-config":
         config = yaml.safe_load(Path(args.config).read_text())
         print(validate_run_config(config, allow_unresolved=args.allow_unresolved))
