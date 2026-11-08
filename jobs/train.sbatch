@@ -13,15 +13,22 @@
 #SBATCH -o reva_train_%j.out
 set -euo pipefail
 
+export WORK="${WORK:-/scratch/ambpdc/soham/ReVA}"
+
 if [[ $# -ne 1 ]]; then
   echo "usage: sbatch jobs/train.sbatch code/configs/stageA.yaml" >&2
   exit 2
 fi
 : "${WORK:?set WORK to the runtime Lustre tree}"
-source "$WORK/envs/reva/bin/activate"
+# shellcheck source=/dev/null
+source "$WORK/jobs/activate_reva.sh"
+export PYTHONUNBUFFERED=1
 export HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false
 export HF_HOME="$WORK/hf_cache"
-export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+# expandable_segments has produced CUDA_ERROR_INVALID_VALUE on this driver.
+export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:128
+export TORCH_CUDNN_V8_API_DISABLED=1
+export CUDNN_FRONTEND_DISABLE=1
 cd "$WORK"
 source jobs/wait_child.sh
 
@@ -46,7 +53,7 @@ on_usr1() {
 }
 trap on_usr1 USR1
 if [[ ! -f "$SMOKE_MARKER" ]]; then
-  python code/smoke.py
+  python code/smoke.py --config "$CFG"
   touch "$SMOKE_MARKER"
 else
   echo "smoke already passed: $SMOKE_MARKER"

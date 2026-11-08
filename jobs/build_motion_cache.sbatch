@@ -10,9 +10,12 @@
 set -euo pipefail
 
 export WORK="${WORK:-/scratch/ambpdc/soham/ReVA}"
-source "$WORK/envs/reva/bin/activate"
+# shellcheck source=/dev/null
+source "$WORK/jobs/activate_reva.sh"
 cd "$WORK"
 
 echo "Building camera motion cache on $(hostname) at $(date)..."
-python archive/implementation/code/build_camera_motion_cache.py --out data/camera_motion_hints.json --splits fit_A,valQ,valT
+python archive/implementation/code/build_camera_motion_cache.py \
+  --out data/camera_motion_hints.json \
+  --splits fit_A,valQ,valT,val,test
 echo "Camera motion cache complete!"

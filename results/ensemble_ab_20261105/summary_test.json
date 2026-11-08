@@ -1,0 +1,19 @@
+{
+  "created_ist": "2026-11-05T23:05:37+05:30 (Asia/Calcutta, box clock assumed IST)",
+  "created_utc": "2026-11-05T17:35:37.488508+00:00",
+  "split": "test",
+  "method": "mean of letter probabilities over A and B (4-view already averaged inside each JSONL)",
+  "n_common": 4000,
+  "n_missing_a": 0,
+  "n_missing_b": 0,
+  "parent_agree": 3683,
+  "parent_disagree": 317,
+  "parent_agree_rate": 0.92075,
+  "paths": {
+    "a": "/scratch/ambpdc/soham/ReVA/runs/stageA_q3vl8b_r16/scores_test.jsonl",
+    "b": "/scratch/ambpdc/soham/ReVA/runs/stageB_q3vl8b_r16_h100/scores_test.jsonl",
+    "scores": "/scratch/ambpdc/soham/ReVA/results/ensemble_ab_20261105/scores_test_ab_mean.jsonl"
+  },
+  "fallback": "Stage A alone (83.95% private test / 3358/4000) remains the submission fallback",
+  "note": "Stage B trained on valQ+valT; do not gate A+B on those splits. Official val is the only labeled clean split for B-family models."
+}

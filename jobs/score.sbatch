@@ -18,7 +18,8 @@ if [[ $# -lt 2 ]]; then
   exit 2
 fi
 : "${WORK:?set WORK to the runtime Lustre tree}"
-source "$WORK/envs/reva/bin/activate"
+# shellcheck source=/dev/null
+source "$WORK/jobs/activate_reva.sh"
 export HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false
 export HF_HOME="$WORK/hf_cache"
 cd "$WORK"

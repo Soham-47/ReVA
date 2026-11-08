@@ -13,6 +13,7 @@ import numpy as np
 
 BAR_HEIGHT = 32
 MOTION_UNAVAILABLE = "Camera motion: unavailable"
+MOTION_UNCLEAR = "Camera motion: unclear."
 
 _DIGIT = {
     "0": ["01110", "10001", "10001", "10001", "10001", "10001", "01110"],
@@ -272,9 +273,8 @@ def camera_motion_hint(frames: np.ndarray, meta: Any) -> str:
         for index in range(array.shape[0] - 1):
             step = _pairwise_affine(_gray(array[index]), _gray(array[index + 1]))
             if step is None:
-                labels.append("hovering stationary")
-            else:
-                labels.append(classify_pairwise_motion(*step, width=min(width, 480)))
+                return MOTION_UNCLEAR
+            labels.append(classify_pairwise_motion(*step, width=min(width, 480)))
         return merge_motion_segments(times, labels, clip_duration(meta))
     except Exception:
         return MOTION_UNAVAILABLE

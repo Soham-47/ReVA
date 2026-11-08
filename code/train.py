@@ -145,9 +145,15 @@ class ReVATrain(Dataset):
         motion_hints_path = config.get("motion_hints")
         if motion_hints_path:
             p = C.work_path(motion_hints_path)
-            if p.is_file():
-                with p.open() as handle:
-                    self.motion_hints = json.load(handle)
+            if not p.is_file():
+                raise FileNotFoundError(f"motion_hints file missing: {p}")
+            with p.open() as handle:
+                self.motion_hints = json.load(handle)
+        video_cfg = config.get("video", {})
+        self.frame_budget = int(video_cfg.get("frame_budget", config.get("frame_budget", C.MAX_FRAMES)))
+        raw_pixels = video_cfg.get("video_max_pixels", config.get("video_max_pixels"))
+        self.video_max_pixels = int(raw_pixels) if raw_pixels is not None else None
+        self.video_size = C.video_size_for(self.frame_budget, self.video_max_pixels)
 
     def __len__(self) -> int:
         return len(self.rows)
@@ -177,8 +183,8 @@ class ReVATrain(Dataset):
         permutation = list(C.LETTERS)
         rng.shuffle(permutation)
         sample_offset = rng.random()
-        frames, meta = C.get_video(row["video_path"], sample_offset)
-        motion_context = self.motion_hints.get(row["video_path"]) if self.motion_hints else None
+        frames, meta = C.get_video(row["video_path"], sample_offset, frame_budget=self.frame_budget)
+        motion_context = C.motion_hint_text(self.motion_hints, row["video_path"])
         temporal_ids = None
         temporal_supervision = None
         if self.temporal_contract is not None:
@@ -197,8 +203,10 @@ class ReVATrain(Dataset):
             temporal_token_ids=temporal_ids,
             temporal_supervision=temporal_supervision,
             temporal_context=motion_context,
+            video_size=self.video_size,
         )
         if encoded["input_ids"].shape[1] > self.config["train"]["max_tokens"]:
+            print(f"max_tokens_downsample qa_id={row['qa_id']}", flush=True)
             frames, meta = C.downsample_video(frames, meta)
             encoded, _ = C.encode(
                 self.processor,
@@ -213,6 +221,7 @@ class ReVATrain(Dataset):
                 temporal_token_ids=temporal_ids,
                 temporal_supervision=temporal_supervision,
                 temporal_context=motion_context,
+                video_size=self.video_size,
             )
         if encoded["input_ids"].shape[1] > self.config["train"]["max_tokens"]:
             raise RuntimeError(f"sample {row['qa_id']} still exceeds max_tokens after downsampling")
@@ -311,13 +320,42 @@ def load_training_components(config: dict, attn_implementation: str):
         return processor, model
 
     processor = C.load_processor()
+    local_only = os.environ.get("HF_HUB_OFFLINE") == "1" or os.environ.get("TRANSFORMERS_OFFLINE") == "1"
     model = Qwen3VLForConditionalGeneration.from_pretrained(
         C.MODEL_ID,
         revision=C.MODEL_REV,
         dtype=torch.bfloat16,
         attn_implementation=attn_implementation,
+        local_files_only=local_only,
     )
+    pin_attention_implementation(model, attn_implementation)
     return processor, model
+
+
+def pin_attention_implementation(model, attn_implementation: str) -> None:
+    """Force text and vision configs onto the requested attention kernel.
+
+    Qwen3-VL vision reads ``vision_config._attn_implementation`` on every
+    forward. Loading can leave that nested config on SDPA, which then hits the
+    fused kernel that fails with cuModuleLoadData on this cluster.
+    """
+
+    configs = [getattr(model, "config", None)]
+    root = configs[0]
+    if root is not None:
+        configs.extend(getattr(root, name, None) for name in ("vision_config", "text_config"))
+    seen: set[int] = set()
+    for config in configs:
+        if config is None or id(config) in seen:
+            continue
+        seen.add(id(config))
+        if hasattr(config, "_attn_implementation"):
+            config._attn_implementation = attn_implementation
+    for module in model.modules():
+        config = getattr(module, "config", None)
+        if config is None or not hasattr(config, "_attn_implementation"):
+            continue
+        config._attn_implementation = attn_implementation
 
 
 def visual_merger_targets(model, include_deepstack: bool = False) -> list[str]:
@@ -580,6 +618,19 @@ def main() -> int:
     work = C.work_dir()
     output = C.work_path(config["output_dir"])
     output.mkdir(parents=True, exist_ok=True)
+    video_cfg = config.get("video", {})
+    frame_budget = int(video_cfg.get("frame_budget", config.get("frame_budget", C.MAX_FRAMES)))
+    raw_pixels = video_cfg.get("video_max_pixels", config.get("video_max_pixels"))
+    video_max_pixels = int(raw_pixels) if raw_pixels is not None else None
+    video_size = C.video_size_for(frame_budget, video_max_pixels)
+    C.write_run_meta(
+        output / "run_meta.json",
+        frame_budget=frame_budget,
+        video_max_pixels=video_max_pixels,
+        video_size=video_size,
+        train_json=str(config["train_json"]),
+        seed=int(config["seed"]),
+    )
     if (output / "DONE").exists():
         print(f"already complete: {output}")
         return 0
@@ -589,6 +640,10 @@ def main() -> int:
         raise RuntimeError("configured bf16 training is unavailable on this GPU")
     attn_implementation = config.get("attn_implementation", "sdpa")
     C.configure_attention_backend(attn_implementation)
+    print(
+        f"attn_implementation={attn_implementation} cudnn_enabled={torch.backends.cudnn.enabled}",
+        flush=True,
+    )
 
     seed = int(config["seed"])
     torch.manual_seed(seed)
@@ -699,8 +754,17 @@ def main() -> int:
         (output / "STOP").unlink()
         print("stopped after checkpoint; rerun to resume")
         return 0
-    adapted.save_pretrained(output / "final_adapter")
-    processor.save_pretrained(output / "final_adapter")
+    final_adapter = output / "final_adapter"
+    adapted.save_pretrained(final_adapter)
+    processor.save_pretrained(final_adapter)
+    C.write_run_meta(
+        final_adapter / "run_meta.json",
+        frame_budget=frame_budget,
+        video_max_pixels=video_max_pixels,
+        video_size=video_size,
+        train_json=str(config["train_json"]),
+        seed=int(config["seed"]),
+    )
     (output / "DONE").write_text("ok\n")
     print(f"training complete: {output}")
     return 0

@@ -1,0 +1,474 @@
+{
+  "created_ist": "2026-11-05T23:06:21+05:30 (Asia/Calcutta, box clock assumed IST)",
+  "created_utc": "2026-11-05T17:36:21.683488+00:00",
+  "split": "val",
+  "method": "mean of letter probabilities over A and B (4-view already averaged inside each JSONL)",
+  "n_common": 2000,
+  "n_missing_a": 0,
+  "n_missing_b": 0,
+  "parent_agree": 1840,
+  "parent_disagree": 160,
+  "parent_agree_rate": 0.92,
+  "paths": {
+    "a": "/scratch/ambpdc/soham/ReVA/runs/stageA_q3vl8b_r16/scores_val.jsonl",
+    "b": "/scratch/ambpdc/soham/ReVA/runs/stageB_q3vl8b_r16_h100/scores_val.jsonl",
+    "scores": "/scratch/ambpdc/soham/ReVA/results/ensemble_ab_20261105/scores_val_ab_mean.jsonl"
+  },
+  "fallback": "Stage A alone (83.95% private test / 3358/4000) remains the submission fallback",
+  "note": "Stage B trained on valQ+valT; do not gate A+B on those splits. Official val is the only labeled clean split for B-family models.",
+  "labeled": {
+    "n": 2000,
+    "overall_vs_A": {
+      "n": 2000,
+      "parent_correct": 1757,
+      "ensemble_correct": 1774,
+      "parent_acc": 0.8785,
+      "ensemble_acc": 0.887,
+      "fixed": 45,
+      "broken": 28,
+      "net": 17,
+      "mcnemar_p": 0.060370037339928545
+    },
+    "overall_vs_B": {
+      "n": 2000,
+      "parent_correct": 1769,
+      "ensemble_correct": 1774,
+      "parent_acc": 0.8845,
+      "ensemble_acc": 0.887,
+      "fixed": 40,
+      "broken": 35,
+      "net": 5,
+      "mcnemar_p": 0.644463913894226
+    },
+    "A_correct": 1757,
+    "B_correct": 1769,
+    "ens_correct": 1774,
+    "A_acc": 0.8785,
+    "B_acc": 0.8845,
+    "ens_acc": 0.887,
+    "per_task": {
+      "Causation Reasoning": {
+        "vs_A": {
+          "n": 90,
+          "parent_correct": 88,
+          "ensemble_correct": 89,
+          "parent_acc": 0.9777777777777777,
+          "ensemble_acc": 0.9888888888888889,
+          "fixed": 1,
+          "broken": 0,
+          "net": 1,
+          "mcnemar_p": 1.0
+        },
+        "vs_B": {
+          "n": 90,
+          "parent_correct": 89,
+          "ensemble_correct": 89,
+          "parent_acc": 0.9888888888888889,
+          "ensemble_acc": 0.9888888888888889,
+          "fixed": 0,
+          "broken": 0,
+          "net": 0,
+          "mcnemar_p": 1.0
+        },
+        "A_correct": 88,
+        "B_correct": 89,
+        "ens_correct": 89,
+        "n": 90
+      },
+      "Change Detection": {
+        "vs_A": {
+          "n": 250,
+          "parent_correct": 215,
+          "ensemble_correct": 219,
+          "parent_acc": 0.86,
+          "ensemble_acc": 0.876,
+          "fixed": 10,
+          "broken": 6,
+          "net": 4,
+          "mcnemar_p": 0.454498291015625
+        },
+        "vs_B": {
+          "n": 250,
+          "parent_correct": 216,
+          "ensemble_correct": 219,
+          "parent_acc": 0.864,
+          "ensemble_acc": 0.876,
+          "fixed": 8,
+          "broken": 5,
+          "net": 3,
+          "mcnemar_p": 0.5810546875
+        },
+        "A_correct": 215,
+        "B_correct": 216,
+        "ens_correct": 219,
+        "n": 250
+      },
+      "Consequence Reasoning": {
+        "vs_A": {
+          "n": 50,
+          "parent_correct": 49,
+          "ensemble_correct": 48,
+          "parent_acc": 0.98,
+          "ensemble_acc": 0.96,
+          "fixed": 0,
+          "broken": 1,
+          "net": -1,
+          "mcnemar_p": 1.0
+        },
+        "vs_B": {
+          "n": 50,
+          "parent_correct": 48,
+          "ensemble_correct": 48,
+          "parent_acc": 0.96,
+          "ensemble_acc": 0.96,
+          "fixed": 0,
+          "broken": 0,
+          "net": 0,
+          "mcnemar_p": 1.0
+        },
+        "A_correct": 49,
+        "B_correct": 48,
+        "ens_correct": 48,
+        "n": 50
+      },
+      "General Understanding": {
+        "vs_A": {
+          "n": 90,
+          "parent_correct": 90,
+          "ensemble_correct": 90,
+          "parent_acc": 1.0,
+          "ensemble_acc": 1.0,
+          "fixed": 0,
+          "broken": 0,
+          "net": 0,
+          "mcnemar_p": 1.0
+        },
+        "vs_B": {
+          "n": 90,
+          "parent_correct": 90,
+          "ensemble_correct": 90,
+          "parent_acc": 1.0,
+          "ensemble_acc": 1.0,
+          "fixed": 0,
+          "broken": 0,
+          "net": 0,
+          "mcnemar_p": 1.0
+        },
+        "A_correct": 90,
+        "B_correct": 90,
+        "ens_correct": 90,
+        "n": 90
+      },
+      "Geometric Relation": {
+        "vs_A": {
+          "n": 200,
+          "parent_correct": 180,
+          "ensemble_correct": 183,
+          "parent_acc": 0.9,
+          "ensemble_acc": 0.915,
+          "fixed": 4,
+          "broken": 1,
+          "net": 3,
+          "mcnemar_p": 0.375
+        },
+        "vs_B": {
+          "n": 200,
+          "parent_correct": 183,
+          "ensemble_correct": 183,
+          "parent_acc": 0.915,
+          "ensemble_acc": 0.915,
+          "fixed": 4,
+          "broken": 4,
+          "net": 0,
+          "mcnemar_p": 1.0
+        },
+        "A_correct": 180,
+        "B_correct": 183,
+        "ens_correct": 183,
+        "n": 200
+      },
+      "Hypothetical Reasoning": {
+        "vs_A": {
+          "n": 80,
+          "parent_correct": 76,
+          "ensemble_correct": 75,
+          "parent_acc": 0.95,
+          "ensemble_acc": 0.9375,
+          "fixed": 0,
+          "broken": 1,
+          "net": -1,
+          "mcnemar_p": 1.0
+        },
+        "vs_B": {
+          "n": 80,
+          "parent_correct": 76,
+          "ensemble_correct": 75,
+          "parent_acc": 0.95,
+          "ensemble_acc": 0.9375,
+          "fixed": 0,
+          "broken": 1,
+          "net": -1,
+          "mcnemar_p": 1.0
+        },
+        "A_correct": 76,
+        "B_correct": 76,
+        "ens_correct": 75,
+        "n": 80
+      },
+      "Object and Land Cover Recognition": {
+        "vs_A": {
+          "n": 330,
+          "parent_correct": 290,
+          "ensemble_correct": 293,
+          "parent_acc": 0.8787878787878788,
+          "ensemble_acc": 0.8878787878787879,
+          "fixed": 8,
+          "broken": 5,
+          "net": 3,
+          "mcnemar_p": 0.5810546875
+        },
+        "vs_B": {
+          "n": 330,
+          "parent_correct": 289,
+          "ensemble_correct": 293,
+          "parent_acc": 0.8757575757575757,
+          "ensemble_acc": 0.8878787878787879,
+          "fixed": 7,
+          "broken": 3,
+          "net": 4,
+          "mcnemar_p": 0.34375
+        },
+        "A_correct": 290,
+        "B_correct": 289,
+        "ens_correct": 293,
+        "n": 330
+      },
+      "Perspective and Viewpoint": {
+        "vs_A": {
+          "n": 240,
+          "parent_correct": 212,
+          "ensemble_correct": 213,
+          "parent_acc": 0.8833333333333333,
+          "ensemble_acc": 0.8875,
+          "fixed": 1,
+          "broken": 0,
+          "net": 1,
+          "mcnemar_p": 1.0
+        },
+        "vs_B": {
+          "n": 240,
+          "parent_correct": 214,
+          "ensemble_correct": 213,
+          "parent_acc": 0.8916666666666667,
+          "ensemble_acc": 0.8875,
+          "fixed": 2,
+          "broken": 3,
+          "net": -1,
+          "mcnemar_p": 1.0
+        },
+        "A_correct": 212,
+        "B_correct": 214,
+        "ens_correct": 213,
+        "n": 240
+      },
+      "Structural Layout": {
+        "vs_A": {
+          "n": 170,
+          "parent_correct": 148,
+          "ensemble_correct": 151,
+          "parent_acc": 0.8705882352941177,
+          "ensemble_acc": 0.888235294117647,
+          "fixed": 6,
+          "broken": 3,
+          "net": 3,
+          "mcnemar_p": 0.5078125
+        },
+        "vs_B": {
+          "n": 170,
+          "parent_correct": 151,
+          "ensemble_correct": 151,
+          "parent_acc": 0.888235294117647,
+          "ensemble_acc": 0.888235294117647,
+          "fixed": 4,
+          "broken": 4,
+          "net": 0,
+          "mcnemar_p": 1.0
+        },
+        "A_correct": 148,
+        "B_correct": 151,
+        "ens_correct": 151,
+        "n": 170
+      },
+      "Temporal Grounding": {
+        "vs_A": {
+          "n": 320,
+          "parent_correct": 243,
+          "ensemble_correct": 251,
+          "parent_acc": 0.759375,
+          "ensemble_acc": 0.784375,
+          "fixed": 12,
+          "broken": 4,
+          "net": 8,
+          "mcnemar_p": 0.076812744140625
+        },
+        "vs_B": {
+          "n": 320,
+          "parent_correct": 254,
+          "ensemble_correct": 251,
+          "parent_acc": 0.79375,
+          "ensemble_acc": 0.784375,
+          "fixed": 12,
+          "broken": 15,
+          "net": -3,
+          "mcnemar_p": 0.7011080384254456
+        },
+        "A_correct": 243,
+        "B_correct": 254,
+        "ens_correct": 251,
+        "n": 320
+      },
+      "Trend and Pattern": {
+        "vs_A": {
+          "n": 180,
+          "parent_correct": 166,
+          "ensemble_correct": 162,
+          "parent_acc": 0.9222222222222223,
+          "ensemble_acc": 0.9,
+          "fixed": 3,
+          "broken": 7,
+          "net": -4,
+          "mcnemar_p": 0.34375
+        },
+        "vs_B": {
+          "n": 180,
+          "parent_correct": 159,
+          "ensemble_correct": 162,
+          "parent_acc": 0.8833333333333333,
+          "ensemble_acc": 0.9,
+          "fixed": 3,
+          "broken": 0,
+          "net": 3,
+          "mcnemar_p": 0.25
+        },
+        "A_correct": 166,
+        "B_correct": 159,
+        "ens_correct": 162,
+        "n": 180
+      }
+    },
+    "weak_tasks": {
+      "Temporal Grounding": {
+        "vs_A": {
+          "n": 320,
+          "parent_correct": 243,
+          "ensemble_correct": 251,
+          "parent_acc": 0.759375,
+          "ensemble_acc": 0.784375,
+          "fixed": 12,
+          "broken": 4,
+          "net": 8,
+          "mcnemar_p": 0.076812744140625
+        },
+        "vs_B": {
+          "n": 320,
+          "parent_correct": 254,
+          "ensemble_correct": 251,
+          "parent_acc": 0.79375,
+          "ensemble_acc": 0.784375,
+          "fixed": 12,
+          "broken": 15,
+          "net": -3,
+          "mcnemar_p": 0.7011080384254456
+        },
+        "A_correct": 243,
+        "B_correct": 254,
+        "ens_correct": 251,
+        "n": 320
+      },
+      "Change Detection": {
+        "vs_A": {
+          "n": 250,
+          "parent_correct": 215,
+          "ensemble_correct": 219,
+          "parent_acc": 0.86,
+          "ensemble_acc": 0.876,
+          "fixed": 10,
+          "broken": 6,
+          "net": 4,
+          "mcnemar_p": 0.454498291015625
+        },
+        "vs_B": {
+          "n": 250,
+          "parent_correct": 216,
+          "ensemble_correct": 219,
+          "parent_acc": 0.864,
+          "ensemble_acc": 0.876,
+          "fixed": 8,
+          "broken": 5,
+          "net": 3,
+          "mcnemar_p": 0.5810546875
+        },
+        "A_correct": 215,
+        "B_correct": 216,
+        "ens_correct": 219,
+        "n": 250
+      },
+      "Perspective and Viewpoint": {
+        "vs_A": {
+          "n": 240,
+          "parent_correct": 212,
+          "ensemble_correct": 213,
+          "parent_acc": 0.8833333333333333,
+          "ensemble_acc": 0.8875,
+          "fixed": 1,
+          "broken": 0,
+          "net": 1,
+          "mcnemar_p": 1.0
+        },
+        "vs_B": {
+          "n": 240,
+          "parent_correct": 214,
+          "ensemble_correct": 213,
+          "parent_acc": 0.8916666666666667,
+          "ensemble_acc": 0.8875,
+          "fixed": 2,
+          "broken": 3,
+          "net": -1,
+          "mcnemar_p": 1.0
+        },
+        "A_correct": 212,
+        "B_correct": 214,
+        "ens_correct": 213,
+        "n": 240
+      },
+      "Geometric Relation": {
+        "vs_A": {
+          "n": 200,
+          "parent_correct": 180,
+          "ensemble_correct": 183,
+          "parent_acc": 0.9,
+          "ensemble_acc": 0.915,
+          "fixed": 4,
+          "broken": 1,
+          "net": 3,
+          "mcnemar_p": 0.375
+        },
+        "vs_B": {
+          "n": 200,
+          "parent_correct": 183,
+          "ensemble_correct": 183,
+          "parent_acc": 0.915,
+          "ensemble_acc": 0.915,
+          "fixed": 4,
+          "broken": 4,
+          "net": 0,
+          "mcnemar_p": 1.0
+        },
+        "A_correct": 180,
+        "B_correct": 183,
+        "ens_correct": 183,
+        "n": 200
+      }
+    }
+  }
+}

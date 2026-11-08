@@ -166,6 +166,18 @@ def main() -> int:
     _report_visual_architecture(model, vision_blocks)
     model.config.use_cache = False
     adapted = prepare_model(model, config)
+    video_cfg = config.get("video", {})
+    frame_budget = int(video_cfg.get("frame_budget", config.get("frame_budget", C.MAX_FRAMES)))
+    raw_pixels = video_cfg.get("video_max_pixels", config.get("video_max_pixels"))
+    video_max_pixels = int(raw_pixels) if raw_pixels is not None else None
+    video_size = C.video_size_for(frame_budget, video_max_pixels)
+    motion_hints = None
+    if config.get("motion_hints"):
+        hints_path = C.work_path(config["motion_hints"])
+        if not hints_path.is_file():
+            raise FileNotFoundError(f"motion_hints file missing: {hints_path}")
+        with hints_path.open() as handle:
+            motion_hints = json.load(handle)
     adapted.enable_input_require_grads()
     if config["train"].get("gradient_checkpointing", True):
         adapted.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
@@ -193,7 +205,7 @@ def main() -> int:
         raise AssertionError("visual merger base parameters are unexpectedly trainable")
     reload_inputs = None
     for row in picks:
-        frames, meta = C.get_video(row["video_path"], 0.0)
+        frames, meta = C.get_video(row["video_path"], 0.0, frame_budget=frame_budget)
         encoded, _ = C.encode(
             processor,
             row,
@@ -204,6 +216,8 @@ def main() -> int:
             im_end_id,
             ltr_ids,
             enable_thinking=chat_template_enable_thinking(config),
+            temporal_context=C.motion_hint_text(motion_hints, row["video_path"]),
+            video_size=video_size,
         )
         decoded = tokenizer.decode(encoded["input_ids"][0])
         if "seconds>" not in decoded or "<|im_start|>assistant\n" not in decoded:

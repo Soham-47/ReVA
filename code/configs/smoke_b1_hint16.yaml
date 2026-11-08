@@ -1,0 +1,27 @@
+run_name: b1_q3vl8b_hint16_smoke
+train_json: data/splits/fit_A.json
+output_dir: runs/b1_q3vl8b_hint16_smoke
+seed: 42
+motion_hints: data/camera_motion_hints.json
+attn_implementation: sdpa
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+train:
+  epochs: 2
+  max_steps: 20
+  lr: 2.0e-4
+  weight_decay: 0.0
+  warmup_ratio: 0.03
+  scheduler: cosine
+  grad_accum: 16
+  max_grad_norm: 1.0
+  bf16: true
+  gradient_checkpointing: true
+  max_tokens: 12000
+  save_steps: 10
+  save_total_limit: 2
+  logging_steps: 5
+  dataloader_workers: 0
+  benchmark_steps: 20
