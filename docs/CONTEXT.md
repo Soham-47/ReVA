@@ -27,4 +27,4 @@ valQ 595 · valT 1,059 · val 2,000 · test 4,000 hidden. Four-view TTA (`pred` 
 
 ## Harness handover
 
-Runtime sync, closed EXPs, and TG Track A (Brev) / Track B (HPC) queue: [`HARNESS_HANDOVER.md`](HARNESS_HANDOVER.md).
+Runtime sync, closed EXPs, and TG Track A (Brev) / Track B (HPC) queue: [`reference/HARNESS_HANDOVER.md`](reference/HARNESS_HANDOVER.md).

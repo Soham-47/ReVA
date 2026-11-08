@@ -24,7 +24,7 @@ Each question is one UAV clip, a question, and options A–D. The model predicts
 
 Stage B (`code/configs/stageB.yaml`) is documented and not run locally (EXP-005). Training-free overlays and prompt variants (EXP-032–036) are closed and not in the production scorer.
 
-Full table: [`experiments/INDEX.md`](experiments/INDEX.md) · narrative status: [`docs/research_status.md`](docs/research_status.md)
+Full table: [`experiments/INDEX.md`](experiments/INDEX.md) · narrative status: [`docs/NEXT_PLAN_STATE.md`](docs/NEXT_PLAN_STATE.md)
 
 ## Layout
 

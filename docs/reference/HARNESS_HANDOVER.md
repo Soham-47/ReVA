@@ -1,6 +1,6 @@
 # Harness handover — continue TG remediation (2026-11-01)
 
-Single reference for a **replacement agent or automation harness** to resume ReVA work without re-deriving context from chat. Read [`AGENTS.md`](../AGENTS.md) first; this file adds **runtime paths**, **sync truth**, **what is closed**, and **exact next steps** from the last user directive.
+Single reference for a **replacement agent or automation harness** to resume ReVA work without re-deriving context from chat. Read [`AGENTS.md`](../../AGENTS.md) first; this file adds **runtime paths**, **sync truth**, **what is closed**, and **exact next steps** from the last user directive.
 
 **Last user intent (in order):**
 
@@ -24,7 +24,7 @@ Single reference for a **replacement agent or automation harness** to resume ReV
 | No GPU train/score at scale without **explicit user approval** | Includes full valQ/valT/val rescoring and new Slurm/Brev training. |
 | Do **not** overwrite `runs/` score JSONL | New arms → new paths under `runs/<new_run_name>/`. |
 | Do **not** change evaluation math | Use `code/evaluate.py`; refresh registry via `python3 code/build_evaluation_registry.py`. |
-| Do **not** claim test wins without EXP-028–030 provenance | See [`docs/research_status.md`](research_status.md). |
+| Do **not** claim test wins without EXP-028–030 provenance | See [`docs/NEXT_PLAN_STATE.md`](../NEXT_PLAN_STATE.md). |
 | One-off experiment code | Lives under `archive/implementation/`; keep `code/score.py` as Stage A/B core unless user asks to extend it. |
 
 ---
@@ -275,13 +275,13 @@ Task slices: filter JSONL by `task` field == `Temporal Grounding` when reporting
 
 | Doc | Purpose |
 | --- | --- |
-| [`docs/CONTEXT.md`](CONTEXT.md) | Experiments + active code map |
-| [`docs/architecture.md`](architecture.md) | Pipeline diagram |
-| [`docs/evaluation.md`](evaluation.md) | Splits, TTA, metric kinds |
-| [`docs/research_status.md`](research_status.md) | One-paragraph status |
-| [`archive/implementation/docs/training_free_tg_spatial_shortlist.md`](../archive/implementation/docs/training_free_tg_spatial_shortlist.md) | Pre-remediation shortlist |
-| [`results/error_review/REVIEW.md`](../results/error_review/REVIEW.md) | Qualitative error review |
-| [`results/temporal_training_data_audit/phase1_report.md`](../results/temporal_training_data_audit/phase1_report.md) | EXP-010 gate |
+| [`docs/CONTEXT.md`](../CONTEXT.md) | Experiments + active code map |
+| [`docs/architecture.md`](../architecture.md) | Pipeline diagram |
+| [`docs/evaluation.md`](../evaluation.md) | Splits, TTA, metric kinds |
+| [`docs/NEXT_PLAN_STATE.md`](../NEXT_PLAN_STATE.md) | One-paragraph status |
+| [`archive/implementation/docs/training_free_tg_spatial_shortlist.md`](../../archive/implementation/docs/training_free_tg_spatial_shortlist.md) | Pre-remediation shortlist |
+| [`results/error_review/REVIEW.md`](../../results/error_review/REVIEW.md) | Qualitative error review |
+| [`results/temporal_training_data_audit/phase1_report.md`](../../results/temporal_training_data_audit/phase1_report.md) | EXP-010 gate |
 
 ---
 

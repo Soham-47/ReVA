@@ -22,3 +22,4 @@ results/**/*.jpg
 results/**/*.jpeg
 results/**/*.tar.gz
 results/**/contact_sheets/
+*.local.bak

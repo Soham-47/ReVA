@@ -25,13 +25,13 @@ experiments/       One folder per EXP with experiment.md
 archive/implementation/  One-off experiment code, jobs, tests
 runs/              Artifacts (scores, reports) — do not overwrite
 results/           registry, evaluations, experiments.json, comparisons
-docs/              CONTEXT, architecture, evaluation, research_status
+docs/              CONTEXT, NEXT_PLAN_STATE (live status), architecture, evaluation, reference/
 tests/             Core pipeline + job syntax
 ```
 
 See [`docs/CONTEXT.md`](docs/CONTEXT.md).
 
-For multi-agent / harness continuity (paths, Brev/HPC, TG remediation queue): [`docs/HARNESS_HANDOVER.md`](docs/HARNESS_HANDOVER.md).
+For multi-agent / harness continuity (paths, Brev/HPC, TG remediation queue): [`docs/reference/HARNESS_HANDOVER.md`](docs/reference/HARNESS_HANDOVER.md) (read only on request).
 
 ## Rules
 
