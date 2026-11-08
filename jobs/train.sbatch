@@ -29,6 +29,9 @@ export HF_HOME="$WORK/hf_cache"
 export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:128
 export TORCH_CUDNN_V8_API_DISABLED=1
 export CUDNN_FRONTEND_DISABLE=1
+# Lazy CUDA module loading crashed on H100/H200 (cuModuleLoadData "image cannot be NULL");
+# EAGER passed the same forward on A100. Do NOT set CUDA_LAUNCH_BLOCKING here (slows training).
+export CUDA_MODULE_LOADING="${CUDA_MODULE_LOADING:-EAGER}"
 cd "$WORK"
 source jobs/wait_child.sh
 

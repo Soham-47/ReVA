@@ -22,6 +22,9 @@ fi
 source "$WORK/jobs/activate_reva.sh"
 export HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false
 export HF_HOME="$WORK/hf_cache"
+# Lazy CUDA module loading crashed on H100/H200 (cuModuleLoadData "image cannot be NULL");
+# EAGER passed the same forward on A100. Do NOT set CUDA_LAUNCH_BLOCKING here (slows training).
+export CUDA_MODULE_LOADING="${CUDA_MODULE_LOADING:-EAGER}"
 cd "$WORK"
 source jobs/wait_child.sh
 adapter=$1
