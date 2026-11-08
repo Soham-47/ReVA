@@ -19,6 +19,7 @@ Last verified: 2026-11-08. This is the only status file; update it at the end of
 - **Fix applied (unverified until a job starts):** `CUDA_MODULE_LOADING=EAGER` in `jobs/train.sbatch` and `jobs/score.sbatch` (not `CUDA_LAUNCH_BLOCKING`).
 - **Second blocker, fixed 2026-11-08:** `hf_cache/.../snapshots/0c351dd.../` was empty since Nov 7 11:59 (blobs intact), so offline loading failed (this killed A100 job 437051). Re-linked 12 files by content; processor/config/snapshot load offline and 750/750 tensors present.
 - **Submitted 2026-11-08:** B1 job **438659** (H200, `-c 4`), B2 job **438660** (H100, `-c 12`). Output dirs `runs/b1_q3vl8b_hint16`, `runs/b2_q3vl8b_f32`. Scheduler start estimates (Nov 21 / Nov 25) are pessimistic backfill numbers.
+- **Also submitted (A100, separate output dirs `*_a100`):** B1 **438670**, B2 **438671** (`code/configs/b{1,2}_*_a100.yaml`). Estimated start ~Feb 2027; same recipe, so duplicates of 438659/438660 unless those fail.
 - Cluster rules: H200 allows max 4 CPUs/GPU (job 430081 used 12 in early Nov); multi-partition requests are rejected; A100 estimate is Feb 2027.
 - **If smoke fails again with the same CUDA error:** try `CUDA_LAUNCH_BLOCKING=1` via `cuda_probe.sbatch` A/B (jobs were cancelled before running).
 - Risk: 4 CPUs on H200 may slow video decoding vs the 8.86 s/step benchmark.
