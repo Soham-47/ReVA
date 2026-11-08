@@ -15,11 +15,13 @@ Last verified: 2026-11-08. This is the only status file; update it at the end of
 - **HPC jobs 431617, 432115, 432116, 432729, 432730 all failed** in the `code/smoke.py` preflight after ~5-7 min, on H100:
   `RuntimeError: CUDA driver error: invalid argument ... image cannot be NULL (cuModuleLoadData)` inside Qwen3-VL `get_image_features`.
 - Env: `torch 2.14.1+cu130`, `transformers 5.19.0`, driver 580.126.20, archs sm_75/80/86/90/100/120.
-- **Only passing run:** CUDA probe job 435943 (A100, Nov 7) with `CUDA_MODULE_LOADING=EAGER` and `CUDA_LAUNCH_BLOCKING=1`. Earlier A100 probes (434916, 435040) failed for unrelated reasons (script bug, timeout). No train/smoke script sets either variable, and the probe was never run on H100.
-- **Two open hypotheses:** (1) lazy CUDA module loading (fix: `CUDA_MODULE_LOADING=EAGER`), (2) H100-specific. They are not yet separated.
-- `expandable_segments` and cuDNN v8 were already ruled out in `jobs/train.sbatch`.
-- Job 437051 (A100 smoke, Nov 8): failed trying to reach huggingface.co offline. `hf_cache` on HPC is ~51 KB; confirm where the model weights are loaded from.
-- **Next step (needs user approval to submit):** run `jobs/cuda_probe.sbatch` (EAGER already set) on `gpu_h100_4`. Pass means set EAGER in `train.sbatch`/`smoke_round1_body.sh`; fail means H100 is the issue, try H200.
+- **Only passing run:** CUDA probe 435943 (A100, Nov 7) with `CUDA_MODULE_LOADING=EAGER`. Every lazy-loading run on H100/H200 failed. A100 probes 434916/435040 failed for unrelated reasons.
+- **Fix applied (unverified until a job starts):** `CUDA_MODULE_LOADING=EAGER` in `jobs/train.sbatch` and `jobs/score.sbatch` (not `CUDA_LAUNCH_BLOCKING`).
+- **Second blocker, fixed 2026-11-08:** `hf_cache/.../snapshots/0c351dd.../` was empty since Nov 7 11:59 (blobs intact), so offline loading failed (this killed A100 job 437051). Re-linked 12 files by content; processor/config/snapshot load offline and 750/750 tensors present.
+- **Submitted 2026-11-08:** B1 job **438659** (H200, `-c 4`), B2 job **438660** (H100, `-c 12`). Output dirs `runs/b1_q3vl8b_hint16`, `runs/b2_q3vl8b_f32`. Scheduler start estimates (Nov 21 / Nov 25) are pessimistic backfill numbers.
+- Cluster rules: H200 allows max 4 CPUs/GPU (job 430081 used 12 in early Nov); multi-partition requests are rejected; A100 estimate is Feb 2027.
+- **If smoke fails again with the same CUDA error:** try `CUDA_LAUNCH_BLOCKING=1` via `cuda_probe.sbatch` A/B (jobs were cancelled before running).
+- Risk: 4 CPUs on H200 may slow video decoding vs the 8.86 s/step benchmark.
 
 ## Cost and token reference
 
