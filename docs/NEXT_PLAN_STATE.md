@@ -30,6 +30,10 @@ Last verified: 2026-11-08. This is the only status file; update it at the end of
 - Reverted the other Nov 8 misdiagnosis changes (commit 2c0de69): B1/B2 back to `sdpa` (were `eager`), flash and
   mem-efficient SDPA plus cuDNN back on (only cuDNN-SDPA off, as in EXP-001), `expandable_segments:True` restored.
   Evidence: A100 B1 job 438670 ran at ~1070 s/step (est. 520 h, OOM retries) vs EXP-001's ~8.9 s/step; cancelled.
+- Main slowdown (found 2026-11-09): `TORCH_CUDNN_V8_API_DISABLED=1` / `CUDNN_FRONTEND_DISABLE=1` from the Nov 8
+  `train.sbatch`. Slurm keeps the submit-time script, so job 438671 still had them and ran ~2,500 s/step. py-spy showed
+  it pinned in the Qwen3-VL `Conv3d` patch embed. `tools/bench_patch_embed.py` on A100: 15 ms normal, 4.2 s with those
+  vars, 201 s with cuDNN off. `common.check_fast_conv_backend` now makes train/smoke refuse to start in that state.
 - Separate fix (Nov 8): `hf_cache` snapshot symlinks were re-linked (blobs intact); confirmed by job 438659 loading weights.
 
 ### Jobs (submitted 2026-11-09)
@@ -38,16 +42,16 @@ Last verified: 2026-11-08. This is the only status file; update it at the end of
 | --- | --- | --- | --- |
 | 441171 | `jobs/verify_kernel_cache.sbatch` | H200 | |
 | 441172 | `jobs/verify_kernel_cache.sbatch` | H100 | |
-| 441173 | B1 `b1_hint16.yaml` | H200 `-c 4` | afterok 441171 |
-| 438660 | B2 `b2_frames32.yaml` | H100 `-c 12` | afterok 441172 |
-| 441565 / 438671 | B1 / B2 `*_a100.yaml` (separate output dirs) | A100 | |
+| 441668 | B1 `b1_hint16.yaml` | H200 `-c 4` | afterok 441171 |
+| 441667 | B2 `b2_frames32.yaml` | H100 `-c 12` | afterok 441172 |
+| 441565 / 441666 | B1 / B2 `*_a100.yaml` (separate output dirs) | A100 | |
 
-Pending jobs keep their submit-time `train.sbatch` (old allocator env, harmless); configs and `common.py` are read
-at start, so they get the fix. Check step time in the first `benchmark steps=` line (expect ~9 s at 16f).
+All four training jobs were (re)submitted with the clean `train.sbatch` (checked with `scontrol write batch_script`). Check step time in the first `benchmark steps=` line (expect ~9 s at 16f).
 
 Verify pass = `VERDICT A=REPRODUCED B=PASS C=PASS`. If a verify job fails, its dependent training job stays
 pending as `DependencyNeverSatisfied`: read `reva_kcache_verify_<id>.out` before cancelling.
 
+- Cancelled as too slow: 438670, 438671; replaced with stale script: 438660, 441173.
 - Earlier failures: 431617, 432115, 432116, 432729, 432730, 438659 (all this crash); 437051 (empty HF snapshot).
 - Cluster rules: H200 max 4 CPUs/GPU (`tests/test_jobs.sh` still asserts `-c 12` in the script header, so pass `-c 4`
   on the command line); multi-partition requests rejected.
