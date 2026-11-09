@@ -640,6 +640,7 @@ def main() -> int:
         raise RuntimeError("configured bf16 training is unavailable on this GPU")
     attn_implementation = config.get("attn_implementation", "sdpa")
     C.configure_attention_backend(attn_implementation)
+    C.check_fast_conv_backend()
     print(
         f"attn_implementation={attn_implementation} cudnn_enabled={torch.backends.cudnn.enabled}",
         flush=True,

@@ -183,6 +183,25 @@ def configure_attention_backend(attn_implementation: str, torch_module=None) -> 
     enable_cudnn_sdp(False)
 
 
+# Env vars that push Qwen3-VL's Conv3d patch embed off the fast cuDNN path. Measured on A100
+# (torch 2.14.1, cuDNN 9.24, bf16, 25,600 patches): 15 ms normally, 4.2 s with these set, 201 s
+# with cuDNN disabled. Job 438671 ran ~2,500 s/step because its submit-time script set them.
+SLOW_CONV_ENV = ("TORCH_CUDNN_V8_API_DISABLED", "CUDNN_FRONTEND_DISABLE")
+
+
+def check_fast_conv_backend(environ=None, torch_module=None) -> None:
+    """Fail fast instead of training ~100x slower on a disabled or degraded cuDNN conv path."""
+
+    environ = os.environ if environ is None else environ
+    if torch_module is None:
+        import torch as torch_module
+    bad = [name for name in SLOW_CONV_ENV if environ.get(name)]
+    if bad:
+        raise RuntimeError(f"unset {', '.join(bad)}: they make the Conv3d patch embed ~280x slower")
+    if not torch_module.backends.cudnn.enabled:
+        raise RuntimeError("torch.backends.cudnn.enabled is False: Conv3d patch embed runs ~10,000x slower")
+
+
 def path_checksum(path: str | os.PathLike[str]) -> str:
     """Hash an adapter file/directory without including its path or timestamps."""
 

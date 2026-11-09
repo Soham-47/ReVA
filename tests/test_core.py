@@ -31,5 +31,23 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(C.MAX_FRAMES, 16)
 
 
+
+class FastConvBackendTest(unittest.TestCase):
+    def _torch(self, enabled):
+        from types import SimpleNamespace
+        return SimpleNamespace(backends=SimpleNamespace(cudnn=SimpleNamespace(enabled=enabled)))
+
+    def test_rejects_slow_conv_env(self):
+        for name in C.SLOW_CONV_ENV:
+            with self.assertRaises(RuntimeError):
+                C.check_fast_conv_backend({name: "1"}, self._torch(True))
+
+    def test_rejects_disabled_cudnn(self):
+        with self.assertRaises(RuntimeError):
+            C.check_fast_conv_backend({}, self._torch(False))
+
+    def test_accepts_default(self):
+        C.check_fast_conv_backend({}, self._torch(True))
+
 if __name__ == "__main__":
     unittest.main()

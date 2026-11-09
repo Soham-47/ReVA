@@ -135,6 +135,7 @@ def main() -> int:
         config = yaml.safe_load(f)
     attn_implementation = config.get("attn_implementation", "sdpa")
     C.configure_attention_backend(attn_implementation)
+    C.check_fast_conv_backend()
     processor, model = load_training_components(config, attn_implementation)
     tokenizer = processor.tokenizer
     ltr_ids = C.letter_ids(tokenizer)
