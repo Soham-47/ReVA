@@ -4,6 +4,14 @@ cd "$(dirname "$0")/.."
 bash -n jobs/*.sbatch jobs/*.sh
 source jobs/wait_child.sh
 
+# Regression guard: empty cached NVRTC kernels crashed every Hopper run (cuModuleLoadData NULL image).
+for pattern in 'export USE_PYTORCH_KERNEL_CACHE="${USE_PYTORCH_KERNEL_CACHE:-0}"' 'export XDG_CACHE_HOME="${REVA_CACHE_DIR:-$WORK/.cache}"' "-size 0"; do
+  if ! grep -Fq -- "$pattern" jobs/activate_reva.sh; then
+    echo "jobs/activate_reva.sh lost kernel-cache guard: $pattern" >&2
+    exit 1
+  fi
+done
+
 for file in README.md jobs/train.sbatch jobs/score.sbatch; do
   if ! grep -Fq -- "--gres=gpu:nvidia_h200_nvl:1" "$file"; then
     echo "missing accepted H200 GRES syntax in $file" >&2

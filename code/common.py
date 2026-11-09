@@ -165,9 +165,10 @@ def estimate_training_hours(
 def configure_attention_backend(attn_implementation: str, torch_module=None) -> None:
     """Disable fused CUDA kernels that crash Qwen3-VL vision on this cluster.
 
-    ``cuModuleLoadData`` / ``image cannot be NULL`` showed up on both H200 and
-    H100 with torch 2.14 + cuDNN SDPA, flash SDPA, and cuDNN conv. Math SDPA
-    and eager attention stay available; fused backends stay off for every run.
+    These backends were disabled while chasing ``cuModuleLoadData`` / ``image
+    cannot be NULL`` on H100/H200. The verified cause was a 0-byte cached NVRTC
+    kernel under a full $HOME (fixed in jobs/activate_reva.sh), not these kernels;
+    they stay off so numerics match earlier runs until re-enabling is evaluated.
     """
 
     if torch_module is None:
