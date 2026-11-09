@@ -9,20 +9,45 @@ Last verified: 2026-11-08. This is the only status file; update it at the end of
 - **Closed (no promotion):** 004, 007-010, 011-027, 031-036. EXP-005 Stage B not run locally.
 - **Ensemble A/B (2026-11-05):** `results/ensemble_ab_20261105/`.
 
-## Round 1 (B1 hints @16f, B2 frames @32f): BLOCKED, nothing has trained
+## Round 1 (B1 hints @16f, B2 frames @32f)
 
-- **B1** smoke PASS on Brev (hints in prompt, 16f, checkpoint resume, 20/20 valQ). **B2** smoke incomplete on Brev (Trainer stall ~8/20 steps).
-- **HPC jobs 431617, 432115, 432116, 432729, 432730 all failed** in the `code/smoke.py` preflight after ~5-7 min, on H100:
-  `RuntimeError: CUDA driver error: invalid argument ... image cannot be NULL (cuModuleLoadData)` inside Qwen3-VL `get_image_features`.
-- Env: `torch 2.14.1+cu130`, `transformers 5.19.0`, driver 580.126.20, archs sm_75/80/86/90/100/120.
-- **Only passing run:** CUDA probe 435943 (A100, Nov 7) with `CUDA_MODULE_LOADING=EAGER`. Every lazy-loading run on H100/H200 failed. A100 probes 434916/435040 failed for unrelated reasons.
-- **Fix applied (unverified until a job starts):** `CUDA_MODULE_LOADING=EAGER` in `jobs/train.sbatch` and `jobs/score.sbatch` (not `CUDA_LAUNCH_BLOCKING`).
-- **Second blocker, fixed 2026-11-08:** `hf_cache/.../snapshots/0c351dd.../` was empty since Nov 7 11:59 (blobs intact), so offline loading failed (this killed A100 job 437051). Re-linked 12 files by content; processor/config/snapshot load offline and 750/750 tensors present.
-- **Submitted 2026-11-08:** B1 job **438659** (H200, `-c 4`), B2 job **438660** (H100, `-c 12`). Output dirs `runs/b1_q3vl8b_hint16`, `runs/b2_q3vl8b_f32`. Scheduler start estimates (Nov 21 / Nov 25) are pessimistic backfill numbers.
-- **Also submitted (A100, separate output dirs `*_a100`):** B1 **438670**, B2 **438671** (`code/configs/b{1,2}_*_a100.yaml`). Estimated start ~Feb 2027; same recipe, so duplicates of 438659/438660 unless those fail.
-- Cluster rules: H200 allows max 4 CPUs/GPU (job 430081 used 12 in early Nov); multi-partition requests are rejected; A100 estimate is Feb 2027.
-- **If smoke fails again with the same CUDA error:** try `CUDA_LAUNCH_BLOCKING=1` via `cuda_probe.sbatch` A/B (jobs were cancelled before running).
-- Risk: 4 CPUs on H200 may slow video decoding vs the 8.86 s/step benchmark.
+### Root cause of the H100/H200 crash (found 2026-11-09)
+
+`RuntimeError: CUDA driver error: invalid argument ... cuModuleLoadData: image cannot be NULL`, raised at
+`(image_grid_thw.prod(-1) // merge**2).tolist()` in Qwen3-VL `get_image_features`.
+
+- `/home/ambpdc` is at its quota (42.02G used; 40G soft / 42G hard). It is a shared account; nothing there was deleted.
+- On Nov 3 PyTorch NVRTC-compiled the int64 `prod` reduction for sm_90 and failed to write it under the full home:
+  `~/.cache/torch/kernels/reduction_prod_arch9.0_nvrtc13.0_...` was **0 bytes** (same happened Oct 11 with nvrtc 12.6).
+- Every later Hopper run loaded that empty file as a NULL module image. The sm_80 (A100) entry is valid, which is why
+  only A100 passed. `CUDA_MODULE_LOADING=EAGER` was tested in job 438659 (H200) and did not help: removed.
+
+### Fix
+
+- `jobs/activate_reva.sh` (sourced by every ReVA job): `XDG_CACHE_HOME`, `PYTORCH_KERNEL_CACHE_PATH`, `TRITON_CACHE_DIR`
+  under `$WORK/.cache`; `USE_PYTORCH_KERNEL_CACHE=0` (compile in memory per process); quarantine 0-byte cache files.
+- The two empty home entries were renamed to `*.empty`. Regression check in `tests/test_jobs.sh`.
+- The cuDNN/fused-SDPA disables in `common.configure_attention_backend` came from the same misdiagnosis; left on so
+  numerics match earlier runs. Re-enabling them is a separate, evaluated change.
+- Separate fix (Nov 8): `hf_cache` snapshot symlinks were re-linked (blobs intact); confirmed by job 438659 loading weights.
+
+### Jobs (submitted 2026-11-09)
+
+| Job | What | GPU | Gate |
+| --- | --- | --- | --- |
+| 441171 | `jobs/verify_kernel_cache.sbatch` | H200 | |
+| 441172 | `jobs/verify_kernel_cache.sbatch` | H100 | |
+| 441173 | B1 `b1_hint16.yaml` | H200 `-c 4` | afterok 441171 |
+| 438660 | B2 `b2_frames32.yaml` | H100 `-c 12` | afterok 441172 |
+| 438670 / 438671 | B1 / B2 `*_a100.yaml` (separate output dirs) | A100 | |
+
+Verify pass = `VERDICT A=REPRODUCED B=PASS C=PASS`. If a verify job fails, its dependent training job stays
+pending as `DependencyNeverSatisfied`: read `reva_kcache_verify_<id>.out` before cancelling.
+
+- Earlier failures: 431617, 432115, 432116, 432729, 432730, 438659 (all this crash); 437051 (empty HF snapshot).
+- Cluster rules: H200 max 4 CPUs/GPU (`tests/test_jobs.sh` still asserts `-c 12` in the script header, so pass `-c 4`
+  on the command line); multi-partition requests rejected.
+- B1 smoke PASS on Brev; B2 smoke incomplete on Brev (Trainer stall ~8/20 steps). Risk: 4 CPUs on H200 may slow decode.
 
 ## Cost and token reference
 
