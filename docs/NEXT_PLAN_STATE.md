@@ -27,8 +27,9 @@ Last verified: 2026-11-08. This is the only status file; update it at the end of
 - `jobs/activate_reva.sh` (sourced by every ReVA job): `XDG_CACHE_HOME`, `PYTORCH_KERNEL_CACHE_PATH`, `TRITON_CACHE_DIR`
   under `$WORK/.cache`; `USE_PYTORCH_KERNEL_CACHE=0` (compile in memory per process); quarantine 0-byte cache files.
 - The two empty home entries were renamed to `*.empty`. Regression check in `tests/test_jobs.sh`.
-- The cuDNN/fused-SDPA disables in `common.configure_attention_backend` came from the same misdiagnosis; left on so
-  numerics match earlier runs. Re-enabling them is a separate, evaluated change.
+- Reverted the other Nov 8 misdiagnosis changes (commit 2c0de69): B1/B2 back to `sdpa` (were `eager`), flash and
+  mem-efficient SDPA plus cuDNN back on (only cuDNN-SDPA off, as in EXP-001), `expandable_segments:True` restored.
+  Evidence: A100 B1 job 438670 ran at ~1070 s/step (est. 520 h, OOM retries) vs EXP-001's ~8.9 s/step; cancelled.
 - Separate fix (Nov 8): `hf_cache` snapshot symlinks were re-linked (blobs intact); confirmed by job 438659 loading weights.
 
 ### Jobs (submitted 2026-11-09)
@@ -39,7 +40,10 @@ Last verified: 2026-11-08. This is the only status file; update it at the end of
 | 441172 | `jobs/verify_kernel_cache.sbatch` | H100 | |
 | 441173 | B1 `b1_hint16.yaml` | H200 `-c 4` | afterok 441171 |
 | 438660 | B2 `b2_frames32.yaml` | H100 `-c 12` | afterok 441172 |
-| 438670 / 438671 | B1 / B2 `*_a100.yaml` (separate output dirs) | A100 | |
+| 441565 / 438671 | B1 / B2 `*_a100.yaml` (separate output dirs) | A100 | |
+
+Pending jobs keep their submit-time `train.sbatch` (old allocator env, harmless); configs and `common.py` are read
+at start, so they get the fix. Check step time in the first `benchmark steps=` line (expect ~9 s at 16f).
 
 Verify pass = `VERDICT A=REPRODUCED B=PASS C=PASS`. If a verify job fails, its dependent training job stays
 pending as `DependencyNeverSatisfied`: read `reva_kcache_verify_<id>.out` before cancelling.
@@ -57,5 +61,5 @@ pending as `DependencyNeverSatisfied`: read `reva_kcache_verify_<id>.out` before
 ## Where things live
 
 - **Local** (`/home/soham/ReVA`, git, origin `Soham-47/ReVA`): source of truth for `code/ jobs/ tests/ tools/ docs/ experiments/`.
-- **HPC** (`/scratch/ambpdc/soham/ReVA`, not git): runs experiments. Holds `data/ runs/ venv312/ envs/ hf_cache/`. Do not clean it. No queued or running ReVA jobs as of 2026-11-08.
+- **HPC** (`/scratch/ambpdc/soham/ReVA`, not git): runs experiments. Holds `data/ runs/ venv312/ envs/ hf_cache/`. Do not clean it. Round-1 jobs queued as of 2026-11-09 (table above).
 - Sync with `tools/sync_to_hpc.sh` (push code, dry-run default, never deletes) and `tools/pull_from_hpc.sh` (pull docs/results).
