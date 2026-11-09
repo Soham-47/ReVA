@@ -2,7 +2,7 @@ run_name: b2_q3vl8b_f32_a100
 train_json: data/splits/fit_A.json
 output_dir: runs/b2_q3vl8b_f32_a100
 seed: 42
-attn_implementation: eager
+attn_implementation: sdpa
 video:
   frame_budget: 32
   video_max_pixels: 409600

@@ -25,10 +25,9 @@ source "$WORK/jobs/activate_reva.sh"
 export PYTHONUNBUFFERED=1
 export HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false
 export HF_HOME="$WORK/hf_cache"
-# expandable_segments has produced CUDA_ERROR_INVALID_VALUE on this driver.
-export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:128
-export TORCH_CUDNN_V8_API_DISABLED=1
-export CUDNN_FRONTEND_DISABLE=1
+# EXP-001 allocator setting. The Nov 8 CUDA_ERROR_INVALID_VALUE blamed on it was the empty
+# cached NVRTC kernel (see jobs/activate_reva.sh), not the allocator.
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 cd "$WORK"
 source jobs/wait_child.sh
 

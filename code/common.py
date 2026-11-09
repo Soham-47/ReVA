@@ -163,30 +163,24 @@ def estimate_training_hours(
 
 
 def configure_attention_backend(attn_implementation: str, torch_module=None) -> None:
-    """Disable fused CUDA kernels that crash Qwen3-VL vision on this cluster.
+    """Keep Qwen vision SDPA off the cuDNN fused-MHA path; flash/mem-efficient SDPA stay on.
 
-    These backends were disabled while chasing ``cuModuleLoadData`` / ``image
-    cannot be NULL`` on H100/H200. The verified cause was a 0-byte cached NVRTC
-    kernel under a full $HOME (fixed in jobs/activate_reva.sh), not these kernels;
-    they stay off so numerics match earlier runs until re-enabling is evaluated.
+    This is the EXP-001 recipe (job 392966, ~8.9 s/step at 16f on H200). A Nov 8 change that
+    switched B1/B2 to eager attention and disabled every fused kernel plus cuDNN was chasing
+    the Hopper ``cuModuleLoadData`` crash, whose real cause was an empty cached NVRTC kernel
+    (fixed in jobs/activate_reva.sh). That change made training ~120x slower and is reverted.
     """
 
-    if torch_module is None:
-        import torch as torch_module
-    torch_module.backends.cudnn.enabled = False
-    torch_module.backends.cudnn.benchmark = False
-    cuda_backends = torch_module.backends.cuda
-    for name, enabled in (
-        ("enable_cudnn_sdp", False),
-        ("enable_flash_sdp", False),
-        ("enable_mem_efficient_sdp", False),
-        ("enable_math_sdp", True),
-    ):
-        toggle = getattr(cuda_backends, name, None)
-        if toggle is not None:
-            toggle(enabled)
     if attn_implementation not in {"sdpa", "eager"}:
         raise ValueError(f"unsupported attn_implementation: {attn_implementation}")
+    if attn_implementation != "sdpa":
+        return
+    if torch_module is None:
+        import torch as torch_module
+    enable_cudnn_sdp = getattr(torch_module.backends.cuda, "enable_cudnn_sdp", None)
+    if enable_cudnn_sdp is None:
+        raise RuntimeError("the installed PyTorch build has no cuDNN SDPA control")
+    enable_cudnn_sdp(False)
 
 
 def path_checksum(path: str | os.PathLike[str]) -> str:

@@ -3,7 +3,7 @@ train_json: data/splits/fit_A.json
 output_dir: runs/b1_q3vl8b_hint16
 seed: 42
 motion_hints: data/camera_motion_hints.json
-attn_implementation: eager
+attn_implementation: sdpa
 lora:
   r: 16
   alpha: 32
